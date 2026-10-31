@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<base href="/">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, límites de faja, franjas de proximidad y detección de edificios por CNN.">
 <title>Chullo Unificado · Mapa y edificaciones</title>
@@ -13,10 +14,9 @@
   <div>
     <p class="eyebrow">TORRENTERA CHULLO · AREQUIPA · MAPA UNIFICADO</p>
     <h1>Mapa, fajas y edificaciones</h1>
-    <p class="sub">Puntos ANA Cayma y Yanahuara · límites de faja documental · línea del cauce · franjas con valores ANA · detección CNN de edificios</p>
+    <p class="sub">Puntos ANA de Cayma y Yanahuara · límites de faja · franjas de proximidad · detección CNN de edificios</p>
   </div>
   <div class="acciones">
-    <button class="button" id="btn-detected" title="Ejecutar detección CNN de edificios sobre imagen satelital">Detectar edificios (CNN)</button>
     <a class="button secondary" href="layers/hitos-ana.geojson" download>Descargar hitos ANA</a>
   </div>
 </header>
@@ -25,13 +25,35 @@
   <div class="connections" aria-label="Estado de conexiones">
     <span>ANA <b class="ready">60 registros · 12 en revisión</b></span>
     <span>OpenStreetMap <b id="map-state">Cargando…</b></span>
-    <span>CNN <b id="cnn-state" title="Detección de edificios con Mask R-CNN">Obligatorio</b></span>
+    <span>CNN <b id="cnn-state" title="Detección de edificios con Mask R-CNN">Disponible</b></span>
   </div>
 
-  <section class="workspace" aria-label="Consulta de hitos, fajas y edificaciones">
+  <section class="workspace" aria-label="Consulta de hitos y edificaciones">
     <div class="map-panel">
-      <div id="map" aria-label="Mapa de Chullo con imagen satelital y franjas de proximidad"></div>
-      <div class="map-controls">
+      <div id="map" aria-label="Mapa de Chullo con OpenStreetMap y franjas de proximidad"></div>
+    </div>
+
+    <aside>
+      <h2>Edificio seleccionado</h2>
+      <div id="edificio-info">
+        <p class="vacio">Selecciona un edificio en el mapa para ver su ficha.</p>
+      </div>
+
+      <div id="faja-info" class="faja-panel">
+        <h3>Límites de faja marginal (documental ANA)</h3>
+        <p>Cayma · margen derecha e izquierda · 210 vértices del documento ANA (RD 1610-2018). Ancho documental: 4 m por margen.</p>
+      </div>
+
+      <div id="detector-panel">
+        <h3>Detección de edificios (CNN)</h3>
+        <p>Identifica edificaciones sobre imagen satelital y las clasifica por distancia al cauce.</p>
+        <p class="note">Modelo preentrenado para edificios de EE. UU. (Mask R-CNN ResNet50-FPN). No hay imagen GeoTIFF del sector disponible en <code>data/imagery/chullo/chullo_rgb.tif</code>, por lo que la detección devuelve 0 edificios. El visor sigue funcionando con datos estáticos (puntos ANA, límites, franjas).</p>
+        <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
+        <div id="detect-status" class="detect-status"></div>
+      </div>
+
+      <div id="controles-panel" class="controles-panel">
+        <h3>Controles de visualización</h3>
         <label class="layer-toggle">
           <input type="checkbox" id="layer-hitos" checked> Puntos ANA
         </label>
@@ -45,36 +67,14 @@
           <input type="checkbox" id="layer-edificios" checked> Edificios detectados (CNN)
         </label>
         <label class="layer-toggle">
-          <input type="checkbox" id="layer-satelital" checked> Vista satelital (Edificios · 4 lados)
+          <input type="checkbox" id="layer-satelital"> Vista satelital (Esri)
         </label>
+        <div class="band-controls">
+          <label>Faja documental rojo (m): <input type="number" id="band-rojo" value="4" min="0" max="500" step="1"></label>
+          <label>Franja seguridad amarillo (m): <input type="number" id="band-amarillo" value="20" min="0" max="500" step="1"></label>
+          <button id="btn-recalcular-bandas">Recalcular franjas</button>
+        </div>
         <div id="panel-info" class="info-panel"></div>
-      </div>
-      <div class="map-legend">
-        <span><i class="cayma"></i>ANA Cayma</span>
-        <span><i class="yana"></i>ANA Yanahuara · en revisión</span>
-        <span><i class="dot cauce"></i>Cauce (unión límites)</span>
-        <span><i class="dot rojo"></i>Rojo · faja documental 0–4 m</span>
-        <span><i class="dot amarillo"></i>Amarillo · seguridad 4–24 m</span>
-        <span><i class="dot verde"></i>Verde · &gt;24 m</span>
-        <span><i class="dot edificio"></i>Edificio detectado (CNN)</span>
-      </div>
-    </div>
-
-    <aside>
-      <h2>Edificio seleccionado</h2>
-      <div id="edificio-info">
-        <p class="vacio">Selecciona un edificio en el mapa para ver su ficha.</p>
-      </div>
-      <div id="faja-info" class="faja-panel">
-        <h3>Límites de faja marginal (documental ANA)</h3>
-        <p>Cayma · margen derecha e izquierda · 210 vértices del documento ANA (RD 1610-2018).</p>
-        <p class="note">Ancho documental: 4 m por margen. Margen derecha e izquierda: mirando aguas abajo.</p>
-      </div>
-      <div id="detector-panel">
-        <h3>Detección de edificios (CNN · obligatorio)</h3>
-        <p>Identifica edificaciones sobre imagen satelital y las clasifica por distancia al cauce usando valores reales de ANA.</p>
-        <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
-        <div id="detect-status" class="detect-status"></div>
       </div>
     </aside>
   </section>

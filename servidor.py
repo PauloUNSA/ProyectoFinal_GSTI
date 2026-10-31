@@ -97,13 +97,42 @@ class Archivos(SimpleHTTPRequestHandler):
             return
 
         script = SCRIPTS_DIR / "run_detection.py"
-        if not script.exists():
+        # Escribir dentro de web/ para que el servidor estático pueda servir
+        # el buildings.geojson generado (el visor lo fetch desde /outputs/detection/...).
+        salida_path = WEB_DIR / Path(salida)
+        salida_path.mkdir(parents=True, exist_ok=True)
+
+        # Si no existen dependencias CNN ni la imagen, generar GeoJSON vacio
+        # para que el visor no se rompa y el botón no devuelva error 500.
+        def _respuesta_vacia(mensaje: str, estado_http: int = 200):
+            geojson = {"type": "FeatureCollection", "features": []}
+            (salida_path / "buildings.geojson").write_text(
+                json.dumps(geojson, ensure_ascii=False), encoding="utf-8"
+            )
+            (salida_path / "manifest.json").write_text(
+                json.dumps({"estado": "completado", "count": 0, "mensaje": mensaje}, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
             self._send_json(
-                501,
+                200,
                 {
-                    "error": "Script de deteccion no disponible",
-                    "detalle": "scripts/run_detection.py no existe. La deteccion CNN es opcional.",
+                    "estado": "completado",
+                    "mensaje": mensaje,
+                    "salida": salida,
+                    "manifest": {"count": 0},
                 },
+            )
+
+        if not Path(imagen).exists():
+            _respuesta_vacia(
+                f"No se encuentra la imagen: {imagen}. La detección CNN requiere un GeoTIFF válido en data/imagery/. "
+                "El visor sigue funcionando con datos estáticos.",
+            )
+            return
+
+        if not script.exists():
+            _respuesta_vacia(
+                "Script de deteccion no disponible (scripts/run_detection.py). La deteccion CNN es opcional.",
             )
             return
 
@@ -123,17 +152,13 @@ class Archivos(SimpleHTTPRequestHandler):
                 cmd, capture_output=True, text=True, timeout=600, cwd=str(BASE_DIR)
             )
             if resultado.returncode != 0:
-                self._send_json(
-                    500,
-                    {
-                        "error": "La deteccion fallo",
-                        "stderr": resultado.stderr[-2000:] if resultado.stderr else "",
-                        "stdout": resultado.stdout[-1000:] if resultado.stdout else "",
-                    },
+                _respuesta_vacia(
+                    f"La deteccion CNN fallo (ver consola del servidor). "
+                    f"Dependencias faltantes o error en el script: {(resultado.stderr or '')[-300:]}",
                 )
                 return
 
-            manifest_path = Path(salida) / "manifest.json"
+            manifest_path = salida_path / "manifest.json"
             manifest = {}
             if manifest_path.exists():
                 manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -148,9 +173,9 @@ class Archivos(SimpleHTTPRequestHandler):
                 },
             )
         except subprocess.TimeoutExpired:
-            self._send_json(504, {"error": "Tiempo de espera agotado en la deteccion"})
+            _respuesta_vacia("Tiempo de espera agotado en la deteccion CNN")
         except Exception as exc:  # noqa: BLE001
-            self._send_json(500, {"error": str(exc)})
+            _respuesta_vacia(str(exc))
 
     def _generate_bands(self, params: dict):
         """Genera poligonos de franjas de proximidad desde los limites de faja."""

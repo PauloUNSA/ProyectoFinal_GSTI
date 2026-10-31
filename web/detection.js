@@ -244,7 +244,6 @@ async function ejecutarDeteccion(imagenPath, umbral = 0.5) {
     if (status) status.innerHTML = `<p style="color:#dc2626">Error: ${err.message}</p>`;
     if (mapaEstado) { mapaEstado.textContent = "Error CNN"; mapaEstado.className = "error"; }
     alert(`No se pudo ejecutar la detección: ${err.message}`);
-    throw err;
   } finally {
     detectando = false;
     setBtns(false, "Ejecutar detección CNN sobre imagen del sector");

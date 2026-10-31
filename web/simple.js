@@ -60,12 +60,6 @@ function initMap() {
 
   L.control.scale({ imperial: false, maxWidth: 150 }).addTo(map);
 
-  const baseLayers = {
-    "Imagen satelital (Esri)": satelitalLayer,
-    "OpenStreetMap (callejero)": osm,
-  };
-  L.control.layers(baseLayers, null, { collapsed: false, position: "topright" }).addTo(map);
-
   new ResizeObserver(() => map.invalidateSize()).observe(document.getElementById("map"));
 
   cargarTodo();
@@ -168,17 +162,19 @@ function dibujarLimites() {
 
 // ------------------------------------------------------------------
 // Línea del cauce + franjas (sin recursión: dibujarBandas solo dibuja)
+// Las franjas se basan en los límites documentales (líneas azul y morada),
+// no en el eje promedio.
 // ------------------------------------------------------------------
 function dibujarBandas() {
   if (!map) return;
 
-  const eje = window.ejeTorrentera || window.OBTENER_EJE ? window.OBTENER_EJE() : null;
-  if (!eje) return;
+  const limites = window.CHULLO_BOUNDARIES;
+  if (!limites) return;
 
   const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
 
   if (window.DIBUJAR_BANDAS) {
-    bandaLayer = window.DIBUJAR_BANDAS(map, window.GENERAR_BANDAS(eje, cfg.rojoM, cfg.amarilloM));
+    bandaLayer = window.DIBUJAR_BANDAS(map, window.GENERAR_BANDAS(limites, cfg.rojoM, cfg.amarilloM));
   }
 
   actualizarInfoPanel();
