@@ -1,0 +1,1924 @@
+{
+  "type": "FeatureCollection",
+  "name": "Hitos ANA Chullo",
+  "metadata": {
+    "crs_original": "EPSG:32719",
+    "crs_geojson": "EPSG:4326",
+    "date_compiled": "2026-10-21",
+    "scope": "48 hitos Cayma y 12 Yanahuara. No es el polígono de faja ni un inventario de viviendas.",
+    "excluded": "Sachaca no se digitaliza: el TXT tiene errores de coordenadas. No se trazan límites entre hitos dispersos.",
+    "point_role": "Ubicaciones documentales de hitos de señalización de faja marginal; no son viviendas, sensores ni detecciones satelitales.",
+    "coordinate_audit": "La conversión UTM WGS84 zona 19S a WGS84 reproduce las coordenadas de los documentos. No certifica exactitud de campo. Los 12 hitos de Yanahuara presentan discrepancias entre la resolución y otra tabla del estudio y quedan en revisión.",
+    "reviewed_locations": 12
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "Cayma-R-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5513787809755,
+          -16.39105936378695
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-01",
+        "bank": "Derecha",
+        "easting": 227485,
+        "northing": 8186094,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 1,
+        "source_table_row": 1,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-1.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 1 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-01"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55123856421234,
+          -16.391070098218474
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-01",
+        "bank": "Izquierda",
+        "easting": 227500,
+        "northing": 8186093,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 1,
+        "source_table_row": 25,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-1.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 1 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-01"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-6",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55126311016986,
+          -16.389362658393118
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-06",
+        "bank": "Derecha",
+        "easting": 227495,
+        "northing": 8186282,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 2,
+        "source_table_row": 2,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-6.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 2 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-06"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-6",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55112218888864,
+          -16.389319206153417
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-06",
+        "bank": "Izquierda",
+        "easting": 227510,
+        "northing": 8186287,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 2,
+        "source_table_row": 26,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-6.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 2 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-06"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55207492846415,
+          -16.387754052867262
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-10",
+        "bank": "Derecha",
+        "easting": 227406,
+        "northing": 8186459,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 3,
+        "source_table_row": 3,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-10.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 3 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-10"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55192488811872,
+          -16.387728776724348
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-10",
+        "bank": "Izquierda",
+        "easting": 227422,
+        "northing": 8186462,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 3,
+        "source_table_row": 27,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-10.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 3 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-10"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55273693117252,
+          -16.38613823226211
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-15",
+        "bank": "Derecha",
+        "easting": 227333,
+        "northing": 8186637,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 4,
+        "source_table_row": 4,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-15.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 4 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-15"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55257812500099,
+          -16.386158225323587
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-15",
+        "bank": "Izquierda",
+        "easting": 227350,
+        "northing": 8186635,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 4,
+        "source_table_row": 28,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-15.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 4 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-15"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-19",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55231347417006,
+          -16.38451752431497
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-19",
+        "bank": "Derecha",
+        "easting": 227376,
+        "northing": 8186817,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 5,
+        "source_table_row": 5,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-19.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 5 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-19"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-19",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55217373270213,
+          -16.3845643829789
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-19",
+        "bank": "Izquierda",
+        "easting": 227391,
+        "northing": 8186812,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 5,
+        "source_table_row": 29,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-19.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 5 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-19"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-23",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55205665610008,
+          -16.38275930467384
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-23",
+        "bank": "Derecha",
+        "easting": 227401,
+        "northing": 8187012,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 6,
+        "source_table_row": 6,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-23.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 6 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-23"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-23",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55190685488802,
+          -16.382752090108877
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-23",
+        "bank": "Izquierda",
+        "easting": 227417,
+        "northing": 8187013,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 6,
+        "source_table_row": 30,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-23.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 6 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-23"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-28",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55286903640454,
+          -16.381195855281845
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-28",
+        "bank": "Derecha",
+        "easting": 227312,
+        "northing": 8187184,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 7,
+        "source_table_row": 7,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-28.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 7 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-28"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-28",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55274718426071,
+          -16.38117926940104
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-28",
+        "bank": "Izquierda",
+        "easting": 227325,
+        "northing": 8187186,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 7,
+        "source_table_row": 31,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-28.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 7 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-28"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-32",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55354925769703,
+          -16.379543683914335
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-32",
+        "bank": "Derecha",
+        "easting": 227237,
+        "northing": 8187366,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 8,
+        "source_table_row": 8,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-32.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 8 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-32"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-32",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55341734565577,
+          -16.379473025484355
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-32",
+        "bank": "Izquierda",
+        "easting": 227251,
+        "northing": 8187374,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 8,
+        "source_table_row": 32,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-32.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 8 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-32"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-36",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5546434420543,
+          -16.378067134098377
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-36",
+        "bank": "Derecha",
+        "easting": 227118,
+        "northing": 8187528,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 9,
+        "source_table_row": 9,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-36.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 9 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-36"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-36",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5545116484848,
+          -16.378005507318456
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-36",
+        "bank": "Izquierda",
+        "easting": 227132,
+        "northing": 8187535,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 9,
+        "source_table_row": 33,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-36.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 9 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-36"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-41",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55429342470954,
+          -16.376337147204964
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-41",
+        "bank": "Derecha",
+        "easting": 227153,
+        "northing": 8187720,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 10,
+        "source_table_row": 10,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-41.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 10 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-41"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-41",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55414398157892,
+          -16.376357026731217
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-41",
+        "bank": "Izquierda",
+        "easting": 227169,
+        "northing": 8187718,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 10,
+        "source_table_row": 34,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-41.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 10 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-41"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-46",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55360770070429,
+          -16.37469252622514
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-46",
+        "bank": "Derecha",
+        "easting": 227224,
+        "northing": 8187903,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 11,
+        "source_table_row": 11,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-46.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 11 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-46"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-46",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55346831917633,
+          -16.37476647795653
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-46",
+        "bank": "Izquierda",
+        "easting": 227239,
+        "northing": 8187895,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 11,
+        "source_table_row": 35,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-46.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 11 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-46"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-50",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55264240534534,
+          -16.373132585871634
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-50",
+        "bank": "Derecha",
+        "easting": 227325,
+        "northing": 8188077,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 12,
+        "source_table_row": 12,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-50.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 12 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-50"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-50",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55250290681872,
+          -16.37319750579244
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-50",
+        "bank": "Izquierda",
+        "easting": 227340,
+        "northing": 8188070,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 12,
+        "source_table_row": 36,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-50.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 12 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-50"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-54",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55176202388965,
+          -16.37162580419352
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-54",
+        "bank": "Derecha",
+        "easting": 227417,
+        "northing": 8188245,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 13,
+        "source_table_row": 13,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-54.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 13 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-54"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-54",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55161234874141,
+          -16.371627619291317
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-54",
+        "bank": "Izquierda",
+        "easting": 227433,
+        "northing": 8188245,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 13,
+        "source_table_row": 37,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-54.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 13 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-54"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-58",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5521978389053,
+          -16.36988627761078
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-58",
+        "bank": "Derecha",
+        "easting": 227368,
+        "northing": 8188437,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 14,
+        "source_table_row": 14,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-58.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 14 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-58"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-58",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5520571672087,
+          -16.369860886140163
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-58",
+        "bank": "Izquierda",
+        "easting": 227383,
+        "northing": 8188440,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 14,
+        "source_table_row": 38,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-58.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 14 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-58"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-63",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55316173345446,
+          -16.368465515103786
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-63",
+        "bank": "Derecha",
+        "easting": 227263,
+        "northing": 8188593,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 15,
+        "source_table_row": 15,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-63.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 15 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-63"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-63",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55306724771401,
+          -16.36839440136139
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-63",
+        "bank": "Izquierda",
+        "easting": 227273,
+        "northing": 8188601,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 15,
+        "source_table_row": 39,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-63.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 15 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-63"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-69",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55314875425336,
+          -16.366749497354263
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-69",
+        "bank": "Derecha",
+        "easting": 227262,
+        "northing": 8188783,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 16,
+        "source_table_row": 16,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-69.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 16 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-69"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-69",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55299931805052,
+          -16.366769375066383
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-69",
+        "bank": "Izquierda",
+        "easting": 227278,
+        "northing": 8188781,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 16,
+        "source_table_row": 40,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-69.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 16 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-69"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-73",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55289185877776,
+          -16.364982242758465
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-73",
+        "bank": "Derecha",
+        "easting": 227287,
+        "northing": 8188979,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 17,
+        "source_table_row": 17,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-73.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 17 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-73"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-73",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55274230633478,
+          -16.36499308902408
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-73",
+        "bank": "Izquierda",
+        "easting": 227303,
+        "northing": 8188978,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 17,
+        "source_table_row": 41,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-73.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 17 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-73"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-77",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55338437089192,
+          -16.36328719096818
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-77",
+        "bank": "Derecha",
+        "easting": 227232,
+        "northing": 8189166,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 18,
+        "source_table_row": 18,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-77.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 18 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-77"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-77",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55323434974225,
+          -16.363261913086188
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-77",
+        "bank": "Izquierda",
+        "easting": 227248,
+        "northing": 8189169,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 18,
+        "source_table_row": 42,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-77.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 18 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-77"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-81",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55376380340255,
+          -16.36153028310103
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-81",
+        "bank": "Derecha",
+        "easting": 227189,
+        "northing": 8189360,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 19,
+        "source_table_row": 19,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-81.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 19 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-81"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-81",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55361366610359,
+          -16.36149597422578
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-81",
+        "bank": "Izquierda",
+        "easting": 227205,
+        "northing": 8189364,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 19,
+        "source_table_row": 43,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-81.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 19 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-81"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-85",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55389008269081,
+          -16.359731283481175
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-85",
+        "bank": "Derecha",
+        "easting": 227173,
+        "northing": 8189559,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 20,
+        "source_table_row": 20,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-85.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 20 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-85"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-85",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55375012351581,
+          -16.35976007858792
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-85",
+        "bank": "Izquierda",
+        "easting": 227188,
+        "northing": 8189556,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 20,
+        "source_table_row": 44,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-85.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 20 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-85"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-90",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55354913066337,
+          -16.357974080384217
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-90",
+        "bank": "Derecha",
+        "easting": 227207,
+        "northing": 8189754,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 21,
+        "source_table_row": 21,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-90.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 21 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-90"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-90",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55340964255828,
+          -16.358038999424117
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-90",
+        "bank": "Izquierda",
+        "easting": 227222,
+        "northing": 8189747,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 21,
+        "source_table_row": 45,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-90.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 21 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-90"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-94",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55329378220566,
+          -16.35632422792943
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-94",
+        "bank": "Derecha",
+        "easting": 227232,
+        "northing": 8189937,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 22,
+        "source_table_row": 22,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-94.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 22 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-94"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-94",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55314400144186,
+          -16.356317011382817
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-94",
+        "bank": "Izquierda",
+        "easting": 227248,
+        "northing": 8189938,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 22,
+        "source_table_row": 46,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-94.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 22 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-94"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-99",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5534957229296,
+          -16.35458753798761
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-99",
+        "bank": "Derecha",
+        "easting": 227208,
+        "northing": 8190129,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 23,
+        "source_table_row": 23,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-99.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 23 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-99"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-99",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55313933618139,
+          -16.354519598547967
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-99",
+        "bank": "Izquierda",
+        "easting": 227246,
+        "northing": 8190137,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 23,
+        "source_table_row": 47,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-99.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 23 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-99"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-R-103",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55408269480778,
+          -16.352963602140612
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "R-CH-103",
+        "bank": "Derecha",
+        "easting": 227143,
+        "northing": 8190308,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 24,
+        "source_table_row": 24,
+        "source_header": "sources/cayma-derecha-header.png",
+        "source_crop": "sources/Cayma-R-103.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 24 · margen derecha",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "R-CH-103"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-L-103",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5537272507296,
+          -16.352967911966218
+        ]
+      },
+      "properties": {
+        "sector": "Cayma",
+        "code": "L-CH-103",
+        "bank": "Izquierda",
+        "easting": 227181,
+        "northing": 8190308,
+        "source": "ANA-Cayma.pdf",
+        "page": 73,
+        "provenance": "Tabla corregida de hitos, rectificación del 22/03/2019; expediente RD 1610-2018",
+        "source_kind": "pdf_crop",
+        "source_row": 24,
+        "source_table_row": 48,
+        "source_header": "sources/cayma-izquierda-header.png",
+        "source_crop": "sources/Cayma-L-103.png",
+        "source_title": "Hitos a monumentar · tabla rectificada del 22/03/2019",
+        "source_locator": "PDF página 73 · fila 24 · margen izquierda",
+        "meaning": "Ubicación prevista por ANA para colocar un hito que señalice la faja marginal. No confirma que el hito exista físicamente.",
+        "source_code": "L-CH-103"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-R-14",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55076362737445,
+          -16.399864481021247
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HR-CH-14",
+        "bank": "Derecha",
+        "easting": 227563,
+        "northing": 8185120,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HR-CH-14",
+        "source_kind": "text_excerpt",
+        "source_line": 779,
+        "source_raw_line": "1+380 HR-CH-14 227563 8185120 HL-CH-014 227575 8185123",
+        "source_selected_text": "HR-CH-14 227563 8185120",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 779 · margen derecha",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4680,
+          "raw_line": "0->600 HR-CH-14 227524 8185516 HL-CH-014 227536 8185517",
+          "easting": 227524,
+          "northing": 8185516,
+          "difference_m": 397.9,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4680"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-L-14",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55065100173294,
+          -16.399838750905825
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HL-CH-014",
+        "bank": "Izquierda",
+        "easting": 227575,
+        "northing": 8185123,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HL-CH-014",
+        "source_kind": "text_excerpt",
+        "source_line": 779,
+        "source_raw_line": "1+380 HR-CH-14 227563 8185120 HL-CH-014 227575 8185123",
+        "source_selected_text": "HL-CH-014 227575 8185123",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 779 · margen izquierda",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4680,
+          "raw_line": "0->600 HR-CH-14 227524 8185516 HL-CH-014 227536 8185517",
+          "easting": 227536,
+          "northing": 8185517,
+          "difference_m": 395.9,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4680"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-R-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.54918602579073,
+          -16.395846099639936
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HR-CH-15",
+        "bank": "Derecha",
+        "easting": 227726,
+        "northing": 8185567,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HR-CH-15",
+        "source_kind": "text_excerpt",
+        "source_line": 780,
+        "source_raw_line": "0+900 HR-CH-15 227726 8185567 HL-CH-015 227738 8185566",
+        "source_selected_text": "HR-CH-15 227726 8185567",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 780 · margen derecha",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4682,
+          "raw_line": "0->500 HR-CH-15 227495 8185610 HL-CH-015 227507 8185612",
+          "easting": 227495,
+          "northing": 8185610,
+          "difference_m": 235.0,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4682"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-L-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.54907387291024,
+          -16.395856492633193
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HL-CH-015",
+        "bank": "Izquierda",
+        "easting": 227738,
+        "northing": 8185566,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HL-CH-015",
+        "source_kind": "text_excerpt",
+        "source_line": 780,
+        "source_raw_line": "0+900 HR-CH-15 227726 8185567 HL-CH-015 227738 8185566",
+        "source_selected_text": "HL-CH-015 227738 8185566",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 780 · margen izquierda",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4682,
+          "raw_line": "0->500 HR-CH-15 227495 8185610 HL-CH-015 227507 8185612",
+          "easting": 227507,
+          "northing": 8185612,
+          "difference_m": 235.5,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4682"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-R-16",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.54906912063242,
+          -16.394772649520043
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HR-CH-16",
+        "bank": "Derecha",
+        "easting": 227737,
+        "northing": 8185686,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HR-CH-16",
+        "source_kind": "text_excerpt",
+        "source_line": 781,
+        "source_raw_line": "0+780 HR-CH-16 227737 8185686 HL-CH-016 227750 8185685",
+        "source_selected_text": "HR-CH-16 227737 8185686",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 781 · margen derecha",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4684,
+          "raw_line": "0--400 HR-CH-16 227494 8185711 HL-CH-016 227494 8185711",
+          "easting": 227494,
+          "northing": 8185711,
+          "difference_m": 244.3,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4684"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-L-16",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5489476125217,
+          -16.39478315584379
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HL-CH-016",
+        "bank": "Izquierda",
+        "easting": 227750,
+        "northing": 8185685,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HL-CH-016",
+        "source_kind": "text_excerpt",
+        "source_line": 781,
+        "source_raw_line": "0+780 HR-CH-16 227737 8185686 HL-CH-016 227750 8185685",
+        "source_selected_text": "HL-CH-016 227750 8185685",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 781 · margen izquierda",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4684,
+          "raw_line": "0--400 HR-CH-16 227494 8185711 HL-CH-016 227494 8185711",
+          "easting": 227494,
+          "northing": 8185711,
+          "difference_m": 257.3,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4684"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-R-17",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.54927332113068,
+          -16.39320754899563
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HR-CH-17",
+        "bank": "Derecha",
+        "easting": 227713,
+        "northing": 8185859,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HR-CH-17",
+        "source_kind": "text_excerpt",
+        "source_line": 782,
+        "source_raw_line": "0+600 HR-CH-17 227713 8185859 HL-CH-017 227724 8185864",
+        "source_selected_text": "HR-CH-17 227713 8185859",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 782 · margen derecha",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4686,
+          "raw_line": "0+300 HR-CH-17 227498 8185809 HL-CH-017 227499 8185809",
+          "easting": 227498,
+          "northing": 8185809,
+          "difference_m": 220.7,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4686"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-L-17",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.54916982016195,
+          -16.393163641859537
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HL-CH-017",
+        "bank": "Izquierda",
+        "easting": 227724,
+        "northing": 8185864,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HL-CH-017",
+        "source_kind": "text_excerpt",
+        "source_line": 782,
+        "source_raw_line": "0+600 HR-CH-17 227713 8185859 HL-CH-017 227724 8185864",
+        "source_selected_text": "HL-CH-017 227724 8185864",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 782 · margen izquierda",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4686,
+          "raw_line": "0+300 HR-CH-17 227498 8185809 HL-CH-017 227499 8185809",
+          "easting": 227499,
+          "northing": 8185809,
+          "difference_m": 231.6,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4686"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-R-18",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.54978829329448,
+          -16.38891989459465
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HR-CH-18",
+        "bank": "Derecha",
+        "easting": 227652,
+        "northing": 8186333,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HR-CH-18",
+        "source_kind": "text_excerpt",
+        "source_line": 783,
+        "source_raw_line": "0+120 HR-CH-18 227652 8186333 HL-CH-018 227664 8186335",
+        "source_selected_text": "HR-CH-18 227652 8186333",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 783 · margen derecha",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4688,
+          "raw_line": "0+200 HR-CH-18 227475 8185928 HL-CH-018 227475 8185928",
+          "easting": 227475,
+          "northing": 8185928,
+          "difference_m": 442.0,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4688"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-L-18",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.54967579176869,
+          -16.388903194108067
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HL-CH-018",
+        "bank": "Izquierda",
+        "easting": 227664,
+        "northing": 8186335,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HL-CH-018",
+        "source_kind": "text_excerpt",
+        "source_line": 783,
+        "source_raw_line": "0+120 HR-CH-18 227652 8186333 HL-CH-018 227664 8186335",
+        "source_selected_text": "HL-CH-018 227664 8186335",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 783 · margen izquierda",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4688,
+          "raw_line": "0+200 HR-CH-18 227475 8185928 HL-CH-018 227475 8185928",
+          "easting": 227475,
+          "northing": 8185928,
+          "difference_m": 448.7,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4688"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-R-19",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.54966203927711,
+          -16.387846557520177
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HR-CH-19",
+        "bank": "Derecha",
+        "easting": 227664,
+        "northing": 8186452,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HR-CH-19",
+        "source_kind": "text_excerpt",
+        "source_line": 784,
+        "source_raw_line": "0+000 HR-CH-19 227664 8186452 HL-CH-019 227676 8186448",
+        "source_selected_text": "HR-CH-19 227664 8186452",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 784 · margen derecha",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4690,
+          "raw_line": "0+100 HR-CH-19 227460 8186029 HL-CH-019 227471 8186025",
+          "easting": 227460,
+          "northing": 8186029,
+          "difference_m": 469.6,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4690"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Yanahuara-L-19",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5495502435824,
+          -16.387884043375394
+        ]
+      },
+      "properties": {
+        "sector": "Yanahuara",
+        "code": "HL-CH-019",
+        "bank": "Izquierda",
+        "easting": 227676,
+        "northing": 8186448,
+        "source": "ANA-resolucion-2017.txt",
+        "page": 9,
+        "provenance": "Cuadro 03, resolución del 28/12/2017; transcripción desde TXT",
+        "source_code": "HL-CH-019",
+        "source_kind": "text_excerpt",
+        "source_line": 784,
+        "source_raw_line": "0+000 HR-CH-19 227664 8186452 HL-CH-019 227676 8186448",
+        "source_selected_text": "HL-CH-019 227676 8186448",
+        "source_title": "Cuadro 03 final · hitos de delimitación, Yanahuara",
+        "source_locator": "TXT · cuadro 03 final · línea 784 · margen izquierda",
+        "meaning": "Hito de faja marginal consignado en la resolución ANA. Ubicación en revisión por diferencias con otra tabla del estudio.",
+        "location_status": "source_conflict",
+        "alternative_source": {
+          "source": "ANA-estudio-2017.txt",
+          "line": 4690,
+          "raw_line": "0+100 HR-CH-19 227460 8186029 HL-CH-019 227471 8186025",
+          "easting": 227471,
+          "northing": 8186025,
+          "difference_m": 470.1,
+          "locator": "Cuadro 06 · tabla posterior del estudio · línea 4690"
+        }
+      }
+    }
+  ]
+}

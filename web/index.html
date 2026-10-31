@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, limites de faja, franjas de proximidad y deteccion de edificios por CNN.">
+<title>Chullo Unificado · Mapa y edificaciones</title>
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="simple.css">
+</head>
+<body>
+<header>
+  <div>
+    <p class="eyebrow">TORRENTERA CHULLO · AREQUIPA · MAPA UNIFICADO</p>
+    <h1>Mapa, fajas y edificaciones</h1>
+    <p class="sub">Puntos ANA de Cayma y Yanahuara · límites de faja · franjas de proximidad · detección CNN de edificios</p>
+  </div>
+  <div class="acciones">
+    <button class="button" id="btn-detected" title="Ejecutar detección CNN de edificios">Detectar edificios</button>
+    <a class="button secondary" href="web/layers/hitos-ana.geojson" download>Descargar hitos ANA</a>
+  </div>
+</header>
+
+<main>
+  <div class="connections" aria-label="Estado de conexiones">
+    <span>ANA <b class="ready">60 registros · 12 en revisión</b></span>
+    <span>OpenStreetMap <b id="map-state">Cargando…</b></span>
+    <span>CNN <b id="cnn-state" title="Detección de edificios con Mask R-CNN">Disponible</b></span>
+  </div>
+
+  <section class="workspace" aria-label="Consulta de hitos y edificaciones">
+    <div class="map-panel">
+      <div id="map" aria-label="Mapa de Chullo con OpenStreetMap y franjas de proximidad"></div>
+      <div class="map-controls">
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-hitos" checked> Puntos ANA
+        </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-limites" checked> Límites de faja (Cayma)
+        </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-bandas" checked> Franjas de proximidad
+        </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-edificios" checked> Edificios detectados
+        </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-satelital"> Vista satelital (overlay)
+        </label>
+        <div class="band-controls">
+          <label>Límite rojo (m): <input type="number" id="band-rojo" value="25" min="0" max="500" step="5"></label>
+          <label>Ancho amarillo (m): <input type="number" id="band-amarillo" value="25" min="0" max="500" step="5"></label>
+          <button id="btn-recalcular-bandas">Recalcular franjas</button>
+        </div>
+        <div id="panel-info" class="info-panel"></div>
+      </div>
+      <div class="map-legend">
+        <span><i class="cayma"></i>ANA Cayma</span>
+        <span><i class="yana"></i>ANA Yanahuara · en revisión</span>
+        <span><i class="dot rojo"></i>Rojo · 0–25 m</span>
+        <span><i class="dot amarillo"></i>Amarillo · 25–50 m</span>
+        <span><i class="dot verde"></i>Verde · &gt;50 m</span>
+        <span><i class="dot edificio"></i>Edificio detectado</span>
+      </div>
+    </div>
+
+    <aside>
+      <h2>Edificio seleccionado</h2>
+      <div id="edificio-info">
+        <p class="vacio">Selecciona un edificio en el mapa para ver su ficha.</p>
+      </div>
+      <div id="faja-info" class="faja-panel">
+        <h3>Límites de faja marginal (documental)</h3>
+        <p>Cayma · margen derecha e izquierda · 210 vértices del documento ANA.</p>
+        <p class="note">Margen derecha e izquierda: mirando aguas abajo, en el sentido del flujo.</p>
+      </div>
+      <div id="detector-panel">
+        <h3>Detección de edificios (CNN)</h3>
+        <p>La detección identifica edificaciones sobre imagen satelital y las clasifica por distancia al cauce.</p>
+        <button id="btn-run-detect" class="button">Ejecutar detección sobre imagen del sector</button>
+        <div id="detect-status" class="detect-status"></div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<dialog id="source-dialog" aria-labelledby="source-title">
+  <div class="source-head">
+    <h2 id="source-title">Fuente del punto</h2>
+    <button type="button" id="close-source" aria-label="Cerrar fuente">×</button>
+  </div>
+  <div id="source-body"></div>
+</dialog>
+
+<script src="vendor/leaflet.js"></script>
+<script src="data.js"></script>
+<script src="bands.js"></script>
+<script src="detection.js"></script>
+<script src="simple.js"></script>
+</body>
+</html>

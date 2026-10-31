@@ -1,0 +1,4795 @@
+\ 
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!'\ANA 
+Autoftdad N•donal del A¡ua 
+
+ESTUDIO DE DELIMITACIÓN DE LA FAJA MARGINAL DEL CAUCE DE LA TORRENTERA 
+CHULLO 
+
+CONTENIDO 
+
+l. GENERALIDADES 
+1 . 1  Introducción 
+1.2 Objetivos 
+1 .3  Justificación 
+1.4 Base Legal 
+1 .5 Definiciones 
+
+11. DESCRIPCION GENERAL DEL TRAMO DE CAUCE NATURAL 
+2.1 Ubicación: Hidrográfica y Geográfica 
+2.2 Descripción del cauce 
+2.3 Aspectos Hidrológicos 
+2.4 Aspectos climatológicos, geomorfológicos, y geológicos 
+2.5 Coeficiente de escorrentía 
+2.6 Población 
+
+1 11. ANALISIS DE MAXIMAS AVENIDAS 
+3.1 Determinación de caudales máximos 
+
+IV. TOPOGRAFIA 
+4.1 Puntos de Control 
+4.2 Levantamiento Topográfico 
+
+v. SIMULACION HIDRAULICA 
+5.1 Descripción del modelo 
+5.2 Configuración del Modelo 
+
+• 
+5.3 Simulación Hidráulica 
+5.4 Procesamiento en SIG 
+
+VI. DELIMITACION DE LA FAJA MARGINAL 
+6.1 Dimensionamiento de la Faja marginal 
+6.2 Limites de la Faja Marginal 
+
+VII. CONCLUSIONES Y RECOMENDACIONES 
+7.1 Conclusiones 
+7.2 Recomendaciones 
+
+VIII. ANEXOS 
+Cuadros, graficas, esquemas, fotos, documentos, mapas 
+
+Av. Pumacahua 520, Cerro Colorado -Arequipa 
+
+Teléfono 054-497585 
+aaa-caplinaocona@ana.gob.pe 
+
+www.ana.gob.pe 
+
+www.mlnagri.gob.pe 
+
+1 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicío al Ciudadano" 
+
+!lANA 
+Autoridad Nxlafl•I del Acu& 
+
+tJ02  
+
+l. GENERALIDADES 
+
+1 .1  Introducción 
+
+La Ley Orgánica de Gobiernos Regionales Nº 27867, señala que los Gobiernos Regionales tienen 
+como función Formular. aprobar, ejecutar, evaluar, dirigir, controlar y administrar las políticas en 
+materia de Defensa Civil, en concordancia con la potitrca general del gobierno y los planes 
+sectoriales. También tiene las funciones de organizar y ejecutar acciones de prevención de 
+desastres y brindar ayuda directa e inmediata a los damnificados y la rebabrhtac.ón de las 
+poblaciones afectadas. 
+
+La LEY Nº 29664 que crea el Sistema Nacional de Gestión del Riesgo de Desastres (SINAGERD)· 
+Los Gobiernos Regionales y Locales son integrantes del SINAGERD. y formulan. aprueban 
+normas y planes, evalúan, dirigen, organizan, supervisan, fiscalizan y ejecutan los procesos de la 
+Gestión del Riesgo de Desastres, en el ámbito de su competencia. 
+En materia de recursos hídricos, la Ley de Recursos Hídncos N° 29338, establece que El Estado 
+dentro de la gestión prospectivas de riesgos delega a la Autoridad Nacional de Aguas -ANA. la 
+acción reguladora que acompaña a los planes de desarrollo y de ordenamiento temtonal y a la 
+implementación de la gestión correcuva de nesgos. La Autoridad Nacional del Agua. fomenta 
+programas integrales de control de avenidas, desastres naturales o aruñciales y prevención de 
+daños por inundaciones o por otros impactos del agua y sus bienes asociados, promoviendo la 
+coordinación de acciones estructurales, institucionales y operativas necesarias. 
+
+Las Autoridades Adrmrustrauvas del Agua son los órganos desconcentrados de la ANA que tienen 
+entre sus funciones: Desarrollar acciones de supervisión. control y vigilancia para asegurar la 
+conservación. protección de calidad y uso sostenible de los recursos hidráulicos. ejerciendo 
+facultad sancionadora; elaborar estudios técnicos que sirvan de sustento a los Planes de Gestión 
+de los Recursos Hidricos en la cuencas; aprobar la delimitación de fajas marginales; autorizar la 
+ejecución de obras en los bienes naturales asociados al agua, efectuar coordrnacrones 
+interinstitucional con los Gobiernos Regionales, Autoridades Municipales. COFOPRI y accrones 
+
+de sensibilización para formación de la cultura del agua. 
+
+De acuerdo al Art. 1 1 3  del reglamento de la Ley de Recursos Hidricos aprobado con Decreto 
+Supremo Nº 001-2010-AGA, establece que, las fajas marginales son bienes de dominio público 
+hidráulico. Están conformadas por las áreas inmediatas superiores a las riberas de las fuentes de 
+agua, naturales o artificiales y las dimensiones en ambas márgenes de un cuerpo de agua son 
+fijadas por la AAA, de acuerdo a los criterios establecidos en el reglamento. 
+
+Según el Art. 5 .1  la Autoridad Administrativa del Agua - AAA. es la autoridad competente para 
+aprobar la cenrmtac.ón de la fa¡a marginal. en base a un estudio de oenrrutacrón. El respaldo legal 
+para la delimitación de cauces y fa¡as marginales se encuentra amparado desde el Art. 108 hasta 
+el Art. 130  del capítulo 111 (causas, riberas y fajas marginales) del título V del reglamento de Ley 
+29338. La Resolución Jefatura! R.J. Nº 332-2016-ANA de la Autoridad Nacional del Agua aprueban 
+Reglamento para la Delimitación y Mantenimiento de Fajas Marginales 
+
+La Autoridad Administrativa del Agua I Caplina Ocoña (AAA I C-O) y la Adrmnistracrón Local del 
+Agua Chili, con¡untamente con los Gobiernos Locales: Municipalidad distntal de Cerro Colorado, 
+Cayma, Yanahuara, Cercado y Sachaca, han priorizado realizar un Estudio Hidráulico - 
+Hidrológico para la delimitación den ancho del cauce y faja marginal de la Torrentera Chullo. 
+
+/\ P. 
+
+] 1¡ ' "  ¡  4 ¡r1,  
+
+
+
+Ministerio 
+de llgricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!\ANA 
+Autoridad .,,..,.,. del Acw• 
+
+1.2 Objetivos y metas 
+
+Determinar las zonas inundables en el cauce de la torrentera Chullo, que cruza los distritos de 
+Yanahuara y Sachaca, desde el sector Puente El Chullo hasta la desembocadura al río Chili en un 
+tramo de 1.260 km, y delimitar los anchos del cauce y faja marginal en ambas márgenes. 
+
+1.3 Justificación 
+
+La Torrentera Chullo nace al pie del Nevado Chachani en forma de quebrada, luego cruza zonas 
+desérticas con presencia de habitantes, también cruza zonas agrícolas y urbanas de la ciudad de 
+Arequipa, desembocando por la margen derecha del Rio Chili aguas abajo del Puente San Isidro 
+aproximadme 500 m. 
+
+Todos los años, en los periodos de lluvias (Enero - Marzo), la Torrentera Chullo y en general todas 
+las torrenteras de Arequipa, se activan con el ingreso de caudales arrastrando materiales sólidos 
+y orgánicos, produciendo impactos negativos sobre zonas de alto riesgo principalmente en centros 
+poblados e infraestructura de servicios (vías, puentes. red de agua y alcantarillado, red de 
+alumbrado, viviendas y otros) de la ciudad de Arequipa. 
+
+El curso fiuvial y su espacio natural de la fuente de agua como es 
+la torrentera Chullo, se han venido alterando debido a las 
+actividades antrópicas, ocasionado impactos negativos sobre el 
+curso fluvial y además ponemos alto nesgo a la población 
+asentada en la zona. Los fenómenos antrópicos se tratan aquellas 
+amenazas cuyo origen se refiere a las acciones que la humanidad 
+impulsa para, aprovechar la transformación de la naturaleza, 
+
+Los medios de comunicación difunden a la sociedad civil los 
+desastres naturales de origen hidrológico que producen las 
+torrenteras en la ciudad d Arequipa, prinapalmente la torrentera 
+Chullo. 
+
+La máxima peligrosidad de la torrentera Chullo, se debe principalmente a la elevada cantidad de 
+puntos vulnerables, correspondiendo prinapalmente a puentes deficientemente diseñados y 
+ubicados en la parte baja. En general, el material que se encuentra en el cauce de la torrentera 
+está constituido de pequeños cantos con un diámetro aproximado de 2 a 3 cm, contenidos en un 
+material areno-arcilloso de escasa o nula consolidación, aumentando el diámetro de los cantos a 
+medida que se asciende hacia los orígenes de las torrenteras, llegándose a encontrar incluso 
+balones y rocas, incrementándose el peligro en caso de fuertes avenidas. 
+
+1.4 Alcances 
+
+La Ley Orgánica de Gobiernos Regionales Nº 27867: 
+Señala que los Gobiernos Regionales tienen como función Formular. aprobar, ejecutar, evaluar. 
+dirigir, controlar y administrar las políticas en materia de Defensa Civil, en concordancia con la 
+política general del gobierno y los planes sectoriales. También tiene las funciones de organizar y 
+ejecutar acciones de prevención de desastres y brindar ayuda directa e inmediata a los 
+damnificados y la rehabilitación de las poblaciones afectadas. 
+
+La Ley Nº 29664 que crea el Sistema Nacional de Gestión del Riesgo de Desastres (SINAGERDl: 
+Los Gobiernos Regionales y Locales son integrantes del SINAGERD, y formulan. aprueban 
+normas y planes, evalúan. dingen, organizan, supervisan, 
+
+t ( 
+
+r , j! I '  '  
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!;_ANA 
+Autonda,,. Nadon. del Acua 
+
+003 
+
+fiscalizan y ejecutan los procesos de la Gestión del Riesgo de Desastres, en el ámbito de su 
+competencia. 
+
+Ley de Recursos Hidricos Nº 29338: 
+Establece que El Estado dentro de la gestión prospectiva de riesgos delega a la Autoridad Nacional 
+de Aguas -ANA, la acción reguladora que acompaña a los planes de desarrollo y de ordenamiento 
+territorial y a la irnplernentacrón de la gestión correctiva de nesgas. 
+
+Programas Integrales de Control de Avenidas (Articulo 264° del Reglamento de la LEY) 
+264.1. La Autoridad Nacional del Agua, en coordinación con las oficinas regionales de Defensa 
+Civil, elabora los programas integrales de control de avenidas los mismos que debe ser incluido 
+en los planes de gestión de recursos hidncos en la cuenca. 
+
+264.2. El programa integral de control de avenidas comprende el conjunto de acciones 
+estructurales y no estructurales destinadas a prevenir, reducir y mrtiqar nesgas de inundaciones 
+producidas por las avenidas de los rios. Involucra proyectos hidráulicos de aprovechamientos 
+multisectoriales y obras de encauzamiento y defensas ribereñas. 
+
+264.3. Las acciones de prevención de inundaciones consideran la rdentrñcación de puntos criticas 
+de desbordamiento por la recurrencia de fenómenos hidrometeorológicos y de eventos extremos, 
+que hacen necesaria la ejecución de acnvidaces permanentes de descolrnatación de cauces, 
+mantenimiento de las pendientes de equilibrio y construcción de obras permanentes de control y 
+Corrección de cauce. 
+
+Definiciones Básicas 
+
+Faja Marginal: Área inmediata superior al cauce de la fuente de agua, natural o arnücral, en su 
+máxima creciente, sin considerar los niveles de las máximas crecientes por causas de eventos 
+extraordinarios. Constituye bien de dominio público moráuhco. 
+
+Cauce o Álveo: Continente de las aguas durante sus máximas crecientes, constituye un bien 
+de dominio público hidráulico. 
+Cauce Inactivo: Cauce o álveo por el que no discurre el agua por variación de su curso 
+Riberas: Áreas de los ríos, arroyos, torrentes, lagos y lagunas, comprendidas entre el nivel 
+mínimo de sus aguas y el nivel de su máxima creciente. Para su deurrutaoón no se considerarán 
+las máximas crecidas registradas por eventos exíraordmanos, constituye un bien de dominio 
+público hidráulico. 
+Nivel Mínimo de las aguas. Nivel de las aguas, calculado o estimado en base a los niveles 
+mínimos de los registros históricos considerando los periodos máximos de información 
+disponible, o de la información disponible en la Unidad Hidrográfica 
+
+Nivel de Máxima creciente o crecientes ordinarias: Nivel de las aguas durante su máxima 
+crecida y en una sección transversal específica del cauce, arroyo, lago, laguna y reservorio: 
+
+estimado por métodos directos o indirectos en función de la información existente en la Unidad 
+Hidrográfica. No se considerarán las máximas crecidas por causas de eventos extraordinarios. 
+Nivel de Máximas Extraordinarias: Nivel que puede alcanzar un cuerpo de agua al transitar 
+sobre él, la avenida máxima extraordinana. Esta avenida se establece de acuerdo a la 
+envergadura, importancia y potencial de daños materiales o personales que podrían originar el 
+desborde del cuerpo de agua. 
+
+/\ r /\ 
+
+[ d J' 4 I'.) 1 
+
+
+
+Ministeno 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!,.\ANA 
+Autoridad Nadoful di! Acta 
+
+Definición de taa mi:W'ginat 
+
+r 
+Obras de protección respetando la faja marginal 
+
+�···----- 
+
+11. DESCRIPCION GENERAL DEL TRAMO EN ESTUDIO 
+
+2.1 Ubicación: Política, Geográfica e Hidrográfica 
+
+Ubicación Política: 
+Región Arequipa 
+Provincia Arequipa 
+Distritos Yanahuara y Sachaca. 
+Ubicación Geográfica: 
+Proyección UTM: Datum horizontal WGS 84 
+Datum vertical· Nivel Medio del Mar 
+Zona: 19 Sur 
+
+Tramo 
+Inicio 
+Fin 
+
+Distrito 
+Yanahuara 
+Sachaca 
+
+Norte m 
+8 186 123 
+8 185 461 
+
+Este m 
+227 492 
+227 539 
+
+Altitud msnm 
+2,360 
+2,250 
+
+Ubicación Hidrográfica: 
+Nivel 3 Quilca Vitor Chili 
+Nivel 4 Medio Quilca Vitor Chili 
+Nivel 5 13257 
+
+2.2 Descripción del tramo de estudio 
+
+La Torrentera Chullo nace al pie del Nevado Chachani en fonma de quebrada, luego cruza zonas 
+desérticas con presencia de habitantes, también cruza zonas agrícolas y urbanas de la ciudad de 
+Arequipa, desembocando por la margen derecha del Ria Chili aguas abajo del Puente San Isidro 
+aproximadme 500 m. 
+
+El Tramo a evaluar corresponde a la Jurisdicción de Yanahuara que se inicia en el puente de la 
+Concordia en la Calle Grande colindando con el Distrito de Cayma hasta la Avenida Metropolitana 
+collndando con el Distrito de Sachaca. 
+
+El distrito de Sachada colinda con los distritos de Yanahuara y Arequipa, hasta la desembocadura 
+con el ria Chili, que corresponde al tramo final de la torrentera Chullo. 
+
+/1 f', ' A. 
+
+
+
+!lANA 
+Autoridad Nacional dlt �• 
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+SUB CUENCA COTA INTERVALO COTA MEDIA AREA AREA ACUMULADA •., OEAREA ,DEAREA 1  .,_ INTERVALO 
+
+INTERVALO ACUMULADA POR AREA 
+
+rn s n et m s n m  
+
+'"' 
+Km2 
+
+' 2250-2400 ;JO() 565 ':i b!'i 
+
+" 
+9 • 
+
+' 
+oc 
+
+2400-2600 2500 896 14 (,1 10 ti7 
+
+" 
+' '  4(. 
+
+2600-2000 2700 783 22 44 9 2 .í/6 71 21 14 
+
+2800-3000 2900 
+"' 
+
+lO 12 
+
+"' 
+15 86 2:·n 
+
+3000-:1200 3100 
+
+'" 
+:W 01 ,o �t 44 27 '>f 
+
+'lO(P.400 
+
+""" 
+7 23 46 24 1 8" .,. º" "� 
+
+"'400--� 
+"°" 
+
+5 21 �1 4', 
+
+' 
+t,1 l.':o e �4 
+
+CHULLO 
+
+--- " 
+,. 5544 4 ,� 
+
+66 ,.i 7t, 
+
+>8004000 ssoo 4 53 %197 
+
+" ' rn 
+
+4000-4.:00 •1\U 
+,, 
+
+. " 7'12'- 
+" 4200-1.100 'JOO 
+
+" 
+66.S .,,. 
+
+" ' 
+14 f,t, 
+
+4400-lóOO aeoo 
+" 
+
+702• ' 27  SJ 6l 11, 16 
+
+<600-<800 '700 03 73 27 ; " IH.!3 ,4 .!4 
+
+4800-5000 <!l<lO 2" 7b Ol J 27 90 50 n M• 
+
+5000-5500 5300 '98 "00 950 ,0000 .¡ '29 
+
+TOTAL 3713 
+'"º "" 
+
+Cuadros: Curva hipsornétnca y frecuencia de altitudes 
+
+Cuadro: Parámetros físicos y geomorfológicos 
+
+2.3 Aspectos Hidrológicos 
+
+La cuenca de la torrentera Chullo tiene un área de 84 km', y una longitud de cauce de 25.0 km 
+desde sus nacientes hasta la confluencia con el Río Chih; varía entre altitudes desde los 4.800 
+msnm hasta los 2.250 msnm y la pendiente media del cauce de la torrentera es del orden de 
+100 m/km (10 %) 
+
+El tramo a delimitar la faja marginal, abarca 15.0 km de longitud del cauce prmcrpal a partir de 
+la zona La Ternilla 11 de SEDAPAR, hasta La zona baja de la cuenca en el encuentro con el rio 
+Chili, aguas abajo de la Ciudad de Arequipa, a los 2,200 msnm. 
+
+En este tramo de 15 km, la parte alta se encuentra planicies desérticas y viviendas asentadas 
+sin servicios públicos, a una altitud de 2,785 msnm; mientras que en la ciudad de Arequipa en 
+el encuentro con el rio Chili se extiende una altitud de 2,250 msnm. La pendiente en este tramo 
+es del orden de los 35 m/km (3.5 %). 
+
+Los parámetros hidráulicos en la cuenca de la torrentera Chullo son las siguientes: 
+
+A 
+
+T ,p l l J(t 
+
+
+
+1 
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+A'S..ANA 
+-- Autondad Nkloti.i fft A¡:\I• 
+
+Microcuenca Chullo 
+
+'JClJ 
+
+' 
+º" 
+
+- , 
+
+• 
+
+1 1 
+• ;¡ 00 
+
+1 
+00 
+
+1 1 1 1 
+'"º 
+
+1 1 
+' 
+
+,0( 60 800 sooo 4200 4400 J, eo ' ) 00 
+,, 
+
+JO 
+
+' " " "°" 
+Almud (m\om) 
+
+M1crocuenc.:, Chullo 
+
+. 
+
+. 
+
+. 
+
+T 
+
+t 
+
+l 
+
+Al m, 
+
+
+
+(j ■Flfflifflj�,ltflilHN 1 
+"Año del Buen Servicio al Ciudadano" 
+
+Cuadro: Pendiente del cauce principal 
+
+É,.ANA 
+Autoridad Nacional dcl Acv• 
+
+OC5  
+
+MICAOCUENCA 
+ALTITUD LONGITUD LONGITUD ACUMULADA PENDIENTE 
+
+m.s.n.m Km Km % 
+
+2250-2400 5.150 5.150 2.91 
+
+2400-2600 5.200 10.350 2.88 
+
+2600-2800 3.500 13.850 4 29 
+
+2800-3000 2.500 16.350 6 00 
+
+3000-3200 i.sao 18.030 8.93 
+
+3200-3400 0950 18.980 15 79 
+
+CHULLO 3400-3600 1 150  20.130 13 04 
+
+3600-3800 O 760 20890 19 74 
+
+3800-4000 1 000 21.890 15.00 
+
+4000-4200 O 766 22 656 19 58 
+
+4200.-4400 0860 23 516 17 44 
+
+4400-4600 0660 24 176 22 73 
+
+4600-4800 0830 25.006 1807 
+
+TOTAL· MEDIA 25.0 5.00 
+
+P•ndiente del cauce prlnch>al de la torrntera Chulto 
+
+1 , h 
+
+La pendiente del cauce pnncipal, entre los 2250 msnm y los 3200 msnm promedia entre los 3% 
+y 5%, mientras que entre altitudes de los 3400 y 4400 promedia entre los 15% y 17%. 
+
+A P , ,  l  
+
+1  ,p, h l  , \f J , ' 8 5  
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+Cuadro. Parámetros hidráulicos de la cuenca 
+
+é.,ANA 
+Autoridad Nadonal del Apa 
+
+DESCRIPCIÓN l UND 1 VALOR 
+
+SUPERFICIE 
+
+�a 1 Km' 1 84.0 
+
+1 Km 1 
+- 
+
+Perímetro de la cuenca 57.5 
+
+COTAS DEL CAUCE PRINCIPAL 
+
+Cota maxma lmsnm 1 4800 
+
+Cota rnuuma lmsnm 1 2250 
+
+ALTITUD 
+
+Albtud media msnm 3713 O 
+
+PENDIENTE 
+
+Pendiente oromeno de la cuenca 'lo 1280 
+
+RED HIORICA 
+
+Loncuuc de/ curso nrinapal Km 2� 
+
+Orden de ta Red_!-i�dri� @�AHLERJ iu;o 1 ----1_ 
+
+1 oenoteme de! cauce onrc.cel lm/km 1 1700 
+
+Utilizando a herramienta ArcGis, se ha delimitado las cuencas microcuencas menores, según el 
+punto de interés y tramo de delimitar a faja marginal de la torrentera Chullo distritos de 
+Yanahuara y Sachaca. 
+
+En el Mapa {Imagen adjunta), se aprecia 03 rrucrocuencas: Área total: 84.0 km2 
+
+A) Microcuenca quebrada Azufra! 
+B) Microcuenca quebrada Pastoraiz 
+C) Mlcrocuenca torrentera Chullo 
+
+Área de 62.23 km2 
+Área de 9.14 km2 
+Área de 12.63 km2 
+
+La Carta Nacional Geográfica 33-S Arequrpa. describe la red hidrográfica de la microcuenca 
+Chullo, el cual se forma al confluir las quebradas Azufra! y Pasto Raíz.; luego la quebrada Chullo 
+desemboca al no Chili por la margen derecha. 
+
+La cuenca está delimitada por la línea imaginaria conocida como "divortiumacuarium" o "línea 
+divisoria de aguas" la cual podríamos definir como el lugar geométrico de los puntos más altos 
+que separan las precipitaciones que caen y encaminan la escorrentía resultante para nuestro 
+sistema fluvial la cual realizamos con el programa Are Gis 10.1 
+
+Micro Area de Longitud del Altitud Altitud Desnivel Pendiente 
+
+cuenca cuenca cauce (km) máxima mínima (m) (%) 
+
+lkm2l (msnm) (msnm) 
+
+Azufra! 62.23 16.8 1 4800 2515 2285 13.60 
+
+Pastoraíz 9.14 1 1  O  3600 2515 1085 9 86 
+
+' 
+
+Chullo 12.63 9 0  2515 2250 265 1 2.95 
+
+� Total 84.00 25.0 4800 2250 2550 12.8 
+
+A 
+
+1  
+
+
+
+É.ANA 
+Alnondad N.c:kln.at tk A(ua 
+
+O C 6  
+
+"Año del Buen Servicio al Ciudadano" 
+
+Imagen- Software Are Gis, y delimitación de rrucrocuencas 
+
+/\ 
+
+j ,( i' � 1 
+
+r 
+
+
+
+!\ANA 
+Autood.N NKioNI del Apa 
+
+"Año del Buen Servicio al Ciudadano" 
+
+2.4 Población beneficiada 
+
+Población de los distritos de Yanahuara 22 890 habitantes y Sachada 17  537 hab. (Fuente INEl- 
+2007) 
+
+111. ANALISIS DE MAXIMAS AVENIDAS 
+
+3.1 Selección del Método para determinación de máximas avenidas 
+
+Se entiende por forma de la avenida, la distnbución de los porcentajes respecto al gasto máximo 
+de los gastos correspondientes a los tiempos transcurridos a partir del momento en que se inicia 
+la avenida 
+
+El cálculo del periodo de retorno (T) nos permite conocer el gasto máximo con el cual se propondrá 
+el espacio de la faja marginal a partir del área indudable. 
+
+METODOS PARA LA ESTIMACION DE UNA AVENIDA MAXIMA 
+
+,- Funciones De Distribución De Probabilidades 
+
+Una función f(x) es llamada función de probabilidad o función de densidad de la variable aleatoria 
+
+continua X. sI cumple con las siguientes conoroones: 
+
+?. l. 't/ E R  
+
+f  (  ), , = 1 , cuando se encuentra en los limites - ,-:,;, y a: 
+
+Sea el evento: A = (  
+
+Luego: 
+
+fl A) = A E A) = f'(. , S S , ,) = f 1 ) , , cuando se encuentra entre los limites a y b. 
+
+En la estadística existen decenas de funciones de distribución de probabilidad teórica y 
+obviamente no es posible probarlas todas para un problema particular, por lo tanto es necesario 
+escoger uno de esos modelos, el que se adapte me¡or al problema bajo análisis. 
+
+Para el análisis de las precipitaciones máximas en 24 horas de la microcuencase han utilizado una 
+seria de 37 registros históricos de precipitaciones máximas en 24 horas completas y consistentes 
+(1977-2012), para ello se ajustaron a seis distribuciones de probabilidades las cuales se detallan 
+a continuación: 
+
+Distribución Gumbel (Drstnbución extrema Tipo 1). 
+
+,- Método Racional Modificado (Temez) 
+
+Para la sustentación de los caudales máximos en las mencionadas cuencas, a partir de las 
+precipitaciones máximas de 24 horas, y utilizando un solo coeficiente de escorrentía "C" estimado 
+sobre la base de las características de la cuenca, podemos utilizar el METODO RACIONAL ya que 
+es usado para cuencas con una área que bordee los 1 O Km' ( como es el caso de la microcuenca 
+Pastoraiz de 9 1 4  y microcuenca Chullo de 12 .63 km2), sin embargo el METODO RACIONAL 
+según la fórmula propuesta por TEMEZ (1987-1991) permite 
+
+1 1  
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano'' 
+
+!,.';.ANA 
+Autorldad NadOIWII de-1 Aci,I• 
+
+estimar caudales máximos en cuencas de drenaje naturales con áreas de 6.2.23 Km' que 
+corresponde a la microcuenca Azufral 
+
+Q = O. 278 * C * l * A *  K  
+
+Dónde. 
+Q: descarga máxima de diseño (m3/s) 
+C: coeficiente de escorrentía para el intervalo en el que se produce 1 
+1: intensidad de precipitación máxima horaria (mm/h) 
+A. área de la cuenca (Km') 
+K: coeficiente de uniformidad 
+
+Las fórmulas que definen los factores de la formula general son los siguientes 
+
+a) Tiempo de concentración (Te) 
+
+T =03*(-L-)076 
+e · sº zs 
+
+Dónde: 
+L: longitud del cauce mayor (Km) 
+S: pendiente promedio del cauce mayor (m/m) 
+
+b) Coeficiente de uniformidad 
+
+T cl.25 
+K = 1 + 1 2 s  
+
+Dónde: Te · + 14 
+Te: tiempo de concentración (horas) 
+c) Coeficiente de simultaneidad o factor reductor (KA) 
+
+lD910A 
+1 - ( 15 ) 
+
+Dónde: 
+A: Área de la cuenca (Km') 
+d) Precipitación máxima corregida sobre la cuenca (P) 
+
+Dónde. 
+KA: factor reductor 
+Pd: precipitación máxima diaria (mm) 
+
+e) Intensidad de precipitación (1) 
+
+/\ r, 
+
+
+
+' 
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!\ANA 
+Alltortdad Nacional ddApl 
+
+Dónde: 
+
+P: precipitación máxima diaria (mm) 
+Te: tiempo de concentración (Te) 
+
+f) Umbral de escorrentía (Po) 
+
+Po 
+
+Dónde: 
+CN: número de curva 
+
+g) Coeficiente de escorrentía (C ) 
+
+(Pd -P0 )  *  (Pd + 23 * P0) 
+e = ------------=--- 
+
+(P d + 11 * P0)2 
+
+Dónde: Pd: precipitación máxima diaria (mm) 
+
+3.2 Determinación de caudales máximos 
+
+T 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+É._ANA 
+�N-' ,t • 
+
+"Año del Buen Servicio al Ciudadano" 
+
+TABLA 
+
+Serles Anuales de Lluvias Mhlmas en 24 Horas 
+- -- 
+
+l  -  HUANCA CHARACATO CHIGUATA LA PAMl'1LLA 
+
+- 
+m Pmu 24horH T, Pma1 24 hCNa, 
+
+" 
+Pma• 24horH 
+
+" 
+Pmu. 24 honlt T,. 
+
+mm , .... , !mmJ ,11fl<Mll (.mm) t•llosl tmml ,_, 
+' "o 2000 
+
+'" 
+JJOO 
+
+"' 
+' 00  .,., "00 
+
+- ' "' 
+,000 " .  � 
+
+16 5fJ 
+
+'" 
+O 50 134 '300 
+
+- ' '" 
+66' 
+
+'" � 11_00_ 
+"' 
+
+033 
+'" 
+
+86' 
+
+• ., ' ' 00  5e 0 
+
+"' 
+"9 
+
+"' '"' 
+'50 
+
+' 
+' '"" "" '• '� rn, 
+
+- "' 
+O 20 lS S 
+
+� -  "º 
+- J;_ H O 3 JJ , . .  
+
+� � "3 
+- 
+
+º----!7 -- '' 7 t- _ ____!R__ 
+
+- �  
+,,. 286 s¡' "' -- '"- ....!!....!.4_ '"� "' 
+
+- ' " .  ' 50  526 
+
+"' 
+J,O ou "o 3" 
+
+- ' 
+14 ;.> 
+
+"' 
+'1 3 
+
+"' 
+,o. 
+
+"' '" "' 
+- " 
+
+1)8 2 00 4.' 6 3 ,0 _  289 0,0 
+'" 
+
+z., 
+
+- " 
+13A 
+
+"' •• 300 
+- 25 O 009 
+
+,,. 
+2 J6 
+
+- " "' "' ·- "" "' 
+,. . c oe 
+
+" ' "' - 
+
+- " 
+13 2 
+
+"' "' 
+2" " 3  O  08  14 9 '00 
+
+- 
+_,_. ____ 
+
+'" ' "  '"' "' '" o"' " '  "' 
+- " "' "' 
+
+�( 3 
+"º 
+
+227 007 
+'" "' 
+
+" "' "' '" "" '" °'" "' 
+'63 
+
+" "' "' "' "' 
+21 O 
+
+'" '" '"  
+- " " '  "' '" '" 
+
+209 006 
+'" ' «  
+
+" "' "" ·" '"  
+207 O 05 
+
+'" ' " 
+- " 
+
+" f,  ' 00  �, 9 '65 20  J  ,---  �- " '  
+'30 
+
+- " " ' O 95 .,,, 8 
+
+"' '" 
+005 
+
+'°' 
+1 24 
+
+" '"' o" '" 
+' 50  
+
+"' º°' " "ª 
+- -  ------ ,o' o" 
+
+, ,  
+� 
+
+,� 
+- 
+
+,., 
+º" '" ' " -- �--- 
+
+" 
+063 ... ,......__.._!--� - 
+
+,,, 
+o°' - " ' "'  -  " " 
+
+o., 
+' ' 
+
+1 12 
+- 
+
+... 
+
+'" " ' "'  
+- " 
+
+¡, 2 077 1'1 5 
+' "  - '" "" '" 
+
+' 00  -  
+
+" " 
+o,. u•n , 2; DO 
+
+º" 
+',, 0% 
+
+- " " o" ,. ' l l fl _  ·  ..  e� - � -  '  °'' Lº so 069 
+' ' ' " - 
+
+12 6 0 O' 
+
+' '" � 
+
+''" "'' 
+
+1 
+... 
+
+'"' 
+,. ' i---.U. -- "' " 
+
+- -"--- " 
+O 65 
+
+''" i---- 2-.<& - '" 
+O  03 
+
+.., oe, 
+
+- R 
+" 
+
+06:J 
+'" "' - " 
+
+003 
+'" 
+
+o" � -  
+079 - - . "' 
+
+2 
+� !J.l(l _  
+
+,  __ 
+
+'" " 
+� --------i • o" ·� 2c 
+
+=1 
+':12,.._ í10) 
+
+" "' 
+o" '  � 
+
+� 6 0 _  003 
+' °'' J - < 
+
+' '  º"' 
+, 
+- 
+
+.'.'..,_ 
+' "- O_QJ 
+
+' 
+0 7¡ 
+
+T 
+
+o 
+
+c:i 
+
+co 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+éANA 
+- &  H  "  .t.i 
+
+"Año del Buen Servicio al Ciudadano" 
+
+Ajuste por Gumbel 1 
+X=M+K'S  
+
+Tr HUANCA CHARACATO CHIGUATA LA PAMPILLA 
+
+(años) K X K X K X K X 
+
+2 -O 147 1621 -0 153 30.76 -O 156 2026 -O 151 1620 
+
+2.5 O 142 1834 O 119 3616 O 108 2319 O 129 1844 
+
+333 0481 2084 0439 42 50 0.419 26 62 0.457 21.06 
+
+5 0926 2412 0859 50.82 0.826 3 1 14  O  888 24 51 
+
+10 1637 2936 1 530 6410 1.476 3834 1 575 30.01 
+
+20 2 318 3439 2 173  7684 2.100 4525 2.235 35 29 
+
+50 3 201 40 89 3005 93.33 2908 5420 3089 42.12 
+
+100 3 862 45 77 3629 10569 3.513 6090 3 728 47 24 
+
+1 107 
+
+
+
+.,¡ 1 ( 1  " '  11 1 
+
+V 
+
+Ol OP 
+
+(so¡nww ) e!11n17 e1 ap u91:>eJna 
+
+0ll 00C 08 09 
+º'' 
+
+091 o 
+
+......----""T"""'---------------------� ......... 0 0  
+os, 
+
+I 1 
+
+oo,-- 
+
+01 
+os-­ 
+
+s 
+
+Ol 
+
+l-- 
+
+o oc 
+
+O 09 
+" 006 � 
+1í 
+� 
+
+O Ol�� 
+3 
+
+O OSI} 
+0·091 
+O ove 
+
+O OPl 
+
+O ozz 
+
+l/l'.)N3n'.)3l:l=l - NQl'.)\fl:lno - OIIOISN3.LNI S11/\l:ln'.) 
+
+- - - 
+o es e 9v 6 L€ s zc 6 LZ  szz 081 �- - - 
+
+-�z ' 
+� 
+
+S SS L LV O 6€ s ce L 8Z OLI 
+czs z·5i, z·ov s·vc 9·5z z·vz 1 091 - - - - -- 
+1 65 8 os S 11' 9 se 90€ osz OSI 
+
+-- Z 19 s zs O Cv 6 9€ L 1€ ssz Qt,I 
+ST9 S t,S 9 t,t, C 9€ 6 zc S-9Z 0€1 - - - -08Z - 
+1 99 8 95 17 91' 9 6€ Z t,C OZI 
+0·59 ees S 91' 9 11' L se zez l 011 - -- t, z¿  z  z9 905 9 €17 S LC soc 001 
+e 9¿ sss 9€5 o 917 S 6€ czc 06 
+O 18 5·59 8 95 9917 5·117 z·vc 08 
+- - --9·9c - 
+9·99 e vL L 09 z zs 9171' OL 
+
+sse c'os 9·59 €95 v·av ssc 1 09 
+17·zo1 6 L8 6 IL ¿ 19 o es CTt, os 
+
+-C86 -- -- 
+
+S t, 1 1  17 08 O 69 Z6S 17·917 017 
+zzc. S CI 1 8 Z6 L 6L 1'89 5·55 oc - - -� 
+5· 191 O 6€1 9 CI 1 9 L6 8 €8  sss oz 
+
+- - - - 
+O L91 S 091 Z ICI L ZII L 96 1·5¿ SI 
+
+oszz 9 961 ¿·091 09€1 ssu 9·95 01 
+-- 
+
+' 001 os oz 01 s z 
+(U!W) OdVHl.l -- 
+
+(sow) ONl:lO.l.3830 0001l:l3d 
+
+(1.1/WW) • .::Jal - SVIAn11 30 Vl::>N3n::>3l:::l.::J - NQl::>Vl::tnO • OVOISN31NI 30 S3N01:)Vl3l::I 
+
+,,ouepepn1::J ¡e OfOfA.Ji1S uane ¡ap OtJtf,, 
+
+mfrw PP fllOP9N  Pl,IOlny 
+
+YNY\f 
+olla111 A e,n¡¡nJ!Jll'f ap 
+
+0!Jill5!U!ll',J 
+
+6 0 0  
+
+
+
+\Y ■it1wnr0m11ma-, 
+
+"Año del Buen Servicio al c;udadano" 
+
+CAUDALES MAXIMDS GENERADOS - CUENCA PASTO RAIZ 
+
+!\ANA 
+Alltondad Nadonal ckl A¡ua 
+
+T Intensidad Factor Area Escorrenta Uniformidad Caudal maxlmo 
+
+años mm 0.0278 km2 e K m3/s 
+
+2 39 53704 002780 91400 04000 O 91767 3.69 
+
+5 48 36720 002780 91400 0.4000 0.91767 4.51 
+
+10 56.33490 0.02780 9 14()() 04000 0.91767 5.25 
+
+20 65.61515 0 02780 9 1400 04000 0.91767 6.12 
+
+50 80 26957 O 02780 9 1400 0.4000 O 91767 7.49 
+
+100 93 49267 0.02780 91400 O 4000 0.91767 8.72 
+
+CAUDALES MAXIMOS GENERADOS - CUENCA AZUFRAL 
+
+T Intensidad Factor Area Escorrenta Uniformidad Caudal maximo 
+
+años mm 0.0278 km2 e K m3/s 
+
+2 39.53704 002780 62 230 0.4000 0.60179 21.94 
+
+5 48 36720 002780 62 230 O 4000 O 80179 26.84 
+
+10 56.33490 O 02780 62 230 04000 O 80179 31.26 
+
+20 65 61515 002780 62 230 04000 O 80179 36.41 
+
+50 80.26957 0.02780 62 230 04000 0.80179 44.54 
+
+100 93.49267 0 02780 62 230 04000 0.80179 5&",.. 
+
+CAUDALES MAXIMOS GENERADOS - CUENCA CHULLO 
+
+T Intensidad Factor Area Escorrenta Uniformidad Caudal maximo 
+
+años mm 0.0278 km2 e K m3/s 
+
+2 39 53704 0.02780 12 630 04000 091767 5.10 
+
+5 48 36720 0.02780 12 630 04000 0.91767 6.23 
+
+,o 56.33490 O 02760 12 630 04000 0.91767 7.26 
+
+20 65.61515 0.02780 12 630 04000 0.91767 8.46 
+
+50 80 26957 O 02780 12 630 O 4000 0 91767 10.35 
+
+100 93 49267 O 02760 12 630 04000 0 91767 12.05 
+
+IV. TOPOGRAFIA 
+
+4.1 Puntos de Control 
+4.2 Levantamiento Topográfico 
+
+SE DETALLA EN ANEXO 
+
+/\ 
+
+1 I' 
+
+A 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+É..ANA 
+Autoridad NM;toro�l de1 A&...,. 
+
+010  
+
+V. SIMULACION HIDRAULICA 
+
+5.1 Descripción del modelo 
+
+Utilizando el HEC-RAS, que es un programa de modelización hidráulica nos ha permitido simular 
+los flujos en cauces naturales de régimen no permanente para determinar el nivel del agua con el 
+objetivo principal de determina las secciones inundables, para la vrsuahzacrón gráfica de datos y 
+resultados hidráulicos. Se ha modelado cada 10 metros y se muestras las secciones cada 25 
+metros. 
+
+- · . 
+•  
+
+- 
+
+- 
+•  •  
+
+•  
+
+j  
+
+r  
+
+5.2 Configuración del Modelo 
+
+l<!.ty Ita 
+
+A 
+
+T 1P, , 1 ! 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+j.';_ANA 
+Autoridad NadoNI del Ap.a 
+
+"Año del Buen Servicio al Ciudadano" 
+
+Coeficiente de manining. 
+
+fie,yJ\ .HU O 
+
+Rf'd,,: to L R 
+
+� [11 
+
+o 
+
+. .,.,,. 
+
+o 
+
+" o 
+
+"' 
+o 
+
+,; 
+
+,; 
+
+o,; 
+
+"' 
+0G 
+
+o:,; 
+
+o, .,.,. 
+
+""' 
+' 
+
+5.3 Simulación Hidráulica 
+
+A 
+
+T ' 
+
+( ' -A 
+
+
+
+"Año del Buen Servicio al Ciudadano11 
+
+, ,  . .  
+
+•  •• 
+. . ' 
+
+1 
+
+l d ) � J 
+
+!\ANA 
+Au1ortuéll NKk>; . ..  Acu• 
+
+0 1 1  
+
+
+
+@11 Ministerio 
+de Agricultura y Riego 
+
+---------------------- 
+
+!_�ANA 
+Autor\d.M Nadonal CMI Afu• 
+
+- 
+
+"Año del Buen Servicio al Ciudadano" 
+
+• ... 
+
+. 
+
+. 
+
+r 
+
+Torrentera Progrem1a Periodo de retorno Qma�tmo Tlr¡nte h1drauhco sene-ente Velodd� Ancho superior Fraude 
+
+1ml !TI (mlb} 1ml (m/m} {m/sl 1ml • 
+CHUU.0 
+
+"" 
+!RETORNO 20YEAR 36' 139 OCXEl34 
+
+"' 
+S3Z o" 
+
+CHULLO 
+"" 
+
+TRETORNO 50 YEAR 
+
+'" 
+26 O 0Cl9413 5 15 532 lOl 
+
+CHULLO 
+
+"" 
+RETORNO lOOYEAR Sl8 rn O 01067 rn 532 1 11  
+
+-HULLO 350 TRUClRNO 20YEAR 36' 
+,, 00ISl28 5 l' 581 
+
+"' 
+(HUI.LO aso TRETORNOSOYEAII � 5  1  ,,, 00U9'H 
+
+"' 
+83 121 
+
+CHULLO 350 Rt TORNO 100 YE:AR 51 B 226 00ll79S 535 '32 11'  
+
+CHULLO lOO TRETORNO 20YEAR 
+'" 
+
+2 o, 0008%8 
+" "" 
+
+o"' 
+
+CHULLO lOO TREIORNOSOYEAR ., 5 rn 00Cl8Sl7 
+.., 8., 097 
+
+CHULLO .,, RETOIINO lOOYEAR 518 
+"' 
+
+0009163 
+
+"' 
+,., 
+
+"' 
+CHUltO 250 TRETORNO 2CMAR 
+
+,., l 81 
+"''"'' 
+
+'17 806 
+"' CHULtO 250 TRETORNOSOYEAR ., 5 193 O  011372 
+
+"' 
+8 ll lO'l 
+
+CHULLO 250 RfTORNO 100 YEAR 51 B 2 OS O Oll674 503 8 22 1 11  
+
+CHUltO 200 TRE10RNO 20YEAR 36' 
+"' 
+
+0003314 285 88 06 
+
+CHUI.LO 200 IRtT0RN050YtAR ., 5 !.07 000198 
+"' 
+
+,o 
+
+"' (HUI.LO 200 RHORNO lOOYEAR "8 "' 
+000383S 
+
+"' '" 
+O 66 
+
+CHULLO l50 tRt !ORNO 20YEAR 36' 'os 0009845 '58 10 l 02 
+
+CHULLO 150 lRElORNO <;OYE.AR ., 5 '27 0009219 
+"' 
+
+10 
+
+(HUI.LO ISO RnORNO lOOYtAA: S18 rn 0010705 S22 JO ros 
+
+CHULLO 100 lRHORNO 20YEAR 36' 18 0006916 
+"' 
+
+'38 o" 
+
+CHULLO ,oo !RETORNO 50 YEAR ., 5 
+
+"'' 
+0006374 '66 
+
+"' 
+O 82 
+
+CHIJLLO 100 RETORNO 100 YE.AR 5'8 226 0006023 382 9 38 O 81 
+
+CHULLO 50 lRETORNO 20YV,R 36' 25 
+
+"""' 
+•66 ... "' 
+
+CHUUO 50 TRETORNO SO YE.AR "5 287  O ()()i878 
+
+"' 
+72 o, 
+
+CHUUO 50 RCTORNO 100YE.AR SJ8 J"' O  006986 so, 823 0,2 
+
+CHUl.ll" o TRElORNO 20YEAR 36' 101 00Ul66 51 
+
+"' 
+l ll 
+
+CHULLI .. o TRE !ORNO SOYE.AR "s 
+"' 
+
+0012<;8 
+
+"' "' 
+1 17  
+
+CHUI.LO o RETORNO tOOYEAR 518 241 O 01.1965 5 92 
+
+"' 
+121 
+
+' 
+MEO 
+
+'"" 
+,., 
+
+u z.sc 
+º"" 
+
+4'5 L '01 
+
+A A, 
+" [IT��F' l 1 
+
+,, 
+
+��� 
+
+
+
+A'S..ANA 
+-- Autondad Nac on.1 el A¡ua 
+
+J1.2  
+
+"Año del Buen Servicio al Ciudadano" 
+
+5.4 Generación de Mapas de inundación 
+
+Una vez terrrnnada LA sirnulación de un modelo en HEC RAS, podemos importar a ArcGIS los 
+resultados de HEC RAS mediante la herramienta GeoRAS para poder visualizarlos en planta Así. 
+es posible poder visualizar la inundación producida por un caudal en una zona, y poder evaluar las 
+zonas inundadas y la delimitación del cauce y espacios de la faJa marginal de la torrentera Chullo. 
+
+En Anexo se aojuntan los Mapas 
+
+,, 
+
+1 " O 1 ¡ ,  
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+S.ANA 
+Autondall N� det Ai,ua 
+
+VI. DELIMITACION DE LA FAJA MARGINAL 
+
+6.1 Dimensionamiento del Cauce y faja marginal 
+
+La R.J Nº 332-2016-ANA aprueba el Reglamento para la Delimitación y Mantenimiento de 
+Fajas Marginales. cuyos anchos se establece en base a los siguientes criterios. 
+
+1 Quebradas y tramos de ríos de alta pendiente (mayores a 2%) encaiionados en 3.0 
+
+material rocoso 
+
+2 Quebradas y tramos de ríos de alta pendiente (mayores a 2%) material 3.0 
+
+conglomerado 
+
+3 Tramos de nos con pendiente media (1- 2%) 5.0 
+
+4 Tramos de ríos con pendiente media (menores a 1%) y presencia de defensas vivas 6.0 
+
+5 Tramos de rios con pendiente media (menores a 1%) y riberas desprotegidas 10.0 
+
+6 Tramos de ríos con estructuras de defensas ribereñas (gavrones, diques, enrocados, 4.0 
+
+muros, etc.) medidos a partir del ple de talud extremo 
+
+7 Tramos de ríos de selva con baja pendiente (menores a 1%) 25.0 
+
+El modelo Hec Ras para la torrentera Chuflo dan como resultados una velocidad del flujo 
+promedio de 5.0 m31s. con una pendiente por encima del 2%; por lo tanto la faja marginal de la 
+torrentera Chuflo debe tener un ancho de 4.0 metros para ambas márgenes. 
+
+6.2 Límites de la faja marginal 
+
+Delrmtar el ancho del cauce y fa¡as marginales de la torrentera Chuflo para los distritos de 
+Yanahuara y Sachaca, por progresivas según los limites mdicados en el cuadro siguiente: 
+
+DISTRITO DE YANAHUARA 
+
+CUADRO N 02: Localización de Hitos 
+
+MARGEN DERECHA MARGEN IZQUIERDA 
+
+PROGRESIVA (km} HITO ,m NORTI PROGRESIVA km} HITO ESTE NORTE 
+
+0,600 R-CH-79 227524 8185516 M,00 l-CH•79 227536 8185517 
+
+o-seo R-CH-84 227495 8185610 e-seo l-CH•84 227507 8185612 
+
+0,40() R·CH-89 227493 8185711 0•<00 l-CH-98 msos 8185711 
+
+0,300 R CH 94 227498 818580'1 0,300 l-CH-� 227499 818S809 
+
+0,200 R-CH-100 227475 8185928 0,,00 l-CH 100 227476 8185929 
+
+O, 100 R CH-105 227460 8186029 0,100 l·CH IO'i 227471 8186025 
+
+0,000 R-CH 110 227484 8186124 L 
+0,000 i..-CH llO 227497 8186123 
+
+I' 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+DISTRITO DE SACHACA 
+
+CUADRO N 02: Locanzacrón de Hitos 
+
+!lANA 
+Autoridad Mu al CNI A&l,I� 
+
+013  
+
+MARGEN DERECHA MARGEN IZQUIERDA 
+
+PROGRESIVA (km) HITO ESTE NORTE PROGRESIVA (km) HITO ,m NORTE 
+
+1+650 R•CH-001 227)39 4 8183187 9 lt650 l CH-OCll 117346 8 a1a,1q1 
+
+¡ 1+550 R-CH 002 227258 7 8183244 8 1+550 L CH-00-' 227268 5 .:llhj.'-.2 
+
+lo-450 R•CH-003 227194 9 8183322 4 1+4<;0 L "H-003 227203 7 81833107 
+1+250 R-CH-004 227207 8 8183520 7 1
+
+1+250 L-CH-004 227219 6 8181520 b 
+
+0.750 R-CH-005 227323 5 8183985 J 0+750 L·CH-005 227331 O 8183%2 O 
+
+0+450 R-CH 006 227412 O 8184269 4 0.450 L-CH-006 127421 8 8184263 h 
+
+O.lOO R·CH 007 227467 7 8184408 0.300 L CH-007 227478 3 8184402 t, 
+
+10.000 R-CH 008 227385] 8184690 4 0.000 L-CH-008 l.273%8 8184t-<JJ l 
+
+VII. CONCLUSIONES Y RECOMENDACIONES 
+
+a) El caudal máximo calculado para la torrentera El Chullo en el ámbito de los distritos de 
+Yanahuara y Sachaca, es de 51.8 m3/s con el método de Gumbel, para un periodo de 
+retorno de 100 años. 
+
+b) Con este caudal, los resultado del modelo Hec Ras para la torrentera Chullo dan como 
+resultados una velocidad del fluJo promedio de 5.0 m3/s, una elevación del tirante 
+hidráulico promedio de 2.5 m y un ancho promedio de cauce de 8 2 m 
+
+c) En el tramo de torrentera del distrito de Sachaca, en la progresiva 0+800 se encuentra las 
+Unidad Catastral 93701 que se sobrepone con la faJa marginal en la progresiva 0+700 se 
+
+tiene un ancho de cauce muy reducido de 4.25m. en la progresiva 0+550. en progresiva 
+0+500, existe una alcantarilla, en la progresiva 0+300, existe una alcantarilla de 1 22m de 
+ancho el mismo que no soporta transito del flujo., en esta progresiva se debe cambiar el 
+sistema de alcantarillado respetando el ancho de faJa marginal en 4.0 m 
+
+d) Delimitar el ancho del cauce y faJas marginales de la torrentera Chullo para los drstntos de 
+Yanahuara y Sachaca, por progresivas según los limites indicados en el cuadro siguiente 
+
+DISTRITO DE YANAHUARA 
+
+CUADRO N 01 :  t.ocahzacrón de Hitos 
+
+MARGEN DERECHA MARGEN IZQUIERDA 
+PROGRESIVA (km) HITO ESTE NORTE PROGRESIVA (km) HITO ,m NORTE 
+
+0.600 R-CH- 79 227524 8185516 o-eoo L ':t-1 79 227536 8185517 
+
+o-soo R CH 84 227495 8185610 '),',O) 
+
+" 
+22750 !-1185612 
+
+0.400 R-CH-89 227493 8185711 0.400 " 98  227505 8185711 
+
+0.300 R-CH-94 277498 818S809 0•300 L 
+" "' 227499 8185809 
+
+0.200 R CH 100 227475 8185928 0.200 l CH 100 227476 8185929 
+
+0.100 R-CH-105 227460 8186029 0+100 L CH JO� 2274/1 8186025 
+
+0,000 R-CH-110 227484 8186124 0.000 L CH 110 227497 8186123 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+DISTRITO DE $ACHACA 
+
+CUADRO Nº 02: Localización de Hitos 
+
+é.,ANA 
+Autoridad NxtoNI del Apaa 
+
+- 
+MARGEN DERECHA MARGEN IZQUIERDA 
+
+PROGRfStVA(km) HITO ESTE NOIITT PROGRESIVA(km) HITO ESTE NORTE 
+
+1.-650 R·CH-001 227339 4 8183187 9 1•650 l CH 001 227346 8 8183197 6 
+
+1•550 R·CH-002 227258 7 8183244 8 1+550 l-CH-002 227268 5 8183252.8 
+
+1.-450 R-CH-003 2271',4 9 818332:2 4 1•450 L-CH-003 22no3 1 8183330.7 
+
+1•250 R-CH-004 227207.8 8183520 7 1 .. 250 L·CH-004 227219 6 8183520 6 
+
+0,,50 R-CH-005 227323.5 818398S 3 10.150 L-CH-005 227331 O 8183982 O 
+
+o-450 R-CH-006 227412 O 8184269 4 1'"450 l-CH-006 227421 8 8184263.8 
+
+O.>'.XJ R CH-007 227467 7 8184406 1 
+
+l:: 
+L-CH-007 227478 3 8184402.6 
+
+0.000 R-CH-008 227385 3 8184690 4 l·CH-008 227396.8 8184694.1 
+
+e) Disponer que los Gobiernos Locales ejecuten programas de control de avenidas para la 
+protección de centros poblados, y áreas productivas, los que consideran las acciones de 
+rehabilitación, encauzamiento, limpieza, descolmatación, protecciones marginales, diques 
+y muros de protección, espigones en los cauces, diques de control de velocidades 
+erosivas, otros en la torrentera Chullo 
+
+VIII. ANEXOS 
+
+Secciones hidráulicas del Modelo Hec Ras 
+Fotografías 
+Mapas 
+Informe Topográfico 
+
+/1 r A 
+
+1 1 
+
+
+
+Ministerio 
+de Agricultura � Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+É,.ANA 
+Autoridad N�1on,1I � A&\,18 
+
+014 
+
+A  
+
+T  1  •  
+
+SECCIONES CADA 50 METROS 
+PUENTE CHALLAPAMPA - PUENTE CHULLO 
+
+
+
+Ministerio 
+
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!..�ANA 
+AU'lorldad Na:tc,r,al del Acu• 
+
+A r, 
+
+T , 1 11 � 
+
+A 
+
+
+
+"Año del Buen Servicio al Ciudadano" 
+
+.. 
+
+" 
+
+!';.ANA 
+A loridaclN-.: delAp,;i 
+
+015  
+
+r  
+
+
+
+"Año del Buen Servicio al Ciudadano" 
+
+. 
+
+.. 
+
+. 
+
+.. 
+
+,, r 
+
+w 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+É_ANA 
+A t rihd N«lon•I del � 
+
+016 
+
+.  
+
+"  
+
+1  
+
+l  ,¡ ¡ ! ¡ 
+
+
+
+Ministerio 
+de �(cultura y Riego 
+
+"Año del Buen Servicto al Ciudadano" 
+
+.. 
+
+.. 
+
+e 
+
+É.ANA 
+AutoridH NadONI NI Acu• 
+
+/\ F , 
+
+T 
+
+( ' - A  
+
+
+
+"Año del Buen Servicio al Ciudadano" 
+
+PANEL FOTOGRAFICO 
+
+017 
+
+É.ANA 
+Autorld � .  detAcu 
+
+1JT��F"' 
+L rJ.rJ;�� 
+
+
+
+íj ■Nw1¡1u¡5pJ@•0 I 
+"Año del Buen Servicio al Ciudadano" 
+
+!\ANA 
+Autoridad Nadan.al del AcuJi 
+
+' r- 
+
+
+
+"Año del Buen Servicio al Ciudadano" 
+
+É._ANA 
+A111ondadN .a delA&u 
+
+0:: 8 
+
+1  1 ,  '  
+
+
+
+"Año del Buen Servicio al Ciudadano" 
+
+!'?:.ANA 
+Autoridad Nadonal ditl Apa 
+
+1 1  
+
+(  
+
+
+
+• 
+
+"Año del Buen Servicio al Ciudadano" 
+
+l�,-• • 
+
+1  1  
+
+é,ANA 
+Au1orld N.lciona de- Atu 
+
+
+
+"Arlo del Buen Servicio al Ciudadano" 
+
+!,�ANA 
+Aulw:lrldad Hadon�I del ll&Ui 
+
+Asunto Información solicitada. 
+
+Referencia: Oficio N° 466-2017-3FPPD 
+
+Tengo el agrado de dirigirme a usted, para saludar1o cordialmente y en atención al 
+documento de la referencia informarte que, las Municipalidades distritales de Cerro 
+Colorado y Cayma no han cumplido con remitir la topografía respectiva para realizar el 
+modelamiento de inundación de la torrentera El Chutlo. Se adjunta los Oficios Nº 1591- 
+2016-ANA-AAA.C-O y Nº1592-2016-ANA-MA.C-O de la Autoridad Administrativa del 
+Agua Caplina Ocoña requiriendo la información. 
+
+Abogada: 
+Cecilia Ampuero Riego 
+Fiscal Provincial Tercera Fiscalía de Prevención del Delito 
+Calle La Merced N° 402 segundo patio -·Arequipa 
+
+Areguipa.- 
+
+OFICIO N'/�3-2017-ANA-AAA I C-0 
+
+Arequipa, 16 de junio del 2017 
+Arequipa, dos mil diecisiete, junio uno.- 
+
+Puesto a despacho en la fecha, SOLICITAR al Director de la Autoridad 
+Administrativa De Agua Caplina Ocoña, Alcalde de la Municipalidad Distrital De 
+Cerro Colorado y Alcalde de la Municipalidad Distrital De Cayma, un informe en el 
+menor plazo posible, sobre la exhortación recaída en la Resolución Nº 150-2017- 
+MP-3FPPD.AR de fecha veintitrés de marzo del dos mil diecisiete. 
+
+Den. 2-2017-3FPPD.AR 
+
+Sin otro particular, hago propicia la oportunidad para expresarle mis más cordiales 
+saludos y estima. 
+
+Atentamente, 
+
+• • Arefuifc, :Ze, de ynio de 20{1 
+
+lén¡pse. prc.sm/e y a,s�e;y:xSe a 
+
+Sü5 cntc��de-n¡cs. 
+
+CUT N• 849&4 - 2017 
+
+Av. Pumaeahua 520, Cerro Coloratio -Arequipa 
+Teléfono 054-49·--- 
+aaa..caplinaocon gob.pe 
+www ana.gob.pe 
+www.minagri.gob.pe 
+
+
+
+"Año del bu1tn servicio al ciudadano 
+
+DISTRITO FISCAL DE AREQUIPA 
+TERCERA FISCALIA PROVINCIAL DE PREVENCIÓN DEL 
+
+• "Año del buen servido al ciudadano 
+
+DISTRITO FISCAL DE AREQUIPA 
+TERCERA FISCALIA PROVINCIAL DE PREVENCIÓN DEL 
+
+3 
+
+• 
+
+r 
+
+• 
+
+Arequipa, dos mil diecisiete marzo velnñtrés.. 
+
+ANTECEDENTES: 
+
+Den. Nro. 002-2017-MP-JFPPD.AR 
+Res. Nro.\.:;o -2017-MP-3FPPD.AR 
+
+• 
+
+recomendando se restringa la ocupación del terreno por encontrarse en zona de alto riesgo y 
+se realice el trámite correspondiente para la delimitación de la faja marginal y la evaluación de 
+dai'los ante el ministerio de agricultura por ser de su competencia 
+SEXTO: El Director de la Autoridad Administrativa del Agua Caplina-Ocofla ha informado a 
+este despacho que se viene realizando el modelamiento de inundación en la torrentera Chullo 
+en el sector de Yanahuara y Sachaca mas no en Cerro colorado y Cayma, debido a que estas 
+instituciones no han presentado la topografía respectiva y que especificamente respecto del 
+predio del pasaje La Ronda Manzana D lote 10 del pueblo tradicional Cerro Viejo , no existe 
+delimitación de la faja marginal. 
+SETIMO: En consecuencia, estando a lo expuesto en los puntos anteriores procede exhortar a 
+los alcaldes de la municipalldad distrilal de Cerro Colorado y municipalidad distrital de Cayma 
+que cumplan con remitir la topografía respectiva a la Autoridad Administrativa del Agua Caprina 
+Ocena para que se realice el modelamiento de inundación de la torrentera Chullo y a la 
+propietaria del inmueble ubicado en el Pueblo Viejo Tradicional Cerro Viejo manzana D lote 10 
+distrito de Cerro Colorado para restringa la ocupación del terreno por encontrarse en zona de 
+alto riesgo. 
+En consecuencia, esta Fiscalía en uso de las atribuciones conferidas por Ley; 
+
+RESUELVE: 
+
+EXHORTAR los alcaldes de la munlcipalidad distrital de Cerro Colorado y municipalidad distrital 
+de Cayma que cumplan con remitir la topografía respectiva a la Autoridad Administrativa del 
+Agua Caplina Ocol'la para que se realice el modelamiento de inundación de la torrentera Chullo 
+y a 1a propietaria del inmueble ubicado en el Pueblo Viejo Tradicional Cerro Viejo manzana D 
+lote 10 distrito de Cerro Colorado para restringa la ocupación del terreno por encontrarse en 
+zona de alto liesgo.Notiffquese.- 
+
+• 
+1
+Rlag-! 
+
+re¡¡c:;;..c. �l!iCA:.•P.C•!: �!t�S'itiO'i 
+DEL Cf.L!!') · t..:1.=e;:;!f,.,. 
+
+-< i '  ,.  
+
+!  §  1  
+z  
+
+;=  
+,...  
+
+¡i  í  ►  
+
+¡  
+
+'  <3 �' o  
+,... 
+
+e) 
+o 
+,¡  
+
+2 1 32 1 1  
+Calle La Merced 402 . Arequipa 
+
+ww ... fisuli•.gob.pt 
+
+Mediante escrito de fecha 13 de enero del presente afio, doña Carmen Rosa Cruz Dávila de 
+Barrios solicita la intervención de este despacho a fin de prevenir la comisión de hechos 
+delictivos en cont_ra de Alcalde de la Municipalidad distrttal de Cerro colorado y el Gerente de 
+SED�'.AR, manife�t�ndo que es propietaria del inmueble ubicado en et Pueblo Viejo 
+Tradicional Cerro VIeJo manzana D lote 10 distrito de Cerro Colorado el cual fue gravemente 
+afectado con las lluvias del ai'lo pasado sin embargo, a pesar del tiempo transcurrido la 
+municipalidad distrit�t de Cerro Colorado no ha tomado ninguna medida y teme que 
+nuevamente tas lluvias de la temporada daflen su domicilio y pongan en riesgo su vida e 
+integridad fisica. 
+
+Con fe_c�a dieciséis de enero del presente ano, se inició procedimiento preventivo y se dispuso 
+se sollcrte al Alcalde la Municipalidad distrital de Cerro Colorado, un informe detallado y 
+documentado de los hechos materia de la denuncia el cual ha sido remitido con oficio 80-2017- 
+PPM-MDCC. Posteriormente se ha solicitado un informe de la Autoridad Administrativa del 
+Agua Caplina - Ocena respecto a la delimitación de la faja marginal de la quebrada El Chullo 
+el cual ha sido remitido con oficio 849-2017-ANA-AM-IC-O ' 
+
+ANALISIS: 
+
+PRIMERO: El Ministerio Público, tiene como �nciones principales la defensa de la legalidad, 
+asl como la defensa de los derechos de los ciudadanos y de los intereses públicos, debiendo 
+actuar fundamentalmente en la prevención del delito, a efecto de lograr la inmediata actuación 
+de sus operadores en resguardo de la ciudadanía 
+
+SEGUNDO: Los artfculos primero y tercero de la Ley Orgánica del Ministerio Público, 
+establecen que para el cumplimiento de sus funciones, los Fiscales ejercitarán las acciones pertinentes, 
+
+TERCERO: Conforme a lo establecido en el Reglamento de las Fiscalías de Prevención del 
+Delito aprobado por Resolución de la Fiscalia de la nación 3377-2016-MP-FN las fiscalías de 
+Prevención del Delito orientan sus acciones a promover la sensibilización de la conciencia 
+pública en la comunidad para asegurar la vigencia de ta Ley en el marco de la defensa de la 
+legalidad y el respeto de los derechos y dignidad de las personas. 
+
+CUARTO: El Reglamento de las Fiscalías de Prevención del Delito aprobado por Resolución 
+de la Fiscalía de la nación 3377-2016-MP-FN en su articulo once establece que es función de 
+esta Flscalla disponer las acciones destinadas a prevenir la comisión de delitos los cuales 
+se promueven de oficio o a pedido de parte y emitir disposiciones recomendando y 
+exhortando a quien corresponda, la realización de acciones que contribuyan a la prevención del delito. 
+
+QUINTO: El estimador de riesgos de la municipalidad distrital de Cerro colorado ha informado 
+mediante informe 002-2017-ERD que el Inmueble materia de la denuncia se encuentra en 
+riesgo atto por el peligro de lluvias intensas que traen como factor desencadenante la entrada 
+de torrentera El Chullo y que a la vez ocasiona erosión del suelo en las máximas avenidas12132I1 
+
+Calle La Muccd 402 • Arcquipa 
+-w.ítsulia.¡ob.pe 
+
+
+
+r 
+
+.,,.,. 
+' J  
+
+,,-  
+
+.  '  /  '  .. •' . .... / \1'1\ \<-' 0 
+
+riot . rgr,1- · Put info direct sun \ 
+
+· -  
+
+:1 
+
+1 ' 
+
+7 
+
+
+
+V LTOP 
+•  
+
+3 
+
+033  
+
+PROYECTO: LEVANTAMIENTO TOPOGRAFICO PARA ESTUDIO 
+
+MARGINAL DE TORRENTERA CHULLO 
+
+Arequipa- Peru 
+
+INFORME TECNICO DE CAMPO 
+
+JULIO-2016 
+
+�ágina 1 
+
+
+
+TOP 
+
+1.- Introducción 
+
+En la actualidad los trabajos de topografia con precisión satelital (Geodesia} son de gran importancia para 
+los Estudios de Ingeniería Básica. de todo proyecto de ingeniería que requiera posteoores diseños de 
+obras de lnfraestrudura son los puntos de partida paa ruak¡uier olxa civil, nula', ¡qícola, ele., Uno de 
+
+los factores más impor1anles está basado en la pl!CÍSÍÓi, y exactilud mn la qui, babaja. JSIDs equipos, ya 
+que reciben información directamente de los satélites en tiempo real. El presente trabajo fue realizado con 
+los equipos mencionados, pertenecientes a la empresa VAL TOP SRL. 
+
+2.- OBJETIVOS 
+
+Los trabajos de campos relizados y descritos en el siguiente informe tiene por finalidad establecer el 
+marro de referencia geodésica del proyeclo asi COIIX) realizar la medición de BMs necesarios ¡ea la 
+
+generación de los productos por la llllllq,alidal distrital de sachaca para el proyecto LEVANTAMIENTO 
+TOPOGRAFICO PARA ESTUDIO MARGINAL DE TORRENTERA CHULLO. 
+
+3.- UBICACIÓN 
+
+B siguiente gráfico rruestra la ubicación del lrarro en esludi>. 
+
+Ubicación Geografica 
+
+Latitud Lon itud ---j-T-ramo 
+S16º24'13.93524" 071º33'08.73049" Inicio 
+
+S16º25'03.44'""'oo='l',---+ 071º33'09.6984r---, Rn 
+
+Página2 
+
+
+
+V TOP 
+• 
+
+0 3 :S  
+
+5  
+
+PAIS: Perú 
+REGION: Arequipa 
+PROVINCIA: Arequipa 
+DISTRITO: &!chaca 
+
+4.- DESCRIPCIÓN DE LA ZONA 
+
+La zona de la torrentera del Chullo en el distrito de &!chaca tiene un clima desértico. A lo largo del año, 
+cayendo casi sin lluvia en Sachaca. De acuerdo con Kiippen y Geiger clima se clasifica como BWk. La 
+temperatura media anual en &!chaca se encuentra a 15.1 ºC. La precipitación es de 62 nvn al año. 
+B 50 % del trarm se encuentra lll!Ql!tación como son terrenos � y arboles de mas de 6 mis. De 
+
+alto. 
+
+Topografía- Plana 
+
+4.1ACCESOS A LA ZONA 
+
+El acceso a la zona Del Proyecto esta en el tramo del cruce de vías Av. Metropolitana con Av. 
+Femandini. 
+
+5.- DESCRIPCION DEL PROYECTO 
+
+Para el desarrollo del proyecto LEVANTAMIENTO TOPOGRAFICO PARA ESTUDIO MARGINAL DE 
+TORRENTERA CHULLO. Se realizo de la siguiente loona: 
+
+Coordinacion: 
+
+Se cordino con la Arq. Lourdes Rosa Zuñiga del área de Defensa Civil de la Municipalidad d Sachaca 
+
+Organización- para la realización del servicio se <XllllD <Xll1 el siguiente personal y equipos. 
+Personal: 
+
+- 01 jefe de topografia 
+
+- 01 cadista 
+
+- 03 asistentes de topografía 
+
+Equipo: 
+- 02 receptores GNSS marca Trimble 
+
+- 01 Estacion Total marca Leica 
+
+- 01 nivel automatico marca Topcon 
+
+- 01 camineta 4x4 
+
+- 01 conµJladora 
+
+Página 3 
+
+
+
+lTOP 
+•  
+
+v36 
+
+6.- EJECUCION TRABAJOS DE CAMPO 
+
+6.1 Reconocimiento del terreno 
+
+Inicialmente se realizo un remrNJCi11ie11lo del EfTl!IIO, para EIJef un ronocmenlo real del alcance del los 
+
+lineamiento del proyecto. 
+
+6.2 Monumentacion de Puntos De Control y BMs 
+Se construyeron 2 hitos de concreto ciclopeo, ron fieno 518 en medo ron una base de 0.40 x 0.40 y una 
+altura de 0.60 m. 
+Hilo de concreto armado fieno inauslado en el centro, ubicados en zonas estrategicas y accesibles al 
+inicio y al final del proyecto. con inscripción del nombre sobre cada hito. 
+Para posteriores trabajos existen visibilidad entre los pares de puntos. 
+
+6.3 Toma de data de post proceso 
+Los equipos fueron oonfigurados según el sis1ema de referencia de origen del proyecto, el cual ha sido 
+definido como WG84, zona 19, asimismo, se emplearon los siguientes parametros: 
+
+• Mascara de elevacion de 10 grados ron respecto al horizonte 
+- Intervalo de toma s• 
+
+POOP menor o igual a cuatro 
+
+SVS mayor o igual a cuatro 04 satelites 
+
+6.4 Nivelación geomébica 
+
+Como punk> de panida vel1ical se utilizo el valor allinétrico del punto de oonlrol base V�CH-A ubi:ado 
+al inicio del proyecto, aparar del cual se dio valor allinébico a los otros punlDs(BMs) media11te una 
+nivelación geométrica de 2do orden. 
+
+Página4 
+
+
+
+V TOP 
+
+0 3 7  
+
+6.5 Levantamiento topográfico 
+Se realizo el levantamiento topográfico y de detalles con equipo Estación Total, con un grillado de 10 m, 
+todo el levantmiento se hizo ronsiderando los puntos georeferenciados. 
+Se tomaron delalles COOll IIIIIOS, arboles y olros en el baroo del proyedo, para lener la modelaáoo 
+
+completa del terreno. 
+
+6.6 Toma de fotos 
+
+Se tomaron las fotos con cámara Carmon del lodo el traroo del proyedo. 
+
+7.- PROCESAMIENTOS Y RESULTADOS DE MEDICIONES 
+
+Una ves culminados las etapas de campo, los que incluyeron las reviciones diarias de la información 
+recolectada, se procedio a dar ili:io a las labores de gabinele a fin de realizar los cálculos y obtener los 
+valores lioales, las datas crudas se bajaron en exel y las nubes de puntos se procesaron en Civil 3D 2016 
+
+7.1 Calculo de Los Puntos De Control 
+Para este proyecto se utilizo la ERP (Estación de Rastreo Permanente) del Instituto Geográfico Nacional 
+del Perú (IGN), ubicada en el departamen1o de� que es la siguiente: 
+
+✓ AQ01, ubicada en la provincia de Arequipa. 
+
+Los valores de las cooldenadas y elevaciones, proporoonados por el IGN, se lllleslran en el aiadro 
+
+siguiente: 
+
+�5 
+
+
+
+V lTOP 
+
+u38 
+
+. . ..  1  '  • •  
+
+1.- AQ01 8182783.1025 232216.8464 2415.231 
+
+Se presenta las hojas de descripción y valores de los puntos geodésicos del IGN descrrtos en la tabla 
+precedente 
+
+Puntos calculados 
+
+Lista de puntos 
+
+ID Eslo 
+
+- - - ... - ... 
+_ ... 
+
+Ángulo de 
+i-o, i-n>I 0.biWbica 
+
+_ ... 
+escalado escala COffi'Viye.lcia 
+
+- 
+i6n allura � ... .....-... 
+
+�-CH-A 227391.(125 8184674.209 2304.611' 1.0005192064 0.9996326840 1.0001516996 0"43'1r 
+
+IV-f'TDMI 227381-- 81113151.397 2254-l?il 1.JI0051!12li95 o I05167 1.IIJ0151959!15 0"43'19' 
+
+113/07/2016 16:14:19 T rimble Business Centerj 
+
+Página6 
+
+
+
+VAL TOP 
+• 
+
+7 .2 Calculo de Nivelación 
+
+Se realizo el calculo en el programa excel. 
+
+CUADRO DE COTAS GEOMETRICAS 
+
+ITEM NOMBRE 
+COTA 
+
+PROGRESIVA OBSERVACION 
+NIVEIAOON 
+
+1 V-PTCH-A 2304.685 0+017.28 Lado derecho 
+
+2 BM-1 2296.936 0+30735 Lado izquierdo 
+
+3 BM-2 2291.167 0+498.59 puente 
+
+4 BM-3 2283.431 0+864.27 riel 
+
+5 BM-4 2260.868 1+434.11 arbol 
+
+6 V-PTCH-8 2254.75 1+708.52 hitoGPS 
+
+'\ ') 9 
+U v  
+
+Página 7 
+
+
+
+TOP 
+
+CALCULO DE LA NIVELACION GEOIIETRICA 
+
+ú40  
+
+NIVELACION PROYECTO TORRENTERA El CHULLO 
+
+PUNTO V.ATRAS H- INSTRUM. V.ADELT. COTA OBSEVACI. 
+
+V-PTCH-A 0.574 2305.259 2304 685 hito GPS 
+
+PC-1 0.228 2303.302 2.185 2303.074 
+
+PC-2 0.456 2301.228 2.53 2300.772 
+
+PC-3 0.645 2299.605 2.268 2298.960 
+
+BM-1 0.266 2297.202 2.669 2296.936 
+
+PC-4 0.137 2294.613 2.726 2294.476 
+
+PC-5 1.081 2292.814 2.88 2291.733 
+
+BM-2 1.647 2291 167 puente 
+
+PC-6 0.915 2292.876 0.853 2291.961 
+
+PC-7 0.59 2291.206 2.26 2290.616 
+
+PC-8 0.3 2289.103 2.403 2288.803 
+
+PC-9 0.248 2286.976 2.375 2286.728 
+
+PC-10 0.665 2285.486 2.155 2284.821 
+
+PC-11 1.442 2284.106 2.822 2282.664 
+
+BM-3 0.675 2283.4 31 riel 
+
+PC-12 0.478 2281.246 3.338 2280.768 
+
+PC-13 0.148 2278.948 2.446 2278.800 
+
+PC-14 0.575 2277.437 2.086 2276.862 
+
+PC-15 0.444 2275.516 2.365 2275.072 
+
+PC-16 0.499 2273.562 2.453 2273.063 
+
+PC-17 0.409 2271.395 2.576 2270.986 
+
+PC-18 0.104 2267.497 4.002 2267.393 
+
+PC-19 0.078 2264.302 3.273 2264.224 
+
+PC-20 0.63 2263.402 1.53 2262.772 
+
+PC-21 1.245 2262.377 2.27 2261.132 
+
+BM-4 1.509 2260.8ti8 arbol 
+
+PC-22 0.367 2260.994 1.75 2260.627 
+
+PC-23 0.94 2259.944 1.99 2259.004 
+
+PC-24 1.8 2258.532 3.212 2256.732 
+
+PC-25 1.047 2257.392 2.187 2256.345 
+
+V-PTCH-B 2.642 2r1� 7'"-! hito GPS 
+
+Página 8 
+
+
+
+V LTOP 
+
+JI 
+
+7 .3 Elaboracion de Planos 
+
+Para la elaboración del plalo se geoero una nube de puntos, que es la posición ..-erdadera que tienen 
+todos y cada uno de los puntos tomados en �. a J8li" del archiw de lem oblenido en el 
+procesamiento de coordenadas. Estos datos se clasifican de acuerdo a la descripción de los puntos en un 
+procesador de texto o una hoja de cálculo y se cargan en un programa de dibujo, en este caso Civil 3d 
+2016 
+
+Ya en Civil 3d 2016, se pmcede a la interpretación de los puntos tomados en campo, para su inlerpolación 
+y triangulación correspondiente y generar curvas de nivel, y unir líneas para definir las áreas existentes. 
+
+Los planos se realizaron a la escala 1:2.000 y 1:200 , para la observación precisa y si1 distolsiín de los 
+delalles levantados. La inbmac:ión se guarda en medio magnétioo, lista para ser � a oolor y/o 
+blanoo y negro oon las dimensiones adecuadas. 8 resuffado son planos piedefinitivos, los cuales pasan a 
+un control interno para su verificación. Una vez hecha la verificación en campo se generaron los planos 
+definitivos de la información. 
+
+8.- Anexos 
+
+8.1 Ficha de Estacion de Rastreo Permanente 
+8.2 Fichas descriptivas de los puntos de control 
+
+8.3 Certificados de equipos utilizados 
+8.4 Panel de fotos 
+
+Página 9 
+
+
+
+V TOP 
+• 
+
+�Oo\OOl5Tlml.OE 
+...,_ 
+
+) z 
+
+8.1 Ficha de rastreo permanente 
+
+l \ "- 1 1 1 1 1 0 ( , l f H , W \ l l< O \ \ l l O \ \ I  
+
+FORMULARIO OE INFORMACION DE LA ESTACION GNSS PERMANENTE 
+
+1 FORMULARIO 
+
+2 INFOAMACION DE LA ESTACION GNSS 
+
+E 
+
+e 
+
+E 
+
+A 
+
+3 INFOAMACION SOBRE LA LOCALIZACION 
+
+A 
+
+F 
+
+e 
+
+1,1 \KI 1 
+1 f 1 1  11\  t  1 1  11:\ 
+
+_,,, 
+
+rd�ina 10 
+
+
+
+V"" L  TOP 
+• 
+
+1 , , 1 1 1 1  I O ( , J,{ ) ( , l{ \ 1 1( () , \ (  1 0 , , 1  
+
+4  COOROENADAS DE LA ESTACION 
+
+A Coordenadas Geocestcas 
+
+A M1, 
+• 
+
+l 
+
+'RF 
+
+A c  " 1  J  s A  
+
+'t 8'.F1 ._>b 9/ .. H 
+
+A .  A• E p • 
+Altura n Fdcl 
+
+4;:;r, • .::: A6 16Q 8 
+
+B Coordenadas Cartesianas 
+
+J3 
+
+\143 
+
+X  m  
+
+1  QJ 1 764 80�1. 
+
+C Coordenadas UTM 
+
+l "' 
+� 7022, O 4039 
+
+8 1 8  1  < 
+
+z 
+
+19 or 
+
+5 CROQUIS DE LA ESTACION 
+
+l ",l \IWI k t t t 11 \ 1 \t I l k \ 
+
+Página 1 1  
+
+
+
+V /1\ l  TOP 
+• 
+
+l' ', f  f  l l  1 0 < , I  0 ( , 1{ \l  f( O '\ \ (  10'\ \I 
+A .l\ t � E • -  E  
+
+6. INFORMACION SOBRE EL EQUIPAMIENTO GPS 
+A R 
+
+·� 
+
+044 
+
+V  a  rw 
+
+K • 
+
+; 
+
+T 
+
+"' j 
+
+Atura 
+
+Met1H d la Ante, 
+
+A t  Z  p  yr e d 
+
+4J ' '5 P. 
+
+Base de scccne de d nter 
+
+Fechad a k1 a 
+
+7. ESQUEMA DE LA ANTENA 
+
+A Esquema de altura de antena 
+
+N vembre g 
+
+Drstancra de compensac,on de centro de fase (Phase center Offset). 
+
+a a = 8.54 cm 
+
+Distancia entre la base de soporte de la antena v el hmtte superior del monumento 
+b b = 3 s cm 
+
+t ,1 \kl41  (  1  1  1  (  11 \ 1  \1 1 1  k  \  
+
+Página 12 
+
+
+
+TOP 
+
+JS  
+
+8.2 Fichas descriptivas de los puntos de control 
+
+0'1: 5 
+
+TOP DESCRIPC JO:-; �IO:-.OGRAFIC\ 
+
+XOMBRI DEL Pli\TO 
+
+V-PTCH-A 
+
+OC.UJD.\D· 
+
+SACliACA 
+
+HT.\BLECID.\ POR: 
+
+VAi.TOP S.Ll 
+
+:BIC.\ClOS: 
+
+AV METROPOLITANA CON AV FERNANDM 
+
+ZO:S.\ llM: 
+
+"s 
+
+:\PROX. ORDE.'i: 
+
+-e- 
+
+S16�-'13 9JS24 
+
+i.oxcrrm (\\1 \\ CS-14: 
+
+01rn1>1110-1,� 
+
+:SORTE (:,.1 \\ CS-14· rsrr CE>" cs..a.a: 
+
+S114674109 227]91 (r.!S 
+
+:U. nlt.\ [LIPSOID.-U.: 
+
+21-4-'279 
+
+:\.L n"'IL.\ ORTOUETRICA 
+
+2J,0.,161S 
+
+0Ql1.S TOPOCR\flCO FOTO DE RASTRI.O DI .-\...,"'TL'i.-\ 
+
+roro nn. HITO 
+
+OC.UJL\CJO:S 
+
+15TlUT05 
+
+RO\l:SCL\ 
+
+I.P.\.RT.UIL,TO 
+
+SAOU.CA 
+
+AREQUIPA 
+
+AREQUIPA 
+
+UCRIPCJO:S, 
+
+U,:uaoc "\"-PTCH-A �•nam1n:a .a b ,lnn de b PG 1-01., �S DUS'J'llld..-Khodtl.1,h Tahwvcuu .1:.acomo m,w:;01 n:b: 
+
+ECILl_ R.OBADA POR 'ISADO POR.. ESCRITA POIL 
+
+Hi.tod. N11:ttt10 "111. t:;De.a et. &tno .al medio«ic :1¡u:.m1, �- ·v-PTCH-A 
+
+Página 13 
+
+
+
+TOP 
+
+TOP 
+
+-o:UBRE Dll. Pl�IO· 
+
+V-PJQI.B 
+
+OC.UJD.-\D: 
+
+SAOIACA 
+
+HT.!BllC1D.-\ POR: 
+
+VALTOPSJll 
+
+'"' 
+
+u!� 6 
+
+DESCRJPOO.'.\'. :\10.'."0GR.-\FIC.-\ 
+
+l"BJC..\CJO�, 
+
+AV METROPOUIA.."IA.COS AV f'ERNANDM 
+
+ZON".-\lTII 
+
+19S 
+
+.\PROX.ORD�, 
+
+"C" 
+
+:\TITl"D (!,) WCS-1.t 
+
+S16�S'03 4406T 
+
+"ORIT �) n C�· 
+
+11831SIJ97 
+
+\LTilt.-\ I.UPSOID.U.: 
+
+:?!9-1 272 
+
+ROQn� TOPOCR.ffiCO 
+
+OSCJni> (\\) \\ GS--1-4: 
+
+O''W33'09 69MT 
+
+217311 -167 
+
+:U.TCR.A ORTOltITRJC.-\ 
+
+!1.S,l 75 
+
+.roro DI R.-\5 TREO DI .-\ .. '\"TU.-\ 
+
+.-\UL-\CJO!'­ 
+
+ISTRITO!, 
+
+ROU.'iCL-\ 
+
+EPARTA.\l[STO: 
+
+DE!.CRIPctO� 
+
+SACJUCA 
+
+AREQUI?A 
+
+AR.EQUIPA 
+
+roro nn.srro 
+
+• 
+
+' 
+
+�, fll�tn .a la .t.f'llrll de b PG 1- �01.5� nu:rpn �o dt b Ton-unen .J Uu.i.lo como -:tu .a Lt,� 
+
+RrfI.RI�C L\ 
+
+au �K10t1J1l E:cili l l 00 000. Ho,J1 J3-i AJeqwpJ 
+
+I'.SCJUTA POR ROBADA POR ECHA 
+
+Págm14 
+
+
+
+V TOP 
+
+8.3 Certificados de equipos utilizados 
+
+0; se teles.a. 
+�S. REPRESENTAOQt,ES. VENIAS V MANTE� 
+
+DE SISIDMS, EQtf'OS ElECTRICOS Y ELECmONICOS. 
+
+AV AL!ERTO ,ww.tJER tf' 2201 t.ta - � - PERU 
+
+CENTAAl 18.EFONCA. 205-3000 FAX. 472-2252 
+
+E-mol.ga,enclo@lletekcom.pe 
+h"'0,1/W-IMJ9MIIC.1':0m pe 
+
+u!�- 7 
+
+CERTIFICADO DE OPERATIVIDAD Nº 16 - 240401 
+
+CLIENTE: 
+EQUIPO: MARCA: 
+MODELO: SERIE: 
+
+VALTOP S.R.L. 
+Receplor GPS 
+Tñmble 
+R4-2 
+
+5251420661 
+
+FECHA DE MANTENIMIENTO: 24 - ABR- 2016 
+FECHA DE VENCIMIENTO: 24- ABR-2017 
+
+Por medio del presente documenfo cerlificomos lo operatividad de los 
+
+siguientes Equipos GPS TRIMBLE: 
+
+En los pruebas e/ec fuodos en Tiempo Reo/ y Post Proceso o tos equipos, es los se 
+encuentran dentro de fas fo/eroncios def fabricante. 
+
+Precisión levantamiento GPS Post Proceso {Estalic & Fasl Estalic l 
+
+HORIZONTAL 
+
+VERTICAL 
+
+CERTIFICADO POR 
+ING. ENRIQ�R�EJO GARAY 
+Gerente de Servicio Técnico 
+
+5 mm + 0,5 ppm RMS 
+
+¡ S m m + 1 , 5 ppm R M S  
+
+SELLO DE GARANTIA FECHA DE EMISION 
+Abril 24, 2016 
+
+Págm15 
+
+
+
+V TOP 
+
+I &  
+
+0; se teles.a. 
+(M)()RlA(X)t,ES, REPRESENtACIONES. YEN1AS Y >.Wll'ENIMENTO 
+
+DE S1S1WAS. EQJ>OS ElEC1RICOS Y ELEC!OON1COS. 
+
+AV m!ERTQ�t,,-02201 1-N:E UMA - PERIJ  
+
+CEN!lW. 1ELEFONICA 20S-3COO FAX. 472-2252 
+
+E-mol.ge,endai,jlbelet.i;an.pa 
+
+trttp;JfwW,i,l.1118tok.corn.oo 
+
+• 
+
+J.;8 
+
+CERTIFICADO DE OPERATIVIDAD Nº 16 -  120201 
+
+CLIENTE: 
+EQUIPO: 
+MARCA: MODELO: 
+SERIE: 
+
+VALTOP S.R.L 
+Receptor GPS 
+Trimble 
+R4 5109462647 
+
+FECHA DE MANTENIMIENTO: 12 - FEB-20I6 
+FECHA DE VENCIMIENTO: 12 - FEB- 2017 
+
+ISETEK S.A. Certifico que el equipo topog,áfico arribo descrito cumple con los 
+especificaciones técnicos ce lo fábrica y los estándares internaciones 
+establecidos. 
+
+En los pruebas efectuados en Tiempo Real los equipos. estos se encuentran 
+dentro de los loleroncios del fabrican le. 
+
+Precisión Levonlomiento GPS Post Proceso (Eslolic & Fas! Eslolicl 
+
+HORIZONTAL 
+
+I VERTICAL 
+
+CERTIFICADO POR 
+
+ING. ENRIQU�EJOGARAY 
+Gerente de Servicio Técnico 
+
+5 mm + 0,5 ppm RMS 
+5 mm+ 1,5 ppm RMS 
+
+SELLO DE GARANTIA FECHA DE EMISION 
+
+febrero 12. 2016 
+
+J 
+
+Págm16 
+
+- - -  
+- - - - - -  
+
+
+
+V TOP 
+
+8.4 Panel de Fotos 
+
+
+
+V LTOP 
+
+050 
+
+:i.o 
+
+Página 18 
+
+
+
+TOP 
+
+......... , .....,, "'.""'.&í �, =<U 
+
+.... M "'. .  
+
+051  
+
+�ági'la 19 
+
+
+
+TOP 
+--=' ' 
+
+v52 
+
+Pá9ina2t 
+
+
+
+� 
+�t.JJ dOJ. 
+
+
+
+TOP 
+
+13/111/11111 111:1& 
+
+Página22 
+
+
+
+TOP 
+
+tl35 
+
+151ffl'lml 11 ::11 
+
+Págína23 
+
+
+
+TOP 
+
+-��� 
+OQ���.���T�:□ OUEA 
+
+e 1 � �5:' 
+
+Página 24 
+
+
+
+l ·  
+
+------ 
+
+I 
+
+.- . 
+
+1 
+
+\ 
+1 
+
+\ 
+
+1 
+1 
+
+\ 
+1 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+!,_\ANA 
+Autoridad Nadonal del A¡ua 
+
+"Año del Buen Servicio al Ciudadano" 
+
+INFORME TECNICO 1 5 3 -  2017-ANA-AAA.CO-SDCPRH/MATLL 
+
+PARA 
+
+DE 
+
+ASUNTO 
+
+: lng. Alberto Domingo Osorio Valencia 
+Director de la Autoridad Administrativa del Agua I Caplina Ocoña 
+
+: lng. Milagros Torrejón LLamoca 
+Especialista de Conservación y Planeamiento de Recursos Hidricos 
+
+: Delimitación de faja marginal 
+
+REFERENCIA : OFICIO 33-2017-CG/COREAR-AC-MPA 
+
+FECHA : 13 de diciembre del 2017 
+
+Tengo el agrado de dirigirme a usted. a fin de informar sobre la delimitación de faja marginal de la torrentera 
+Chullo. los siguientes actuados: 
+
+1. ANALISIS 
+
+1.1 De la m icrocuenca 
+
+En el Mapa (Imagen adjunta), se aprecia 03 microcuencas: 
+
+Cuadro: Tiempos de concentración quebrada Azufral 
+
+Microcuenca quebrada Azufral 
+Microcuenca quebrada Pastoraiz 
+
+Microcuenca torrentera Chulto 
+
+: Area de 62.23 km2 
+: Area de 9.14 km2 
+: Area de 12.63 km2 
+
+Area total: 84.0 km2 
+
+··­ ......... _, 
+
+··-·­ 
+.11 ...... - 
+
+... ... ...  .... . . .  
+
+0at"6 " ., ,.  ♦· ,_ • >.t la Cll lll■!l►., 
+
+" ó\ l' O : : : : •  -• t •  Jj ,::. A � i  �  .,.._ 
+
+••• 
+
+Av. Pumacahua 520, Cerro Colorado -/\rcquipa 
+
+Teléfono 054-497585 
+aa.1-caplmaoct.'111:l '" ana gob pe 
+\HH\ ana gob ll!,; 
+WW\\' n11m1gr1 ili!.!UlC 
+
+. 
+
+Página I de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+!\ANA 
+Autortdad Nacional del Aru• 
+
+"Año del Buen Servicio al Ciudadano" 
+
+METOOO FORMULA RESULTADO 
+
+L(m) 16800 
+
+Kirplch L 0.77 X $ -0.385 S(m/m) 0.136 
+
+Te= 0.01947 x Te (min) 7S 
+
+Te (hor) 1.25 
+
+Te= 0.0195 ( L3 ) º·385 L(m) 16800 
+
+California H 
+H(m) 2285 
+
+Tc(min) 75.35 
+
+Te fhor) 1.256 
+
+L(km) 16.8 
+
+Te= 0.108 x (  L x A )  1/3 S(m/m) 0.136 
+
+Passini 51/2 Area (km2) 62.23 
+
+Tc(min) 178.2 
+
+Te (hor) 2.97 
+
+L(km) 16.8 
+
+Temez 
+Te = 0.3 x Lb__) 0·76 S(m/m) 0.136 
+
+5 0.250 Tc(min) 224 
+
+Te íhor) 3.7 
+
+l(km) 16.8 
+
+Pizarra 
+Te= 13.548 (�) º·
+
+77 
+H(m) 2285 
+
+H Te (min) 163 
+
+Te (hor) 2.7 
+
+Las Areas y Tiempos de concentración son las siguientes: 
+
+Microcuenca Area (km2) TC (hor) 
+Zafranal 62.23 2.7 
+Pasto raíz 9.14 1.2 
+Chullo 12.63 1.2 
+
+(Manual de hidrología, hidráulica y drenaje, MTC) 
+
+Q = O. 278 * C * I * A *  K  
+
+Dónde: 
+Q: descarga máxima de diseño (m3/s) 
+C: coeficiente de escorrentía para el intervalo en el que se produce 1 
+
+1: intensidad de precipitación máxima horaria (mm/h) 
+A: área de la cuenca (Km') 
+K: coeficiente de uniformidad 
+
+Las fórmulas que definen los factores de la formula general, son los siguientes 
+
+a) Tiempo de concentración (Te) 
+
+T = o 3*(-L-)o.76 
+e · 5o.zs 
+
+Av. Pumacahua 520, Cerro Colorado-Arequipa 
+Teléfono 054-497585 
+:iaa�aplm31'.M.'QU3 11 am\ g,1b pe 
+
+\\ \\ \\ arm "Ob p,c 
+
+www mmm;n gob pe 
+
+P,lgina 2 d� 9 
+
+
+
+;1<!1¡o;f"U;ll!Ultu ,\U\.\\ 
+
+:x1 qoi'l mm \\ \\ \\ 
+;>([ qo;i uue fJ UILOXH!Ul[dl!.J-L'\!C 
+
+>8>L6trtrn OUOJ?iO.L 
+
+udmbcrv - OptUOjOJ º"�J 'ozs enqcceum.j ·11v 
+
+¡e,¡nzv epeJqano (e 
+
+ojpmsa ¡ap sope¡¡nsa� z· ( 
+
+(ww) elJB!P eunxeui u9pe11dpaJd :pd 
+.apuorj 
+
+z ( º d * l l  + P d )  
+= J  
+
+( º d * f: Z  + P d ) * ( º d  _ P d )  
+(  ::,) euuauoose ap a1ua1::,!Jao::, (6 
+
+eiuno ap orsumu '.N:J 
+
+(od) •!JUaJJoosa ap ¡e,qwn (J 
+
+(ol) uopanuaouoo ap odurau :0.1 
+
+( NJ ) od 
+os- 0005 = .apuorj 
+
+.apu90 
+
+(t,Z) (ww) eueip eunxeur u91oe¡1dr.ia1d :d 
+1-10BZ (Tl) * - = I 
+
+10Jl-r0BZ d 
+
+(¡) u91oei1d1oa,d ap pepisueiu¡ (a 
+(ww) elJB!P eunxetu u91oe11d1oaJd :pd 
+
+roíonpai Jope¡ :lf)I 
+
+P d * V)/ = d :apu90 
+
+(d) eousno e¡ aiqos ep16a1100 ew,x�w U9!0eJ!d!OaJd (p 
+
+(,w)I) eousno e¡ ap ea,y :v 
+
+:apu90 
+
+( Sl ) - l v)I 
+vº1Bo1 
+
+P•P!WJ0J!Un ap a¡ua,oyao:¡ (q 
+
+= )/ 
+1'l + sz·1J .L 
+
++ l  
+
+szr J .L 
+
+('1/>1) roronper roioej o pepieueununs ap a¡u a,oyao:i (o 
+(saiou) ucoenusouoo ap odurau :0.1 
+
+:apu90 
+
+(w¡w) ,o.lew aonso ¡ap otpsuicrd a1ua1puad :s 
+
+(w>1) Jo.lew soneo ¡ap pn116uo¡ :7 
+:apu90 
+
+,,ouepepnf:J 1e 0f�JAJa5 uana 1ap oyv,. 
+
+1nly lilP IIIIJOPl!N p1pµo¡nv 
+
+VNV\l 
+olla!ll A eJn¡¡nopllv ap 
+
+O!JillS!U!I/II 
+
+
+
+i!II 
+1  
+
+Ministerio 
+de Agricultura y Riego 
+
+-- - -------------------------- 
+
+!lANA 
+Autotldad Nadonal del A¡ua 
+
+"Año del Buen Servicio al Ciudadano" 
+
+CAUDALES MAXIMOS GENERADOS - CUENCA AZUFRAL 
+
+T Intensidad Factor Area Escorrenta Uniformidad Caudal maximo 
+
+.... mm 0.0278 km2 c K ml/1 
+
+2 150.69000 0.02780 62.230 0.0650 0.60179 13.59 
+
+5 198.69000 0.02780 62.230 0.0650 0.80179 17.93 
+
+10 235.35000 0.02780 62.230 O 0650 0.80179 21.22 
+
+25 288.50000 0.02780 62.230 0.0650 0.80179 26.01 
+
+50 475.78000 0.02780 62.230 0.0650 0.80179 42.90 
+
+100 541.79000 O 02780 62.230 0.0650 0.80179 -48.85 
+
+200 607.81000 0.02780 62.230 0.0650 0.80179 54.80 
+
+500 695,08000 0.02780 62.230 0.0650 0,80179 62.67 
+
+1000 761.09700 0.02780 62.230 0.0650 0.80179 68.62 
+
+b) Quebrada Pasto raíz 
+
+CAUDALES MAXIMOS GENERADOS - CUENCA PASTO RAIZ 
+
+T Intensidad Factor Area Escorrenta Uniformidad Caudal maximo 
+
+.... mm 0.0278 km2 c K ml/1 
+
+2 150.69000 0.02780 9.1400 0,0850 0.91767 2.99 
+
+5 198.89000 0.02780 9.1400 0.0850 0.91767 3.94 
+
+10 235.35000 0.02780 9.1400 0.0850 0.91767 4.66 
+
+25 288.50000 0.02780 9.1400 0.0850 0.91767 5.72 
+
+50 475.78000 0.02780 9.1400 0.0850 0.91767 9.43 
+
+100 541.79000 0.02780 9.1400 0.0850 0.91767 10.74 
+
+200 607.81000 0.02780 9.1400 O 0850 0,91767 12.05 
+
+500 695.08000 0.02780 9.1400 0.0850 0.91767 13.78 
+
+1000 761.09700 0.02780 9.1400 0.0850 0.91767 15.08 
+
+1.3 Características del cauce de la "quebrada Chullo" 
+
+La "torrentera Chullo", tiene en el tramo de los distritos de Yanahuara y Sachaca 
+presencia de construcciones civiles, lo que lo convierte en área vulnerable a 
+inundaciones y socavamiento de estructuras. 
+
+Las municipalidades de Cerro Colorado, Cayma, Yanahuara, Sachaca y la 
+Municipalidad Provincial de Arequipa deben priorizar e implementar un Programa 
+Integral de Control de Avenidas, las mismas que contengan acciones estructurales y 
+
+no estructurales, a fin de mitigar posibles impactos que afecten a la población. Se 
+recomienda que las municipalidades aledañas realicen las respectivas evaluaciones 
+de peligros. 
+
+En el tramo de "torrentera Chullo" del distrito de Sachaca, en la progresiva 0+800 se 
+encuentra las Unidad Catastral 93701 que se sobrepone con la faja marginal; en la 
+progresiva O+ 700 se tiene un ancho de cauce muy reducido de 4.25m. 
+
+Av. Pumacahua 520, Cerro Colorado-Arcquipa 
+
+Teléfono 054-497585 
+aaa-caplinaocon:i u ana J;úb PI! 
+
+ww,, a,n L'Ob es 
+
+www nunagn gob J'.1$, 
+
+Página 4 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!\.ANA 
+Autoridad Nacional del A¡ua 
+
+En la progresiva 0+300, existe una alcantarilla de 1.22m de ancho el mismo que no 
+soporta transito del flujo, en esta progresiva se debe cambiar el sistema de 
+alcantarillado respetando el ancho de faja marginal en 4.0 m. 
+
+En todo el tramo que cruza la torrentera Chullo, del distrito de Yanahuara, existen 
+estructuras civiles, como puente Chullo y Challapampa, que deben ser adecuadas y 
+
+reforzadas para soportar el libre flujo de los caudales. 
+
+En todo el tramo del distrito de Yanahuara, se debe priorizar la construcción de muros 
+de contención y encauzar en todo su tramo, replantear alcantarillas, obras de 
+saneamiento que cruzan el cauce. 
+
+1.4 La delimitación de faja marginal queda establecida de acuerdo al siguiente detalle: 
+
+Cuadro 01:  Delimitación del cauce de la "quebrada Chullo", en el sector del distrito de Sachaca, datum 
+WGS 84, zona 19. 
+
+Faja marginal derecha Faja marginal izquierda 
+
+Progresiva 
+Código 
+
+Coordenadas WGS 84, zona 19 
+Código 
+
+Coordenadas WGS 84, zona 19 
+
+Este (x) Norte (y) Este (x) Norte (y) 
+
+1+700 R-CH-001 227379.45 8183158.14 L-CH-001 227386.92 8183168.00 
+
+1+650 R-CH-002 227339.39 8183187.88 L-CH-002 227346.69 8183197.74 
+
+1+600 R-CH-003 227296.91 8183213.75 L-CH-003 227303.51 8183223.77 
+
+1+550 R-CH-004 227257.28 8183246.63 L-CH-004 227266.54 8183254.25 
+
+1+500 R-CH-005 227231.48 8183289.24 L-CH-005 227203.78 8183330.72 
+
+1+450 R-CH-006 227194.95 8183322.53 L-CH-006 227212.60 8183468.86 
+
+1+400 R-CH-007 227186.40 8183374.94 L-CH-007 227219.54 8183520.55 
+
+1+350 R-CH-008 227191.95 8183424.00 L-CH-008 227211.19 8183615.05 
+
+1+300 R-CH-009 227201.90 8183474.02 L-CH-009 227210.24 8183667.25 
+
+1+250 R-CH-010 227207.58 8183520.73 L-CH-010 227203.93 8183424.62 
+
+1+200 R-CH-011 227195.62 8183565.82 L-CH-011 227213.37 8183712.74 
+
+1+150 R-CH-012 227199.79 8183618.48 L-CH-012 227239.73 8183752.96 
+
+1+100 R-CH-013 227198.84 8183663.34 L-CH-013 227265.77 8183796.28 
+
+1+050 R-CH-014 227201.79 8183715.90 L-CH-014 227287.40 8183839.82 
+
+1+000 R-CH-015 227229.57 8183759.49 L-CH-015 227309.41 8183885.72 
+
+0+950 R-CH-016 227254.42 8183800.95 L-CH-016 227327.53 8183932.55 
+
+0+900 R-CH-017 227277.42 8183846.61 L-CH-017 227334.22 8183980.48 
+
+0+850 R-CH-018 227298.44 8183890.59 L-CH-018 227344.46 8184030.20 
+
+0+800 R-CH-019 227315.80 8183936.80 L-CH-019 227354.36 8184079.52 
+
+0+750 R-CH-020 227323.17 8183985.53 L-CH-020 227367.50 8184125.06 
+
+0+700 R-CH-021 227332.71 818403312 L-CH-021 227402.08 8184219.90 
+
+0+650 R-CH-022 227342.46 8184081.75 L-CH-022 227421.86 8184263.73 
+
+0+600 R-CH-023 227357.30 818413138 L-CH-023 227240.41 8183296.55 
+
+Av. Pumacahua 520, Cerro Colorado -Arequipa 
+Teléfono 054-497585 
+aaa-cap!111aoco11a a ana gob 1)\! 
+www ana uob JJ<.! 
+
+www rmnagn gQQJ� 
+
+Página 5 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudedeno" 
+
+!�ANA 
+Autoridad Nacional di!! A¡ua 
+
+Faja marginal derecha Faja marginal izquierda 
+
+Progresiva 
+Código 
+
+Coordenadas WGS 84, zona 19 
+Código 
+
+Coordenadas WGS 84, zona 19 
+
+Este (x) Norte (y) Este (x) Norte (y) 
+
+0-<550 R-CH--024 227377.25 8184174.37 L-CH--024 227198.40 8183374.75 
+
+0-<500 R-CH--025 227390.41 8184222.66 L-CH-025 227442.73 8184309.86 
+
+0"450 R-CH--026 227411.25 8184269.71 L-CH--026 227460.21 8184357.36 
+
+0"400 R-CH--027 227431.52 8184314.75 L-CH-027 227478.40 8184402.58 
+
+0•350 R-CH--028 227448.55 8184361.09 L-CH--028 227470.03 8184454.99 
+
+0•300 R-CH--029 227467.81 8184408.26 L-CH-029 227454.91 8184502.70 
+
+0+250 R-CH-030 227458.43 8184451.89 L-CH--030 227426.05 8184598.52 
+
+0•200 R-CH--031 227443.40 8184499.32 L-CH--031 227396.70 8184694.05 
+
+0+150 R-CH--032 227414.46 8184594.99 L-CH--032 227206.18 8183563.88 
+
+0•100 R-CH--033 227400.68 8184643.16 L-CH--033 227385.89 8184173.64 
+
+0+050 R-CH--034 227385.23 8184690.52 L-CH--034 227441.33 8184543.72 
+
+0+000 R-CH--035 227429.45 8184540.64 L-CH--035 227410.04 8184645.76 
+
+Cuadro 03: Delimitación del cauce de la "quebrada Chullo", en el sector del distrito de Yanahuara, datum 
+WGS 84, zona 19. 
+
+Faja marginal derecha Faja marginal izquierda 
+
+Progresiva Coordenadas WGS 84, zona 19 
+Código 
+
+Coordenadas WGS 84, zona 19 
+Código 
+
+Este (x) Norte (y) Este (x) Norte (y) 
+
+1+380 R-CH-76 227563-36 8185119-91 L-CH-76 227574.95 8185123.26 
+
+1+360 R-CH-77 227557.97 8185139.30 L-CH-77 227569.53 8185142.51 
+
+1+280 R-CH-78 227591.50 8185215.39 L-CH-78 227602.43 8185209.77 
+
+1+220 R-CH-79 227612.68 8185270.81 L-CH-79 227623.84 8185266.40 
+
+1+180 R-CH-80 227628.15 8185308.57 L-CH-80 227638.60 8185302.66 
+
+1+120 R-CH-81 227655.66 8185361.73 L-CH-81 227666.24 8185356.07 
+
+1+080 R-CH-82 227666.12 8185398.86 L-CH-82 227677.53 8185395.14 
+
+1+020 R-CH-83 227688.46 8185454.86 L-CH-83 227699.58 8185450.36 
+
+0+960 R-CH-84 227709.59 8185510.96 L-CH-84 227720.82 8185506.73 
+
+0+940 R-CH-85 227716.71 8185529.88 L-CH-85 227727.79 8185525.26 
+
+0+920 R-CH-86 227721.93 8185547.93 L-CH-86 227733.69 8185545.53 
+
+0+900 R-CH-87 227725.82 8185566.82 L-CH-87 227737.79 8185565.81 
+
+0+840 R-CH-88 227731.87 8185625.99 L-CH-88 227743.91 8185625.78 
+
+0+780 R-CH-89 227737.42 8185686.27 L-CH-89 227749.51 8185685.15 
+
+0+740 R-CH-90 227740.83 8185725.54 L-CH-90 227752.88 8185725.54 
+
+0+720 R-CH-91 227739.11 8185744.70 L-CH-91 227751.02 8185746.19 
+
+0+680 R-CH-92 227728.67 8185782.58 L-CH-92 227740.34 8185785.44 
+
+Av. Pumacahua 520, Cerro Colcrado-. Arcquipa 
+Teléfono 054-497585 
+::iaa-caplmaoconarfl'ana goh pe 
+
+�\'W ana gQQ,1'!!,; 
+
+\xww mmagn ;.:ob pe 
+
+Página 6 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!�ANA 
+Autoridad Nadonal del A¡ua 
+
+Faja mal'9inal derecha Faja marginal izquierda 
+
+Progresiva 
+Código 
+
+Coordenadas WGS 84, zona 19 
+Código 
+
+Coordenadas WGS 84, zona 19 
+
+Este (x) Norte (y) Este (x) Norte (y) 
+
+0+640 R-CH-93 227725.41 8185821.99 L-CH-93 227736.97 8185825.20 
+
+0+600 R-CH-94 227712.70 8185859.28 L-CH-94 227723.80 8185863.86 
+
+0+560 R-CH-95 227711.18 8185901.18 L-CH-95 227711.18 8185901.18 
+
+0+540 R-CH-96 227706.59 8185919.07 L-CH-96 227718.16 8185922.25 
+
+0+520 R-CH-97 227700.53 8185937.23 L-CH-97 227711.55 8185942.00 
+
+0+480 R-CH-98 227686.22 8185974.85 L-CH-98 227697.42 8185979.15 
+
+0+460 R-CH-99 227680.59 8185995.81 L-CH-99 227692.57 8185996.36 
+
+0+420 R-CH-100 227680.29 8186036.06 L-CH-100 227692.29 8186036.06 
+
+0+340 R-CH-101 227679.35 8186116.05 L-CH-101 227691.35 8186116.05 
+
+0+300 R-CH-102 227678.44 8186156.03 L-CH-102 227690.45 8186156.06 
+
+0+220 R-CH-103 227666.18 8186234.14 L-CH-103 227678.05 8186235.91 
+
+0+200 R-CH-104 227663.16 8186253.85 L-CH-104 227675.01 8186255.74 
+
+0+180 R-CH-105 227658.71 8186272.79 L-CH-105 227670.34 8186275.74 
+
+0+160 R-CH-106 227654.02 818692.35 L-CH-106 227665.81 8186295.10 
+
+0+120 R-CH-107 227652.29 8186332.79 L-CH-107 227664.17 8186334.55 
+
+0+100 R-CH-108 227648.88 8186352.18 L-CH-108 227660.73 8186354.63 
+
+0+060 R-CH-109 227646.57 8186394.79 L-CH-109 227658.06 8186391.31 
+
+0+000 R-CH-110 227664.47 8186452.16 L-CH-110 227675.81 8186448.27 
+
+2. CONCLUSIONES 
+
+a) Aprobar el estudio de delimitación de faja marginal del cauce de la torrentera "Chullo" 
+en el tramo correspondiente a los distritos de Yanahuara y Sachaca. 
+
+b) Las caracteristicas de la torrentera El Chullo en el ámbito de los distritos de Yanahuara 
+y Sachaca, tiene un caudal es de 51.8 m3/s con el método de Gumbel, para un periodo 
+de retorno de 100 años. 
+
+Con este caudal, los resultado del modelo Hec Ras para el cauce de la torrentera Chullo 
+dan como resultados una velocidad del flujo promedio de 5.0 m3/s, una elevación del 
+tirante hidráulico promedio de 2.5 m y un ancho promedio de cauce de 8.2 m. 
+
+c) El ancho de mínimo de faja marginal del cauce de la torrentera Chullo, es de 4m en 
+cada margen, de acuerdo al Art. 12º de la Resolución Jefatura! 332-2016-ANA. 
+
+d) Aprobar los hitos de delimitación de faja marginal de la "torrentera Chullo", de acuerdo 
+al siguiente detalle: 
+
+Av. Pumacahua 520, Cerro Colorado-Arequipa 
+
+Teléfono 054-497585 
+aaa-capl1n;iocona'da11a goh pe 
+W\\ w ana .i;Ql¿p� 
+
+\\WW minagn goh ru; 
+
+Página 7 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+!\ANA 
+Autoridad Niidonal del A¡ua 
+
+"Año del Buen Servicio al Ciudadano" 
+
+Cuadro 04: Características de la delimitación de faja margina l del cauce de la "torrentera Chullo". 
+
+• a C ¡ ·� Ubicación : Ancho de laja Nombre � Polilica · Hld=ráflca Geooráfica Longltud (Km) 
+. marainal 1ml ·•·. ·- 
+
+Distrito: Sachaca 
+Yanahura 
+Provincia: Nivel 3: Quilca Vítor Chili 
+
+Cauce de la 
+Arequipa 
+
+Nivel 4: Medio Quilca Datum: 
+Sachaca: Margen Derecha: 4 
+
+Torrentera 
+Departamento: 
+
+Vítor Chili WGS84 
+1,70Km m 
+
+Chuflo 
+Arequipa 
+
+Nivel 5: Unidad Zona: 19 
+Yanahuara: Margen Izquierda: 
+
+Ubigeo: 
+Hidrográfica 13257 1,38Km 4m 
+
+40117 
+40101 
+
+Cuadro 05: Hitos de delimitación de faja marginal del cauce de la "torrentera Chullo", en el tramo 
+correspondiente al distrito de Sachaca, coordenadas WGS 84, zona 19, provincia y región Arequipa. 
+
+Hitos de delimttación de faja marginal de la torrentera Chullo en el tramo Sachaca 
+
+MARGEN DERECHA MARGEN IZQUIERDA 
+
+PROGRESIVA (km) HITO ESTE NORTE HITO ESTE NORTE 
+
+1-.650 HR-CH-001 227339 8183188 HL-CH-001 227347 8183198 
+
+1-P.i50 HR-CH-002 227258 8183246 HL-CH-002 227266 8183254 
+
+1-<450 HR-CH-003 227195 8183322 HL-CH-003 227212 8183469 
+
+1+250 HR-CH-004 227208 8183521 HL-CH-004 227204 8183425 
+
+0+750 HR-CH-005 227323 8183986 HL-CH-005 227368 8184125 
+
+0+450 HR-CH-006 8184270 8184269 HL-CH-006 227460 8184357 
+
+0+300 HR-CH-007 227468 8184408 HL-CH-007 227455 8184503 
+
+0+000 HR-CH-008 227429 8184541 HL-CH-008 227410 8184646 
+
+ioa. 
+
+Hitos de delimltación de faja marginal de la torrentera Chullo en et tramo Yanahuara 
+
+MARGEN DERECHA MARGEN IZQUIERDA 
+PROGRESIVA 
+
+HITO ESTE NORTE HITO ESTE NORTE lkml 
+
+1+380 HR-CH-14 227563 8185120 HL-CH-014 227575 8185123 
+
+0+900 HR-CH-15 227726 8185567 HL-CH-015 227738 8185566 
+
+0+780 HR-CH-16 227737 8185686 HL-CH-016 227750 8185685 
+
+0+600 HR-CH-17 227713 8185859 HL-CH-017 227724 8185864 
+
+0+120 HR-CH-18 227652 8186333 HL-CH-018 227664 8186335 
+
+0+000 HR-CH-19 227664 8186452 HL-CH-019 227676 8186448 
+
+Cuadro 06: Hitos de delimitación de faja marginal del cauce de la "torrentera Chullo", en el tramo 
+correspondiente al distrito de Yanahuara , coordenadas WGS 84, zona 19, provincia y región 
+Arequ 
+
+3. RECOMENDACIONES 
+
+Av. Pumacahua 520, Cerro Colorado-Arequipa 
+Teléfono 054-497585 
+aa.1-caplmaOl.'.Ona'a ana güh I'< 
+
+www.am gob ['l<: 
+
+ww,v.minngn gob pe 
+
+Página 8 de 9 
+
+
+
+1 
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!�ANA 
+Autoridad Nadonal del A¡u■ 
+
+a) Derivar a la Unidad de Asesoría Jurídica, para prosecución de trámite. 
+
+b) Disponer que los Gobiernos Locales ejecuten programas de control de avenidas para 
+la protección de centros poblados, y áreas productivas, los que consideran las 
+acciones de rehabilitación, encauzamiento, limpieza, descolmatación, protecciones 
+marginales, diques y muros de protección, espigones en los cauces, diques de control 
+de velocidades erosivas, otros en la torrentera Chullo. 
+
+e) Disponer que en la faja marginal aprobada, queda prohibida las actividades de 
+asentamientos humanos, actividades agrícolas permanentes o intensivas, 
+construcción de infraestructuras temporales o permanentes u otras que las afecte, 
+bajo apercibimiento de iniciar procedimientos administrativo sancionador que diera 
+lugar. 
+
+d) Disponer a la Municipalidad Distrital de Yanahura, Municipalidad Distrital de Sachaca, 
+la colocación de hitos físico. 
+
+e) Disponer que la Administración Local de Chili la notificación a las autoridades 
+competentes en materia de saneamiento físico legal, en este caso a la Municipalidad 
+Distrital de Sachaca, Municipalidad Provincial de Arequipa, Municipalidad Distrital de 
+Yanahura, Municipalidad Distrital de Cayma, Municipalidad Distrital de Cerro 
+Colorado, Gobierno Regional de Arequipa de la Municipalidad Provincial de Arequipa 
+- IMPLA, Gobierno Regional de Arequipa, Superintendencia Nacional de Registros 
+Públicos - SUNARP, Organismo de Formalización de la propiedad Informal - 
+COFOPRI, la Superintendencia nacional de Bienes estatales y Consejo de Recursos 
+Hidricos de Cuenca Quilca Chili. 
+
+Es todo cuanto informo a usted, para fines pertinentes. 
+Atentamente, 
+
+CUT 208454 - 20 17  
+CC: Archivo 
+
+ADOV/matll 
+
+Av. Pumacahua 520. Cerro Colorado-Arequipa 
+Teléfono 054-497585 
+
+na,1•caplmaocona II ana guh � 
+w,, w ¡ma gQ!i_¡!!; 
+
+www lllltHl!![I goh Jl\: 
+
+Página 9 de 9 
+
+
+
+072  
+Ministerio 
+de Agricultura y Riego 
+
+!\ANA 
+Autoridad Nacional dl!I A,:ua 
+
+"Año del Buen Servicio al Ciudadano" 
+
+INFORME TECNICO 1 5 3 -  2017-ANA-AAA.CO-SDCPRH/MATLL 
+
+REFERENCIA : OFICIO 33-2017-CG/COREAR-AC-MPA 
+
+AU10�1Qi\l .,_ '  ' '  "' , l i t.  ,. 1  Al)TQRIOAD M1'•" ,L • ,.,· • r-' ,,, 
+.,, � \ 1 . ► ... SECRETAR�S�BDIRECCION 
+
+ricos 2 6 � 2017 
+
+PARA 
+
+DE 
+
+ASUNTO 
+
+: lng. Alberto Domingo Osario Valencia Director de la Autoridad Administrativa del Agua I Caplina Ocoñ 
+: lng. Milagros Torrejón Llamoca Especialista de Conservación y Planeamiento de Recursos Hi 
+
+: Delimitación de faja marginal 
+IIJA>. ••.. _ ·•••· 
+
+'º' 
+
+.. . . . .  
+
+•····· ..... 
+
+FECHA : 13 de diciembre del 2017 
+
+Tengo el agrado de dirigirme a usted, a fin de informar sobre la delimitación de faja marginal de la torrentera Chullo, los siguientes actuados: 
+1. ANALISIS 
+
+1.1 De la microcuenca 
+
+En el Mapa (Imagen adjunta), se aprecia 03 microcuencas: 
+Microcuenca quebrada Azufra! 
+Microcuenca quebrada Pastoraíz Microcuenca torrentera Chullo 
+
+: Area de 62.23 km2 :Areade 9.14km2 : Area de 12.63 km2 
+Area total: 84.0 km2 
+
+Cuadro: Tiempos de concentración quebrada Azufral 
+
+.11,-�-- 
+
+... ..  .,_  jjo..-.  _ _  -· 
+
+011tfiila t. � "  ♦• •- ' ,L lll � � S !:l  ►4 
+,.,,�o::::  .. •· � • •=•"'ª  tt  ·  
+
+,-�­ 
+
+�--�·�·=-- 
+•.t ...... _, 
+
+......... - 
+
+- ... .....,_ 
+
+Av. Pumacahua 520. Cerro Colorado - Arequipa Teléfono 054-497585 
+a.t.1-ca¡)lmao¡;ona II ana g11h � 
+,, w,1 ana gQb ll..C 
+
+www nunagn uob Lll! 
+
+Páginu 1 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+!\ANA 
+Autotidad Nacional del Acua 
+
+"Año del Buen Servicio al Ciudadano" 
+
+METODO FORMULA RESULTADO 
+
+l{m) 16800 
+
+Klrpich L o. 77 X S --0.38S 
+Slm/m) 0.136 
+
+T e =  0.01947 X Te (min) 75 
+
+Te lhor) 1.25 
+
+T e =  0.0195 ( L3 ) 0·385 Lfm) 16800 
+
+California H 
+H(m) 2285 
+
+Te (min) 75.35 
+
+Te (hor) 1.256 
+
+L (km) 16.8 
+
+T e =  0.108 x ( L x  A) 113 S{m/m) 0.136 
+Passini 51/2 Area (km2) 62.23 
+
+Tc(min) 178.2 
+
+Te fhor) 2.97 
+
+Lfkm) 16.8 
+
+Temez 
+Te = 0.3 X L.!,_) º·76 S{m/m) 0.136 
+
+$ 0.250 Tc(min) 224 
+
+Te lhor) 3.7 
+
+T e =  13.548 (_�) 0·77 L(km) 16.8 
+
+Pizarra 
+H(m) 2285 
+
+H Te (min) 163 
+
+Te (hor) 2.7 
+
+Las Áreas y Tiempos de concentración son las siguientes: 
+
+Microcuenca Área (km2) TC (hor) 
+Zafranal 62.23 2.7 
+Pasto raíz 9.14 1.2 
+Chullo 12.63 1.2 
+
+(Manual de hidrología, hidráulica y drenaje, MTC) 
+
+Q = O. 278 * C * I * A *  K  
+
+Dónde: 
+Q: descarga máxima de diseño (m31s) 
+C: coeficiente de escorrentía para el intervalo en el que se produce 1 
+
+1: intensidad de precipitación máxima horaria (mm/h) 
+A: área de la cuenca (Km') 
+K: coeficiente de uniformidad 
+
+Las fórmulas que definen los factores de la formula general, son los siguientes 
+
+a) Tiempo de concentración (Te) 
+
+T = o 3*(-L-)o.76 
+e · 50.2s 
+
+/\v. Pumacahua 520, Cerro Colorado - Arequipa 
+
+Teléfono 054-497585 
+
+W\\ w mn gob ¡x: 
+
+,.w,\w mm:il!n "Ob.,pc 
+Página 2 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+!_\ANA 
+AlltOridad Nacional del A¡u1 
+
+"Año del Buen Servicio al Ciudadano" 
+
+Dónde: 
+L: longitud del cauce mayor (Km) 
+S: pendiente promedio del cauce mayor (m/m) 
+
+0 7 3  
+
+b) Coeficiente de uniformidad 
+
+K =  
+
+T  1.25 
+1 + e 
+
+T c1.2s + 14 
+Dónde: 
+Te: tiempo de concentración (horas) 
+e) Coeficiente de simultaneidad o factor reductor (KA) 
+
+log10A 
+l - ( 15 ) 
+
+Dónde: 
+A: Área de la cuenca (Km') 
+
+d) Precipitación máxima corregida sobre la cuenca (P) 
+
+Dónde: P = K A *  Pd 
+KA: factor reductor 
+Pd: precipitación máxima diaria (mm) 
+
+e) Intensidad de precipitación (1) 
+
+p 2sºl-Tcºl 
+1 = (-) * (11) 2s0-1-1 
+
+P: precipitación máxima diaria (mm) 24 
+
+Te: tiempo de concentración (Te) 
+
+f) Umbral de escorrentía (Po) 
+
+Dónde 
+
+Dónde: Po (5000)-50 
+CN 
+
+CN: número de curva 
+
+g) Coeficiente de escorrentía (C ) 
+
+(Pd- P o ) * ( P d +  2 3 * P o )  
+C =  
+
+(Pd+  1 1 * P o J2  
+
+Pd: precipitación máxima diaria (mm) 
+
+1.2 Resultados del estudio 
+
+a) Quebrada Azufral 
+
+Av. Pumacahua 520, Cerro Colorado -Arc:quipa 
+
+Teléfono 054-497585 
+aaa-,aphnaocona 1/ar1a gob p..: 
+�,1;;9b.pc 
+
+WWW llllíl.l!!fÍ � 
+
+Página 3 de 9 
+
+Dónde: 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+CAUDALES MAXIMOS GENERADOS - CUENCA AZUFRAL 
+
+!\ANA 
+Autoridad Nadonal del Ac:1.11 
+
+T Intensidad Factor Area Escorrenta Uniformidad Caudal maximo 
+
+afios mm 0.0278 km2 e K m3ls 
+
+2 150.69000 0.02780 62.230 0.0650 0.80179 13.59 
+
+5 198.89000 0.02780 62 230 0.0650 0.80179 17 .93 
+
+10 235.35000 0.02780 62.230 0.0650 0.80179 21.22 
+
+25 288.50000 0.02780 62.230 0.0650 0.80179 26.01 
+
+50 475.78000 0.02780 62.230 0.0650 0.80179 42.90 
+
+100 541.79000 0.02780 62.230 0,0650 0.80179 48.85 
+
+200 607.81000 0.02780 62.230 0.0650 0,80179 54.80 
+
+500 695.08000 0.02780 62.230 0.0650 0.80179 62.67 
+
+1000 761.09700 0.02780 62 230 0.0650 0.80179 68.62 
+
+b) Quebrada Pasto raíz 
+
+CAUDALES MAXIMOS GENERADOS - CUENCA PASTO RAIZ 
+
+T Intensidad Factor Area Escorrenta Uniformidad Caudal maximo 
+
+.... mm 0.0278 km2 e K m31s 
+
+2 150.69000 0.02780 9.1400 0.0850 0.91767 2.99 
+
+5 198.89000 0.02780 9.1400 O 0850 0.91767 3.94 
+
+10 235.35000 0.02780 9.1400 0.0850 0.91767 4.66 
+
+25 288 50000 O 02780 9.1400 0.0850 0.91767 5.72 
+
+50 475.78000 0.02780 9.1400 0.0850 0.91767 9.43 
+
+100 541.79000 0.02780 9.1400 0.0850 0.91767 10.74 
+
+200 607.81000 0.02780 9.1400 0.0850 0,91767 12.05 
+
+500 695.08000 0.02780 9.1400 O 0850 0.91767 13.78 
+
+1000 761.09700 0.02780 9.1400 O 0850 0.91767 15.08 
+- "'<;IONA¡� 
+
+if',1;""·oc '� a - o,  
+
+1.3 Características del cauce de la "quebrada Chullo" 
+
+La "torrentera Chullo", tiene en el tramo de los distritos de Yanahuara y Sachaca 
+presencia de construcciones civiles, lo que lo convierte en área vulnerable a 
+inundaciones y socavamiento de estructuras. 
+
+Las municipalidades de Cerro Colorado, Cayma, Yanahuara, Sachaca y la 
+Municipalidad Provincial de Arequipa deben priorizar e implementar un Programa 
+Integral de Control de Avenidas, las mismas que contengan acciones estructurales y 
+no estructurales, a fin de mitigar posibles impactos que afecten a la población. Se 
+recomienda que las municipalidades aledañas realicen las respectivas evaluaciones 
+de peligros. 
+
+En el tramo de "torrentera Chullo" del distrito de Sachaca, en la progresiva 0+800 se 
+encuentra las Unidad Catastral 93701 que se sobrepone con la faja marginal; en la 
+progresiva O+ 700 se tiene un ancho de cauce muy reducido de 4.25m. 
+
+Av. Pumacahua 520, Cerro Colorado-Arcquipa 
+
+Teléfono 054-497585 
+
+aa.1-caplmao,,:ona:dana goh ,� 
+\\ W\\ mrn gol> p.; 
+
+WW\\.min;1gri "Ob pe 
+
+Página 4 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!\ANA 
+Autorlod Nacional d� A,cua 
+
+074  
+En la progresiva 0+300, existe una alcantarilla de 1.22m de ancho el mismo que no 
+soporta transito del flujo, en esta progresiva se debe cambiar el sistema de 
+alcantarillado respetando el ancho de faja marginal en 4.0 m. 
+
+En todo el tramo que cruza la torrentera Chullo, del distrito de Yanahuara, existen 
+estructuras civiles, como puente Chullo y Challapampa, que deben ser adecuadas y 
+
+reforzadas para soportar el libre flujo de los caudales. 
+
+En todo el tramo del distrito de Yanahuara, se debe priorizar la construcción de muros 
+de contención y encauzar en todo su tramo, replantear alcantarillas, obras de 
+saneamiento que cruzan el cauce. 
+
+1.4 La delimitación de faja marginal queda establecida de acuerdo al siguiente detalle: 
+
+Cuadro 01:  Delimitación del cauce de la "quebrada Chullo", en el sector del distrito de Sachaca, datum 
+
+WGS 84, zona 19. 
+
+Faja marginal derecha Faja marginal izquierda 
+
+Progresiva 
+Código 
+
+Coordenadas WGS 84, zona 19 
+Código 
+
+Coordenadas WGS 84, zona 19 
+
+Este (x) Norte (y) Este (x) Norte (y) 
+
+1+700 R-CH-001 227379.45 8183158.14 L-CH-001 227386.92 8183168.00 
+
+1+650 R-CH-002 227339.39 8183187.88 L-CH-002 227346.69 8183197.74 
+
+1+600 R-CH-003 227296.91 8183213.75 L-CH-003 227303.51 8183223.77 
+
+1+550 R-CH-004 227257.28 8183246.63 L-CH-004 227266.54 8183254.25 
+
+1+500 R-CH-005 227231.48 8183289.24 L-CH-005 227203.78 8183330.72 
+
+1+450 R-CH-006 227194.95 8183322.53 L-CH-006 227212.60 8183468.86 
+
+1+400 R-CH-007 227186.40 8183374.94 L-CH-007 227219 .54 8183520.55 
+
+1+350 R-CH-008 227191.95 8183424.00 L-CH-008 227211.19 8183615.05 
+
+1+300 R-CH-009 227201.90 8183474.02 L-CH-009 227210.24 8183667.25 
+
+1+250 R-CH-010 227207.58 8183520.73 L-CH-010 227203.93 8183424.62 
+
+1+200 R-CH-011 227195.62 8183565.82 L-CH-011 227213.37 8183712.74 
+
+1+150 R-CH-012 227199.79 8183618.48 L-CH-012 227239.73 8183752.96 
+
+1+100 R-CH-013 227198.84 8183663.34 L-CH-013 227265.77 8183796.28 
+
+1+050 R-CH-014 227201.79 8183715.90 L-CH-014 227287.40 8183839.82 
+
+1+000 R-CH-015 227229.57 8183759.49 L-CH-015 227309.41 8183885.72 
+
+0+950 R-CH-016 227254.42 8183800.95 L-CH-016 227327.53 8183932.55 
+
+0+900 R-CH-017 227277.42 8183846.61 L-CH-017 227334.22 8183980.48 
+
+0+850 R-CH-018 227298.44 8183890.59 L-CH-018 227344.46 8184030.20 
+
+0+800 R-CH-019 227315.80 8183936.80 L-CH-019 227354.36 8184079.52 
+
+0+750 R-CH-020 227323.17 8183985.53 L-CH-020 227367.50 8184125.06 
+
+0+700 R-CH-021 227332.71 8184033.12 L-CH-021 227402.08 8184219.90 
+
+0+650 R-CH-022 227342.46 8184081.75 L-CH-022 227421.86 8184263.73 
+
+0+600 R-CH-023 227357.30 8184131.38 L-CH-023 227240.41 8183296.55 
+
+/\v. Pumacahua 520, Cerro Colorado-Arequipa 
+
+Teléfono 054-497585 
+
+aaa-capl1naoco11a•'á'ana ffih115; 
+www mia gob ll� 
+
+W\\W mina••n gob pe 
+
+Página 5 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!\ANA 
+Autoridad Nadonal d�I Alu• 
+
+Faja marginal derecha Faja marginal Izquierda 
+
+Progresiva 
+Código 
+
+Coordenadas WGS 84, zona 19 
+Código 
+
+Coordenadas WGS 84, zona 19 
+
+Este(xl Norte (y) Este (x) Norte (y) 
+
+0+550 R-CH--024 227377.25 8184174.37 L-CH--024 227198.40 8183374.75 
+
+0->500 R-CH--025 227390.41 8184222.66 L-CH--025 227442.73 8184309.86 
+
+0-1450 R-CH--026 227411.25 8184269.71 L-CH--026 227460.21 8184357.36 
+
+0-1400 R-CH--027 227431.52 8184314.75 L-CH--027 227478.40 8184402.58 
+
+0+350 R-CH--028 227448.55 8184361.09 L-CH--028 227470 03 8184454.99 
+
+0+300 R-CH--029 227467.81 8184408.26 L-CH--029 227454.91 8184502.70 
+
+0+250 R-CH--030 227458.43 8184451.89 L-CH--030 227426.05 8184598.52 
+
+0+200 R-CH--031 227443.40 8184499.32 L-CH--031 227396.70 8184694.05 
+
+0+150 R-CH--032 227414.46 8184594.99 L-CH--032 227206.18 8183563.88 
+
+0+100 R-CH--033 227400.68 8184643.16 L-CH--033 227385.89 8184173.64 
+
+0+050 R-CH--034 227385.23 8184690.52 L-CH--034 227441.33 8184543.72 
+
+0+000 R-CH--035 227429.45 8184540.64 L-CH--035 227410.04 8184645.76 
+
+Cuadro 03: Delimitación del cauce de la "quebrada Chullo", en el sector del distrito de Yanahuara, datum 
+
+WGS 84, zona 19. 
+
+Faia marainal derecha Faia marainal izauierda 
+
+Progresiva 
+Código 
+
+Coordenadas WGS 84, zona 19 
+Código 
+
+Coordenadas WGS 84, zona 19 
+
+Este (x) Norte (y) Este (x) Norte (y) 
+
+0+660 R-CH-76 227534.4 8185458.8 L-CH-76 227545.2 8185463.8 
+
+0+640 R-CH-77 227528.7 8185473.9 L-CH-77 227539.6 8185479.2 
+
+0+620 R-CH-78 227523.5 8185495.1 L-CH-78 227535.4 8185498.5 
+
+0+600 R-CH-79 227524.4 8185516.4 L-CH-79 227536.4 8185516.6 
+
+0+580 R-CH-80 227522.0 8185534.9 L-CH-80 227533.5 8185537.3 
+
+0+560 R-CH-81 227516.4 8185553.8 L-CH-81 227527.9 8185557.2 
+
+0+540 R-CH-82 227510.0 8185572.1 L-CH-82 227521.1 8185576.6 
+
+0+520 R-CH-83 227502.5 8185590.7 L-CH-83 227513.6 8185595.2 
+
+0+500 R-CH-84 227494.8 8185610.3 L-CH-84 227506.9 8185612.3 
+
+0+480 R-CH-85 227492.6 8185631.1 L-CH-85 227504.6 8185631.2 
+
+0+460 R-CH-86 227492.7 8185651.3 L-CH-86 227504.7 8185651.2 
+
+0+440 R-CH-87 227492.8 8185671.4 L-CH-87 227504.8 8185671.1 
+
+0+420 R-CH-88 227492.9 8185691.2 L-CH-88 227504.9 8185691.1 
+
+0+400 R-CH-89 227493.5 8185711.0 L-CH-98 227504.7 8185710.9 
+
+0+380 R-CH-90 227493.1 8185731.2 L-CH-90 227505.1 8185731.1 
+
+0+360 R-CH-91 227493.0 8185750.7 L-CH-91 227504.6 8185751.0 
+
+0+340 R-CH-92 227491.9 8185770.8 L-CH-92 227503.9 8185771.4 
+
+Av. Pumacahua 520, Cerro Colorado- Arequipa 
+Teléfono 054-497585 
+
+aaa-caphnao,:on;nlana gob pc 
+
+www ana gob pe 
+
+www nunagn gob pe 
+s 
+
+Página 6 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!\ANA 
+Autorldad Nacional del A(ua 
+
+Faia marainal derecha Faia marainal izauierda 
+
+Progresiva 
+Código 
+
+Coordenadas WGS 84, zona 19 
+Código 
+
+Coordenadas WGS 84, zona 19 
+
+Este (x) Norte (y) Este (x) Norte (y) 
+
+0+320 R-CH-93 227490.5 8185790.0 L-CH-93 227502.3 8185792.1 
+
+0+300 R-CH-94 227498.0 8185809.0 L-CH-94 227498.6 8185809.2 
+
+0+280 R-CH-95 227496.0 8185839.0 L-CH-95 227493.7 8185831.1 
+
+0+260 R-CH-96 227489.0 8185850.0 L-CH-96 227490.0 8185850.2 
+
+0+260 R-CH-97 227488.0 8185870.0 L-CH-97 227488.4 8185871.0 
+
+0+240 R-CH-98 227483.0 8185890.0 L-CH-98 227483.6 8185890.0 
+
+0+220 R-CH-99 227478.0 8185909.0 L-CH-99 227478.9 8185909.5 
+
+0+200 R-CH-100 227475.0 8185928.0 L-CH-100 227475.8 8185928.6 
+
+0+180 R-CH-101 227461.9 8185947.8 L-CH-101 227474.1 8185947.6 
+
+0+160 R-CH-102 227462.2 8185967.9 L-CH-102 227474.1 8185968.3 
+
+0+140 R-CH-103 227458.9 8185987.4 L-CH-103 227470.9 8185988.3 
+
+0+120 R-CH-104 227456.4 8186007.6 L-CH-104 227468.4 8186007.9 
+
+0+100 R-CH-105 227460.2 8186028.8 L-CH-105 227471.0 8186025.2 
+
+0+080 R-CH-106 227466.1 8186048.0 L-CH-106 227477.5 8186044.3 
+
+0+060 R-CH-107 227472.5 8186067.0 L-CH-107 227483.9 8186063.2 
+
+0+040 R-CH-108 227477.9 8186085.9 L-CH-108 227489.4 8186082.4 
+
+0+020 R-CH-109 227481.5 8186104.3 L-CH-109 227493.3 8186101.8 
+
+0+000 R-CH-110 227483.7 8186124.1 L-CH-110 227496.9 8186123.0 
+
+2. CONCLUSIONES 
+
+a) Aprobar el estudio de delimitación de faja marginal del cauce de la torrentera "Chullo" 
+en el tramo correspondiente a los distritos de Yanahuara y Sachaca. 
+
+b) Las características de la torrentera El Chullo en el ámbito de los distritos de Yanahuara 
+y Sachaca, tiene un caudal es de 51 .8  m3/s con el método de Gumbel, para un periodo 
+de retorno de 100 años. 
+
+Con este caudal, los resultado del modelo Hec Ras para el cauce de la torrentera Chullo 
+dan como resultados una velocidad del flujo promedio de 5.0 m3/s, una elevación del 
+tirante hidráulico promedio de 2.5 m y un ancho promedio de cauce de 8.2 m. 
+
+e) El ancho de mínimo de faja marginal del cauce de la torrentera Chullo, es de 4m en 
+cada margen, de acuerdo al Art. 12º de la Resolución Jefatura! 332-2016-ANA. 
+
+d) Aprobar los hitos de delimitación de faja marginal de la "torrentera Chullo", de acuerdo 
+al siguiente detalle: 
+
+Av. Pumacahua 520, Cerro Colorado-Arequipa 
+Teléfono 054-497585 
+
+:.iaa-caplmaocona1a ana gob 1lf 
+
+WW\\ an,I "º" JJ<.: 
+
+www.minagn gob � 
+
+Página 7 de 9 
+
+
+
+Ministerio 
+de Agricultura y Riego 
+
+!\ANA 
+Autoridad Nadonal del Aa;ua 
+
+"Año del Buen Servicio al Ciudadano" 
+
+Cuadro 04: Características de la delimitación de faja marginal del cauce de la "torrentera Chullo". 
+
+. . Atoo:._, • • .  ,  Ubicación .. 
+
+. , . :; .. " Ancho de faja . 
+Nombre . .  Polltlca .. Hldro•ráflca �-:;- � G-ráflca Longitud.(�). malalnal 1ml 
+
+Distrito: Sachaca 
+Yanahura Nivel 3: Quilca Vítor Chilí 
+
+Cauce de la 
+Provincia: Nivel 4: Medio Quilca Datum: 
+
+Sachaca: Margen derecha: 4 
+
+Torrentera 
+Arequipa 
+
+Vítor Chili WGS84 
+1.70Km m 
+
+Chullo 
+Departamento: Nivel 5: Unidad Zona: 19 
+
+Yanahuara: Margen Izquierda: 
+Arequipa Hidrográfica 13257 
+
+1.38Km 4m 
+Ubigeo: 
+
+Cuadro 05: Hitos de delimitación de faja marginal del cauce de la "torrentera Chullo", en el tramo 
+correspondiente al distrito de Sachaca, coordenadas WGS 84, zona 19, provincia y región Arequipa. 
+
+Hitos de delimitación de faja marginal de la torrentera Chullo en el tramo Sachaca 
+
+MARGEN DERECHA MARGEN IZQUIERDA 
+
+PROGRESIVA (km) HITO ESTE NORTE HITO ESTE NORTE 
+
+1"'650 HR-CH-001 227339 8183188 HL-CH-001 227347 8183198 
+
+1->550 HR-CH-002 227258 8183246 HL-CH-002 227266 8183254 
+
+1 "'450 HR-CH-003 227195 8183322 HL-CH-003 227212 8183469 
+
+1+250 HR-CH-004 227208 8183521 HL-CH-004 227204 8183425 
+
+0+750 HR-CH-005 227323 8183986 HL-CH-005 227368 8184125 
+
+0--450 HR-CH-006 8184270 8184269 HL-CH-006 227460 8184357 
+
+0+300 HR-CH-007 227468 8184408 HL-CH-007 227455 8184503 
+
+0+000 HR-CH-008 227429 8184541 HL-CH-008 227410 8184646 
+
+�t.\OHALo!'( i',:J,,IOcol<,, 
+�¡ �\a\.,) 
+'a � 
+
+_6",,."t 
+
+Soc'<q- Cuadro 06: Hitos de delimitación de faja marginal del cauce de la "torrentera Chullo", en el tramo 
+correspondiente al distrito de Yanahuara, coordenadas WGS 84, zona 19, provincia y región 
+Arequipa. 
+
+. ' . 
+
+Hitos de delimitación de faja marginal de la torrentera Chullo en el tramo Yanahuara 
+
+MARGEN DERECHA MARGEN IZQUIERDA 
+
+PROGRESIVA (km) HITO ESTE NORTE HITO ESTE NORTE 
+
+0->600 HR-CH-14 227524 8185516 HL-CH-014 227536 8185517 
+
+0->500 HR-CH-15 227495 8185610 HL-CH-015 227507 8185612 
+
+0--400 HR-CH-16 227494 8185711 HL-CH-016 227494 8185711 
+
+0+300 HR-CH-17 227498 8185809 HL-CH-017 227499 8185809 
+
+0+200 HR-CH-18 227475 8185928 HL-CH-018 227475 8185928 
+
+0+100 HR-CH-19 227460 8186029 HL-CH-019 227471 8186025 
+
+0+000 HR-CH-20 227484 8186124 HL-CH-020 227497 8186123 
+
+Av. Pumacahua 520, Cerro Colorado - Arcquipa 
+
+Teléfono 054-497585 
+:.rna-1:aplmao..:011:1:«ana gQQJ� 
+wwwmm "Obpc 
+
+www mrnagn goh � 
+
+Página 8 de 9 
+
+
+
+' 
+Ministerio 
+de Agricultura y Riego 
+
+"Año del Buen Servicio al Ciudadano" 
+
+!\ANA 
+Autoridad Naclon�I del A¡ua 
+
+07G  
+3. RECOMENDACIONES 
+
+a) Derivar a la Unidad de Asesoría Jurídica, para prosecución de trámite. 
+
+b) Disponer que los Gobiernos Locales ejecuten programas de control de avenidas para 
+la protección de centros poblados, y áreas productivas, los que consideran las 
+acciones de rehabilitación, encauzamiento, limpieza, descolmatación, protecciones 
+marginales, diques y muros de protección, espigones en los cauces, diques de control 
+de velocidades erosivas, otros en la torrentera Chullo. 
+
+e) Disponer que en la faja marginal aprobada, queda prohibida las actividades de 
+asentamientos humanos, actividades agrícolas permanentes o intensivas, 
+construcción de infraestructuras temporales o permanentes u otras que las afecte, 
+bajo apercibimiento de iniciar procedimientos administrativo sancionador que diera 
+lugar. 
+
+d) Disponer a la Municipalidad Distrital de Yanahura, Municipalidad Distrital de Sachaca , 
+la colocación de hitos físico. 
+
+e) Disponer que la Administración Local de Chili la notificación a las autoridades 
+competentes en materia de saneamiento físico legal, en este caso a la Municipalidad 
+Distrital de Sachaca, Municipalidad Provincial de Arequipa, Municipalidad Distrital de 
+Yanahura, Municipalidad Distrital de Cayma, Municipalidad Distrital de Cerro 
+Colorado, Gobierno Regional de Arequipa de la Municipalidad Provincial de Arequipa 
+- IMPLA, Gobierno Regional de Arequipa, Superintendencia Nacional de Registros 
+Públicos - SUNARP, Organismo de Formalización de la propiedad Informal - 
+COFOPRI, la Superintendencia nacional de Bienes estatales y Consejo de Recursos 
+Hidricos de Cuenca Quilca Chili. 
+
+Es todo cuanto informo a usted, para fines pertinentes. 
+Atentamente, 
+
+CLJT 208454 - 2017 
+CC: Archivo 
+
+ADOV/matll 
+
+Av. Pumacahua 520, Cerro Colorado - Arequipa 
+
+Teléfono 054-497585 
+aaa-caplmarh:ona ,7ana <•oh IK 
+www an<l ;;ob � 
+
+www mrn:ll.'n cob pe 
+
+Página 9 dé 9 
+
+
+
+r 
+
+. , 
+
+r 
+
+/1 
+7 / 
+
+� 
+
+� -  
+-: � "\ 
+
+clf"ker Pen only. 
+
+
+
+MUNICIPALIDAD DISTRlTAL 
+DE LA VILLA HERMOSA DE 
+
+YAN�ARA. 
+
+"AÑO DE LA CONSOLIDACIÓN DEL MAR DE GRAU" 
+
+Yanahuar a, 21 de octubre del 2016 
+Oficio Nº 149-2016-GDU-MDY 
+
+I N G E N I ER O :  
+
+PANTALION H 

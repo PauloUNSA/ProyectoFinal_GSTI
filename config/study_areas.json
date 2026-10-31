@@ -1,0 +1,21 @@
+{
+  "study_areas": [
+    {
+      "id": "chullo",
+      "name": "Chullo · sector unificado",
+      "path": "data/processed/chullo",
+      "analysis_crs": "EPSG:32719",
+      "bbox": [
+        -71.554,
+        -16.403,
+        -71.55,
+        -16.397
+      ],
+      "max_band_m": 100,
+      "description": "Sector de Chullo, Arequipa. Unifica hitos ANA (Cayma y Yanahuara), límites de faja documental y detección de edificios por CNN sobre imagen satelital.",
+      "coverage_notes": "Eje aproximado calculado a partir de los límites exteriores de Cayma (210 vértices). No es delimitación legal oficial.",
+      "imagery_path": "data/imagery/chullo/chullo_rgb.tif",
+      "imagery_manifest": "data/imagery/chullo/manifest.json"
+    }
+  ]
+}
