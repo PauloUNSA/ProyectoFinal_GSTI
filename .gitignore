@@ -12,3 +12,9 @@ models/*.download
 venv/
 .venv/
 .venv-ml/
+
+node_modules/
+models/**/*.pth
+outputs/qa/
+
+!models/chullo_local_v1/weights.pth

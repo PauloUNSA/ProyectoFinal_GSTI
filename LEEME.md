@@ -1,121 +1,64 @@
-# Chullo Unificado · Mapa y detección de edificaciones en la torrentera Chullo
+# Chullo Unificado
 
-Proyecto local que unifica dos prototipos en una sola aplicación:
+Visor local de los límites documentales ANA y detección automática de cubiertas con Mask R-CNN.
 
-1. **Visor documental** (de chullo-local): mapa con imagen satelital, hitos ANA de Cayma y Yanahuara, límites de faja documental y línea del cauce obtenida uniendo ambos límites.
-2. **Detección de edificios con CNN** (de gsti-teo, ahora obligatoria): identificación de edificaciones sobre imagen satelital y clasificación por distancia al cauce usando valores reales de ANA.
+## Franjas corregidas
 
-Todo se ejecuta en tu computadora, sin cuenta en la nube.
+- **Rojo:** un único corredor que ocupa todo el espacio entre las líneas azul y morada. Su ancho sigue los límites existentes; no es un buffer fijo de 4 m desde el eje.
+- **Amarillo:** anillo exterior de 20 m por defecto, configurable entre 0 y 500 m. Se mide desde el borde del corredor rojo.
+- **Referencia central:** línea discontinua abierta entre ambas márgenes; nunca une artificialmente el final con el inicio.
 
----
+Los 4 m documentales se conservan como referencia del documento; no desplazan ni sustituyen las coordenadas de los límites. Estas capas no son una validación legal ni un estudio de peligro.
 
-## ¿Qué hace este programa?
+El visor y la CNN comparten la geometría calculada en `backend/spatial.py`, en EPSG:32719. La intersección de cualquier parte del contorno con rojo tiene prioridad roja; si solo toca la zona exterior se clasifica amarillo. Se conservan los contornos completos. No se muestran candidatos fuera de ambas zonas.
 
-Muestra un mapa del sector Chullo (Arequipa) con:
+## Uso
 
-- **Puntos ANA**: hitos documentales de la faja marginal en Cayma (48 puntos) y Yanahuara (12 puntos, en revisión).
-- **Límites de faja**: las dos líneas exteriores documentadas de Cayma (margen derecha e izquierda) con 210 vértices del documento ANA (RD 1610-2018).
-- **Línea del cauce**: obtenida uniendo los dos límites documentales punto a punto (punto medio entre margen derecha e izquierda en cada vértice).
-- **Franjas de proximidad con valores reales de ANA**:
-  - Rojo: 0 a 4 m (faja documental, 4 m por margen según Tabla 02 / RD 1610-2018)
-  - Amarillo: 4 a 24 m (franja de seguridad adicional configurable)
-  - Verde: más de 24 m
-- **Edificios detectados**: polígonos de edificaciones identificados por CNN (Mask R-CNN), coloreados según su distancia al cauce.
-- **Imagen satelital**: capa base por defecto para identificar edificios (techos como figuras de 4 lados).
+1. Abre `iniciar.bat`, o ejecuta `python servidor.py --abrir` desde esta carpeta.
+2. Visita http://127.0.0.1:4173/.
+3. Pulsa **Ejecutar detección CNN sobre imagen del sector**. Una ejecución completa sobre CPU tardó aproximadamente 4 minutos y medio en este equipo.
+4. Selecciona un contorno para consultar distancias y puntuación.
+5. Si cambias el ancho amarillo y recalculas, vuelve a ejecutar la CNN. El visor limpia el resultado anterior para evitar mostrar una clasificación con otro ancho.
 
-Cada edificio detectado, al hacer clic, muestra su distancia al cauce, el color del semáforo y la puntuación del detector.
+Los resultados completos guardados se cargan al abrir el visor. Un fallo devuelve un error real y conserva los archivos de la última detección válida.
 
-**Importante:** la proximidad no determina peligro ni permiso para construir. Verde no significa seguro.
+## Imagen y modelo incluidos
 
----
+- `data/imagery/chullo/chullo_rgb.tif`: GeoTIFF RGB real, EPSG:32719, 1177 × 8942 píxeles, que cubre el corredor ANA con contexto alrededor.
+- `data/imagery/chullo/chullo_rgb.json`: procedencia, extensiones devueltas por ArcGIS, parámetros de las tres capturas y hashes. Fuente: [Esri World Imagery](https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer). Se conservan los créditos del proveedor. La fecha de descarga no se presenta como fecha de captura.
+- `data/imagery/chullo/captura_original_sin_crs.png`: respaldo de la imagen que antes estaba renombrada como `.tif`, sin coordenadas.
+- `models/chullo_local_v1/`: pesos y documentación del modelo piloto ya existente en el proyecto original `gsti-teo`. Se verifica el SHA256 antes de cargarlo. No se entrenó un modelo nuevo en esta corrección.
 
-## Cómo usar (despliegue local)
+El GeoTIFF del proyecto original cubría otro tramo, al sur del corredor ANA, por lo que se descartó como entrada de esta detección. No se asignaron coordenadas inventadas al PNG ni se desplazaron límites para hacerlo coincidir.
 
-### Requisitos
-- Python 3 instalado en tu equipo.
-- Para la detección CNN: torch, torchvision, rasterio, geopandas, shapely, pyproj, requests.
+Para repetir la captura local del corredor: `python scripts/prepare_imagery.py` (requiere conexión al servicio Esri).
 
-### Pasos
+## Ejecución y salidas
 
-1. Abre la carpeta `chullo-unificado`.
-2. Doble clic en `iniciar.bat`.
-   - O ejecuta: `python servidor.py --abrir`
-3. El navegador se abre en: `http://127.0.0.1:4173/`
-4. Para detener el servidor: presiona `Ctrl+C` en la ventana negra.
-
-Si el puerto 4173 está ocupado:
-```
-python servidor.py --puerto 4174 --abrir
-```
-
----
-
-## Capas del mapa (qué puedes activar/desactivar)
-
-1. **Puntos ANA Cayma** (verde oscuro) — hitos de señalización de faja marginal.
-2. **Puntos ANA Yanahuara** (naranja) — hitos en revisión por discrepancias entre fuentes.
-3. **Límites de faja Cayma** — dos líneas exteriores documentadas (margen derecha e izquierda).
-4. **Línea del cauce** — unión de los dos límites documentales (punto medio entre márgenes).
-5. **Franjas de proximidad (ANA)** — rojo/faja documental, amarillo/seguridad, verde/fuera.
-6. **Edificios detectados (CNN)** — polígonos de edificios identificados por CNN, coloreados por proximidad.
-7. **Vista satelital** — imagen satelital como base para identificar edificios.
-
----
-
-## Detección de edificios con CNN (obligatoria)
-
-La detección usa Mask R-CNN ResNet50-FPN con pesos preentrenados para huellas de edificios.
-
-Para ejecutarla desde el visor: pulsa el botón **"Detectar edificios (CNN)"**. El servidor ejecuta `backend/detector.py` sobre la imagen del sector y devuelve los contornos como GeoJSON.
-
-También desde línea de comandos:
+Instala las dependencias si faltan: `python -m pip install -r requirements-detection.txt`.
 
 ```powershell
-python scripts/run_detection.py --imagen data/imagery/chullo/chullo_rgb.tif --salida outputs/detection --umbral 0.5
+python scripts/run_detection.py --imagen data/imagery/chullo/chullo_rgb.tif --salida web/outputs/detection --umbral 0.5 --amarillo 20
+python scripts/generate_bands.py --amarillo 20
 ```
 
-Esto genera un GeoJSON con los contornos de edificios detectados y un manifiesto de ejecución.
+La API publica `web/outputs/detection/buildings.geojson` y `manifest.json`; se sirven bajo `/outputs/detection/`. El manifiesto registra conteos por color, modelo, imagen, cobertura y parámetros.
 
----
+La ejecución real de verificación del 31/10/2026 produjo **405 contornos candidatos: 118 rojos y 287 amarillos**, procesando 49 mosaicos con datos relevantes. Esto verifica que la inferencia funciona; no certifica la precisión de los contornos.
 
-## Estructura del proyecto
+## Pruebas
 
-| Carpeta/archivo | Contenido |
-|---|---|
-| `servidor.py` | Servidor HTTP local y API de detección CNN |
-| `iniciar.bat` | Lanzador con doble clic |
-| `web/index.html` | Página principal del mapa |
-| `web/simple.css` | Estilos visuales |
-| `web/simple.js` | Lógica del mapa Leaflet, línea del cauce, franjas ANA |
-| `web/data.js` | Puntos ANA y límites de faja (GeoJSON embebido) |
-| `web/bands.js` | Franjas de proximidad con valores reales de ANA |
-| `web/detection.js` | Detección CNN obligatoria de edificios |
-| `web/vendor/` | Leaflet (mapa) |
-| `web/docs/` | Documentos ANA de referencia |
-| `web/layers/` | Archivos GeoJSON de capas |
-| `backend/detector.py` | Ejecución del modelo CNN Mask R-CNN |
-| `backend/spatial.py` | Línea del cauce, franjas ANA, distancias edificio-cauce |
-| `config/proximity_rules.json` | Reglas del semáforo (basadas en ANA) |
-| `data/processed/chullo/` | Capas vectoriales del sector |
-| `scripts/run_detection.py` | CLI para ejecutar detección de edificios |
-| `scripts/generate_bands.py` | CLI para generar GeoJSON de franjas |
-| `outputs/detection/` | Resultados guardados de detección |
+```powershell
+python -m pytest -p no:xonsh tests -q
+npm ci
+$env:CHULLO_URL = 'http://127.0.0.1:4173'
+npm test
+```
 
----
+Si la instalación local de pytest carga plugins ajenos incompatibles con la consola, usa `$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'` antes de ejecutar pytest.
 
-## Advertencias
+Se verifican las franjas, el último vértice de ambas márgenes, anillos interiores, prioridad por intersección del contorno, máscaras RGB bidimensionales, resultado vacío real y preservación de resultados ante errores. La prueba del navegador comprueba controles, geometría y presentación honesta de errores. La inferencia real se comprobó también a través de la API con un recorte del GeoTIFF.
 
-- Las franjas de proximidad usan los valores reales de los documentos ANA (4 m por margen), no criterios ilustrativos inventados.
-- No es una faja marginal legal ni un estudio de inundaciones.
-- El detector CNN puede producir omisiones y falsos positivos; requiere revisión humana.
-- Para decisiones sobre construcción se necesitan análisis hidráulicos, delimitaciones oficiales y permisos aplicables.
-- La imagen satelital y el mapa base OpenStreetMap requieren conexión a internet.
+## Alcance de la CNN
 
----
-
-## Referencias documentales
-
-- Expediente ANA Cayma (RD 1610-2018, rectificación 22/03/2019) — Tabla 02 de vértices de faja, planos pp. 40-44, hitos pp. 71-73.
-- Resolución ANA Yanahuara–Sachaca (28/12/2017) — delimitación por coordenadas (en revisión).
-- Informes INGEMMET ZS-Cayma, ZS-Yanahuara, ZS-Chullo — contexto de peligro, no delimitación legal.
-- Modelo CNN: Mask R-CNN ResNet50-FPN (giswqs/geoai, building_footprints_usa).
+El modelo local sigue siendo **experimental**: su evaluación previa en dos recortes del proyecto original obtuvo F1 de instancias ≈0.249, con omisiones, falsos positivos y máscaras que unen techos. Esa cifra no mide su precisión en la nueva imagen Esri. Detecta cubiertas visibles; no confirma viviendas individuales ni su uso residencial. Es necesario revisar los contornos en el mapa.

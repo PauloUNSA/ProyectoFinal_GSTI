@@ -80,9 +80,14 @@ async function cargarTodo() {
 
   dibujarPuntos();
   dibujarLimites();
-  dibujarBandas();
+  try {
+    await dibujarBandas();
+  } catch (err) {
+    document.getElementById("panel-info").textContent = err.message;
+  }
 
   configurarUI();
+  await window.CARGAR_ESTADO_DETECTOR();
 }
 
 // ------------------------------------------------------------------
@@ -165,7 +170,7 @@ function dibujarLimites() {
 // Las franjas se basan en los límites documentales (líneas azul y morada),
 // no en el eje promedio.
 // ------------------------------------------------------------------
-function dibujarBandas() {
+async function dibujarBandas() {
   if (!map) return;
 
   const limites = window.CHULLO_BOUNDARIES;
@@ -174,7 +179,7 @@ function dibujarBandas() {
   const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
 
   if (window.DIBUJAR_BANDAS) {
-    bandaLayer = window.DIBUJAR_BANDAS(map, window.GENERAR_BANDAS(limites, cfg.rojoM, cfg.amarilloM));
+    bandaLayer = await window.RECALCULAR_BANDAS(map, limites, cfg.rojoM, cfg.amarilloM);
   }
 
   actualizarInfoPanel();
@@ -217,7 +222,22 @@ function configurarUI() {
     if (el) el.addEventListener("change", fn);
   });
 
-  // Botón detección CNN (envuelto en try/catch para no romper la app)
+  document.getElementById("btn-recalcular-bandas").addEventListener("click", async () => {
+    const input = document.getElementById("band-amarillo");
+    if (!input.reportValidity()) return;
+    const previo = window.CONFIG.amarilloM;
+    window.CONFIG.amarilloM = Number(input.value);
+    try {
+      await dibujarBandas();
+      limpiarEdificios();
+      document.getElementById("detect-status").textContent = "Franjas actualizadas. Ejecuta la CNN para analizar este ancho.";
+    } catch (err) {
+      window.CONFIG.amarilloM = previo;
+      document.getElementById("panel-info").textContent = err.message;
+    }
+  });
+
+  // El detector gestiona su estado y conserva resultados si falla.
   const btnDetect = document.getElementById("btn-run-detect");
   if (btnDetect && window.EJECUTAR_DETECCION) {
     btnDetect.addEventListener("click", async () => {
@@ -305,10 +325,10 @@ function actualizarInfoPanel() {
   const amarillo = cfg.amarilloM;
   const exterior = rojo + amarillo;
   panel.innerHTML =
-    `<strong>Franjas (valores ANA)</strong><br>` +
-    `Rojo: 0 a ${rojo} m (faja documental)<br>` +
-    `Amarillo: ${rojo} a ${exterior} m (seguridad)<br>` +
-    `Verde: &gt; ${exterior} m`;
+    `<strong>Franjas del corredor ANA</strong><br>` +
+    `Rojo: todo el espacio entre el límite azul y el morado.<br>` +
+    `Amarillo: ${amarillo} m hacia afuera desde esos límites.<br>` +
+    `La clasificación usa el contorno del edificio y estas mismas zonas.`;
 }
 
 function abrirFuente(id) {

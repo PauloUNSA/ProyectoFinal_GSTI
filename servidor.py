@@ -1,19 +1,15 @@
-"""Servidor local de Chullo Unificado.
-
-Sirve el visor web (HTML/CSS/JS/GeoJSON) y expone una API simple para
-ejecutar la deteccion de edificios con CNN y generar franjas de proximidad.
-
-Solo requiere Python 3 para el servidor base. La deteccion CNN requiere
-instalar por separado torch, torchvision, rasterio, geopandas y shapely.
-"""
-
+"""Servidor local: visor, franjas compartidas y detección CNN real."""
 from __future__ import annotations
-
 import argparse
+import importlib.util
 import json
+import math
 import os
+import socket
+import shutil
 import subprocess
 import sys
+import tempfile
 import threading
 import webbrowser
 from functools import partial
@@ -21,286 +17,167 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 
-
 BASE_DIR = Path(__file__).resolve().parent
 WEB_DIR = BASE_DIR / "web"
-BACKEND_DIR = BASE_DIR / "backend"
 SCRIPTS_DIR = BASE_DIR / "scripts"
-OUTPUTS_DIR = BASE_DIR / "outputs" / "detection"
+OUTPUTS_DIR = WEB_DIR / "outputs/detection"
+DEFAULT_IMAGE = BASE_DIR / "data/imagery/chullo/chullo_rgb.tif"
+LIMITES_PATH = WEB_DIR / "layers/limites-faja-cayma.geojson"
+DETECTION_LOCK = threading.Lock()
+
+
+class ServidorLocal(ThreadingHTTPServer):
+    # Windows permite enlazar varias instancias con SO_REUSEADDR. Impedir que
+    # una copia antigua siga atendiendo el mismo puerto tras reiniciar.
+    allow_reuse_address = False
+
+    def server_bind(self):
+        if os.name == "nt":
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
+
+
+def leer_bandas(amarillo=20):
+    from backend.spatial import generar_poligonos_banda
+    limites = json.loads(LIMITES_PATH.read_text(encoding="utf-8-sig"))
+    bandas = generar_poligonos_banda(limites, amarillo_m=amarillo)
+    return {"type": "FeatureCollection", "features": [bandas[c] for c in ("amarillo", "rojo", "cauce") if bandas[c]["geometry"]["coordinates"]], "metadata": bandas["metadata"]}
 
 
 class Archivos(SimpleHTTPRequestHandler):
-    """Manejador de archivos estáticos con MIME types para GeoJSON y JS."""
-
-    extensions_map = {
-        **SimpleHTTPRequestHandler.extensions_map,
-        ".geojson": "application/geo+json",
-        ".js": "text/javascript; charset=utf-8",
-        ".css": "text/css; charset=utf-8",
-        ".json": "application/json; charset=utf-8",
-        ".csv": "text/csv; charset=utf-8",
-        ".tif": "image/tiff",
-        ".tiff": "image/tiff",
-        ".png": "image/png",
-        ".jpg": "image/jpeg",
-        ".pdf": "application/pdf",
-        ".txt": "text/plain; charset=utf-8",
-    }
+    extensions_map = {**SimpleHTTPRequestHandler.extensions_map, ".geojson": "application/geo+json", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json; charset=utf-8"}
 
     def list_directory(self, path):
         self.send_error(403, "Listado de carpetas deshabilitado")
         return None
 
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-store")
+        super().end_headers()
+
     def do_GET(self):
         parsed = urlparse(self.path)
-        path = parsed.path
-
-        # Rutas de la API
-        if path.startswith("/api/"):
-            self._handle_api(path, parsed.query)
+        if parsed.path.startswith("/api/"):
+            params = parse_qs(parsed.query)
+            try:
+                if parsed.path == "/api/bands":
+                    self._send_json(200, leer_bandas(float(params.get("amarillo", [20])[0])))
+                elif parsed.path == "/api/detect":
+                    self._run_detection(params)
+                elif parsed.path == "/api/status":
+                    self._status()
+                elif parsed.path == "/api/list":
+                    archivos = [{"nombre": f.name, "tamano": f.stat().st_size} for f in OUTPUTS_DIR.glob("*") if f.is_file()]
+                    self._send_json(200, {"archivos": archivos})
+                else:
+                    self._send_json(404, {"estado": "error", "error": "Endpoint API no encontrado"})
+            except (ValueError, FileNotFoundError) as exc:
+                self._send_json(400, {"estado": "error", "error": str(exc)})
+            except Exception as exc:
+                self._send_json(500, {"estado": "error", "error": str(exc)})
             return
+        super().do_GET()
 
-        # Servir archivos estáticos desde web/ (directorio fijo via partial en el constructor)
-        return super().do_GET()
-
-    def _handle_api(self, path: str, query: str):
-        params = parse_qs(query)
-
-        if path == "/api/detect":
-            self._run_detection(params)
-        elif path == "/api/bands":
-            self._generate_bands(params)
-        elif path == "/api/status":
-            self._status(params)
-        elif path == "/api/list":
-            self._list_outputs(params)
-        else:
-            self._send_json(404, {"error": "Endpoint API no encontrado"})
-
-    def _send_json(self, status: int, data: dict):
-        body = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
+    def _send_json(self, status, data):
+        body = json.dumps(data, ensure_ascii=False, allow_nan=False).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
 
-    def _run_detection(self, params: dict):
-        """Ejecuta la deteccion CNN como subprocess."""
-        imagen = params.get("imagen", [None])[0]
-        salida = params.get("salida", [str(OUTPUTS_DIR)])[0]
-        umbral = params.get("umbral", ["0.5"])[0]
-
-        if not imagen:
-            self._send_json(400, {"error": "Falta el parametro 'imagen'"})
+    def _run_detection(self, params):
+        from backend.raster import validar_imagen
+        imagen = Path(params.get("imagen", [str(DEFAULT_IMAGE)])[0])
+        if not imagen.is_absolute():
+            imagen = BASE_DIR / imagen
+        umbral = float(params.get("umbral", [0.5])[0])
+        amarillo = float(params.get("amarillo", [20])[0])
+        if not math.isfinite(umbral) or not 0 <= umbral <= 1:
+            raise ValueError("El umbral debe estar entre 0 y 1.")
+        if not math.isfinite(amarillo) or not 0 <= amarillo <= 500:
+            raise ValueError("El ancho amarillo debe estar entre 0 y 500 m.")
+        if params.get("salida", ["outputs/detection"])[0].strip("/") != "outputs/detection":
+            raise ValueError("La salida del visor es outputs/detection.")
+        validar_imagen(imagen)
+        if not DETECTION_LOCK.acquire(blocking=False):
+            self._send_json(409, {"estado": "error", "error": "Ya hay una detección CNN en curso."})
             return
-
-        script = SCRIPTS_DIR / "run_detection.py"
-        # Escribir dentro de web/ para que el servidor estático pueda servir
-        # el buildings.geojson generado (el visor lo fetch desde /outputs/detection/...).
-        salida_path = WEB_DIR / Path(salida)
-        salida_path.mkdir(parents=True, exist_ok=True)
-
-        # Si no existen dependencias CNN ni la imagen, generar GeoJSON vacio
-        # para que el visor no se rompa y el botón no devuelva error 500.
-        def _respuesta_vacia(mensaje: str, estado_http: int = 200):
-            geojson = {"type": "FeatureCollection", "features": []}
-            (salida_path / "buildings.geojson").write_text(
-                json.dumps(geojson, ensure_ascii=False), encoding="utf-8"
-            )
-            (salida_path / "manifest.json").write_text(
-                json.dumps({"estado": "completado", "count": 0, "mensaje": mensaje}, ensure_ascii=False, indent=2),
-                encoding="utf-8",
-            )
-            self._send_json(
-                200,
-                {
-                    "estado": "completado",
-                    "mensaje": mensaje,
-                    "salida": salida,
-                    "manifest": {"count": 0},
-                },
-            )
-
-        if not Path(imagen).exists():
-            _respuesta_vacia(
-                f"No se encuentra la imagen: {imagen}. La detección CNN requiere un GeoTIFF válido en data/imagery/. "
-                "El visor sigue funcionando con datos estáticos.",
-            )
-            return
-
-        if not script.exists():
-            _respuesta_vacia(
-                "Script de deteccion no disponible (scripts/run_detection.py). La deteccion CNN es opcional.",
-            )
-            return
-
-        cmd = [
-            sys.executable,
-            str(script),
-            "--imagen",
-            imagen,
-            "--salida",
-            salida,
-            "--umbral",
-            umbral,
-        ]
-
         try:
-            resultado = subprocess.run(
-                cmd, capture_output=True, text=True, timeout=600, cwd=str(BASE_DIR)
-            )
-            if resultado.returncode != 0:
-                _respuesta_vacia(
-                    f"La deteccion CNN fallo (ver consola del servidor). "
-                    f"Dependencias faltantes o error en el script: {(resultado.stderr or '')[-300:]}",
-                )
-                return
-
-            manifest_path = salida_path / "manifest.json"
-            manifest = {}
-            if manifest_path.exists():
-                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-
-            self._send_json(
-                200,
-                {
-                    "estado": "completado",
-                    "mensaje": "Deteccion finalizada",
-                    "salida": salida,
-                    "manifest": manifest,
-                },
-            )
+            OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
+            # Publicar solo resultados completos. Un fallo conserva el resultado anterior.
+            with tempfile.TemporaryDirectory(prefix="chullo-cnn-") as temp:
+                resultado = subprocess.run(
+                    [sys.executable, "-u", str(SCRIPTS_DIR / "run_detection.py"), "--imagen", str(imagen),
+                     "--salida", temp, "--umbral", str(umbral), "--amarillo", str(amarillo)],
+                    capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=900, cwd=str(BASE_DIR),
+                    env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+                if resultado.returncode:
+                    error = (resultado.stderr or resultado.stdout)[-2000:].strip()
+                    self._send_json(422, {"estado": "error", "error": "No se completó la inferencia CNN. " + error})
+                    return
+                geojson = json.loads((Path(temp)/"buildings.geojson").read_text(encoding="utf-8"))
+                manifest = json.loads((Path(temp)/"manifest.json").read_text(encoding="utf-8"))
+                if manifest.get("estado") != "completado" or manifest.get("count") != len(geojson["features"]):
+                    raise ValueError("La salida del detector está incompleta.")
+                manifest["outputs"] = {"buildings": "/outputs/detection/buildings.geojson"}
+                (Path(temp)/"manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+                for nombre in ("buildings.geojson", "manifest.json"):
+                    destino = OUTPUTS_DIR / nombre
+                    staging = destino.with_suffix(destino.suffix + ".tmp")
+                    shutil.copyfile(Path(temp)/nombre, staging)
+                    staging.replace(destino)
+                self._send_json(200, {"estado": "completado", "salida": "/outputs/detection", "manifest": manifest,
+                                      "geojson": "/outputs/detection/buildings.geojson"})
         except subprocess.TimeoutExpired:
-            _respuesta_vacia("Tiempo de espera agotado en la deteccion CNN")
-        except Exception as exc:  # noqa: BLE001
-            _respuesta_vacia(str(exc))
+            self._send_json(504, {"estado": "error", "error": "La CNN superó 15 minutos; se conserva la detección anterior."})
+        finally:
+            DETECTION_LOCK.release()
 
-    def _generate_bands(self, params: dict):
-        """Genera poligonos de franjas de proximidad desde los limites de faja."""
-        rojo = float(params.get("rojo", ["25"])[0])
-        amarillo = float(params.get("amarillo", ["25"])[0])
-
-        script = SCRIPTS_DIR / "generate_bands.py"
-        if not script.exists():
-            # Generacion simple en el servidor sin dependencias externas
-            self._send_json(
-                200,
-                {
-                    "estado": "ok",
-                    "mensaje": "Usa el visor para calcular franjas localmente (bands.js)",
-                    "rojo_m": rojo,
-                    "amarillo_m": amarillo,
-                    "limite_exterior_m": rojo + amarillo,
-                },
-            )
-            return
-
+    def _status(self):
+        from backend.raster import validar_imagen
+        faltantes = [m for m in ("numpy", "rasterio", "torch", "torchvision", "shapely", "pyproj") if importlib.util.find_spec(m) is None]
+        imagen, error = None, None
         try:
-            resultado = subprocess.run(
-                [
-                    sys.executable,
-                    str(script),
-                    "--rojo",
-                    str(rojo),
-                    "--amarillo",
-                    str(amarillo),
-                ],
-                capture_output=True,
-                text=True,
-                timeout=120,
-                cwd=str(BASE_DIR),
-            )
-            if resultado.returncode != 0:
-                self._send_json(500, {"error": resultado.stderr[-2000:]})
-                return
-            self._send_json(
-                200,
-                {"estado": "completado", "salida": resultado.stdout.strip()},
-            )
-        except Exception as exc:  # noqa: BLE001
-            self._send_json(500, {"error": str(exc)})
-
-    def _status(self, params: dict):
-        """Estado del servidor y disponibilidad de deteccion."""
-        tiene_torch = False
-        try:
-            import torch  # noqa: F401
-
-            tiene_torch = True
-        except ImportError:
-            pass
-
-        OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
-        detecciones = []
-        if OUTPUTS_DIR.exists():
-            for f in sorted(OUTPUTS_DIR.iterdir()):
-                if f.suffix == ".geojson":
-                    detecciones.append(f.name)
-
-        self._send_json(
-            200,
-            {
-                "servidor": "chullo-unificado",
-                "puerto": getattr(self.server, "server_address", ("", 0))[1],
-                "cnn_disponible": tiene_torch,
-                "detecciones_disponibles": detecciones,
-                "web_dir": str(WEB_DIR),
-            },
-        )
-
-    def _list_outputs(self, params: dict):
-        """Lista archivos de salida de deteccion."""
-        OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
-        archivos = []
-        for f in sorted(OUTPUTS_DIR.iterdir()):
-            archivos.append(
-                {
-                    "nombre": f.name,
-                    "tipo": f.suffix.lstrip("."),
-                    "tamano": f.stat().st_size,
-                }
-            )
-        self._send_json(200, {"archivos": archivos})
+            imagen = validar_imagen(DEFAULT_IMAGE)
+        except Exception as exc:
+            error = str(exc)
+        pesos = BASE_DIR / "models/chullo_local_v1/weights.pth"
+        if faltantes:
+            error = "Faltan dependencias: " + ", ".join(faltantes)
+        elif not pesos.is_file():
+            error = "Falta el modelo local Chullo."
+        manifest = None
+        manifest_path = OUTPUTS_DIR / "manifest.json"
+        if manifest_path.is_file() and (OUTPUTS_DIR/"buildings.geojson").is_file():
+            candidato = json.loads(manifest_path.read_text(encoding="utf-8"))
+            if candidato.get("estado") == "completado" and candidato.get("zonas", {}).get("geometria") == "corredor_entre_limites":
+                manifest = candidato
+        self._send_json(200, {"servidor": "chullo-unificado", "puerto": self.server.server_address[1],
+                              "cnn_disponible": error is None, "error": error, "imagen": imagen,
+                              "modelo": "Mask R-CNN · Chullo local v1 (piloto)", "manifest": manifest,
+                              "detecciones_disponibles": ["buildings.geojson"] if manifest else []})
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--puerto", type=int, default=4173)
-    parser.add_argument("--abrir", action="store_true", help="Abrir en el navegador")
+    parser.add_argument("--abrir", action="store_true")
     args = parser.parse_args()
-
-    if not (WEB_DIR / "index.html").is_file():
-        parser.exit(1, "Falta web/index.html. Verifica que la carpeta web/ este completa.\n")
-
-    url = f"http://127.0.0.1:{args.puerto}/"
     try:
-        servidor = ThreadingHTTPServer(
-            ("127.0.0.1", args.puerto), partial(Archivos, directory=str(WEB_DIR))
-        )
-    except OSError as error:
-        parser.exit(
-            1,
-            f"No se pudo iniciar el servidor: {error}\n"
-            f"Prueba otro puerto: python servidor.py --puerto 4174 --abrir\n",
-        )
-
+        servidor = ServidorLocal(("127.0.0.1", args.puerto), partial(Archivos, directory=str(WEB_DIR)))
+    except OSError as exc:
+        parser.exit(1, f"No se pudo abrir el puerto {args.puerto}: {exc}. Cierra la instancia anterior o usa --puerto 4174.\n")
+    url = f"http://127.0.0.1:{args.puerto}/"
     print(f"Chullo Unificado disponible en {url}", flush=True)
-    print("Solo en este equipo. Para detener: Ctrl+C.", flush=True)
-    print(f"API: {url}api/status", flush=True)
-    print(f"Visor: {url}", flush=True)
-
     if args.abrir:
         threading.Timer(0.5, webbrowser.open, args=(url,)).start()
-
     try:
         servidor.serve_forever()
     except KeyboardInterrupt:
-        print("\nServidor detenido.")
+        pass
     finally:
         servidor.server_close()
-
 
 if __name__ == "__main__":
     main()

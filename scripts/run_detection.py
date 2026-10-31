@@ -26,6 +26,7 @@ def main() -> None:
     parser.add_argument("--imagen", required=True, help="Ruta al GeoTIFF RGB del sector")
     parser.add_argument("--salida", default="outputs/detection", help="Directorio de salida")
     parser.add_argument("--umbral", type=float, default=0.5, help="Umbral de confianza (0-1)")
+    parser.add_argument("--amarillo", type=float, default=20, help="Ancho exterior desde los límites documentales (m)")
     parser.add_argument(
         "--dispositivo",
         default="auto",
@@ -58,7 +59,7 @@ def main() -> None:
         sys.exit(1)
 
     def progreso(mensaje: str, valor: float, **kwargs):
-        print(f"[{(valor * 100):5.1f}%] {mensaje}")
+        print(f"[{(valor * 100):5.1f}%] {mensaje}", flush=True)
 
     try:
         manifiesto = detectar_edificios(
@@ -70,6 +71,7 @@ def main() -> None:
             solapamiento=args.solapamiento,
             area_minima_m2=args.area_minima,
             progreso=progreso,
+            amarillo_m=args.amarillo,
         )
         print("\nDeteccion completada.")
         print(json.dumps(manifiesto, indent=2, ensure_ascii=False))

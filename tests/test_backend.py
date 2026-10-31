@@ -1,211 +1,201 @@
-"""Pruebas automatizadas del backend de Chullo Unificado.
-
-Verifica:
-- Clasificación de distancia por franjas ANA (rojo=4m, amarillo=20m)
-- Cálculo de línea del cauce desde límites documentales (si hay geopandas)
-- Generación de polígonos de banda (si hay shapely)
-- Endpoints del servidor (status)
-
-Ejecutar con:
-    python -m pytest tests/test_backend.py -v
-
-Pruebas que requieren geopandas/shapely se saltan automáticamente si no están instaladas.
-"""
-
-from __future__ import annotations
-
+"""Regresiones de geometría, máscaras CNN y publicación HTTP."""
 import json
-import sys
+from functools import partial
+from http.server import ThreadingHTTPServer
 from pathlib import Path
+import threading
+import urllib.request
+import urllib.error
 
 import numpy as np
 import pytest
+from pyproj import Transformer
+from shapely.geometry import LineString, Point, box, mapping, shape
+from shapely import transform as _transform
+def transform(fn, geom):
+    return _transform(geom, fn, interleaved=False)
 
-try:
-    import geopandas as gpd
-    import pandas as pd
+from backend.spatial import (calcular_linea_cauce_desde_limites, clasificar_distancia,
+                             construir_zonas, evaluar_edificio, generar_poligonos_banda)
+import servidor
 
-    HAS_GEOPANDAS = True
-except ImportError:
-    HAS_GEOPANDAS = False
+BASE = Path(__file__).resolve().parents[1]
 
-try:
-    from shapely.geometry import LineString, shape
+@pytest.fixture
+def limites():
+    a_wgs = Transformer.from_crs(32719, 4326, always_xy=True).transform
+    # El corredor cambia de ancho; un buffer de 4 m del eje no lo cubre.
+    return {"type": "FeatureCollection", "features": [
+        {"type": "Feature", "properties": {"bank": bank}, "geometry": mapping(transform(a_wgs, LineString(coords)))}
+        for bank, coords in [("Derecha", [(227200,8187000),(227210,8187050),(227200,8187100)]),
+                             ("Izquierda", [(227240,8187000),(227270,8187050),(227240,8187100)])]]}
 
-    HAS_SHAPELY = True
-except ImportError:
-    HAS_SHAPELY = False
-
-BASE_DIR = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(BASE_DIR))
-
-from backend.spatial import (  # noqa: E402
-    calcular_linea_cauce_desde_limites,
-    clasificar_distancia,
-    generar_poligonos_banda,
-)
-
-
-# ---------------------------------------------------------------------------
-# Pruebas de clasificación de distancia (valores reales de ANA)
-# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("distancia,esperado", [(0,"rojo"),(4,"rojo"),(4.001,"amarillo"),(24,"amarillo"),(24.01,"verde"),(None,"desconocido"),(-1,"desconocido"),(float('nan'),"desconocido")])
+def test_clasificador_legado(distancia, esperado):
+    assert clasificar_distancia(distancia,4,20).clase == esperado
 
 
-@pytest.mark.parametrize(
-    "distancia,rojo,amarillo,clase_esperada",
-    [
-        (0.0, 4, 20, "rojo"),
-        (2.0, 4, 20, "rojo"),
-        (4.0, 4, 20, "rojo"),
-        (4.0001, 4, 20, "amarillo"),
-        (10.0, 4, 20, "amarillo"),
-        (24.0, 4, 20, "amarillo"),
-        (24.0001, 4, 20, "verde"),
-        (100.0, 4, 20, "verde"),
-    ],
-)
-def test_clasificar_distancia(distancia, rojo, amarillo, clase_esperada):
-    """La clasificación debe usar los valores reales de ANA."""
-    resultado = clasificar_distancia(distancia, rojo, amarillo)
-    assert resultado.clase == clase_esperada
-    assert resultado.distancia_m == distancia
-
-
-def test_clasificar_distancia_valor_invalido():
-    """Distancia None, negativa o NaN debe ser 'desconocido', nunca 'verde'."""
-    for valor in (None, -1.0, float("nan"), float("inf")):
-        r = clasificar_distancia(valor, 4, 20)
-        assert r.clase == "desconocido", f"Valor {valor} no se clasificó como desconocido"
-
-
-def test_clasificar_distancia_etiquetas_y_colores():
-    """Cada clase debe tener etiqueta y color definidos."""
-    r_rojo = clasificar_distancia(2.0, 4, 20)
-    assert r_rojo.color == "#dc2626"
-    assert "rojo" in r_rojo.etiqueta.lower()
-
-    r_amarillo = clasificar_distancia(10.0, 4, 20)
-    assert r_amarillo.color == "#eab308"
-    assert "amarillo" in r_amarillo.etiqueta.lower()
-
-    r_verde = clasificar_distancia(30.0, 4, 20)
-    assert r_verde.color == "#16a34a"
-    assert "verde" in r_verde.etiqueta.lower()
-
-
-# ---------------------------------------------------------------------------
-# Pruebas de línea del cauce desde límites documentales
-# ---------------------------------------------------------------------------
-
-
-@pytest.mark.skipif(not HAS_GEOPANDAS, reason="geopandas no instalado")
-def test_calcular_linea_cauce_desde_limites():
-    """La línea del cauce debe unir punto a punto los límites derecho e izquierdo."""
-    coords_d = [(0.0, 0.0), (1.0, 0.0), (2.0, 0.0)]
-    coords_i = [(0.0, 0.001), (1.0, 0.001), (2.0, 0.001)]
-
-    gdf_d = gpd.GeoDataFrame(
-        [{"bank": "Derecha", "geometry": LineString(coords_d)}],
-        geometry="geometry",
-        crs="EPSG:4326",
-    )
-    gdf_i = gpd.GeoDataFrame(
-        [{"bank": "Izquierda", "geometry": LineString(coords_i)}],
-        geometry="geometry",
-        crs="EPSG:4326",
-    )
-    limites = pd.concat([gdf_d, gdf_i], ignore_index=True)
-    limites = gpd.GeoDataFrame(limites, geometry="geometry", crs="EPSG:4326")
-
-    cauce = calcular_linea_cauce_desde_limites(limites)
-
-    assert cauce is not None
-    assert isinstance(cauce, LineString)
-    assert cauce.coords[0] == pytest.approx((0.0, 0.0005), abs=1e-12)
-    assert cauce.coords[1] == pytest.approx((1.0, 0.0005), abs=1e-12)
-    assert cauce.coords[2] == pytest.approx((2.0, 0.0005), abs=1e-12)
-
-
-@pytest.mark.skipif(not HAS_GEOPANDAS, reason="geopandas no instalado")
-def test_calcular_linea_cauce_vacio():
-    """Sin límites, debe devolver None."""
+def test_cauce_abierto_y_ultimo_vertice(limites):
+    linea = calcular_linea_cauce_desde_limites(limites)
+    assert len(linea.coords) == 3
+    assert linea.coords[-1] != linea.coords[0]
+    assert not linea.is_ring
     assert calcular_linea_cauce_desde_limites(None) is None
 
 
-# ---------------------------------------------------------------------------
-# Pruebas de generación de polígonos de banda
-# ---------------------------------------------------------------------------
+def test_rojo_cubre_margenes_y_amarillo_conserva_hueco(limites):
+    zonas = construir_zonas(limites,20)
+    bandas = generar_poligonos_banda(limites,4,20)
+    rojo = transform(zonas['a_m'], shape(bandas['rojo']['geometry']))
+    amarillo = transform(zonas['a_m'], shape(bandas['amarillo']['geometry']))
+    for f in limites['features']:
+        # Incluye el vértice final, omitido antes por el buffer JS.
+        margen = transform(zonas['a_m'], shape(f['geometry']))
+        assert margen.difference(rojo.buffer(1e-6)).is_empty
+    assert rojo.covers(Point(227240,8187050))
+    assert rojo.is_valid and amarillo.is_valid
+    assert rojo.intersection(amarillo).area < 1e-5
+    assert not amarillo.covers(Point(227240,8187050))
+    assert amarillo.covers(Point(227280,8187050))
+    assert len(bandas['amarillo']['geometry']['coordinates']) == 2
 
 
-@pytest.mark.skipif(not HAS_SHAPELY, reason="shapely no instalado")
-def test_generar_poligonos_banda_estructura():
-    """Debe devolver dict con claves rojo, amarillo, cauce y metadata."""
-    cauce = LineString([(0.0, 0.0), (1.0, 0.0), (2.0, 0.0)])
-    bandas = generar_poligonos_banda(cauce, rojo_m=4, amarillo_m=20)
+def test_direccion_invertida_y_ancho_cero(limites):
+    antes = construir_zonas(limites,0)
+    limites['features'][1]['geometry']['coordinates'] = list(reversed(limites['features'][1]['geometry']['coordinates']))
+    despues = construir_zonas(limites,0)
+    assert antes['rojo'].equals(despues['rojo'])
+    assert despues['amarillo'].is_empty
 
-    assert "rojo" in bandas
-    assert "amarillo" in bandas
-    assert "cauce" in bandas
-    assert "metadata" in bandas
-
-    assert bandas["rojo"]["properties"]["clase"] == "rojo"
-    assert bandas["amarillo"]["properties"]["clase"] == "amarillo"
-    assert bandas["cauce"]["properties"]["clase"] == "cauce"
-
-    meta = bandas["metadata"]
-    assert meta["rojo_m"] == 4
-    assert meta["amarillo_m"] == 20
-    assert meta["exterior_m"] == 24
+@pytest.mark.parametrize('ancho',[-1,501,float('nan'),float('inf')])
+def test_rechazar_ancho_invalido(limites, ancho):
+    with pytest.raises(ValueError):
+        construir_zonas(limites,ancho)
 
 
-@pytest.mark.skipif(not HAS_SHAPELY, reason="shapely no instalado")
-def test_generar_poligonos_banda_geometrias_validas():
-    """Los polígonos generados deben ser válidos y no vacíos."""
-    cauce = LineString([(0.0, 0.0), (1.0, 0.0), (2.0, 0.0)])
-    bandas = generar_poligonos_banda(cauce, rojo_m=4, amarillo_m=20)
-
-    rojo_geom = shape(bandas["rojo"]["geometry"])
-    amarillo_geom = shape(bandas["amarillo"]["geometry"])
-
-    assert rojo_geom.is_valid
-    assert amarillo_geom.is_valid
-    assert rojo_geom.area > 0
-    assert amarillo_geom.area > 0
+def test_clasifica_contorno_y_prioridad_roja(limites):
+    zonas = construir_zonas(limites,20)
+    assert evaluar_edificio(box(227230,8187040,227250,8187060),zonas)['clase'] == 'rojo'
+    assert evaluar_edificio(box(227272,8187049,227280,8187051),zonas)['clase'] == 'amarillo'
+    assert evaluar_edificio(box(227310,8187049,227320,8187051),zonas)['clase'] == 'verde'
+    # Cruza las dos zonas aunque su centro quede fuera del rojo.
+    assert evaluar_edificio(box(227260,8187049,227300,8187051),zonas)['clase'] == 'rojo'
 
 
-# ---------------------------------------------------------------------------
-# Pruebas del servidor (endpoint /api/status)
-# ---------------------------------------------------------------------------
+def test_limites_reales_sin_atraso_ni_solapamientos():
+    limites = json.loads((BASE/'web/layers/limites-faja-cayma.geojson').read_text())
+    bandas = generar_poligonos_banda(limites)
+    rojo, amarillo = (shape(bandas[c]['geometry']) for c in ('rojo','amarillo'))
+    assert rojo.is_valid and amarillo.is_valid
+    assert rojo.intersection(amarillo).area < 1e-15
+    assert len(bandas['cauce']['geometry']['coordinates']) == 105
+    assert len(calcular_linea_cauce_desde_limites(limites).coords) == 105
+
+@pytest.fixture
+def imagen(tmp_path):
+    import rasterio
+    from rasterio.transform import from_origin
+    path = tmp_path/'rgb.tif'
+    with rasterio.open(path,'w',driver='GTiff',width=32,height=32,count=3,dtype='uint8',crs='EPSG:32719',transform=from_origin(227220,8187070,1,1)) as dst:
+        dst.write(np.full((3,32,32),128,dtype='uint8'))
+    return path
 
 
-def test_servidor_status_endpoint():
-    """El endpoint /api/status debe responder con JSON válido."""
-    import urllib.request
+def test_mascara_geometria_preserva_huecos():
+    from backend.detector import mascara_a_geometria
+    from rasterio.transform import from_origin
+    mascara = np.ones((10,10),dtype='uint8')
+    mascara[3:7,3:7] = 0
+    geom = mascara_a_geometria(mascara,from_origin(0,10,1,1))
+    assert geom.area == 84
+    assert len(geom.interiors) == 1
 
-    try:
-        with urllib.request.urlopen("http://127.0.0.1:4173/api/status", timeout=5) as r:
-            assert r.status == 200
-            data = json.loads(r.read().decode())
-            assert "servidor" in data
-            assert data["servidor"] == "chullo-unificado"
-            assert "puerto" in data
-            assert "cnn_disponible" in data
-    except Exception:
-        pytest.skip("Servidor no está corriendo; iniciar con `python servidor.py --abrir`")
+@pytest.mark.parametrize('hay_detecciones',[True,False])
+def test_pipeline_rgb_mascara_2d_y_salida_vacia(tmp_path, monkeypatch, imagen, limites, hay_detecciones):
+    import torch
+    from backend import detector
+    limites_path = tmp_path/'limites.geojson'
+    limites_path.write_text(json.dumps(limites))
+    def modelo(tensores):
+        assert tensores[0].shape == (3,32,32)
+        mask = torch.zeros((1,1,32,32))
+        mask[0,0,8:20,8:20] = 1
+        return [{'scores': torch.tensor([0.9 if hay_detecciones else 0.1]),'labels':torch.tensor([1]),'masks':mask}]
+    monkeypatch.setattr(detector,'cargar_modelo',lambda dispositivo: (modelo,'cpu'))
+    output = tmp_path/'salida'
+    manifest = detector.detectar_edificios(imagen,output,tamano_mosaico=32,solapamiento=0,limites_path=limites_path)
+    features = json.loads((output/'buildings.geojson').read_text())['features']
+    assert manifest['count'] == len(features) == int(hay_detecciones)
+    if features:
+        assert features[0]['properties']['clase'] == 'rojo'
+        assert shape(features[0]['geometry']).is_valid
 
 
-def test_servidor_archivo_index():
-    """El endpoint raíz debe servir index.html con estado 200."""
-    import urllib.request
+def test_rechaza_png_renombrado(tmp_path):
+    from PIL import Image
+    from backend.raster import validar_imagen
+    path = tmp_path/'falso.tif'
+    Image.new('RGB',(20,20)).save(path,format='PNG')
+    with pytest.raises(ValueError,match='GeoTIFF'):
+        validar_imagen(path)
 
-    try:
-        with urllib.request.urlopen("http://127.0.0.1:4173/", timeout=5) as r:
-            assert r.status == 200
-            contenido = r.read().decode()
-            assert "Chullo" in contenido or "mapa" in contenido.lower()
-    except Exception:
-        pytest.skip("Servidor no está corriendo")
+@pytest.fixture
+def api(tmp_path, monkeypatch):
+    monkeypatch.setattr(servidor,'OUTPUTS_DIR',tmp_path/'detection')
+    server = servidor.ServidorLocal(('127.0.0.1',0),partial(servidor.Archivos,directory=str(BASE/'web')))
+    thread = threading.Thread(target=server.serve_forever,daemon=True)
+    thread.start()
+    yield f'http://127.0.0.1:{server.server_address[1]}'
+    server.shutdown()
+    server.server_close()
 
 
-if __name__ == "__main__":
-    pytest.main([__file__, "-v"])
+def test_no_permite_dos_servidores_en_el_mismo_puerto(api):
+    from urllib.parse import urlparse
+    with pytest.raises(OSError):
+        servidor.ServidorLocal(('127.0.0.1',urlparse(api).port),servidor.Archivos)
+
+
+def test_api_bandas_reales_e_inputs_invalidos(api):
+    with urllib.request.urlopen(api+'/api/bands?amarillo=20') as r:
+        data = json.load(r)
+    assert [f['properties']['clase'] for f in data['features']] == ['amarillo','rojo','cauce']
+    for query in ('nan','-1','abc'):
+        with pytest.raises(urllib.error.HTTPError) as exc:
+            urllib.request.urlopen(api+'/api/bands?amarillo='+query)
+        assert exc.value.code == 400
+
+
+def test_error_no_es_exito_y_conserva_detecciones(api):
+    servidor.OUTPUTS_DIR.mkdir()
+    path = servidor.OUTPUTS_DIR/'buildings.geojson'
+    path.write_text('resultado previo')
+    with pytest.raises(urllib.error.HTTPError) as exc:
+        urllib.request.urlopen(api+'/api/detect?imagen=no-existe.tif')
+    assert exc.value.code == 400
+    assert json.load(exc.value)['estado'] == 'error'
+    assert path.read_text() == 'resultado previo'
+
+
+def test_api_publica_resultado_en_ruta_servida(api, imagen, monkeypatch):
+    def simular_subprocess(cmd,**kwargs):
+        output = Path(cmd[cmd.index('--salida')+1])
+        (output/'buildings.geojson').write_text(json.dumps({'type':'FeatureCollection','features':[]}))
+        (output/'manifest.json').write_text(json.dumps({'estado':'completado','count':0}))
+        return type('Resultado',(),{'returncode':0})()
+    monkeypatch.setattr(servidor.subprocess,'run',simular_subprocess)
+    with urllib.request.urlopen(api+'/api/detect?imagen='+str(imagen).replace('\\','/')) as r:
+        resultado = json.load(r)
+    assert resultado['geojson'] == '/outputs/detection/buildings.geojson'
+    assert json.loads((servidor.OUTPUTS_DIR/'buildings.geojson').read_text())['features'] == []
+
+
+def test_fallo_de_subproceso_no_sobrescribe(api, imagen, monkeypatch):
+    servidor.OUTPUTS_DIR.mkdir()
+    path = servidor.OUTPUTS_DIR/'buildings.geojson'
+    path.write_text('anterior')
+    monkeypatch.setattr(servidor.subprocess,'run',lambda *a,**k: type('Fallo',(),{'returncode':1,'stderr':'ERROR de prueba','stdout':''})())
+    with pytest.raises(urllib.error.HTTPError) as exc:
+        urllib.request.urlopen(api+'/api/detect?imagen='+str(imagen).replace('\\','/'))
+    assert exc.value.code == 422
+    assert path.read_text() == 'anterior'

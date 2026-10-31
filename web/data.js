@@ -74,10 +74,6 @@ function calcularEjeTorrentera(limites) {
     ejeCoords.push([lon, lat]);
   }
 
-  if (ejeCoords.length > 2) {
-    ejeCoords.push(ejeCoords[0]);
-  }
-
   return {
     type: "Feature",
     geometry: { type: "LineString", coordinates: ejeCoords },

@@ -1,0 +1,95 @@
+{
+  "source": "Esri World Imagery",
+  "service_url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+  "acquired_at": "2026-10-31T20:00:39.689468+00:00",
+  "observed_at": null,
+  "observed_at_note": "La fecha de captura no se infiere de la fecha de descarga.",
+  "attribution": "Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+  "terms_url": "https://goto.arcgisonline.com/maps/World_Imagery",
+  "exports": [
+    {
+      "params": {
+        "f": "json",
+        "bbox": "227024.0,8188978.5,227612.5,8190478.5",
+        "bboxSR": 32719,
+        "imageSR": 32719,
+        "size": "1177,3000",
+        "format": "png24",
+        "transparent": "false"
+      },
+      "extent": {
+        "xmin": 227024,
+        "ymin": 8188978.5,
+        "xmax": 227612.5,
+        "ymax": 8190478.5,
+        "spatialReference": {
+          "wkid": 32719,
+          "latestWkid": 32719
+        }
+      },
+      "width": 1177,
+      "height": 3000,
+      "sha256_response_image": "daccb7ae4396e05d7f70cac55f37589a0dcfd83b063b4ef36f8b2bc542eb4829"
+    },
+    {
+      "params": {
+        "f": "json",
+        "bbox": "227024.0,8187478.5,227612.5,8188978.5",
+        "bboxSR": 32719,
+        "imageSR": 32719,
+        "size": "1177,3000",
+        "format": "png24",
+        "transparent": "false"
+      },
+      "extent": {
+        "xmin": 227024,
+        "ymin": 8187478.5,
+        "xmax": 227612.5,
+        "ymax": 8188978.5,
+        "spatialReference": {
+          "wkid": 32719,
+          "latestWkid": 32719
+        }
+      },
+      "width": 1177,
+      "height": 3000,
+      "sha256_response_image": "6b2490e7d7e2d7831f5aeca152dbeb2d44375f28ed80c4c4921de86ee9f51381"
+    },
+    {
+      "params": {
+        "f": "json",
+        "bbox": "227024.0,8186007.5,227612.5,8187478.5",
+        "bboxSR": 32719,
+        "imageSR": 32719,
+        "size": "1177,2942",
+        "format": "png24",
+        "transparent": "false"
+      },
+      "extent": {
+        "xmin": 227024,
+        "ymin": 8186007.5,
+        "xmax": 227612.5,
+        "ymax": 8187478.5,
+        "spatialReference": {
+          "wkid": 32719,
+          "latestWkid": 32719
+        }
+      },
+      "width": 1177,
+      "height": 2942,
+      "sha256_response_image": "38ab28ca9389ff8d2efed738dd225f269d47b681d874898050ae7471342a0d90"
+    }
+  ],
+  "crs": "EPSG:32719",
+  "bounds": [
+    227024.0,
+    8186007.5,
+    227612.5,
+    8190478.5
+  ],
+  "resolution_m": 0.5,
+  "resolution_note": "Paso de la rejilla exportada; no certifica resolución nativa ni precisión posicional.",
+  "width": 1177,
+  "height": 8942,
+  "sha256": "8c5615cdd3c24c8812525c4b4e4267a29b90d4d3a559cc2a39bb9478e5986d1c"
+}

@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test-chullo.js",
+    "test:backend": "python -m pytest -p no:xonsh tests -q"
   },
   "keywords": [],
   "author": "",

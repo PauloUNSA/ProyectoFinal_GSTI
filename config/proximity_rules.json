@@ -1,11 +1,13 @@
 {
   "schema_version": 1,
   "provider_id": "chullo_unificado_proximity_demo",
-  "rule_version": "2026.10.demo.1",
-  "mode": "demo_rules",
+  "rule_version": "2026.10.corridor.1",
+  "mode": "documentary_corridor",
   "title": "Reglas de proximidad Chullo Unificado",
-  "source": "Criterios ilustrativos del proyecto; no son umbrales oficiales de peligro.",
-  "default_thresholds": {"red_band_m": 25, "yellow_width_m": 25},
+  "source": "Geometría de los límites documentales del proyecto; el ancho amarillo es configurable, no un umbral oficial de peligro.",
+  "default_thresholds": {
+    "yellow_width_m": 20
+  },
   "notice": "No determina peligro ni permiso para construir; verde no implica seguridad.",
   "pending_factors": [
     "Terreno: falta verificar pendiente, elevación y geometría del cauce.",
@@ -16,7 +18,7 @@
     "red": {
       "label": "Rojo · prioridad de revisión alta",
       "priority": "Revisión alta por proximidad",
-      "reason": "La edificación está dentro del primer intervalo de distancia (0 a límite rojo).",
+      "reason": "El contorno toca el corredor entre ambos límites documentales.",
       "potential_exposure": "La cercanía justifica revisar exposición a desbordes y arrastre; el modelo no determina si ocurre.",
       "actions": [
         "Priorizar una revisión técnica del lugar y del contorno detectado.",
@@ -26,7 +28,7 @@
     "yellow": {
       "label": "Amarillo · revisión preventiva",
       "priority": "Revisión preventiva",
-      "reason": "La edificación supera el límite rojo pero permanece dentro de la franja amarilla configurada.",
+      "reason": "El contorno no toca rojo y sí toca su anillo exterior amarillo.",
       "potential_exposure": "La cercanía justifica revisar exposición a desbordes y arrastre; el modelo no determina si ocurre.",
       "actions": [
         "Verificar preventivamente el terreno, el contorno y los posibles recorridos del agua.",
@@ -36,7 +38,7 @@
     "green": {
       "label": "Verde · menor proximidad",
       "priority": "Menor proximidad; seguridad sin evaluar",
-      "reason": "La edificación se encuentra más allá del límite exterior amarillo de esta demostración.",
+      "reason": "El contorno no toca el corredor ni su anillo exterior. La detección del visor filtra estos candidatos.",
       "potential_exposure": "Una mayor distancia al eje no descarta desbordes, otros cauces ni condiciones del terreno. Verde no significa seguro ni edificable.",
       "actions": [
         "Comprobar otros cauces, la topografía y las condiciones locales.",
@@ -53,5 +55,6 @@
         "Repetir el análisis cuando existan datos válidos."
       ]
     }
-  }
+  },
+  "classification": "Intersección del contorno completo con el corredor rojo o su anillo amarillo; prioridad roja."
 }

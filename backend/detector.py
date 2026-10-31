@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -35,13 +36,9 @@ except ImportError as exc:  # pragma: no cover - depende del entorno
     _ERROR_IMPORT = str(exc)
 
 
-MODEL_URL = (
-    "https://huggingface.co/giswqs/geoai/resolve/"
-    "43b6aa04156d7d9d2b90fe321096f15f03353cd2/building_footprints_usa.pth"
-)
-MODEL_SHA256 = "3aea5d0da7803be31ff4e2e1e5ac747f15cab2a13d6bb1a9319b6a6ba8bc7bca"
-MODEL_BYTES = 176225905
-MODEL_PATH = Path(__file__).resolve().parents[1] / "models" / "building_footprints_usa.pth"
+LOCAL_MODEL_PATH = Path(__file__).resolve().parents[1] / "models/chullo_local_v1/weights.pth"
+LOCAL_MODEL_SHA256 = "dcc985d4b57ec6ab0c6dbc36bf48f8b6433bfe61e9d89faf2445bb7b05d5f61c"
+MODEL_ID = "chullo/maskrcnn_chullo_local_v1"
 
 
 def sha256_file(path: Path) -> str:
@@ -50,36 +47,6 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
-
-
-def asegurar_modelo(progreso=None) -> Path:
-    """Descarga y verifica el checkpoint preentrenado si no existe localmente."""
-    path = MODEL_PATH
-    if path.exists():
-        if path.stat().st_size == MODEL_BYTES and sha256_file(path) == MODEL_SHA256:
-            return path
-        path.unlink(missing_ok=True)
-
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporal = path.with_suffix(".download")
-
-    if progreso:
-        progreso("Descargando pesos preentrenados del modelo CNN (176 MB)…", 0.02)
-
-    import requests
-
-    with requests.get(MODEL_URL, stream=True, timeout=(30, 300)) as respuesta:
-        respuesta.raise_for_status()
-        with temporal.open("wb") as salida:
-            for fragmento in respuesta.iter_content(1024 * 1024):
-                salida.write(fragmento)
-
-    if temporal.stat().st_size != MODEL_BYTES or sha256_file(temporal) != MODEL_SHA256:
-        temporal.unlink(missing_ok=True)
-        raise ValueError("Los pesos descargados no coinciden con el SHA256 esperado.")
-
-    temporal.replace(path)
-    return path
 
 
 def cargar_modelo(dispositivo: str = "auto"):
@@ -91,12 +58,16 @@ def cargar_modelo(dispositivo: str = "auto"):
 
     from torchvision.models.detection import maskrcnn_resnet50_fpn
 
-    pesos = asegurar_modelo()
+    pesos = LOCAL_MODEL_PATH
+    if not pesos.is_file() or sha256_file(pesos) != LOCAL_MODEL_SHA256:
+        raise ValueError("Faltan los pesos verificados models/chullo_local_v1/weights.pth o su SHA256 no coincide.")
     torch.set_num_threads(min(4, (torch.cuda.device_count() or 1) if dispositivo == "cuda" else 4))
 
     seleccionado = "cuda" if dispositivo == "auto" and torch.cuda.is_available() else dispositivo
     if seleccionado == "auto":
         seleccionado = "cpu"
+    if seleccionado not in ("cpu", "cuda") or (seleccionado == "cuda" and not torch.cuda.is_available()):
+        raise ValueError("Dispositivo no disponible. Usa cpu o auto.")
 
     modelo = maskrcnn_resnet50_fpn(
         weights=None,
@@ -134,7 +105,7 @@ def mascara_a_geometria(mascara_binaria, transform):
         from shapely.geometry import Polygon
 
         return Polygon()
-    return unary_union(pieces)
+    return unary_union(piezas)
 
 
 def detectar_edificios(
@@ -147,6 +118,8 @@ def detectar_edificios(
     area_minima_m2: float = 10.0,
     crs_analisis: str = "EPSG:32719",
     progreso=None,
+    limites_path: str | Path | None = None,
+    amarillo_m: float = 20,
 ) -> dict:
     """Ejecuta la detección de edificios sobre una imagen y guarda GeoJSON.
 
@@ -158,10 +131,24 @@ def detectar_edificios(
         )
 
     import torch
+    from backend.raster import validar_imagen
+    from backend.spatial import construir_zonas, evaluar_edificio
+    from shapely.geometry import box, mapping
+
+    if not math.isfinite(umbral) or not 0 <= umbral <= 1:
+        raise ValueError("El umbral debe estar entre 0 y 1.")
+    if tamano_mosaico < 32 or not 0 <= solapamiento < tamano_mosaico:
+        raise ValueError("Mosaico o solapamiento inválidos.")
+    if not math.isfinite(area_minima_m2) or area_minima_m2 < 0:
+        raise ValueError("El área mínima debe ser positiva.")
 
     imagen_path = Path(imagen_path).resolve()
     salida_dir = Path(salida_dir).resolve()
     salida_dir.mkdir(parents=True, exist_ok=True)
+    imagen_info = validar_imagen(imagen_path)
+    limites_path = Path(limites_path or Path(__file__).resolve().parents[1] / "web/layers/limites-faja-cayma.geojson")
+    zonas = construir_zonas(json.loads(limites_path.read_text(encoding="utf-8-sig")), amarillo_m, crs_analisis)
+    iniciado = datetime.now(timezone.utc).isoformat()
 
     if progreso:
         progreso("Validando imagen GeoTIFF…", 0.02)
@@ -169,6 +156,9 @@ def detectar_edificios(
     with rasterio.open(imagen_path) as src:
         crs_nativo = src.crs
         transformador_metrico = Transformer.from_crs(crs_nativo, crs_analisis, always_xy=True)
+        cobertura = _transformar_geometria(box(*src.bounds), transformador_metrico.transform)
+        if not cobertura.intersects(zonas["exterior"]):
+            raise ValueError("La imagen no cubre las franjas del sector Chullo.")
 
         filas = _inicios_mosaico(src.height, tamano_mosaico, solapamiento)
         columnas = _inicios_mosaico(src.width, tamano_mosaico, solapamiento)
@@ -187,6 +177,7 @@ def detectar_edificios(
 
         candidatos = []
         numero_mosaico = 0
+        mosaicos_procesados = 0
 
         for fila in filas:
             for col in columnas:
@@ -196,8 +187,14 @@ def detectar_edificios(
                     rasterio.windows.Window(0, 0, src.width, src.height)
                 )
 
-                datos = src.read(window=ventana)
-                valido = src.read_masks(window=ventana) > 0
+                huella = box(*rasterio.windows.bounds(ventana, src.transform))
+                if not _transformar_geometria(huella, transformador_metrico.transform).intersects(zonas["exterior"]):
+                    continue
+                datos = src.read([1, 2, 3], window=ventana)
+                valido = (src.read_masks([1, 2, 3], window=ventana) > 0).all(axis=0)
+                if src.count >= 4 and rasterio.enums.ColorInterp.alpha in src.colorinterp:
+                    alpha = src.colorinterp.index(rasterio.enums.ColorInterp.alpha) + 1
+                    valido &= src.read(alpha, window=ventana) > 0
                 if not valido.any():
                     if progreso:
                         progreso(
@@ -210,6 +207,7 @@ def detectar_edificios(
 
                 # Normalizar a tensor RGB [0,1]
                 tensor = torch.from_numpy(datos[:3].astype(np.float32) / 255.0).to(dispositivo_usado)
+                mosaicos_procesados += 1
 
                 with torch.inference_mode():
                     prediccion = modelo([tensor])[0]
@@ -218,7 +216,7 @@ def detectar_edificios(
                 etiquetas = prediccion["labels"].detach().cpu().numpy()
                 elegidos = np.flatnonzero((puntuaciones >= umbral) & (etiquetas == 1))
 
-                mascaras = prediccion["masks"][elegidos, 0, : ventana.height, : ventana.width].detach().cpu().numpy()
+                mascaras = prediccion["masks"][elegidos, 0, : int(ventana.height), : int(ventana.width)].detach().cpu().numpy()
 
                 for puntuacion, mascara in zip(puntuaciones[elegidos], mascaras):
                     binaria = (mascara >= 0.5) & valido
@@ -234,15 +232,21 @@ def detectar_edificios(
                     area = geometria_metrica.area
                     if area < area_minima_m2:
                         continue
+                    evaluacion = evaluar_edificio(geometria_metrica, zonas)
+                    if not evaluacion["dentro_banda"]:
+                        continue
 
                     candidatos.append({
                         "geometria": geometria,
                         "confianza": float(puntuacion),
                         "area_m2": float(area),
                         "mosaico": numero_mosaico,
+                        "evaluacion": evaluacion,
                     })
 
                 del prediccion, tensor
+                if progreso:
+                    progreso(f"Mosaico {numero_mosaico}/{total_mosaicos} · {len(candidatos)} candidatos en franjas", 0.1 + 0.75 * numero_mosaico / total_mosaicos)
 
         if progreso:
             progreso("Vectorizando contornos…", 0.88)
@@ -250,46 +254,49 @@ def detectar_edificios(
     # Suprimir duplicados entre mosaicos solapados
     conservados = _suprimir_duplicados(candidatos)
 
-    # Generar GeoDataFrame
-    import geopandas as gpd
-
     registros = []
-    imagen_id = "img_" + hashlib.sha256(imagen_path.read_bytes()[: 1024 * 1024]).hexdigest()[:16]
+    imagen_id = "img_" + sha256_file(imagen_path)[:16]
     ahora = datetime.now(timezone.utc).isoformat()
+    source_path = imagen_path.with_suffix(".json")
+    fuente_imagen = json.loads(source_path.read_text(encoding="utf-8")) if source_path.exists() else {}
 
     for item in conservados:
         identidad = hashlib.sha256(
             (imagen_id + str(item["geometria"].wkb)).encode()
         ).hexdigest()[:16]
-        registros.append({
+        propiedades = {
             "building_id": "ai_" + identidad,
             "source_id": "cnn_building_inference",
-            "observed_at": ahora,
+            "observed_at": fuente_imagen.get("observed_at"),
+            "inferred_at": ahora,
             "review_status": "Sin revisión manual · inferencia IA",
-            "model_id": "giswqs/geoai/building_footprints_usa",
+            "model_id": MODEL_ID,
             "image_id": imagen_id,
             "confidence": item["confianza"],
             "area_m2": item["area_m2"],
             "tile_index": item["mosaico"],
-            "geometry": item["geometria"],
-        })
-
-    gdf = gpd.GeoDataFrame(
-        registros,
-        geometry="geometry",
-        crs=crs_nativo,
-    ).to_crs("EPSG:4326")
+            **item["evaluacion"],
+        }
+        a_wgs = Transformer.from_crs(crs_nativo, "EPSG:4326", always_xy=True)
+        registros.append({"type": "Feature", "properties": propiedades,
+                          "geometry": mapping(_transformar_geometria(item["geometria"], a_wgs.transform))})
 
     geojson_path = salida_dir / "buildings.geojson"
-    gdf.to_file(geojson_path, driver="GeoJSON")
+    geojson_path.write_text(json.dumps({"type": "FeatureCollection", "features": registros}, ensure_ascii=False), encoding="utf-8")
 
     manifiesto = {
         "schema_version": 1,
         "estado": "completado",
-        "iniciado_en": ahora,
+        "iniciado_en": iniciado,
         "completado_en": datetime.now(timezone.utc).isoformat(),
-        "count": len(gdf),
-        "modelo": "giswqs/geoai/building_footprints_usa",
+        "count": len(registros),
+        "counts_by_class": {c: sum(f["properties"]["clase"] == c for f in registros) for c in ("rojo", "amarillo")},
+        "modelo": MODEL_ID,
+        "model_sha256": LOCAL_MODEL_SHA256,
+        "zonas": {"geometria": "corredor_entre_limites", "amarillo_m": amarillo_m, "limites_sha256": sha256_file(limites_path)},
+        "cobertura": imagen_info,
+        "imagen_fuente": {k: fuente_imagen.get(k) for k in ("source", "service_url", "attribution", "observed_at", "acquired_at")},
+        "mosaicos_procesados": mosaicos_procesados,
         "arquitectura": "Mask R-CNN ResNet50-FPN",
         "imagen": str(imagen_path),
         "dispositivo": dispositivo_usado,
@@ -301,6 +308,8 @@ def detectar_edificios(
             "Detecciones automáticas sin revisión humana.",
             "La confianza no es una probabilidad calibrada de peligro.",
             "Pueden existir omisiones y falsos positivos.",
+            "Modelo local piloto: F1 de instancias 0.249 en dos recortes; no garantiza separar viviendas.",
+            "Solo se analiza la cobertura del GeoTIFF; no se evalúan franjas fuera de ella.",
         ],
     }
 
@@ -311,9 +320,9 @@ def detectar_edificios(
 
     if progreso:
         progreso(
-            f"Detección finalizada: {len(gdf)} edificios detectados.",
+            f"Detección finalizada: {len(registros)} edificios detectados.",
             1.0,
-            count=len(gdf),
+            count=len(registros),
         )
 
     return manifiesto
@@ -327,9 +336,9 @@ def _inicios_mosaico(longitud, tamano, solapamiento):
 
 
 def _transformar_geometria(geom, funcion_transformar):
-    from shapely.ops import transform as transformar_shapely
+    from shapely import transform as transformar_shapely
 
-    return transformar_shapely(funcion_transformar, geom)
+    return transformar_shapely(geom, funcion_transformar, interleaved=False)
 
 
 def _suprimir_duplicados(candidatos, umbral_iou: float = 0.35, umbral_contenimiento: float = 0.7):

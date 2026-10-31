@@ -1,108 +1,56 @@
-const { chromium } = require("playwright");
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const fs = require('node:fs');
+const { chromium } = require('playwright');
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage();
-
-  const jsErrors = [];
-  const loadFails = [];
-
-  page.on("console", (msg) => {
-    if (msg.type() === "error") jsErrors.push(msg.text());
-  });
-  page.on("pageerror", (err) => jsErrors.push(err.message));
-  page.on("requestfailed", (req) => {
-    const url = req.url();
-    if (url.includes("tile.openstreetmap.org")) return;
-    loadFails.push(`${url} -> ${req.failure()?.errorText || "failed"}`);
-  });
-
-  const response = await page.goto("http://127.0.0.1:4173/", {
-    waitUntil: "networkidle",
-    timeout: 30000,
-  });
-
-  await page.waitForTimeout(3000);
-
-  console.log("Status HTTP:", response.status());
-
-  const mapaSucio = {
-    mapControls: await page.locator(".map-controls").count(),
-    leafletControlLayers: await page.locator(".leaflet-control-layers").count(),
-    mapLegend: await page.locator(".map-legend").count(),
-  };
-  console.log("Elementos que NO deberían estar en el mapa:", JSON.stringify(mapaSucio, null, 2));
-
-  const panelLateral = {
-    edificioInfo: await page.locator("#edificio-info").count(),
-    fajaInfo: await page.locator("#faja-info").count(),
-    detectorPanel: await page.locator("#detector-panel").count(),
-    controlesPanel: await page.locator("#controles-panel").count(),
-    btnRunDetect: await page.locator("#btn-run-detect").count(),
-  };
-  console.log("Elementos del panel lateral:", JSON.stringify(panelLateral, null, 2));
-
-  const detectResp = await page.request.get(
-    "http://127.0.0.1:4173/api/detect?imagen=data%2Fimagery%2Fchullo%2Fchullo_rgb.tif&salida=outputs%2Fdetection&umbral=0.5"
-  );
-  const detectBody = await detectResp.json();
-  console.log("\nRespuesta /api/detect:", JSON.stringify(detectBody, null, 2));
-
-  const btn = page.locator("#btn-run-detect");
-  if ((await btn.count()) > 0) {
-    await btn.click();
-    await page.waitForTimeout(4000);
-    const status = await page.locator("#detect-status").textContent();
-    console.log("\nEstado tras clic en deteccion:\n", status);
+  const base = process.env.CHULLO_URL || 'http://127.0.0.1:4173';
+  const out = process.env.CHULLO_QA_DIR || path.join(__dirname, 'outputs', 'qa');
+  fs.mkdirSync(out, {recursive:true});
+  const browser = await chromium.launch({headless:true});
+  const page = await browser.newPage({viewport:{width:1500,height:1000}});
+  const errors = [];
+  page.on('pageerror', err => errors.push(err.message));
+  try {
+    assert.equal((await page.goto(base)).status(),200);
+    await page.waitForFunction(() => window.OBTENER_BANDAS?.()?.features?.length === 3);
+    await page.waitForFunction(() => document.querySelector('#cnn-state').textContent !== 'Comprobando…');
+    const serverStatus = await (await page.request.get(base + '/api/status')).json();
+    if (serverStatus.manifest) {
+      await page.waitForFunction(total => edificiosGeoJSON?.features?.length === total, serverStatus.manifest.count);
+      assert.equal(await page.evaluate(() => edificioLayer.getLayers().length),serverStatus.manifest.count);
+    }
+    const geometry = await page.evaluate(() => {
+      const bands = window.OBTENER_BANDAS();
+      const red = bands.features.filter(f => f.properties.clase === 'rojo');
+      const yellow = bands.features.find(f => f.properties.clase === 'amarillo');
+      const axis = bands.features.find(f => f.properties.clase === 'cauce');
+      return {redCount:red.length, yellowRings:yellow.geometry.coordinates.length,
+              open:JSON.stringify(axis.geometry.coordinates[0]) !== JSON.stringify(axis.geometry.coordinates.at(-1)),
+              layerCount:window.MAP().hasLayer(bandaLayer), satelliteChecked:document.querySelector('#layer-satelital').checked};
+    });
+    assert.deepEqual(geometry,{redCount:1,yellowRings:2,open:true,layerCount:true,satelliteChecked:true});
+    await page.evaluate(() => window.MAP().setView([-16.3901,-71.5516],19));
+    await page.waitForTimeout(1800);
+    await page.screenshot({path:path.join(out,'franjas-corregidas.png'),fullPage:true});
+    if (process.env.CHULLO_PREVIEW) await page.locator('#map').screenshot({path:process.env.CHULLO_PREVIEW});
+    await page.locator('#band-amarillo').fill('30');
+    await page.locator('#btn-recalcular-bandas').click();
+    await page.waitForFunction(() => window.OBTENER_BANDAS().metadata.amarillo_m === 30);
+    assert.match(await page.locator('#panel-info').textContent(),/30 m/);
+    await page.locator('#layer-bandas').uncheck();
+    assert.equal(await page.evaluate(() => window.MAP().hasLayer(bandaLayer)),false);
+    await page.locator('#layer-bandas').check();
+    // Prueba de UI con un fallo explícito: nunca debe mostrar éxito/0 edificios.
+    await page.route('**/api/detect?*',route => route.fulfill({status:422,contentType:'application/json',body:JSON.stringify({estado:'error',error:'Imagen de prueba inválida'})}));
+    await page.locator('#btn-run-detect').click();
+    await page.waitForFunction(() => document.querySelector('#cnn-state').textContent === 'Error CNN');
+    assert.match(await page.locator('#detect-status').textContent(),/Imagen de prueba inválida/);
+    assert.equal(await page.locator('#btn-run-detect').isEnabled(),true);
+    assert.equal(await page.locator('#btn-recalcular-bandas').isEnabled(),true);
+    assert.deepEqual(errors,[]);
+    console.log('PASS: geometría única, hueco amarillo, eje abierto, controles y error CNN honesto.');
+  } finally {
+    await browser.close();
   }
-
-  await page.screenshot({ path: "chullo-test-screenshot.png", fullPage: true });
-
-  console.log("\n=== ERRORES DE CONSOLA JS ===");
-  if (jsErrors.length === 0) {
-    console.log("Ninguno. ¡Limpio!");
-  } else {
-    jsErrors.forEach((e, i) => console.log(`${i + 1}. ${e}`));
-  }
-
-  console.log("\n=== FALLAS DE CARGA (sin tiles OSM) ===");
-  if (loadFails.length === 0) {
-    console.log("Ninguna.");
-  } else {
-    loadFails.forEach((e, i) => console.log(`${i + 1}. ${e}`));
-  }
-
-  const mapaLimpio =
-    mapaSucio.mapControls === 0 &&
-    mapaSucio.leafletControlLayers === 0 &&
-    mapaSucio.mapLegend === 0;
-
-  const panelOk =
-    panelLateral.edificioInfo > 0 &&
-    panelLateral.fajaInfo > 0 &&
-    panelLateral.detectorPanel > 0 &&
-    panelLateral.controlesPanel > 0 &&
-    panelLateral.btnRunDetect > 0;
-
-  const sinErrores500 = !jsErrors.some((e) => e.includes("500") || e.includes("Failed to fetch"));
-  const detectOk = detectResp.status() === 200;
-
-  const pass =
-    response.status() === 200 &&
-    mapaLimpio &&
-    panelOk &&
-    jsErrors.length === 0 &&
-    sinErrores500 &&
-    detectOk;
-
-  console.log("\n=== RESULTADO ===");
-  console.log("Mapa limpio:", mapaLimpio ? "OK" : "FALLA");
-  console.log("Panel lateral OK:", panelOk ? "OK" : "FALLA");
-  console.log("Sin errores JS:", jsErrors.length === 0 ? "OK" : "FALLA");
-  console.log("Sin error 500/failed to fetch:", sinErrores500 ? "OK" : "FALLA");
-  console.log("Endpoint /api/detect HTTP 200:", detectOk ? "OK" : "FALLA");
-  console.log("Resultado final:", pass ? "PASS" : "FAIL");
-
-  await browser.close();
-  process.exit(pass ? 0 : 1);
-})();
+})().catch(err => {console.error(err);process.exitCode=1;});
