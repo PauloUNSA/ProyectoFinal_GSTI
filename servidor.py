@@ -60,13 +60,7 @@ class Archivos(SimpleHTTPRequestHandler):
             self._handle_api(path, parsed.query)
             return
 
-        # Servir archivos estáticos desde web/
-        if path == "/" or path == "":
-            path = "/index.html"
-
-        # Forzar directorio base web/ y ruta relativa
-        self.directory = str(WEB_DIR)
-        self.path = path
+        # Servir archivos estáticos desde web/ (directorio fijo via partial en el constructor)
         return super().do_GET()
 
     def _handle_api(self, path: str, query: str):
@@ -108,7 +102,7 @@ class Archivos(SimpleHTTPRequestHandler):
                 501,
                 {
                     "error": "Script de deteccion no disponible",
-                    "detalle": "scripts/run_detection.py no existe. La deteccion CNN es obligatoria.",
+                    "detalle": "scripts/run_detection.py no existe. La deteccion CNN es opcional.",
                 },
             )
             return
