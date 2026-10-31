@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.pyc
+.env
+*.log
+.DS_Store
+Thumbs.db
+outputs/detection/*.geojson
+outputs/detection/manifest.json
+models/*.pth
+models/*.download
+venv/
+.venv/
+.venv-ml/
