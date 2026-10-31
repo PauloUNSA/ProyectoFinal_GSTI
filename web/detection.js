@@ -8,9 +8,10 @@
    documentales de ANA), usando franjas con valores reales de ANA.
    ============================================================ */
 
-let edificioLayer = null;
 let edificiosGeoJSON = null;
 let detectando = false;
+
+// edificioLayer se declara en simple.js (ambos comparten el scope global)
 
 const COLORES_EDIFICIO = {
   rojo: "#dc2626",

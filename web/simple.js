@@ -13,7 +13,7 @@ let puntoLayer = null;
 let limiteLayer = null;
 let cauceLayer = null;          // Línea del cauce uniendo los dos límites
 let bandaLayer = null;
-let edificioLayer = null;
+let edificioLayer = null;       // Compartido con detection.js
 let satelitalLayer = null;
 
 const TILES_OSM = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -308,28 +308,6 @@ function configurarUI() {
     const el = document.getElementById(id);
     if (el) el.addEventListener("change", fn);
   });
-
-  // Recalcular bandas con valores de ANA
-  const btnRecalcular = document.getElementById("btn-recalcular-bandas");
-  const inputRojo = document.getElementById("band-rojo");
-  const inputAmarillo = document.getElementById("band-amarillo");
-
-  if (btnRecalcular && inputRojo && inputAmarillo) {
-    btnRecalcular.addEventListener("click", () => {
-      const rojo = parseFloat(inputRojo.value) || 4;
-      const amarillo = parseFloat(inputAmarillo.value) || 20;
-      CONFIG.rojoM = rojo;
-      CONFIG.amarilloM = amarillo;
-      if (window.RECALCULAR_BANDAS) {
-        bandaLayer = window.RECALCULAR_BANDAS(map, rojo, amarillo);
-      }
-      // Reclasificar edificios existentes si los hay
-      if (edificioLayer && window.EJECUTAR_DETECCION) {
-        // Los edificios se reclasifican al recargar su GeoJSON con nuevos umbrales
-      }
-      actualizarInfoPanel();
-    });
-  }
 
   // Botón detección CNN (obligatorio, siempre visible)
   const btnDetect = document.getElementById("btn-run-detect");

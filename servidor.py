@@ -61,22 +61,12 @@ class Archivos(SimpleHTTPRequestHandler):
             return
 
         # Servir archivos estáticos desde web/
-        self.directory = str(WEB_DIR)
-        # Ajustar la ruta relativa para servir desde web/
         if path == "/" or path == "":
             path = "/index.html"
-        # Simular que el directorio raiz es web/
-        translated = self.translate_path(path)
-        # Forzar directorio base web/
-        relative = Path(path).relative_to("/") if path.startswith("/") else Path(path)
-        target = WEB_DIR / relative
-        if not target.exists() and target.suffix == "":
-            target = WEB_DIR / relative / "index.html"
-        if target.exists() and target.is_file():
-            self.path = str(relative)
-            return super().do_GET()
-        # Fallback: intentar servir normalmente desde WEB_DIR
+
+        # Forzar directorio base web/ y ruta relativa
         self.directory = str(WEB_DIR)
+        self.path = path
         return super().do_GET()
 
     def _handle_api(self, path: str, query: str):
