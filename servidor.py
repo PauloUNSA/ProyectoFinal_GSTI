@@ -118,7 +118,7 @@ class Archivos(SimpleHTTPRequestHandler):
                 501,
                 {
                     "error": "Script de deteccion no disponible",
-                    "detalle": "scripts/run_detection.py no existe. La deteccion CNN es opcional.",
+                    "detalle": "scripts/run_detection.py no existe. La deteccion CNN es obligatoria.",
                 },
             )
             return

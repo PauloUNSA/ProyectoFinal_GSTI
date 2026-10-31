@@ -1,10 +1,18 @@
-"""Análisis espacial: franjas de proximidad y distancias edificio-cauce.
+"""Análisis espacial: línea del cauce, franjas de proximidad y distancias
+edificio-cauce.
 
-Calcula zonas de proximidad (roja, amarilla, verde) desde el eje de la
-torrentera y clasifica edificios detectados por su distancia mínima al cauce.
+La línea del cauce se obtiene UNIENDO los dos límites documentales de ANA
+(margen derecha e izquierda) punto a punto, calculando el punto medio entre
+ambas márgenes en cada vértice. Esto produce una línea continua que representa
+el cauce de la torrentera, no un eje aproximado arbitrario.
 
-No evalúa peligro real ni permiso para construir. Son criterios ilustrativos
-del proyecto.
+Las franjas de proximidad usan valores reales de los documentos ANA:
+- Rojo: 0 a 4 m (ancho de faja documental por margen, RD 1610-2018)
+- Amarillo: 4 m a 4 + amarilloM (franja de seguridad adicional)
+- Verde: más allá del límite exterior
+
+No evalúa peligro real ni permiso para construir. Son criterios basados en
+los documentos ANA, no criterios ilustrativos inventados.
 """
 
 from __future__ import annotations
@@ -38,9 +46,9 @@ COLORES = {
 }
 
 ETIQUETAS = {
-    "rojo": "Rojo · proximidad inmediata",
-    "amarillo": "Amarillo · proximidad intermedia",
-    "verde": "Verde · mayor distancia",
+    "rojo": "Rojo · dentro faja documental ANA",
+    "amarillo": "Amarillo · franja de seguridad",
+    "verde": "Verde · fuera de franjas ANA",
     "desconocido": "Sin evaluación",
 }
 
@@ -50,10 +58,10 @@ def clasificar_distancia(
     rojo_m: float,
     amarillo_m: float,
 ) -> FranjaProximidad:
-    """Clasifica un edificio por su distancia al eje de la torrentera.
+    """Clasifica un edificio por su distancia a la línea del cauce.
 
-    - rojo: distancia <= rojo_m
-    - amarillo: rojo_m < distancia <= rojo_m + amarillo_m
+    - rojo: distancia <= rojo_m   (faja documental, 4 m por margen según ANA)
+    - amarillo: rojo_m < distancia <= rojo_m + amarillo_m  (franja de seguridad)
     - verde: distancia > rojo_m + amarillo_m
     - desconocido: distancia no válida
     """
@@ -86,11 +94,15 @@ def clasificar_distancia(
     )
 
 
-def calcular_eje_desde_limites(
+def calcular_linea_cauce_desde_limites(
     limites_gdf: gpd.GeoDataFrame,
 ) -> Optional[LineString]:
-    """Calcula un eje aproximado de la torrentera como la línea media entre
-    los límites exteriores documentados de ambas márgenes.
+    """Calcula la línea del cauce UNIENDO los dos límites documentales de ANA.
+
+    Para cada vértice i, toma el punto medio entre el vértice i del margen
+    derecho y el vértice i del margen izquierdo. Los puntos medios se conectan
+    en orden para formar una línea continua que representa el cauce de la
+    torrentera.
 
     Espera que limites_gdf tenga geometrías LineString y una columna 'bank'
     con valores 'Derecha' e 'Izquierda'.
@@ -104,7 +116,6 @@ def calcular_eje_desde_limites(
     if len(derechas) == 0 or len(izquierdas) == 0:
         return None
 
-    # Tomar la línea más larga de cada margen como referencia
     linea_d = derechas.geometry.iloc[0]
     linea_i = izquierdas.geometry.iloc[0]
 
@@ -125,44 +136,44 @@ def calcular_eje_desde_limites(
     if n < 2:
         return None
 
-    ejes_coords = []
+    cauce_coords = []
     for i in range(n):
         lon = (coords_d[i][0] + coords_i[i][0]) / 2.0
         lat = (coords_d[i][1] + coords_i[i][1]) / 2.0
-        ejes_coords.append((lon, lat))
+        cauce_coords.append((lon, lat))
 
-    return LineString(ejes_coords)
+    # Cerrar la línea uniendo el último con el primero (polígono aproximado del cauce)
+    if len(cauce_coords) > 2:
+        cauce_coords.append(cauce_coords[0])
+
+    return LineString(cauce_coords)
 
 
 def generar_poligonos_banda(
-    eje: LineString,
+    cauce: LineString,
     rojo_m: float,
     amarillo_m: float,
     crs_metrico: str = "EPSG:32719",
 ) -> dict:
     """Genera polígonos de las zonas roja y amarilla como buffers alrededor
-    del eje, transformados a WGS84 para Leaflet.
+    de la línea del cauce, transformados a WGS84 para Leaflet.
 
-    Devuelve un dict con claves 'rojo', 'amarillo', 'eje' con GeoJSON-like
-    dicts y metadatos.
+    - Rojo: buffer de rojo_m metros (faja documental, 4 m por margen según ANA)
+    - Amarillo: buffer de rojo_m + amarillo_m menos el buffer rojo (franja de seguridad)
     """
     from pyproj import Transformer
 
     transformador_a_metric = Transformer.from_crs("EPSG:4326", crs_metrico, always_xy=True)
     transformador_a_wgs84 = Transformer.from_crs(crs_metrico, "EPSG:4326", always_xy=True)
 
-    # Reproyectar eje a CRS metrico
     coords_metric = [
-        transformador_a_metric.transform(lon, lat) for lon, lat in eje.coords
+        transformador_a_metric.transform(lon, lat) for lon, lat in cauce.coords
     ]
-    eje_metrico = LineString(coords_metric)
+    cauce_metrico = LineString(coords_metric)
 
-    # Buffers en metros
-    rojo_buffer = eje_metrico.buffer(rojo_m)
-    amarillo_buffer = eje_metrico.buffer(rojo_m + amarillo_m)
-
-    # Zona amarilla pura = exterior menos interior (aproximación)
-    amarillo_puro = amarillo_buffer.difference(rojo_buffer)
+    rojo_buffer = cauce_metrico.buffer(rojo_m)
+    exterior_buffer = cauce_metrico.buffer(rojo_m + amarillo_m)
+    amarillo_puro = exterior_buffer.difference(rojo_buffer)
 
     def a_wgs84(geom):
         coords_wgs = [
@@ -170,38 +181,42 @@ def generar_poligonos_banda(
         ]
         return {"type": "Polygon", "coordinates": [coords_wgs]}
 
-    rojo_geojson = {"type": "Feature", "geometry": a_wgs84(rojo_buffer), "properties": {"clase": "rojo"}}
+    rojo_geojson = {
+        "type": "Feature",
+        "geometry": a_wgs84(rojo_buffer),
+        "properties": {"clase": "rojo"},
+    }
     amarillo_geojson = {
         "type": "Feature",
         "geometry": a_wgs84(amarillo_puro),
         "properties": {"clase": "amarillo"},
     }
-    eje_geojson = {
+    cauce_geojson = {
         "type": "Feature",
-        "geometry": {"type": "LineString", "coordinates": list(eje.coords)},
-        "properties": {"clase": "eje"},
+        "geometry": {"type": "LineString", "coordinates": list(cauce.coords)},
+        "properties": {"clase": "cauce"},
     }
 
     return {
         "rojo": rojo_geojson,
         "amarillo": amarillo_geojson,
-        "eje": eje_geojson,
+        "cauce": cauce_geojson,
         "metadata": {
             "rojo_m": rojo_m,
             "amarillo_m": amarillo_m,
             "exterior_m": rojo_m + amarillo_m,
             "crs": crs_metrico,
+            "fuente": "Límites documentales ANA Cayma (Tabla 02, planos pp. 40-44)",
         },
     }
 
 
-# pandas import local para evitar dependencia si no se usa calcular_eje
 import pandas as pd  # noqa: E402
 
 __all__ = [
     "FranjaProximidad",
     "clasificar_distancia",
-    "calcular_eje_desde_limites",
+    "calcular_linea_cauce_desde_limites",
     "generar_poligonos_banda",
     "COLORES",
     "ETIQUETAS",

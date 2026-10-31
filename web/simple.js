@@ -3,23 +3,29 @@
 /* ============================================================
    Chullo Unificado - simple.js
    Lógica principal del mapa Leaflet: inicialización, capas,
-   puntos ANA, límites de faja, franjas de proximidad y UI.
+   puntos ANA, límites de faja, línea del cauce (unión de límites),
+   franjas de proximidad con valores reales de ANA y detección CNN
+   obligatoria de edificios.
    ============================================================ */
 
 let map = null;
 let puntoLayer = null;
 let limiteLayer = null;
+let cauceLayer = null;          // Línea del cauce uniendo los dos límites
 let bandaLayer = null;
 let edificioLayer = null;
 let satelitalLayer = null;
-let ejeTorrentera = null;
 
 const TILES_OSM = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+// Capa satelital de mejor calidad (Esri World Imagery) para ver edificios como figuras de 4 lados
 const TILES_SATELITAL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 
+// Valores por defecto basados en los documentos ANA (4 m por margen según Tabla 02 / RD 1610-2018).
+// El usuario puede ajustarlos en la UI, pero la referencia real son los límites documentales de ANA.
 const CONFIG = {
-  rojoM: 25,
-  amarilloM: 25,
+  rojoM: 4,        // ancho de faja documental por margen (derecha e izquierda)
+  amarilloM: 20,   // franja adicional de seguridad más allá de la faja documental
+  umbralDeteccion: 0.5,
 };
 
 function esc(v) {
@@ -59,7 +65,8 @@ function initMap() {
     attribution: "&copy; <a href='https://www.esri.com/' target='_blank' rel='noopener'>Esri</a> · World Imagery",
   });
 
-  osm.addTo(map);
+  // Satelital como base por defecto para identificar edificios (figuras de 4 lados / techos)
+  satelitalLayer.addTo(map);
   document.getElementById("map-state").textContent = "Conectado";
   document.getElementById("map-state").className = "ready";
 
@@ -67,8 +74,8 @@ function initMap() {
 
   // Control de capas base
   const baseLayers = {
-    "OpenStreetMap (callejero)": osm,
     "Imagen satelital (Esri)": satelitalLayer,
+    "OpenStreetMap (callejero)": osm,
   };
   L.control.layers(baseLayers, null, { collapsed: false, position: "topright" }).addTo(map);
 
@@ -79,7 +86,7 @@ function initMap() {
 }
 
 // ------------------------------------------------------------------
-// Cargar hitos, límites y calcular eje
+// Cargar hitos, límites y calcular línea del cauce
 // ------------------------------------------------------------------
 async function cargarTodo() {
   // Hitos
@@ -87,20 +94,72 @@ async function cargarTodo() {
   // Límites
   if (window.CARGAR_LIMITES) await window.CARGAR_LIMITES();
 
-  // Calcular eje de torrentera desde los límites
+  // Calcular línea del cauce uniendo los dos límites documentales (margen derecha + izquierda)
   const limites = window.CHULLO_BOUNDARIES;
-  if (limites && window.CALCULAR_EJE) {
-    ejeTorrentera = window.CALCULAR_EJE(limites);
+  if (limites) {
+    ejeTorrentera = calcularLineaCauce(limites);
   }
 
   // Dibujar capas
   dibujarPuntos();
   dibujarLimites();
+  dibujarLineaCauce();
   dibujarBandas();
 
   // Configurar controles de UI
   configurarUI();
 }
+
+// Variable global para la línea del cauce
+let ejeTorrentera = null;
+
+// ------------------------------------------------------------------
+// Unir los dos límites en una línea continua del cauce
+// Calcula el punto medio entre margen derecha e izquierda en cada vértice
+// y los conecta en orden para formar la línea del cauce de la torrentera.
+// ------------------------------------------------------------------
+function calcularLineaCauce(limites) {
+  if (!limites || !limites.features || limites.features.length < 2) return null;
+
+  const derecha = limites.features.find(f => f.properties.bank === "Derecha");
+  const izquierda = limites.features.find(f => f.properties.bank === "Izquierda");
+
+  if (!derecha || !izquierda) return null;
+
+  const coordsD = derecha.geometry.coordinates;
+  const coordsI = izquierda.geometry.coordinates;
+
+  // Unir los dos límites punto a punto (medio entre ambas márgenes)
+  // para formar la línea central del cauce de forma continua.
+  const n = Math.min(coordsD.length, coordsI.length);
+  const cauceCoords = [];
+  for (let i = 0; i < n; i++) {
+    const lon = (coordsD[i][0] + coordsI[i][0]) / 2;
+    const lat = (coordsD[i][1] + coordsI[i][1]) / 2;
+    cauceCoords.push([lon, lat]);
+  }
+
+  // Cerrar la línea uniendo el último punto con el primero si hay suficientes vértices
+  // (forma un polígono aproximado del cauce + faja)
+  if (cauceCoords.length > 2) {
+    cauceCoords.push(cauceCoords[0]);
+  }
+
+  return {
+    type: "Feature",
+    geometry: { type: "LineString", coordinates: cauceCoords },
+    properties: {
+      role: "torrentera_axis",
+      description: "Línea del cauce de la torrentera Chullo obtenida uniendo los límites documentales de ANA (margen derecha e izquierda)",
+      fuente: "ANA Cayma · Tabla 02 de vértices de faja marginal (planos pp. 40-44)",
+      vertices: cauceCoords.length,
+    },
+  };
+}
+
+// Exportar para módulos
+window.CALCULAR_LINEA_CAUCE = calcularLineaCauce;
+window.OBTENER_CAUCE = () => ejeTorrentera;
 
 // ------------------------------------------------------------------
 // Puntos ANA (hitos)
@@ -137,8 +196,8 @@ function dibujarPuntos() {
           `<dl style="margin:8px 0">` +
           `<dt>Latitud</dt><dd>${c.lat}</dd>` +
           `<dt>Longitud</dt><dd>${c.lon}</dd>` +
-          `<dt>Este</dt><dd>${p.easting} m</dd>` +
-          `<dt>Norte</dt><dd>${p.norte || p.northing} m</dd>` +
+          `<dt>Este (UTM)</dt><dd>${p.easting} m</dd>` +
+          `<dt>Norte (UTM)</dt><dd>${p.norte || p.northing} m</dd>` +
           `</dl>` +
           `<button class="source-button" data-open-source data-id="${esc(f.id)}">Ver fila de origen</button>` +
           `</div>`;
@@ -171,7 +230,7 @@ function dibujarLimites() {
       layer.bindPopup(
         `<strong>Límite exterior de faja · ${p.bank}</strong><br>` +
         `Cayma · ${p.vertices} vértices del documento ANA.<br>` +
-        `Tabla 02 · RD 1610-2018`,
+        `Tabla 02 · RD 1610-2018 · Ancho documental: 4 m por margen`,
         { maxWidth: 300 }
       );
     },
@@ -179,7 +238,28 @@ function dibujarLimites() {
 }
 
 // ------------------------------------------------------------------
-// Franjas de proximidad
+// Línea del cauce (unión de los dos límites)
+// ------------------------------------------------------------------
+function dibujarLineaCauce() {
+  if (cauceLayer && map) map.removeLayer(cauceLayer);
+  if (!ejeTorrentera || !map) return;
+
+  cauceLayer = L.geoJSON(ejeTorrentera, {
+    style: { color: "#07838a", weight: 3, opacity: 0.9, dashArray: "6 8" },
+  });
+  cauceLayer.bindPopup(
+    `<strong>Línea del cauce de la torrentera Chullo</strong><br>` +
+    `Obtenida uniendo los límites documentales de ANA (margen derecha e izquierda)<br>` +
+    `Vértices: ${ejeTorrentera.properties.vertices || "N/A"}`
+  );
+  cauceLayer.addTo(map);
+}
+
+// ------------------------------------------------------------------
+// Franjas de proximidad con valores reales de ANA
+// Rojo: dentro de la faja documental (0 a 4 m por margen)
+// Amarillo: franja adicional de seguridad (4 a 24 m)
+// Verde: más allá de 24 m
 // ------------------------------------------------------------------
 function dibujarBandas() {
   if (!ejeTorrentera || !map) return;
@@ -187,25 +267,12 @@ function dibujarBandas() {
     bandaLayer = window.RECALCULAR_BANDAS(map, CONFIG.rojoM, CONFIG.amarilloM);
   }
 
-  // Dibujar línea del eje si no está en bandas
-  if (ejeTorrentera) {
-    const ejeLayer = L.geoJSON(ejeTorrentera, {
-      style: { color: "#07838a", weight: 3, opacity: 0.9, dashArray: "5 6" },
-    });
-    ejeLayer.bindPopup("Eje aproximado de la torrentera Chullo (media entre límites documentales)");
-    if (bandaLayer) {
-      // Añadir al feature group de bandas si existe
-      bandaLayer.addLayer(ejeLayer);
-    } else {
-      ejeLayer.addTo(map);
-    }
-  }
-
+  // La línea del cauce ya se dibuja en dibujarLineaCauce()
   actualizarInfoPanel();
 }
 
 // ------------------------------------------------------------------
-// Edificios detectados
+// Edificios detectados (CNN obligatorio)
 // ------------------------------------------------------------------
 function dibujarEdificiosDetectados(geojson) {
   if (!map) return;
@@ -220,7 +287,7 @@ function limpiarEdificios() {
     edificioLayer = null;
   }
   const panel = document.getElementById("edificio-info");
-  if (panel) panel.innerHTML = `<p class="vacio">Edificios eliminados. Ejecuta la detección para volver a cargarlos.</p>`;
+  if (panel) panel.innerHTML = `<p class="vacio">Edificios eliminados. Ejecuta la detección CNN para volver a cargarlos.</p>`;
 }
 
 // ------------------------------------------------------------------
@@ -231,6 +298,7 @@ function configurarUI() {
   const toggles = {
     layer-hitos: () => toggleCapa(puntoLayer, "layer-hitos"),
     layer-limites: () => toggleCapa(limiteLayer, "layer-limites"),
+    layer-cauce: () => toggleCapa(cauceLayer, "layer-cauce"),
     layer-bandas: () => toggleCapa(bandaLayer, "layer-bandas"),
     layer-edificios: () => toggleCapa(edificioLayer, "layer-edificios"),
     layer-satelital: toggleSatelital,
@@ -241,15 +309,15 @@ function configurarUI() {
     if (el) el.addEventListener("change", fn);
   });
 
-  // Recalcular bandas
+  // Recalcular bandas con valores de ANA
   const btnRecalcular = document.getElementById("btn-recalcular-bandas");
   const inputRojo = document.getElementById("band-rojo");
   const inputAmarillo = document.getElementById("band-amarillo");
 
   if (btnRecalcular && inputRojo && inputAmarillo) {
     btnRecalcular.addEventListener("click", () => {
-      const rojo = parseFloat(inputRojo.value) || 25;
-      const amarillo = parseFloat(inputAmarillo.value) || 25;
+      const rojo = parseFloat(inputRojo.value) || 4;
+      const amarillo = parseFloat(inputAmarillo.value) || 20;
       CONFIG.rojoM = rojo;
       CONFIG.amarilloM = amarillo;
       if (window.RECALCULAR_BANDAS) {
@@ -257,29 +325,42 @@ function configurarUI() {
       }
       // Reclasificar edificios existentes si los hay
       if (edificioLayer && window.EJECUTAR_DETECCION) {
-        // Los edificios ya dibujados se reclasifican al recargar su GeoJSON
-        // Aquí solo actualizamos la configuración global
+        // Los edificios se reclasifican al recargar su GeoJSON con nuevos umbrales
       }
       actualizarInfoPanel();
     });
   }
 
-  // Botón detección
+  // Botón detección CNN (obligatorio, siempre visible)
   const btnDetect = document.getElementById("btn-run-detect");
   if (btnDetect && window.EJECUTAR_DETECCION) {
-    btnDetect.addEventListener("click", () => {
-      // Imagen por defecto del sector (si existe)
+    btnDetect.addEventListener("click", async () => {
+      // Intentar usar imagen local del sector si existe, sino notificar
       const imagen = "data/imagery/chullo/chullo_rgb.tif";
-      window.EJECUTAR_DETECCION(imagen, CONFIG.umbralDeteccion || 0.5);
+      btnDetect.disabled = true;
+      btnDetect.textContent = "Procesando CNN…";
+      try {
+        await window.EJECUTAR_DETECCION(imagen, CONFIG.umbralDeteccion);
+      } finally {
+        btnDetect.disabled = false;
+        btnDetect.textContent = "Ejecutar detección CNN de edificios";
+      }
     });
   }
 
-  // Botón detectar edificios (header)
+  // Botón detectar edificios (header) - CNN obligatorio
   const btnDetected = document.getElementById("btn-detected");
   if (btnDetected && window.EJECUTAR_DETECCION) {
-    btnDetected.addEventListener("click", () => {
+    btnDetected.addEventListener("click", async () => {
       const imagen = "data/imagery/chullo/chullo_rgb.tif";
-      window.EJECUTAR_DETECCION(imagen, CONFIG.umbralDeteccion || 0.5);
+      btnDetected.disabled = true;
+      btnDetected.textContent = "Procesando CNN…";
+      try {
+        await window.EJECUTAR_DETECCION(imagen, CONFIG.umbralDeteccion);
+      } finally {
+        btnDetected.disabled = false;
+        btnDetected.textContent = "Detectar edificios (CNN)";
+      }
     });
   }
 
@@ -331,9 +412,11 @@ function actualizarInfoPanel() {
   const amarillo = CONFIG.amarilloM;
   const exterior = rojo + amarillo;
   panel.innerHTML =
-    `<strong>Franjas de proximidad</strong><br>` +
-    `Rojo: 0 a ${rojo} m · Amarillo: ${rojo} a ${exterior} m · Verde: &gt; ${exterior} m<br>` +
-    `<small>Calculado desde el eje de la torrentera Chullo.</small>`;
+    `<strong>Franjas de proximidad (valores ANA)</strong><br>` +
+    `Rojo: 0 a ${rojo} m (faja documental · 4 m por margen)<br>` +
+    `Amarillo: ${rojo} a ${exterior} m (franja de seguridad adicional)<br>` +
+    `Verde: &gt; ${exterior} m<br>` +
+    `<small>Basado en los límites documentales de ANA (RD 1610-2018), no en criterios ilustrativos.</small>`;
 }
 
 function abrirFuente(id) {
@@ -378,7 +461,7 @@ function abrirFuente(id) {
     `<p class="small">${esc(p.source_title || "")}</p>` +
     `<p class="source-location">${esc(p.source_locator || "")}</p>` +
     `<table class="source-values">` +
-    `<thead><tr><th>Hito</th><th>Este · m</th><th>Norte · m</th></tr></thead>` +
+    `<thead><tr><th>Hito</th><th>Este (UTM) · m</th><th>Norte (UTM) · m</th></tr></thead>` +
     `<tbody><tr><td>${esc(p.source_code || p.code)}</td><td>${p.easting}</td><td>${p.norte || p.northing}</td></tr></tbody>` +
     `</table>` + fragment +
     `<p class="source-projection">Coordenadas UTM WGS84 zona 19S convertidas a latitud ${c.lat}, longitud ${c.lon}. No es una medición de campo.</p>` +

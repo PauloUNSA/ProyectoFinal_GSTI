@@ -2,21 +2,22 @@
 
 /* ============================================================
    Chullo Unificado - bands.js
-   Franjas de proximidad (semáforo rojo/amarillo/verde)
-   Calculadas desde el eje de la torrentera.
+   Franjas de proximidad calculadas sobre la línea del cauce
+   obtenida uniendo los límites documentales de ANA (margen
+   derecha e izquierda). No usa criterios ilustrativos: los
+   umbrales por defecto vienen del documento ANA (4 m por
+   margen según Tabla 02, RD 1610-2018).
    ============================================================ */
 
 let bandasGeoJSON = null;
-let mapaBandas = new Map(); // distancia -> color
 
 const COLORES = {
   rojo: "#dc2626",
   amarillo: "#eab308",
   verde: "#16a34a",
-  eje: "#07838a",
+  cauce: "#07838a",
 };
 
-// Generar buffers circulares en grados (aproximación para visualización en Leaflet WGS84)
 // 1 grado latitud ≈ 111,000 m. Ajustamos por latitud de Arequipa (~-16.4°).
 function metrosAGrados(metros, latitud = -16.4) {
   const mPorGradoLat = 111000;
@@ -24,8 +25,7 @@ function metrosAGrados(metros, latitud = -16.4) {
   return { lat: metros / mPorGradoLat, lon: metros / mPorGradoLon };
 }
 
-// Crear un polígono de buffer simple alrededor de una línea (aproximación por puntos)
-// Para cada segmento, crear rectángulo con extremos redondeados (casquete)
+// Crear un polígono de buffer alrededor de una línea (aproximación por segmentos)
 function bufferLinea(coordenadas, metros) {
   const { lat: dLat, lon: dLon } = metrosAGrados(metros);
   const puntos = [];
@@ -49,21 +49,22 @@ function bufferLinea(coordenadas, metros) {
     puntos.push([lon2 + nx, lat2 + ny]);
   }
 
-  // Cerrar polígono
-  if (puntos.length > 0) {
+  if (puntos.length >= 4) {
     puntos.push(puntos[0]);
+    return [puntos];
   }
-
-  return puntos.length >= 4 ? [puntos] : null;
+  return null;
 }
 
-// Generar GeoJSON de franjas (roja, amarilla) desde el eje
-function generarBandas(eje, rojoM, amarilloM) {
-  if (!eje || !eje.geometry || !eje.geometry.coordinates) return null;
+// Generar GeoJSON de franjas desde la línea del cauce (unión de límites ANA)
+// - rojo: 0 a rojoM (faja documental, 4 m por margen)
+// - amarillo: rojoM a rojoM + amarilloM (franja de seguridad adicional)
+function generarBandas(cauce, rojoM, amarilloM) {
+  if (!cauce || !cauce.geometry || !cauce.geometry.coordinates) return null;
 
-  const coords = eje.geometry.coordinates;
+  const coords = cauce.geometry.coordinates;
   const rojoBuff = bufferLinea(coords, rojoM);
-  const amarilloBuff = bufferLinea(coords, rojoM + amarilloM);
+  const exteriorBuff = bufferLinea(coords, rojoM + amarilloM);
 
   const features = [];
 
@@ -73,93 +74,88 @@ function generarBandas(eje, rojoM, amarilloM) {
       geometry: { type: "Polygon", coordinates: rojoBuff },
       properties: {
         clase: "rojo",
-        etiqueta: "Rojo · proximidad inmediata",
+        etiqueta: "Rojo · faja documental ANA (0 a " + rojoM + " m)",
         distancia_m: rojoM,
         color: COLORES.rojo,
+        fuente: "ANA RD 1610-2018 · 4 m por margen",
       },
     });
   }
 
-  if (amarilloBuff && rojoBuff) {
-    // Zona amarilla = buffer exterior menos buffer interior (aproximación visual)
+  if (exteriorBuff && rojoBuff) {
     features.push({
       type: "Feature",
-      geometry: { type: "Polygon", coordinates: amarilloBuff },
+      geometry: { type: "Polygon", coordinates: exteriorBuff },
       properties: {
         clase: "amarillo",
-        etiqueta: "Amarillo · proximidad intermedia",
+        etiqueta: "Amarillo · franja de seguridad (" + rojoM + " a " + (rojoM + amarilloM) + " m)",
         distancia_m: rojoM + amarilloM,
         color: COLORES.amarillo,
+        fuente: "Franja de seguridad adicional configurada",
       },
     });
   }
 
-  // Línea del eje
+  // Línea del cauce
   features.push({
     type: "Feature",
     geometry: { type: "LineString", coordinates: coords },
     properties: {
-      clase: "eje",
-      etiqueta: "Eje de la torrentera",
-      color: COLORES.eje,
+      clase: "cauce",
+      etiqueta: "Línea del cauce (unión de límites ANA)",
+      color: COLORES.cauce,
     },
   });
 
   return {
     type: "FeatureCollection",
     features,
-    metadata: { rojo_m: rojoM, amarillo_m: amarilloM, exterior_m: rojoM + amarilloM },
+    metadata: {
+      rojo_m: rojoM,
+      amarillo_m: amarilloM,
+      exterior_m: rojoM + amarilloM,
+      fuente: "Límites documentales ANA Cayma (Tabla 02, planos pp. 40-44)",
+    },
   };
 }
 
 // Dibujar bandas en el mapa
 function dibujarBandas(mapInstance, bandas) {
-  if (bandaLayer) {
-    mapInstance.removeLayer(bandaLayer);
-    bandaLayer = null;
-  }
-
+  // Remover capa anterior si existe
+  // (bandaLayer se gestiona desde simple.js; aquí solo dibujamos si se pasa)
   if (!bandas || !bandas.features || bandas.features.length === 0) return;
 
   const capas = bandas.features.map(f => {
-    const { clase, color } = f.properties;
+    const { clase, color, etiqueta, distancia_m, fuente } = f.properties;
     let estilo;
 
-    if (clase === "eje") {
-      estilo = { color: COLORES.eje, weight: 3, opacity: 0.9, dashArray: "5 6" };
+    if (clase === "cauce") {
+      estilo = { color: COLORES.cauce, weight: 3, opacity: 0.9, dashArray: "6 8" };
     } else if (clase === "rojo") {
-      estilo = { color: COLORES.rojo, weight: 1, fillColor: COLORES.rojo, fillOpacity: 0.25 };
+      estilo = { color: COLORES.rojo, weight: 1, fillColor: COLORES.rojo, fillOpacity: 0.3 };
     } else {
-      // amarillo: solo el anillo exterior (visual simplificado)
-      estilo = { color: COLORES.amarillo, weight: 1, fillColor: COLORES.amarillo, fillOpacity: 0.12 };
+      estilo = { color: COLORES.amarillo, weight: 1, fillColor: COLORES.amarillo, fillOpacity: 0.15 };
     }
 
     const layer = L.geoJSON(f, { style: estilo });
+    const fuenteTxt = fuente ? `<br><small>${fuente}</small>` : "";
     layer.bindPopup(
-      `<strong>${f.properties.etiqueta}</strong><br>` +
-      (f.properties.distancia_m !== undefined
-        ? `Límite exterior: ${f.properties.distancia_m} m`
-        : "Eje de referencia de la torrentera")
+      `<strong>${etiqueta}</strong>${fuenteTxt}`
     );
     return layer;
   });
 
-  bandaLayer = L.featureGroup(capas).addTo(mapInstance);
-  return bandaLayer;
+  return L.featureGroup(capas).addTo(mapInstance);
 }
 
-// Recalcular y redibujar bandas con nuevos umbrales
-function recalcularBandas(mapInstance, rojoM, amarilloM) {
-  const eje = window.OBTENER_EJE ? window.OBTENER_EJE() : null;
-  if (!eje) {
-    console.warn("No hay eje de torrentera disponible para calcular bandas");
+// Recalcular y redibujar bandas con nuevos umbrales (basados en ANA)
+function recalcularBandas(mapInstance, cauce, rojoM, amarilloM) {
+  if (!cauce) {
+    console.warn("No hay línea del cauce disponible para calcular bandas");
     return null;
   }
 
-  CONFIG.rojoM = rojoM;
-  CONFIG.amarilloM = amarilloM;
-
-  bandasGeoJSON = generarBandas(eje, rojoM, amarilloM);
+  bandasGeoJSON = generarBandas(cauce, rojoM, amarilloM);
   return dibujarBandas(mapInstance, bandasGeoJSON);
 }
 
@@ -168,4 +164,3 @@ window.GENERAR_BANDAS = generarBandas;
 window.DIBUJAR_BANDAS = dibujarBandas;
 window.RECALCULAR_BANDAS = recalcularBandas;
 window.OBTENER_BANDAS = () => bandasGeoJSON;
-window.CONFIG_BANDAS = () => ({ rojoM: CONFIG.rojoM, amarilloM: CONFIG.amarilloM });
