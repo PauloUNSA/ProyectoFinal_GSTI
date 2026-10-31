@@ -2,8 +2,8 @@
 
 /* ============================================================
    Chullo Unificado - data.js
-   Datos embebidos: puntos ANA (Cayma + Yanahuara) y límites de faja (Cayma).
-   Se cargan desde archivos GeoJSON locales en web/layers/.
+   Datos: puntos ANA, límites de faja, configuración.
+   No declara capas Leaflet ni el mapa (eso está en simple.js).
    ============================================================ */
 
 const CHULLO = {
@@ -16,20 +16,15 @@ const CHULLO = {
   crs: { original: "EPSG:32719", geojson: "EPSG:4326" },
 };
 
-// Referencias a capas Leaflet (se asignan en simple.js)
-let pointLayer = null;
-let boundaryLayer = null;
-let bandaLayer = null;
-let edificioLayer = null;
-let satelitalLayer = null;
-let map = null;
-let ejeTorrentera = null; // LineString del eje calculado
-
+// Configuración por defecto (valores ANA: faja documental 4 m, franja seguridad 20 m)
 const CONFIG = {
-  rojoM: 25,
-  amarilloM: 25,
+  rojoM: 4,
+  amarilloM: 20,
   umbralDeteccion: 0.5,
 };
+
+// Referencias globales (se asignan desde simple.js)
+let ejeTorrentera = null;
 
 // Cargar GeoJSON de hitos ANA
 async function cargarHitos() {
@@ -59,7 +54,7 @@ async function cargarLimites() {
   }
 }
 
-// Calcular eje aproximado de la torrentera como línea central entre los dos límites
+// Calcular línea del cauce uniendo los dos límites documentales (punto medio entre márgenes)
 function calcularEjeTorrentera(limites) {
   if (!limites || !limites.features || limites.features.length < 2) return null;
 
@@ -71,7 +66,6 @@ function calcularEjeTorrentera(limites) {
   const coordsD = derecha.geometry.coordinates;
   const coordsI = izquierda.geometry.coordinates;
 
-  // Interpolar puntos medios a lo largo del tramo común
   const n = Math.min(coordsD.length, coordsI.length);
   const ejeCoords = [];
   for (let i = 0; i < n; i++) {
@@ -80,23 +74,25 @@ function calcularEjeTorrentera(limites) {
     ejeCoords.push([lon, lat]);
   }
 
+  if (ejeCoords.length > 2) {
+    ejeCoords.push(ejeCoords[0]);
+  }
+
   return {
     type: "Feature",
     geometry: { type: "LineString", coordinates: ejeCoords },
     properties: {
       role: "torrentera_axis",
-      description: "Eje aproximado de la torrentera Chullo (media entre límites documentales de Cayma)",
-      fuente: "Calculado a partir de límites ANA Cayma",
+      description: "Línea del cauce de la torrentera Chullo (unión de límites documentales ANA)",
+      fuente: "ANA Cayma · Tabla 02 de vértices (planos pp. 40-44)",
     },
   };
 }
 
-// Obtener el eje (se calcula una vez cargados los límites)
 function obtenerEje() {
   return ejeTorrentera;
 }
 
-// Exportar para uso en otros módulos
 window.CHULLO = CHULLO;
 window.CARGAR_HITOS = cargarHitos;
 window.CARGAR_LIMITES = cargarLimites;

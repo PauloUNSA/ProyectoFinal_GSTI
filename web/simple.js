@@ -3,24 +3,19 @@
 /* ============================================================
    Chullo Unificado - simple.js
    Lógica principal del mapa Leaflet: inicialización, capas,
-   puntos ANA, límites de faja, franjas de proximidad y UI.
+   puntos ANA, límites de faja, línea del cauce, franjas de
+   proximidad y UI limpia (sin controles grandes sobre el mapa).
    ============================================================ */
 
 let map = null;
 let puntoLayer = null;
 let limiteLayer = null;
-let bandaLayer = null;
 let edificioLayer = null;
 let satelitalLayer = null;
-let ejeTorrentera = null;
+// bandaLayer se declara en bands.js; ejeTorrentera se declara en data.js (ambos globales)
 
 const TILES_OSM = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const TILES_SATELITAL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
-
-const CONFIG = {
-  rojoM: 25,
-  amarilloM: 25,
-};
 
 function esc(v) {
   return String(v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -59,51 +54,45 @@ function initMap() {
     attribution: "&copy; <a href='https://www.esri.com/' target='_blank' rel='noopener'>Esri</a> · World Imagery",
   });
 
-  osm.addTo(map);
+  satelitalLayer.addTo(map);
   document.getElementById("map-state").textContent = "Conectado";
   document.getElementById("map-state").className = "ready";
 
   L.control.scale({ imperial: false, maxWidth: 150 }).addTo(map);
 
-  // Control de capas base
   const baseLayers = {
-    "OpenStreetMap (callejero)": osm,
     "Imagen satelital (Esri)": satelitalLayer,
+    "OpenStreetMap (callejero)": osm,
   };
   L.control.layers(baseLayers, null, { collapsed: false, position: "topright" }).addTo(map);
 
   new ResizeObserver(() => map.invalidateSize()).observe(document.getElementById("map"));
 
-  // Cargar datos y capas
   cargarTodo();
 }
 
 // ------------------------------------------------------------------
-// Cargar hitos, límites y calcular eje
+// Cargar datos y dibujar capas
 // ------------------------------------------------------------------
 async function cargarTodo() {
-  // Hitos
   if (window.CARGAR_HITOS) await window.CARGAR_HITOS();
-  // Límites
   if (window.CARGAR_LIMITES) await window.CARGAR_LIMITES();
 
-  // Calcular eje de torrentera desde los límites
   const limites = window.CHULLO_BOUNDARIES;
   if (limites && window.CALCULAR_EJE) {
     ejeTorrentera = window.CALCULAR_EJE(limites);
+    window.ejeTorrentera = ejeTorrentera;
   }
 
-  // Dibujar capas
   dibujarPuntos();
   dibujarLimites();
   dibujarBandas();
 
-  // Configurar controles de UI
   configurarUI();
 }
 
 // ------------------------------------------------------------------
-// Puntos ANA (hitos)
+// Puntos ANA
 // ------------------------------------------------------------------
 function dibujarPuntos() {
   if (puntoLayer && map) map.removeLayer(puntoLayer);
@@ -137,8 +126,8 @@ function dibujarPuntos() {
           `<dl style="margin:8px 0">` +
           `<dt>Latitud</dt><dd>${c.lat}</dd>` +
           `<dt>Longitud</dt><dd>${c.lon}</dd>` +
-          `<dt>Este</dt><dd>${p.easting} m</dd>` +
-          `<dt>Norte</dt><dd>${p.norte || p.northing} m</dd>` +
+          `<dt>Este (UTM)</dt><dd>${p.easting} m</dd>` +
+          `<dt>Norte (UTM)</dt><dd>${p.norte || p.northing} m</dd>` +
           `</dl>` +
           `<button class="source-button" data-open-source data-id="${esc(f.id)}">Ver fila de origen</button>` +
           `</div>`;
@@ -153,7 +142,7 @@ function dibujarPuntos() {
 }
 
 // ------------------------------------------------------------------
-// Límites de faja (líneas exteriores Cayma)
+// Límites de faja
 // ------------------------------------------------------------------
 function dibujarLimites() {
   if (limiteLayer && map) map.removeLayer(limiteLayer);
@@ -170,8 +159,7 @@ function dibujarLimites() {
       const p = feature.properties;
       layer.bindPopup(
         `<strong>Límite exterior de faja · ${p.bank}</strong><br>` +
-        `Cayma · ${p.vertices} vértices del documento ANA.<br>` +
-        `Tabla 02 · RD 1610-2018`,
+        `Cayma · ${p.vertices} vértices · Tabla 02 · RD 1610-2018`,
         { maxWidth: 300 }
       );
     },
@@ -179,26 +167,18 @@ function dibujarLimites() {
 }
 
 // ------------------------------------------------------------------
-// Franjas de proximidad
+// Línea del cauce + franjas (sin recursión: dibujarBandas solo dibuja)
 // ------------------------------------------------------------------
 function dibujarBandas() {
-  if (!ejeTorrentera || !map) return;
-  if (window.RECALCULAR_BANDAS) {
-    bandaLayer = window.RECALCULAR_BANDAS(map, CONFIG.rojoM, CONFIG.amarilloM);
-  }
+  if (!map) return;
 
-  // Dibujar línea del eje si no está en bandas
-  if (ejeTorrentera) {
-    const ejeLayer = L.geoJSON(ejeTorrentera, {
-      style: { color: "#07838a", weight: 3, opacity: 0.9, dashArray: "5 6" },
-    });
-    ejeLayer.bindPopup("Eje aproximado de la torrentera Chullo (media entre límites documentales)");
-    if (bandaLayer) {
-      // Añadir al feature group de bandas si existe
-      bandaLayer.addLayer(ejeLayer);
-    } else {
-      ejeLayer.addTo(map);
-    }
+  const eje = window.ejeTorrentera || window.OBTENER_EJE ? window.OBTENER_EJE() : null;
+  if (!eje) return;
+
+  const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
+
+  if (window.DIBUJAR_BANDAS) {
+    bandaLayer = window.DIBUJAR_BANDAS(map, window.GENERAR_BANDAS(eje, cfg.rojoM, cfg.amarilloM));
   }
 
   actualizarInfoPanel();
@@ -210,7 +190,8 @@ function dibujarBandas() {
 function dibujarEdificiosDetectados(geojson) {
   if (!map) return;
   if (window.DIBUJAR_EDIFICIOS) {
-    edificioLayer = window.DIBUJAR_EDIFICIOS(map, geojson, CONFIG.rojoM, CONFIG.amarilloM);
+    const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
+    edificioLayer = window.DIBUJAR_EDIFICIOS(map, geojson, cfg.rojoM, cfg.amarilloM);
   }
 }
 
@@ -220,20 +201,19 @@ function limpiarEdificios() {
     edificioLayer = null;
   }
   const panel = document.getElementById("edificio-info");
-  if (panel) panel.innerHTML = `<p class="vacio">Edificios eliminados. Ejecuta la detección para volver a cargarlos.</p>`;
+  if (panel) panel.innerHTML = `<p class="vacio">Edificios eliminados. Ejecuta la detección CNN para volver a cargarlos.</p>`;
 }
 
 // ------------------------------------------------------------------
-// UI y controles
+// UI limpia (solo toggles de capa, sin inputs grandes sobre el mapa)
 // ------------------------------------------------------------------
 function configurarUI() {
-  // Toggle capas
   const toggles = {
-    layer-hitos: () => toggleCapa(puntoLayer, "layer-hitos"),
-    layer-limites: () => toggleCapa(limiteLayer, "layer-limites"),
-    layer-bandas: () => toggleCapa(bandaLayer, "layer-bandas"),
-    layer-edificios: () => toggleCapa(edificioLayer, "layer-edificios"),
-    layer-satelital: toggleSatelital,
+    "layer-hitos": () => toggleCapa(puntoLayer, "layer-hitos"),
+    "layer-limites": () => toggleCapa(limiteLayer, "layer-limites"),
+    "layer-bandas": () => toggleCapa(bandaLayer, "layer-bandas"),
+    "layer-edificios": () => toggleCapa(edificioLayer, "layer-edificios"),
+    "layer-satelital": toggleSatelital,
   };
 
   Object.entries(toggles).forEach(([id, fn]) => {
@@ -241,49 +221,47 @@ function configurarUI() {
     if (el) el.addEventListener("change", fn);
   });
 
-  // Recalcular bandas
-  const btnRecalcular = document.getElementById("btn-recalcular-bandas");
-  const inputRojo = document.getElementById("band-rojo");
-  const inputAmarillo = document.getElementById("band-amarillo");
-
-  if (btnRecalcular && inputRojo && inputAmarillo) {
-    btnRecalcular.addEventListener("click", () => {
-      const rojo = parseFloat(inputRojo.value) || 25;
-      const amarillo = parseFloat(inputAmarillo.value) || 25;
-      CONFIG.rojoM = rojo;
-      CONFIG.amarilloM = amarillo;
-      if (window.RECALCULAR_BANDAS) {
-        bandaLayer = window.RECALCULAR_BANDAS(map, rojo, amarillo);
-      }
-      // Reclasificar edificios existentes si los hay
-      if (edificioLayer && window.EJECUTAR_DETECCION) {
-        // Los edificios ya dibujados se reclasifican al recargar su GeoJSON
-        // Aquí solo actualizamos la configuración global
-      }
-      actualizarInfoPanel();
-    });
-  }
-
-  // Botón detección
+  // Botón detección CNN (envuelto en try/catch para no romper la app)
   const btnDetect = document.getElementById("btn-run-detect");
   if (btnDetect && window.EJECUTAR_DETECCION) {
-    btnDetect.addEventListener("click", () => {
-      // Imagen por defecto del sector (si existe)
-      const imagen = "data/imagery/chullo/chullo_rgb.tif";
-      window.EJECUTAR_DETECCION(imagen, CONFIG.umbralDeteccion || 0.5);
+    btnDetect.addEventListener("click", async () => {
+      btnDetect.disabled = true;
+      btnDetect.textContent = "Procesando CNN…";
+      const status = document.getElementById("detect-status");
+      if (status) status.innerHTML = `<p>Ejecutando detector CNN… esto puede tardar varios minutos.</p>`;
+
+      try {
+        const imagen = "data/imagery/chullo/chullo_rgb.tif";
+        await window.EJECUTAR_DETECCION(imagen, 0.5);
+      } catch (err) {
+        console.error("Error en detección CNN:", err);
+        if (status) status.innerHTML = `<p style="color:#dc2626">Error: ${err.message}</p>`;
+        alert(`No se pudo ejecutar la detección: ${err.message}`);
+      } finally {
+        btnDetect.disabled = false;
+        btnDetect.textContent = "Ejecutar detección CNN sobre imagen del sector";
+      }
     });
   }
 
-  // Botón detectar edificios (header)
   const btnDetected = document.getElementById("btn-detected");
   if (btnDetected && window.EJECUTAR_DETECCION) {
-    btnDetected.addEventListener("click", () => {
-      const imagen = "data/imagery/chullo/chullo_rgb.tif";
-      window.EJECUTAR_DETECCION(imagen, CONFIG.umbralDeteccion || 0.5);
+    btnDetected.addEventListener("click", async () => {
+      btnDetected.disabled = true;
+      btnDetected.textContent = "Procesando CNN…";
+      try {
+        const imagen = "data/imagery/chullo/chullo_rgb.tif";
+        await window.EJECUTAR_DETECCION(imagen, 0.5);
+      } catch (err) {
+        console.error("Error en detección CNN:", err);
+        alert(`No se pudo ejecutar la detección: ${err.message}`);
+      } finally {
+        btnDetected.disabled = false;
+        btnDetected.textContent = "Detectar edificios (CNN)";
+      }
     });
   }
 
-  // Diálogo de fuente
   const dialog = document.getElementById("source-dialog");
   const btnClose = document.getElementById("close-source");
   btnClose.addEventListener("click", () => dialog.close());
@@ -291,7 +269,6 @@ function configurarUI() {
     if (ev.target === dialog) dialog.close();
   });
 
-  // Delegación para botones "Ver fila de origen" en popups
   document.getElementById("map").addEventListener("click", ev => {
     const btn = ev.target.closest("[data-open-source]");
     if (!btn) return;
@@ -322,18 +299,20 @@ function toggleSatelital(ev) {
 }
 
 // ------------------------------------------------------------------
-// Información de faja y edificio en panel lateral
+// Paneles laterales
 // ------------------------------------------------------------------
 function actualizarInfoPanel() {
   const panel = document.getElementById("panel-info");
   if (!panel) return;
-  const rojo = CONFIG.rojoM;
-  const amarillo = CONFIG.amarilloM;
+  const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
+  const rojo = cfg.rojoM;
+  const amarillo = cfg.amarilloM;
   const exterior = rojo + amarillo;
   panel.innerHTML =
-    `<strong>Franjas de proximidad</strong><br>` +
-    `Rojo: 0 a ${rojo} m · Amarillo: ${rojo} a ${exterior} m · Verde: &gt; ${exterior} m<br>` +
-    `<small>Calculado desde el eje de la torrentera Chullo.</small>`;
+    `<strong>Franjas (valores ANA)</strong><br>` +
+    `Rojo: 0 a ${rojo} m (faja documental)<br>` +
+    `Amarillo: ${rojo} a ${exterior} m (seguridad)<br>` +
+    `Verde: &gt; ${exterior} m`;
 }
 
 function abrirFuente(id) {
@@ -378,7 +357,7 @@ function abrirFuente(id) {
     `<p class="small">${esc(p.source_title || "")}</p>` +
     `<p class="source-location">${esc(p.source_locator || "")}</p>` +
     `<table class="source-values">` +
-    `<thead><tr><th>Hito</th><th>Este · m</th><th>Norte · m</th></tr></thead>` +
+    `<thead><tr><th>Hito</th><th>Este (UTM) · m</th><th>Norte (UTM) · m</th></tr></thead>` +
     `<tbody><tr><td>${esc(p.source_code || p.code)}</td><td>${p.easting}</td><td>${p.norte || p.northing}</td></tr></tbody>` +
     `</table>` + fragment +
     `<p class="source-projection">Coordenadas UTM WGS84 zona 19S convertidas a latitud ${c.lat}, longitud ${c.lon}. No es una medición de campo.</p>` +
@@ -387,15 +366,13 @@ function abrirFuente(id) {
   dialog.showModal();
 }
 
-// Inicializar cuando el DOM esté listo
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initMap);
 } else {
   initMap();
 }
 
-// Exportar para módulos
 window.MAP = () => map;
 window.DIBUJAR_EDIFICIOS_DETECTADOS = dibujarEdificiosDetectados;
 window.LIMPIAR_EDIFICIOS = limpiarEdificios;
-window.OBTENER_CONFIG = () => CONFIG;
+window.OBTENER_CONFIG = () => window.CONFIG || { rojoM: 4, amarilloM: 20 };

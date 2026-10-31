@@ -2,13 +2,14 @@
 
 /* ============================================================
    Chullo Unificado - detection.js
-   Interfaz de detección de edificios con CNN (Mask R-CNN).
+   Detección obligatoria de edificios con CNN (Mask R-CNN).
    Llama al endpoint /api/detect del servidor local.
+   Robusto: errores no rompen la app.
    ============================================================ */
 
-let edificioLayer = null;
 let edificiosGeoJSON = null;
 let detectando = false;
+// edificioLayer se declara en simple.js (compartido entre módulos)
 
 const COLORES_EDIFICIO = {
   rojo: "#dc2626",
@@ -17,22 +18,69 @@ const COLORES_EDIFICIO = {
   desconocido: "#66788b",
 };
 
-// Clasificar un edificio por su distancia al eje de la torrentera
+// Clasificar un edificio por su distancia al cauce (línea de ANA)
 function clasificarEdificio(distanciaM, rojoM, amarilloM) {
   const exterior = rojoM + amarilloM;
   if (distanciaM === null || distanciaM === undefined || !isFinite(distanciaM)) {
     return { clase: "desconocido", etiqueta: "Sin evaluación", color: COLORES_EDIFICIO.desconocido };
   }
   if (distanciaM <= rojoM) {
-    return { clase: "rojo", etiqueta: "Rojo · proximidad inmediata", color: COLORES_EDIFICIO.rojo };
+    return { clase: "rojo", etiqueta: "Rojo · faja documental ANA", color: COLORES_EDIFICIO.rojo };
   }
   if (distanciaM <= rojoM + amarilloM) {
-    return { clase: "amarillo", etiqueta: "Amarillo · proximidad intermedia", color: COLORES_EDIFICIO.amarillo };
+    return { clase: "amarillo", etiqueta: "Amarillo · franja de seguridad", color: COLORES_EDIFICIO.amarillo };
   }
-  return { clase: "verde", etiqueta: "Verde · mayor distancia", color: COLORES_EDIFICIO.verde };
+  return { clase: "verde", etiqueta: "Verde · fuera de franjas ANA", color: COLORES_EDIFICIO.verde };
 }
 
-// Dibujar edificios detectados en el mapa
+// Distancia mínima desde un edificio a la línea del cauce (aproximación en grados → metros)
+function distanciaAlCauce(geometria, cauceCoords) {
+  if (!cauceCoords || cauceCoords.length < 2) return null;
+
+  const obtenerCoords = (geom) => {
+    if (!geom) return [];
+    if (geom.type === "Point") return [[geom.coordinates[0], geom.coordinates[1]]];
+    if (geom.type === "MultiPoint") return geom.coordinates.map(c => [c[0], c[1]]);
+    if (geom.type === "LineString") return geom.coordinates;
+    if (geom.type === "MultiLineString") return geom.coordinates.flat();
+    if (geom.type === "Polygon") return geom.coordinates.flat();
+    if (geom.type === "MultiPolygon") return geom.coordinates.flat(2);
+    return [];
+  };
+
+  const edificioCoords = obtenerCoords(geometria);
+  let minDist = Infinity;
+
+  for (const [lon, lat] of edificioCoords) {
+    for (let i = 0; i < cauceCoords.length - 1; i++) {
+      const [lon1, lat1] = cauceCoords[i];
+      const [lon2, lat2] = cauceCoords[i + 1];
+      const d = distanciaPuntoASegmento(lon, lat, lon1, lat1, lon2, lat2);
+      if (d < minDist) minDist = d;
+    }
+  }
+
+  if (minDist === Infinity) return null;
+
+  const mPorGradoLat = 111000;
+  const mPorGradoLon = 111000 * Math.cos((-16.4 * Math.PI) / 180);
+  return minDist * ((mPorGradoLat + mPorGradoLon) / 2);
+}
+
+function distanciaPuntoASegmento(px, py, x1, y1, x2, y2) {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  if (dx === 0 && dy === 0) {
+    return Math.sqrt((px - x1) ** 2 + (py - y1) ** 2);
+  }
+  const t = ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy);
+  const tClamped = Math.max(0, Math.min(1, t));
+  const closestX = x1 + tClamped * dx;
+  const closestY = y1 + tClamped * dy;
+  return Math.sqrt((px - closestX) ** 2 + (py - closestY) ** 2);
+}
+
+// Dibujar edificios detectados (edificioLayer se declara en simple.js)
 function dibujarEdificios(mapInstance, geojson, rojoM, amarilloM) {
   if (edificioLayer) {
     mapInstance.removeLayer(edificioLayer);
@@ -44,18 +92,16 @@ function dibujarEdificios(mapInstance, geojson, rojoM, amarilloM) {
     return;
   }
 
+  // Línea del cauce para calcular distancias
+  const cauceCoords = window.ejeTorrentera ? window.ejeTorrentera.geometry.coordinates : null;
+
   const capas = geojson.features.map(f => {
     const props = f.properties || {};
-    const distancia = props.distance_m !== undefined ? props.distance_m : null;
+    const distancia = cauceCoords ? distanciaAlCauce(f.geometry, cauceCoords) : (props.distance_m !== undefined ? props.distance_m : null);
     const clasificacion = clasificarEdificio(distancia, rojoM, amarilloM);
     const color = clasificacion.color;
 
-    const estilo = {
-      color,
-      weight: 1.5,
-      fillColor: color,
-      fillOpacity: 0.5,
-    };
+    const estilo = { color, weight: 1.5, fillColor: color, fillOpacity: 0.5 };
 
     const layer = L.geoJSON(f, { style: estilo });
 
@@ -90,7 +136,6 @@ function dibujarEdificios(mapInstance, geojson, rojoM, amarilloM) {
   edificioLayer = L.featureGroup(capas).addTo(mapInstance);
   edificiosGeoJSON = geojson;
 
-  // Ajustar vista a los edificios si hay pocos
   if (capas.length > 0 && capas.length <= 50) {
     const grupo = L.featureGroup(capas);
     mapInstance.fitBounds(grupo.getBounds(), { padding: [40, 40], maxZoom: 17 });
@@ -105,7 +150,7 @@ function dibujarEdificios(mapInstance, geojson, rojoM, amarilloM) {
   return edificioLayer;
 }
 
-// Mostrar resumen de edificios en el panel lateral
+// Mostrar resumen en panel lateral
 function mostrarInfoEdificios(info) {
   const panel = document.getElementById("edificio-info");
   if (!panel) return;
@@ -117,9 +162,9 @@ function mostrarInfoEdificios(info) {
 
   if (info.total !== undefined) {
     panel.innerHTML = `
-      <strong>Edificios detectados: ${info.total}</strong><br>
-      <small>Límite rojo: ${info.rojoM} m · Ancho amarillo: ${info.amarilloM} m</small>
-      <p class="vacio">Selecciona un edificio en el mapa para ver su ficha detallada.</p>
+      <strong>Edificios detectados (CNN): ${info.total}</strong><br>
+      <small>Faja documental rojo: ${info.rojoM} m · Franja seguridad amarillo: ${info.amarilloM} m</small>
+      <p class="vacio">Selecciona un edificio en el mapa para ver su ficha.</p>
     `;
     return;
   }
@@ -136,13 +181,13 @@ function mostrarInfoEdificios(info) {
     <div><strong>Fuente:</strong> ${info.fuente}</div>
     <div><strong>Fecha observación:</strong> ${info.observado}</div>
     <p style="margin-top:10px;font-size:14px;color:#536259">
-      La distancia se mide desde el punto más cercano del edificio al eje de la torrentera.
-      Verde no significa seguro ni edificable.
+      La distancia se mide desde el punto más cercano del edificio a la línea del cauce
+      (unión de límites documentales de ANA). Verde no significa seguro ni edificable.
     </p>
   `;
 }
 
-// Ejecutar detección CNN vía API del servidor
+// Ejecutar detección CNN vía API (envuelto para no romper la app si falla)
 async function ejecutarDeteccion(imagenPath, umbral = 0.5) {
   if (detectando) {
     alert("Ya hay una detección en curso. Espera a que termine.");
@@ -151,11 +196,17 @@ async function ejecutarDeteccion(imagenPath, umbral = 0.5) {
 
   detectando = true;
   const btn = document.getElementById("btn-run-detect");
+  const btnHeader = document.getElementById("btn-detected");
   const status = document.getElementById("detect-status");
   const mapaEstado = document.getElementById("cnn-state");
 
-  if (btn) { btn.disabled = true; btn.textContent = "Procesando…"; }
-  if (status) status.innerHTML = `<p>Ejecutando detector CNN… esto puede tardar varios minutos.</p>`;
+  const setBtns = (disabled, text) => {
+    if (btn) { btn.disabled = disabled; btn.textContent = text; }
+    if (btnHeader) { btnHeader.disabled = disabled; btnHeader.textContent = text; }
+  };
+
+  setBtns(true, "Procesando CNN…");
+  if (status) status.innerHTML = `<p>Ejecutando detector CNN sobre imagen satelital… puede tardar varios minutos.</p>`;
   if (mapaEstado) { mapaEstado.textContent = "Procesando…"; mapaEstado.className = "warning"; }
 
   try {
@@ -166,13 +217,14 @@ async function ejecutarDeteccion(imagenPath, umbral = 0.5) {
     }).toString();
 
     const resp = await fetch(`/api/detect?${query}`, { method: "GET" });
+    if (!resp.ok) throw new Error(`Servidor respondió ${resp.status}`);
+
     const resultado = await resp.json();
 
     if (resultado.estado !== "completado") {
       throw new Error(resultado.error || "Error en la detección");
     }
 
-    // Cargar el GeoJSON de edificios generado
     const salida = resultado.salida || "outputs/detection";
     const geojsonResp = await fetch(`${salida}/buildings.geojson`);
     if (!geojsonResp.ok) {
@@ -180,31 +232,31 @@ async function ejecutarDeteccion(imagenPath, umbral = 0.5) {
     }
     const geojson = await geojsonResp.json();
 
-    const cfg = window.CONFIG_BANDAS ? window.CONFIG_BANDAS() : { rojoM: 25, amarilloM: 25 };
+    const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
     dibujarEdificios(map, geojson, cfg.rojoM, cfg.amarilloM);
 
-    if (status) status.innerHTML = `<p style="color:var(--green)">Detección completada: ${resultado.manifest ? resultado.manifest.count : "N/A"} edificios.</p>`;
-    if (mapaEstado) { mapaEstado.textContent = "Detectado"; mapaEstado.className = "ready"; }
+    if (status) status.innerHTML = `<p style="color:var(--green)">Detección CNN completada: ${resultado.manifest ? resultado.manifest.count : "N/A"} edificios.</p>`;
+    if (mapaEstado) { mapaEstado.textContent = "CNN activo"; mapaEstado.className = "ready"; }
 
     return resultado;
   } catch (err) {
-    console.error(err);
+    console.error("Error en detección CNN:", err);
     if (status) status.innerHTML = `<p style="color:#dc2626">Error: ${err.message}</p>`;
-    if (mapaEstado) { mapaEstado.textContent = "Error"; mapaEstado.className = "error"; }
-    alert(`Error en la detección: ${err.message}`);
+    if (mapaEstado) { mapaEstado.textContent = "Error CNN"; mapaEstado.className = "error"; }
+    alert(`No se pudo ejecutar la detección: ${err.message}`);
+    throw err;
   } finally {
     detectando = false;
-    if (btn) { btn.disabled = false; btn.textContent = "Ejecutar detección sobre imagen del sector"; }
+    setBtns(false, "Ejecutar detección CNN sobre imagen del sector");
   }
 }
 
-// Cargar un archivo GeoJSON de edificios previamente generado
 async function cargarEdificiosGeoJSON(ruta, mapInstance) {
   try {
     const resp = await fetch(ruta);
     if (!resp.ok) throw new Error(`No se pudo cargar ${ruta}`);
     const geojson = await resp.json();
-    const cfg = window.CONFIG_BANDAS ? window.CONFIG_BANDAS() : { rojoM: 25, amarilloM: 25 };
+    const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
     return dibujarEdificios(mapInstance, geojson, cfg.rojoM, cfg.amarilloM);
   } catch (e) {
     console.error("Error cargando edificios:", e);
@@ -212,9 +264,9 @@ async function cargarEdificiosGeoJSON(ruta, mapInstance) {
   }
 }
 
-// Exportar
 window.DIBUJAR_EDIFICIOS = dibujarEdificios;
 window.EJECUTAR_DETECCION = ejecutarDeteccion;
 window.CARGAR_EDIFICIOS_GEOJSON = cargarEdificiosGeoJSON;
 window.MOSTRAR_INFO_EDIFICIOS = mostrarInfoEdificios;
 window.CLASIFICAR_EDIFICIO = clasificarEdificio;
+window.DISTANCIA_AL_CAUCE = distanciaAlCauce;
