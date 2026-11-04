@@ -4,6 +4,63 @@ Proyecto Chullo Unificado: visor de franjas ANA y detección de cubiertas con CN
 
 Visor local de los límites documentales ANA y detección automática de cubiertas con Mask R-CNN.
 
+## Despliegue
+
+**Demo pública:** https://paulounsa.github.io/ProyectoFinal_GSTI/
+
+| Opción | Qué permite probar | Requisitos |
+| --- | --- | --- |
+| GitHub Pages | Mapa, franjas de 20 m, fichas y 405 detecciones guardadas | Navegador; sin instalar Python |
+| Docker / servidor Python | Recalcular franjas y ejecutar nuevas inferencias | Docker, o Python y pesos; memoria suficiente |
+
+La demo estática no ejecuta PyTorch. Las inferencias anteriores se identifican como resultados guardados. GitHub Pages sirve archivos estáticos; la CNN requiere el servidor completo.
+
+### Publicar tu propia demo en GitHub Pages
+
+1. Haz un fork de este repositorio y activa **Actions**.
+2. En **Settings → Pages → Build and deployment**, selecciona **GitHub Actions**.
+3. Ejecuta **Actions → Publicar visor en GitHub Pages → Run workflow** sobre `main` (o realiza un push a `main`).
+4. Espera a que termine el despliegue. El trabajo muestra la URL en el entorno `github-pages`.
+
+El archivo `.github/workflows/pages.yml` genera y publica `dist/` automáticamente. Esta demo no descarga el modelo LFS: usa los contornos guardados y genera las franjas mediante Shapely/PyProj. Funciona bajo el subdirectorio de un repositorio de Pages.
+
+Para generar y probar los mismos archivos en tu equipo:
+
+```powershell
+python -m pip install numpy shapely pyproj
+python scripts/build_static.py
+python -m http.server 8081 --directory dist
+```
+
+Abre http://localhost:8081/. `dist/` también puede subirse como sitio estático a otro proveedor.
+
+### Ejecutar la aplicación completa con Docker
+
+Instala Docker Desktop (contenedores Linux) o Docker Engine. Después de clonar el repositorio:
+
+```powershell
+docker build -t chullo-gsti .
+docker run --rm -p 8080:8080 -e CHULLO_ENABLE_DETECTION=1 chullo-gsti
+```
+
+Abre http://localhost:8080/. Esta variante permite ejecutar nuevas inferencias desde el botón del visor. La imagen incluye PyTorch CPU y el checkpoint verificado. Si el proveedor solo entrega el puntero Git LFS, `scripts/ensure_weights.py` obtiene la revisión pública fijada y comprueba su SHA256.
+
+Para un servidor remoto: enlaza el contenedor a su puerto público y configura `HOST=0.0.0.0` y `PORT` (por defecto 8080). El contenedor usa esos valores. Reserva inicialmente unos **4 GB de RAM** para probar la CNN y ajusta según el consumo real. No se ha medido un mínimo garantizado en todos los proveedores.
+
+El contenedor desactiva nuevas inferencias por defecto (`CHULLO_ENABLE_DETECTION=0`). Actívalas explícitamente con `1` cuando el servicio tenga recursos disponibles. Se admite una inferencia simultánea por proceso. Los resultados se guardan en el contenedor y se pierden si se reemplaza; conserva los GeoJSON o configura almacenamiento persistente si necesitas historial.
+
+### Desplegar el contenedor en Render
+
+1. Crea una cuenta en Render y conecta tu repositorio GitHub.
+2. Selecciona **New → Web Service** y este repositorio.
+3. Elige **Docker** como lenguaje y `Dockerfile` como ruta. No necesitas un comando de inicio adicional.
+4. Define `CHULLO_ENABLE_DETECTION=1` si vas a permitir inferencias; escoge recursos suficientes para la CNN.
+5. Publica el servicio y abre la URL HTTPS que Render asigne.
+
+Esta preparación no crea un servicio de pago ni configura una cuenta de Render. La URL pública verificada del proyecto es la demo en GitHub Pages. La inferencia es síncrona y puede tardar varios minutos: comprueba los límites de tiempo del proxy/proveedor. Para uso concurrente se debe pasar a una cola de trabajos y almacenamiento persistente.
+
+Documentación oficial: [GitHub Pages y Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [Docker en Render](https://render.com/docs/docker).
+
 ## Clonar con el modelo CNN
 
 Los pesos se distribuyen mediante Git LFS. Antes de ejecutar la detección:

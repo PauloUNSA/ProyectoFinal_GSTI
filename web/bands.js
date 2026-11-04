@@ -6,6 +6,12 @@ let bandaLayer = null;
 
 async function generarBandas(limites, rojoM, amarilloM) {
   if (!limites) throw new Error("Faltan los límites documentales.");
+  if (window.CHULLO_STATIC) {
+    if (Number(amarilloM) !== 20) throw new Error("La demo pública muestra franjas de 20 m. Para recalcular, usa el servidor Python.");
+    const resp = await fetch("layers/bandas-proximidad.geojson");
+    if (!resp.ok) throw new Error("No se pudieron cargar las franjas publicadas.");
+    return resp.json();
+  }
   const resp = await fetch(`/api/bands?amarillo=${encodeURIComponent(amarilloM)}`);
   const bandas = await resp.json();
   if (!resp.ok) throw new Error(bandas.error || "No se pudieron calcular las franjas.");

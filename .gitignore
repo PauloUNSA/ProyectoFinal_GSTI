@@ -18,3 +18,5 @@ models/**/*.pth
 outputs/qa/
 
 !models/chullo_local_v1/weights.pth
+
+dist/

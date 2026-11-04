@@ -55,6 +55,28 @@ function mostrarEstadoDeteccion(manifest) {
 async function cargarEstadoDetector() {
   const estado = document.getElementById("cnn-state");
   try {
+    if (window.CHULLO_STATIC) {
+      const resp = await fetch("outputs/detection/manifest.json");
+      if (!resp.ok) throw new Error("No se pudo cargar el manifiesto publicado.");
+      const manifest = await resp.json();
+      await cargarEdificiosGeoJSON("outputs/detection/buildings.geojson", window.MAP());
+      mostrarEstadoDeteccion(manifest);
+      estado.textContent = "Resultados guardados";
+      estado.className = "ready";
+      document.getElementById("btn-run-detect").disabled = true;
+      document.getElementById("btn-run-detect").textContent = "Nuevas inferencias: ejecutar servidor Python";
+      document.getElementById("band-amarillo").disabled = true;
+      document.getElementById("btn-recalcular-bandas").disabled = true;
+      const note = document.createElement("p");
+      note.className = "note";
+      note.textContent = `Demo pública: explora las franjas y las ${manifest.count} detecciones guardadas. Aquí no se ejecuta una CNN nueva. Para probar la inferencia, sigue el README del repositorio.`;
+      const link = document.createElement("a");
+      link.href = "https://github.com/PauloUNSA/ProyectoFinal_GSTI#despliegue";
+      link.textContent = " Ver instrucciones de despliegue";
+      note.append(link);
+      document.getElementById("detector-panel").append(note);
+      return;
+    }
     const resp = await fetch("/api/status");
     const data = await resp.json();
     if (!resp.ok) throw new Error(data.error || "No se pudo consultar el detector.");

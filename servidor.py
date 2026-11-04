@@ -87,10 +87,15 @@ class Archivos(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def _run_detection(self, params):
+        if os.getenv("CHULLO_ENABLE_DETECTION", "1") != "1":
+            self._send_json(403, {"estado": "error", "error": "Las nuevas inferencias están desactivadas en este servidor."})
+            return
         from backend.raster import validar_imagen
         imagen = Path(params.get("imagen", [str(DEFAULT_IMAGE)])[0])
         if not imagen.is_absolute():
             imagen = BASE_DIR / imagen
+        if os.getenv("CHULLO_PUBLIC", "0") == "1" and imagen.resolve() != DEFAULT_IMAGE.resolve():
+            raise ValueError("El servidor público solo analiza la imagen del sector configurada.")
         umbral = float(params.get("umbral", [0.5])[0])
         amarillo = float(params.get("amarillo", [20])[0])
         if not math.isfinite(umbral) or not 0 <= umbral <= 1:
@@ -154,18 +159,19 @@ class Archivos(SimpleHTTPRequestHandler):
             if candidato.get("estado") == "completado" and candidato.get("zonas", {}).get("geometria") == "corredor_entre_limites":
                 manifest = candidato
         self._send_json(200, {"servidor": "chullo-unificado", "puerto": self.server.server_address[1],
-                              "cnn_disponible": error is None, "error": error, "imagen": imagen,
+                              "cnn_disponible": error is None and os.getenv("CHULLO_ENABLE_DETECTION", "1") == "1", "error": error, "imagen": imagen,
                               "modelo": "Mask R-CNN · Chullo local v1 (piloto)", "manifest": manifest,
                               "detecciones_disponibles": ["buildings.geojson"] if manifest else []})
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--puerto", type=int, default=4173)
+    parser.add_argument("--puerto", type=int, default=int(os.getenv("PORT", "4173")))
+    parser.add_argument("--host", default=os.getenv("HOST", "127.0.0.1"))
     parser.add_argument("--abrir", action="store_true")
     args = parser.parse_args()
     try:
-        servidor = ServidorLocal(("127.0.0.1", args.puerto), partial(Archivos, directory=str(WEB_DIR)))
+        servidor = ServidorLocal((args.host, args.puerto), partial(Archivos, directory=str(WEB_DIR)))
     except OSError as exc:
         parser.exit(1, f"No se pudo abrir el puerto {args.puerto}: {exc}. Cierra la instancia anterior o usa --puerto 4174.\n")
     url = f"http://127.0.0.1:{args.puerto}/"

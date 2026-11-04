@@ -199,3 +199,20 @@ def test_fallo_de_subproceso_no_sobrescribe(api, imagen, monkeypatch):
         urllib.request.urlopen(api+'/api/detect?imagen='+str(imagen).replace('\\','/'))
     assert exc.value.code == 422
     assert path.read_text() == 'anterior'
+
+
+def test_servidor_publico_restringe_imagen(api, imagen, monkeypatch):
+    monkeypatch.setenv('CHULLO_PUBLIC','1')
+    with pytest.raises(urllib.error.HTTPError) as exc:
+        urllib.request.urlopen(api+'/api/detect?imagen='+str(imagen).replace('\\','/'))
+    assert exc.value.code == 400
+    assert 'solo analiza' in json.load(exc.value)['error']
+
+
+def test_inferencia_desactivada_en_servidor(api, monkeypatch):
+    monkeypatch.setenv('CHULLO_ENABLE_DETECTION','0')
+    with pytest.raises(urllib.error.HTTPError) as exc:
+        urllib.request.urlopen(api+'/api/detect')
+    assert exc.value.code == 403
+    with urllib.request.urlopen(api+'/api/status') as r:
+        assert json.load(r)['cnn_disponible'] is False
