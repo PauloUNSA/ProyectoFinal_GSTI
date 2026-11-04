@@ -216,3 +216,14 @@ def test_inferencia_desactivada_en_servidor(api, monkeypatch):
     assert exc.value.code == 403
     with urllib.request.urlopen(api+'/api/status') as r:
         assert json.load(r)['cnn_disponible'] is False
+
+
+def test_etiquetas_guardadas_en_utf8():
+    from backend.spatial import ETIQUETAS
+    data=json.loads((BASE/'web/outputs/detection/buildings.geojson').read_text(encoding='utf-8'))
+    for f in data['features']:
+        p=f['properties']
+        assert p['etiqueta']==ETIQUETAS[p['clase']]
+        assert p['review_status']=='Sin revisión manual · inferencia IA'
+    manifest=json.loads((BASE/'web/outputs/detection/manifest.json').read_text(encoding='utf-8'))
+    assert manifest['limitaciones'][0]=='Detecciones automáticas sin revisión humana.'

@@ -38,7 +38,7 @@
     "buildings": "/outputs/detection/buildings.geojson"
   },
   "limitaciones": [
-    "Detecciones automÃ¡ticas sin revisiÃ³n humana.",
+    "Detecciones automáticas sin revisión humana.",
     "La confianza no es una probabilidad calibrada de peligro.",
     "Pueden existir omisiones y falsos positivos.",
     "Modelo local piloto: F1 de instancias 0.249 en dos recortes; no garantiza separar viviendas.",

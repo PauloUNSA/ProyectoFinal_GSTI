@@ -13,6 +13,15 @@ const {chromium}=require('playwright');
   assert.equal(await page.locator('#btn-run-detect').isDisabled(),true);
   assert.equal(await page.locator('#btn-recalcular-bandas').isDisabled(),true);
   assert.equal(await page.evaluate(()=>window.OBTENER_BANDAS().features.filter(f=>f.properties.clase==='rojo').length),1);
+  for (const [clase,expected] of [['rojo','Rojo · entre límites documentales ANA'],['amarillo','Amarillo · franja exterior']]) {
+    await page.evaluate(clase=>{
+      const layer=edificioLayer.getLayers().find(l=>l.feature.properties.clase===clase);
+      layer.fire('click');layer.openPopup();
+    },clase);
+    assert.equal(await page.locator('#edificio-info .chip').textContent(),expected);
+    assert.equal(await page.locator('.leaflet-popup-content strong').first().textContent(),expected);
+    assert.doesNotMatch(await page.locator('#edificio-info').textContent(),/[ÃÂ�]/);
+  }
   await page.locator('#layer-edificios').uncheck();await page.locator('#layer-edificios').check();
   assert.deepEqual(api,[]);assert.deepEqual(errors,[]);
   console.log('PASS: demo bajo /dist/, 405 contornos, franjas, controles, sin peticiones API ni errores JS.');
