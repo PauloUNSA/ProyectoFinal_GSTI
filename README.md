@@ -6,7 +6,9 @@ Visor local de los límites documentales ANA y detección automática de cubiert
 
 ## Despliegue
 
-**Demo pública:** https://paulounsa.github.io/ProyectoFinal_GSTI/
+**Demo pública en Sites:** https://chullo-gsti-publico-paulo.paulohidalgoch.chatgpt.site
+
+**GitHub Pages (disponible cuando finalice el workflow):** https://paulounsa.github.io/ProyectoFinal_GSTI/
 
 | Opción | Qué permite probar | Requisitos |
 | --- | --- | --- |
@@ -57,7 +59,7 @@ El contenedor desactiva nuevas inferencias por defecto (`CHULLO_ENABLE_DETECTION
 4. Define `CHULLO_ENABLE_DETECTION=1` si vas a permitir inferencias; escoge recursos suficientes para la CNN.
 5. Publica el servicio y abre la URL HTTPS que Render asigne.
 
-Esta preparación no crea un servicio de pago ni configura una cuenta de Render. La URL pública verificada del proyecto es la demo en GitHub Pages. La inferencia es síncrona y puede tardar varios minutos: comprueba los límites de tiempo del proxy/proveedor. Para uso concurrente se debe pasar a una cola de trabajos y almacenamiento persistente.
+Esta preparación no crea un servicio de pago ni configura una cuenta de Render. La demo pública utiliza los resultados guardados; la CNN en un servidor remoto se configura por separado. La inferencia es síncrona y puede tardar varios minutos: comprueba los límites de tiempo del proxy/proveedor. Para uso concurrente se debe pasar a una cola de trabajos y almacenamiento persistente.
 
 Documentación oficial: [GitHub Pages y Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [Docker en Render](https://render.com/docs/docker).
 
@@ -134,3 +136,7 @@ Se verifican las franjas, el último vértice de ambas márgenes, anillos interi
 ## Alcance de la CNN
 
 El modelo local sigue siendo **experimental**: su evaluación previa en dos recortes del proyecto original obtuvo F1 de instancias ≈0.249, con omisiones, falsos positivos y máscaras que unen techos. Esa cifra no mide su precisión en la nueva imagen Esri. Detecta cubiertas visibles; no confirma viviendas individuales ni su uso residencial. Es necesario revisar los contornos en el mapa.
+
+## Verificación del despliegue
+
+Se aprobaron 28 pruebas del backend y una prueba de navegador de la demo bajo un subdirectorio. Se construyó el Dockerfile en Linux y se ejecutó la CNN real sobre un recorte del GeoTIFF: devolvió 13 contornos. Se comprobó también la API HTTP del contenedor y la carga de los 405 resultados guardados. El contenedor incluye `libexpat1`, requerido por Rasterio en la imagen base slim.

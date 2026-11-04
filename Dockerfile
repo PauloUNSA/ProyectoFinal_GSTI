@@ -4,6 +4,7 @@ WORKDIR /app
 RUN pip install --no-cache-dir torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu
 COPY requirements-detection.txt .
 RUN pip install --no-cache-dir -r requirements-detection.txt
+RUN apt-get update && apt-get install -y --no-install-recommends libexpat1 && rm -rf /var/lib/apt/lists/*
 COPY backend backend
 COPY scripts scripts
 COPY servidor.py .
