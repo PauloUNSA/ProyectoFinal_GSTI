@@ -23,6 +23,8 @@ SCRIPTS_DIR = BASE_DIR / "scripts"
 OUTPUTS_DIR = WEB_DIR / "outputs/detection"
 DEFAULT_IMAGE = BASE_DIR / "data/imagery/chullo/chullo_rgb.tif"
 LIMITES_PATH = WEB_DIR / "layers/limites-faja-cayma.geojson"
+sys.path.insert(0, str(BASE_DIR))
+from backend.modelos import describir, resolver_tipo  # noqa: E402
 DETECTION_LOCK = threading.Lock()
 
 
@@ -96,9 +98,9 @@ class Archivos(SimpleHTTPRequestHandler):
             imagen = BASE_DIR / imagen
         if os.getenv("CHULLO_PUBLIC", "0") == "1" and imagen.resolve() != DEFAULT_IMAGE.resolve():
             raise ValueError("El servidor público solo analiza la imagen del sector configurada.")
-        umbral = float(params.get("umbral", [0.5])[0])
+        umbral = float(params["umbral"][0]) if params.get("umbral") else None
         amarillo = float(params.get("amarillo", [20])[0])
-        if not math.isfinite(umbral) or not 0 <= umbral <= 1:
+        if umbral is not None and (not math.isfinite(umbral) or not 0 <= umbral <= 1):
             raise ValueError("El umbral debe estar entre 0 y 1.")
         if not math.isfinite(amarillo) or not 0 <= amarillo <= 500:
             raise ValueError("El ancho amarillo debe estar entre 0 y 500 m.")
@@ -112,9 +114,12 @@ class Archivos(SimpleHTTPRequestHandler):
             OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
             # Publicar solo resultados completos. Un fallo conserva el resultado anterior.
             with tempfile.TemporaryDirectory(prefix="chullo-cnn-") as temp:
+                comando = [sys.executable, "-u", str(SCRIPTS_DIR / "run_detection.py"), "--imagen", str(imagen),
+                           "--salida", temp, "--amarillo", str(amarillo), "--modelo", resolver_tipo()]
+                if umbral is not None:
+                    comando += ["--umbral", str(umbral)]
                 resultado = subprocess.run(
-                    [sys.executable, "-u", str(SCRIPTS_DIR / "run_detection.py"), "--imagen", str(imagen),
-                     "--salida", temp, "--umbral", str(umbral), "--amarillo", str(amarillo)],
+                    comando,
                     capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=900, cwd=str(BASE_DIR),
                     env={**os.environ, "PYTHONIOENCODING": "utf-8"})
                 if resultado.returncode:
@@ -141,17 +146,20 @@ class Archivos(SimpleHTTPRequestHandler):
 
     def _status(self):
         from backend.raster import validar_imagen
-        faltantes = [m for m in ("numpy", "rasterio", "torch", "torchvision", "shapely", "pyproj") if importlib.util.find_spec(m) is None]
+        try:
+            modelo = describir()
+        except ValueError as exc:
+            modelo = {"nombre": "Desconocido", "error": str(exc), "dependencias": []}
+        faltantes = [m for m in modelo["dependencias"] if importlib.util.find_spec(m) is None]
         imagen, error = None, None
         try:
             imagen = validar_imagen(DEFAULT_IMAGE)
         except Exception as exc:
             error = str(exc)
-        pesos = BASE_DIR / "models/chullo_local_v1/weights.pth"
         if faltantes:
             error = "Faltan dependencias: " + ", ".join(faltantes)
-        elif not pesos.is_file():
-            error = "Falta el modelo local Chullo."
+        elif modelo["error"]:
+            error = modelo["error"]
         manifest = None
         manifest_path = OUTPUTS_DIR / "manifest.json"
         if manifest_path.is_file() and (OUTPUTS_DIR/"buildings.geojson").is_file():
@@ -160,7 +168,7 @@ class Archivos(SimpleHTTPRequestHandler):
                 manifest = candidato
         self._send_json(200, {"servidor": "chullo-unificado", "puerto": self.server.server_address[1],
                               "cnn_disponible": error is None and os.getenv("CHULLO_ENABLE_DETECTION", "1") == "1", "error": error, "imagen": imagen,
-                              "modelo": "Mask R-CNN · Chullo local v1 (piloto)", "manifest": manifest,
+                              "modelo": modelo["nombre"], "manifest": manifest,
                               "detecciones_disponibles": ["buildings.geojson"] if manifest else []})
 
 

@@ -248,7 +248,7 @@ function configurarUI() {
 
       try {
         const imagen = "data/imagery/chullo/chullo_rgb.tif";
-        await window.EJECUTAR_DETECCION(imagen, 0.5);
+        await window.EJECUTAR_DETECCION(imagen);
       } catch (err) {
         console.error("Error en detección CNN:", err);
         if (status) status.innerHTML = `<p style="color:#dc2626">Error: ${err.message}</p>`;
@@ -267,7 +267,7 @@ function configurarUI() {
       btnDetected.textContent = "Procesando CNN…";
       try {
         const imagen = "data/imagery/chullo/chullo_rgb.tif";
-        await window.EJECUTAR_DETECCION(imagen, 0.5);
+        await window.EJECUTAR_DETECCION(imagen);
       } catch (err) {
         console.error("Error en detección CNN:", err);
         alert(`No se pudo ejecutar la detección: ${err.message}`);

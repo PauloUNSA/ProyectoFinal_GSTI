@@ -47,7 +47,7 @@
       <div id="detector-panel">
         <h3>Detección de edificios (CNN)</h3>
         <p>Detecta cubiertas que tocan las zonas roja y amarilla. El rojo tiene prioridad si un contorno toca ambas zonas.</p>
-        <p class="note">Modelo local Chullo v1 (piloto) sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
+        <p class="note" id="modelo-nota">Modelo local Chullo v1 (piloto) sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
         <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
         <div id="detect-status" class="detect-status"></div>
       </div>
