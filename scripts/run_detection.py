@@ -3,7 +3,7 @@
 Uso (PowerShell):
     python scripts/run_detection.py --imagen data/imagery/chullo/chullo_rgb.tif --salida outputs/detection --umbral 0.5
 
-Requisitos: torch, torchvision, rasterio, geopandas, shapely, pyproj, requests.
+Requisitos: torch, rasterio, shapely, pyproj y torchvision (Mask R-CNN) o ultralytics (YOLO).
 Si no estan instalados, usa el visor sin deteccion (datos estaticos).
 """
 
@@ -22,10 +22,12 @@ from backend.detector import detectar_edificios  # noqa: E402
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Deteccion de edificios con CNN (Mask R-CNN)")
+    parser = argparse.ArgumentParser(description="Deteccion de cubiertas con CNN (YOLO-seg o Mask R-CNN)")
     parser.add_argument("--imagen", required=True, help="Ruta al GeoTIFF RGB del sector")
     parser.add_argument("--salida", default="outputs/detection", help="Directorio de salida")
-    parser.add_argument("--umbral", type=float, default=0.5, help="Umbral de confianza (0-1)")
+    parser.add_argument("--umbral", type=float, default=None, help="Umbral de confianza (0-1); por defecto, el del modelo")
+    parser.add_argument("--modelo", default=None, choices=["auto", "yolo", "maskrcnn"],
+                        help="Modelo; por defecto CHULLO_MODELO o auto (YOLO si está entrenado)")
     parser.add_argument("--amarillo", type=float, default=20, help="Ancho exterior desde los límites documentales (m)")
     parser.add_argument(
         "--dispositivo",
@@ -36,14 +38,14 @@ def main() -> None:
     parser.add_argument(
         "--tamano-mosaico",
         type=int,
-        default=512,
-        help="Tamano de mosaico en pixeles (256-1024)",
+        default=None,
+        help="Tamano de mosaico en pixeles; por defecto, el del modelo",
     )
     parser.add_argument(
         "--solapamiento",
         type=int,
-        default=128,
-        help="Solapamiento entre mosaicos (< 50%% del tamano)",
+        default=None,
+        help="Solapamiento entre mosaicos; por defecto, un cuarto del mosaico",
     )
     parser.add_argument(
         "--area-minima",
@@ -72,6 +74,7 @@ def main() -> None:
             area_minima_m2=args.area_minima,
             progreso=progreso,
             amarillo_m=args.amarillo,
+            modelo=args.modelo,
         )
         print("\nDeteccion completada.")
         print(json.dumps(manifiesto, indent=2, ensure_ascii=False))

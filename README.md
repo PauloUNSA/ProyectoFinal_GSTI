@@ -137,6 +137,16 @@ Se verifican las franjas, el último vértice de ambas márgenes, anillos interi
 
 El modelo local sigue siendo **experimental**: su evaluación previa en dos recortes del proyecto original obtuvo F1 de instancias ≈0.249, con omisiones, falsos positivos y máscaras que unen techos. Esa cifra no mide su precisión en la nueva imagen Esri. Detecta cubiertas visibles; no confirma viviendas individuales ni su uso residencial. Es necesario revisar los contornos en el mapa.
 
+## Mejorar la detección con YOLO-seg
+
+El proyecto incluye el flujo para reemplazar el modelo piloto por un **YOLO-seg** (Ultralytics) entrenado sobre la misma imagen Esri:
+
+1. Anotar techos en QGIS sobre `data/training/yolo_chullo/celdas.geojson`. Ya están generadas 59 celdas de 128 m y un borrador con las detecciones actuales.
+2. `python scripts/armar_dataset_yolo.py`
+3. `python scripts/entrenar_yolo.py`
+
+Cuando existe `models/yolo_chullo_v1/manifest.json`, el visor usa YOLO automáticamente; `CHULLO_MODELO=maskrcnn` vuelve al modelo anterior. Guía completa: [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md).
+
 ## Verificación del despliegue
 
 Se aprobaron 28 pruebas del backend y una prueba de navegador de la demo bajo un subdirectorio. Se construyó el Dockerfile en Linux y se ejecutó la CNN real sobre un recorte del GeoTIFF: devolvió 13 contornos. Se comprobó también la API HTTP del contenedor y la carga de los 405 resultados guardados. El contenedor incluye `libexpat1`, requerido por Rasterio en la imagen base slim.
