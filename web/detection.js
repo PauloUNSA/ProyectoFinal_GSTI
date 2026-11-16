@@ -49,7 +49,8 @@ async function cargarEdificiosGeoJSON(ruta, mapInstance) {
 function mostrarEstadoDeteccion(manifest) {
   const counts = manifest.counts_by_class || {};
   document.getElementById("detect-status").textContent =
-    `Inferencia completada: ${manifest.count} edificaciones en las franjas (rojo: ${counts.rojo || 0}; amarillo: ${counts.amarillo || 0}). Revisa los contornos en el mapa.`;
+    `Inferencia completada: ${manifest.count} edificaciones en las franjas (rojo: ${counts.rojo || 0}; amarillo: ${counts.amarillo || 0})` +
+    `${manifest.arquitectura ? ` · ${manifest.arquitectura}` : ""}. Revisa los contornos en el mapa.`;
 }
 
 async function cargarEstadoDetector() {
@@ -62,6 +63,10 @@ async function cargarEstadoDetector() {
       await cargarEdificiosGeoJSON("outputs/detection/buildings.geojson", window.MAP());
       mostrarEstadoDeteccion(manifest);
       estado.textContent = "Resultados guardados";
+      const notaModelo = document.getElementById("modelo-nota");
+      if (notaModelo && manifest.arquitectura) {
+        notaModelo.textContent = `Resultados guardados de ${manifest.arquitectura} (${manifest.modelo}). Requiere revisión de contornos: puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.`;
+      }
       estado.className = "ready";
       document.getElementById("btn-run-detect").disabled = true;
       document.getElementById("btn-run-detect").textContent = "Nuevas inferencias: ejecutar servidor Python";
@@ -81,6 +86,9 @@ async function cargarEstadoDetector() {
     const data = await resp.json();
     if (!resp.ok) throw new Error(data.error || "No se pudo consultar el detector.");
     estado.textContent = data.cnn_disponible ? "Listo · modelo local" : "No disponible";
+    estado.title = data.modelo || estado.title;
+    const nota = document.getElementById("modelo-nota");
+    if (nota && data.modelo) nota.textContent = `Modelo activo: ${data.modelo}. Requiere revisión de contornos: puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.`;
     estado.className = data.cnn_disponible ? "ready" : "error";
     const btn = document.getElementById("btn-run-detect");
     btn.disabled = !data.cnn_disponible;
@@ -96,7 +104,7 @@ async function cargarEstadoDetector() {
   }
 }
 
-async function ejecutarDeteccion(imagenPath = "data/imagery/chullo/chullo_rgb.tif", umbral = 0.5) {
+async function ejecutarDeteccion(imagenPath = "data/imagery/chullo/chullo_rgb.tif", umbral = null) {
   if (detectando) return;
   detectando = true;
   const btn = document.getElementById("btn-run-detect");
@@ -110,7 +118,9 @@ async function ejecutarDeteccion(imagenPath = "data/imagery/chullo/chullo_rgb.ti
   estado.textContent = "Procesando…";
   estado.className = "warning";
   try {
-    const query = new URLSearchParams({imagen: imagenPath, umbral, amarillo: window.CONFIG.amarilloM});
+    // Sin umbral explícito, el servidor usa el recomendado para el modelo activo.
+    const query = new URLSearchParams({imagen: imagenPath, amarillo: window.CONFIG.amarilloM});
+    if (umbral !== null) query.set("umbral", umbral);
     const resp = await fetch(`/api/detect?${query}`);
     const resultado = await resp.json();
     if (!resp.ok || resultado.estado !== "completado") throw new Error(resultado.error || "No se completó la inferencia CNN.");

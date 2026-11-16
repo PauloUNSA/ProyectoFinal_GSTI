@@ -20,3 +20,16 @@ outputs/qa/
 !models/chullo_local_v1/weights.pth
 
 dist/
+
+# Dataset YOLO regenerable y corridas de entrenamiento (se conservan celdas.geojson y techos.geojson)
+data/training/yolo_chullo/dataset/
+data/training/yolo_chullo/runs/
+data/training/yolo_chullo/comparaciones/
+*.cache
+# Pesos base que Ultralytics descarga en la raíz al entrenar
+/*.pt
+data/evaluacion/
+data/externos/
+data/imagery/arequipa_bloques/
+data/training/ramp_dataset/
+data/training/ramp_runs/

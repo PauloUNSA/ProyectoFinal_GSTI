@@ -1,0 +1,477 @@
+{
+  "bloques": {
+    "cayma_este": {
+      "id": "cayma_este",
+      "nombre": "Cayma (este)",
+      "lat": -16.375,
+      "lon": -71.535,
+      "split": "train",
+      "imagen": "data\\imagery\\arequipa_bloques\\cayma_este.tif",
+      "celdas": 49,
+      "huellas": 784,
+      "overture_release": "2026-10-21.0",
+      "limpieza": {
+        "entrada": 793,
+        "conservadas": 784,
+        "descartes": {
+          "diminuta": 9,
+          "lote_o_manzana": 0
+        },
+        "alineacion": [
+          {
+            "fuente": "overture:Google Open Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 302,
+            "dx_px": 0,
+            "dy_px": 1,
+            "ganancia": 1.008,
+            "aplicado": false
+          },
+          {
+            "fuente": "overture:Microsoft ML Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 77,
+            "dx_px": 1,
+            "dy_px": 8,
+            "ganancia": 1.074,
+            "aplicado": false,
+            "motivo": "máximo en el borde de la búsqueda"
+          },
+          {
+            "fuente": "overture:OpenStreetMap",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 405,
+            "dx_px": 3,
+            "dy_px": 1,
+            "ganancia": 1.077,
+            "aplicado": true
+          }
+        ]
+      },
+      "procesado_en": "2026-11-15T21:54:38.004216+00:00"
+    },
+    "alto_selva_alegre": {
+      "id": "alto_selva_alegre",
+      "nombre": "Alto Selva Alegre",
+      "lat": -16.38,
+      "lon": -71.515,
+      "split": "train",
+      "imagen": "data\\imagery\\arequipa_bloques\\alto_selva_alegre.tif",
+      "celdas": 49,
+      "huellas": 5148,
+      "overture_release": "2026-10-21.0",
+      "limpieza": {
+        "entrada": 5150,
+        "conservadas": 5148,
+        "descartes": {
+          "diminuta": 1,
+          "lote_o_manzana": 1
+        },
+        "alineacion": [
+          {
+            "fuente": "overture:Google Open Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 2920,
+            "dx_px": -1,
+            "dy_px": 3,
+            "ganancia": 1.118,
+            "aplicado": true
+          },
+          {
+            "fuente": "overture:Microsoft ML Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 1469,
+            "dx_px": 3,
+            "dy_px": -8,
+            "ganancia": 1.198,
+            "aplicado": false,
+            "motivo": "máximo en el borde de la búsqueda"
+          },
+          {
+            "fuente": "overture:OpenStreetMap",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 759,
+            "dx_px": 3,
+            "dy_px": -1,
+            "ganancia": 1.107,
+            "aplicado": true
+          }
+        ]
+      },
+      "procesado_en": "2026-11-15T21:54:41.332947+00:00"
+    },
+    "miraflores_aqp": {
+      "id": "miraflores_aqp",
+      "nombre": "Miraflores (Arequipa)",
+      "lat": -16.395,
+      "lon": -71.52,
+      "split": "train",
+      "imagen": "data\\imagery\\arequipa_bloques\\miraflores_aqp.tif",
+      "celdas": 49,
+      "huellas": 4720,
+      "overture_release": "2026-10-21.0",
+      "limpieza": {
+        "entrada": 4726,
+        "conservadas": 4720,
+        "descartes": {
+          "diminuta": 5,
+          "lote_o_manzana": 1
+        },
+        "alineacion": [
+          {
+            "fuente": "overture:Google Open Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 3035,
+            "dx_px": 1,
+            "dy_px": 5,
+            "ganancia": 1.105,
+            "aplicado": true
+          },
+          {
+            "fuente": "overture:Microsoft ML Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 1114,
+            "dx_px": 4,
+            "dy_px": -8,
+            "ganancia": 1.187,
+            "aplicado": false,
+            "motivo": "máximo en el borde de la búsqueda"
+          },
+          {
+            "fuente": "overture:OpenStreetMap",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 571,
+            "dx_px": 2,
+            "dy_px": -1,
+            "ganancia": 1.068,
+            "aplicado": true
+          }
+        ]
+      },
+      "procesado_en": "2026-11-15T21:54:44.781049+00:00"
+    },
+    "socabaya": {
+      "id": "socabaya",
+      "nombre": "Socabaya",
+      "lat": -16.455,
+      "lon": -71.53,
+      "split": "train",
+      "imagen": "data\\imagery\\arequipa_bloques\\socabaya.tif",
+      "celdas": 49,
+      "huellas": 2193,
+      "overture_release": "2026-10-21.0",
+      "limpieza": {
+        "entrada": 2196,
+        "conservadas": 2193,
+        "descartes": {
+          "diminuta": 0,
+          "lote_o_manzana": 3
+        },
+        "alineacion": [
+          {
+            "fuente": "overture:Google Open Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 1629,
+            "dx_px": -2,
+            "dy_px": 1,
+            "ganancia": 1.045,
+            "aplicado": true
+          },
+          {
+            "fuente": "overture:Microsoft ML Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 484,
+            "dx_px": -4,
+            "dy_px": 5,
+            "ganancia": 1.125,
+            "aplicado": true
+          },
+          {
+            "fuente": "overture:OpenStreetMap",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 80,
+            "dx_px": 2,
+            "dy_px": -1,
+            "ganancia": 1.037,
+            "aplicado": false
+          }
+        ]
+      },
+      "procesado_en": "2026-11-15T21:54:46.883321+00:00"
+    },
+    "hunter": {
+      "id": "hunter",
+      "nombre": "Jacobo Hunter",
+      "lat": -16.445,
+      "lon": -71.555,
+      "split": "val",
+      "imagen": "data\\imagery\\arequipa_bloques\\hunter.tif",
+      "celdas": 49,
+      "huellas": 4407,
+      "overture_release": "2026-10-21.0",
+      "limpieza": {
+        "entrada": 4409,
+        "conservadas": 4407,
+        "descartes": {
+          "diminuta": 0,
+          "lote_o_manzana": 2
+        },
+        "alineacion": [
+          {
+            "fuente": "overture:Google Open Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 3247,
+            "dx_px": 2,
+            "dy_px": -7,
+            "ganancia": 1.034,
+            "aplicado": false
+          },
+          {
+            "fuente": "overture:Microsoft ML Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 1103,
+            "dx_px": -4,
+            "dy_px": 6,
+            "ganancia": 1.099,
+            "aplicado": true
+          },
+          {
+            "fuente": "overture:OpenStreetMap",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 57,
+            "dx_px": 0,
+            "dy_px": -7,
+            "ganancia": 1.096,
+            "aplicado": true
+          }
+        ]
+      },
+      "procesado_en": "2026-11-15T21:54:49.836554+00:00"
+    },
+    "sachaca": {
+      "id": "sachaca",
+      "nombre": "Sachaca",
+      "lat": -16.425,
+      "lon": -71.565,
+      "split": "train",
+      "imagen": "data\\imagery\\arequipa_bloques\\sachaca.tif",
+      "celdas": 49,
+      "huellas": 1512,
+      "overture_release": "2026-10-21.0",
+      "limpieza": {
+        "entrada": 1516,
+        "conservadas": 1512,
+        "descartes": {
+          "diminuta": 2,
+          "lote_o_manzana": 2
+        },
+        "alineacion": [
+          {
+            "fuente": "overture:Google Open Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 1002,
+            "dx_px": 1,
+            "dy_px": -7,
+            "ganancia": 1.154,
+            "aplicado": true
+          },
+          {
+            "fuente": "overture:Microsoft ML Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 328,
+            "dx_px": -3,
+            "dy_px": 6,
+            "ganancia": 1.086,
+            "aplicado": true
+          },
+          {
+            "fuente": "overture:OpenStreetMap",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 182,
+            "dx_px": 1,
+            "dy_px": -2,
+            "ganancia": 1.031,
+            "aplicado": false
+          }
+        ]
+      },
+      "procesado_en": "2026-11-15T21:54:52.123382+00:00"
+    },
+    "cerro_colorado_libertad": {
+      "id": "cerro_colorado_libertad",
+      "nombre": "Cerro Colorado (La Libertad)",
+      "lat": -16.36,
+      "lon": -71.59,
+      "split": "train",
+      "imagen": "data\\imagery\\arequipa_bloques\\cerro_colorado_libertad.tif",
+      "celdas": 49,
+      "huellas": 212,
+      "overture_release": "2026-10-21.0",
+      "limpieza": {
+        "entrada": 214,
+        "conservadas": 212,
+        "descartes": {
+          "diminuta": 0,
+          "lote_o_manzana": 2
+        },
+        "alineacion": [
+          {
+            "fuente": "overture:Google Open Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 120,
+            "dx_px": 2,
+            "dy_px": -5,
+            "ganancia": 1.216,
+            "aplicado": true
+          },
+          {
+            "fuente": "overture:Microsoft ML Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 15,
+            "dx_px": 0,
+            "dy_px": 0,
+            "ganancia": null,
+            "aplicado": false,
+            "motivo": "pocas huellas"
+          },
+          {
+            "fuente": "overture:OpenStreetMap",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 77,
+            "dx_px": -1,
+            "dy_px": -3,
+            "ganancia": 1.016,
+            "aplicado": false
+          }
+        ]
+      },
+      "procesado_en": "2026-11-15T21:54:53.904637+00:00"
+    },
+    "jlbyr_sur": {
+      "id": "jlbyr_sur",
+      "nombre": "J. L. Bustamante y Rivero (sur)",
+      "lat": -16.445,
+      "lon": -71.51,
+      "split": "train",
+      "imagen": "data\\imagery\\arequipa_bloques\\jlbyr_sur.tif",
+      "celdas": 49,
+      "huellas": 1940,
+      "overture_release": "2026-10-21.0",
+      "limpieza": {
+        "entrada": 1940,
+        "conservadas": 1940,
+        "descartes": {
+          "diminuta": 0,
+          "lote_o_manzana": 0
+        },
+        "alineacion": [
+          {
+            "fuente": "overture:Google Open Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 1294,
+            "dx_px": 0,
+            "dy_px": 4,
+            "ganancia": 1.031,
+            "aplicado": false
+          },
+          {
+            "fuente": "overture:Microsoft ML Buildings",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 591,
+            "dx_px": 4,
+            "dy_px": -8,
+            "ganancia": 1.195,
+            "aplicado": false,
+            "motivo": "máximo en el borde de la búsqueda"
+          },
+          {
+            "fuente": "overture:OpenStreetMap",
+            "ventana": [
+              0,
+              0
+            ],
+            "huellas": 55,
+            "dx_px": 3,
+            "dy_px": 2,
+            "ganancia": 1.086,
+            "aplicado": true
+          }
+        ]
+      },
+      "procesado_en": "2026-11-15T21:54:55.833353+00:00"
+    }
+  },
+  "licencias": {
+    "imagen": "Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+    "huellas": "Overture Maps (ODbL): Google Open Buildings, Microsoft, OpenStreetMap"
+  }
+}

@@ -1,6 +1,6 @@
 # Chullo Unificado
 
-Visor local de los límites documentales ANA y detección automática de cubiertas con Mask R-CNN.
+Visor local de los límites documentales ANA y detección automática de cubiertas con el modelo YOLO26-Chullo (detalles en `README.md` y `docs/ENTRENAMIENTO_YOLO.md`).
 
 ## Franjas corregidas
 
@@ -44,7 +44,7 @@ python scripts/generate_bands.py --amarillo 20
 
 La API publica `web/outputs/detection/buildings.geojson` y `manifest.json`; se sirven bajo `/outputs/detection/`. El manifiesto registra conteos por color, modelo, imagen, cobertura y parámetros.
 
-La ejecución real de verificación del 31/10/2026 produjo **405 contornos candidatos: 118 rojos y 287 amarillos**, procesando 49 mosaicos con datos relevantes. Esto verifica que la inferencia funciona; no certifica la precisión de los contornos.
+Las detecciones publicadas (15/11/2026) son del modelo YOLO26-Chullo: **442 contornos candidatos, 113 rojos y 329 amarillos**, con umbral 0.05. El Mask R-CNN piloto anterior había dado 405 el 31/10/2026. Ninguna cifra certifica la precisión de los contornos.
 
 ## Pruebas
 

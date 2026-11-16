@@ -25,7 +25,7 @@
   <div class="connections" aria-label="Estado de conexiones">
     <span>ANA <b class="ready">60 registros · 12 en revisión</b></span>
     <span>OpenStreetMap <b id="map-state">Cargando…</b></span>
-    <span>CNN <b id="cnn-state" title="Detección de edificios con Mask R-CNN">Comprobando…</b></span>
+    <span>CNN <b id="cnn-state" title="Detección de edificios con CNN">Comprobando…</b></span>
   </div>
 
   <section class="workspace" aria-label="Consulta de hitos y edificaciones">
@@ -47,7 +47,7 @@
       <div id="detector-panel">
         <h3>Detección de edificios (CNN)</h3>
         <p>Detecta cubiertas que tocan las zonas roja y amarilla. El rojo tiene prioridad si un contorno toca ambas zonas.</p>
-        <p class="note">Modelo local Chullo v1 (piloto) sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
+        <p class="note" id="modelo-nota">Detección CNN sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
         <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
         <div id="detect-status" class="detect-status"></div>
       </div>

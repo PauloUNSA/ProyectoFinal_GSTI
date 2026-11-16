@@ -1,11 +1,13 @@
-"""Detección de edificios con CNN (Mask R-CNN ResNet50-FPN).
+"""Detección de cubiertas con CNN: YOLO-seg entrenado o Mask R-CNN piloto.
 
-Ejecuta la inferencia sobre una imagen GeoTIFF del sector Chullo y genera
-GeoJSON con los contornos de edificios detectados, listos para visualizar
-en el visor unificado.
+Ejecuta la inferencia por mosaicos sobre un GeoTIFF del sector Chullo y
+genera GeoJSON con los contornos detectados, listos para el visor. Ambos
+modelos comparten la vectorización, la clasificación por franjas y la
+supresión de duplicados; solo cambia la predicción de cada mosaico.
 
 Requisitos opcionales (instalar solo si se usa el detector):
-  torch, torchvision, rasterio, geopandas, shapely, pyproj, requests
+  torch, rasterio, shapely, pyproj y torchvision (Mask R-CNN) o
+  ultralytics (YOLO)
 
 Si no están instalados, la detección no está disponible y el visor sigue
 funcionando con datos estáticos (puntos ANA, límites, franjas).
@@ -24,7 +26,6 @@ try:
     import numpy as np
     import rasterio
     import torch
-    import torchvision
     from pyproj import Transformer
     from shapely.geometry import Polygon, shape
     from shapely.ops import unary_union
@@ -36,9 +37,12 @@ except ImportError as exc:  # pragma: no cover - depende del entorno
     _ERROR_IMPORT = str(exc)
 
 
-LOCAL_MODEL_PATH = Path(__file__).resolve().parents[1] / "models/chullo_local_v1/weights.pth"
-LOCAL_MODEL_SHA256 = "dcc985d4b57ec6ab0c6dbc36bf48f8b6433bfe61e9d89faf2445bb7b05d5f61c"
+from backend import modelos
+
+LOCAL_MODEL_PATH = modelos.MASKRCNN_DIR / "weights.pth"
+LOCAL_MODEL_SHA256 = modelos.MASKRCNN_SHA256
 MODEL_ID = "chullo/maskrcnn_chullo_local_v1"
+LIMITACION_MASKRCNN = "Modelo local piloto: F1 de instancias 0.249 en dos recortes; no garantiza separar viviendas."
 
 
 def sha256_file(path: Path) -> str:
@@ -90,6 +94,75 @@ def cargar_modelo(dispositivo: str = "auto"):
     return modelo, seleccionado
 
 
+def _predictor_maskrcnn(dispositivo: str, umbral: float):
+    """Devuelve predecir(rgb uint8 (3,H,W)) -> (puntuaciones, máscaras bool (N,H,W))."""
+    modelo, usado = cargar_modelo(dispositivo)
+
+    def predecir(datos):
+        alto, ancho = datos.shape[1:]
+        tensor = torch.from_numpy(datos[:3].astype(np.float32) / 255.0).to(usado)
+        with torch.inference_mode():
+            prediccion = modelo([tensor])[0]
+        puntuaciones = prediccion["scores"].detach().cpu().numpy()
+        etiquetas = prediccion["labels"].detach().cpu().numpy()
+        elegidos = np.flatnonzero((puntuaciones >= umbral) & (etiquetas == 1))
+        mascaras = prediccion["masks"][elegidos, 0, :alto, :ancho].detach().cpu().numpy() >= 0.5
+        return puntuaciones[elegidos], mascaras
+
+    info = {"id": MODEL_ID, "sha256": LOCAL_MODEL_SHA256, "arquitectura": "Mask R-CNN ResNet50-FPN",
+            "limitacion": LIMITACION_MASKRCNN}
+    return predecir, usado, info
+
+
+def _predictor_yolo(dispositivo: str, umbral: float):
+    """YOLO-seg de Ultralytics con los pesos registrados por scripts/entrenar_yolo.py."""
+    try:
+        from ultralytics import YOLO
+    except ImportError as exc:
+        raise ImportError("Falta ultralytics para el modelo YOLO: python -m pip install -r requirements-yolo.txt") from exc
+    descripcion = modelos.describir("yolo")
+    if descripcion["error"]:
+        raise ValueError(descripcion["error"])
+    pesos, manifest = descripcion["pesos"], descripcion["manifest"]
+    if sha256_file(pesos) != manifest["sha256"]:
+        raise ValueError(f"El SHA256 de {pesos.name} no coincide con su manifiesto.")
+    if dispositivo == "cuda" and not torch.cuda.is_available():
+        raise ValueError("Dispositivo no disponible. Usa cpu o auto.")
+    usado = "cuda" if dispositivo in ("auto", "cuda") and torch.cuda.is_available() else "cpu"
+    modelo = YOLO(str(pesos), task="segment")
+    imgsz = int(manifest["imgsz"])
+
+    def predecir(datos):
+        alto, ancho = datos.shape[1:]
+        # Ultralytics interpreta los arreglos numpy como BGR, igual que cv2 al entrenar.
+        bgr = np.ascontiguousarray(datos[:3].transpose(1, 2, 0)[:, :, ::-1])
+        r = modelo.predict(bgr, imgsz=imgsz, conf=umbral, retina_masks=True, verbose=False,
+                           device=0 if usado == "cuda" else "cpu", max_det=300)[0]
+        if r.masks is None or not len(r.boxes):
+            return np.zeros(0, dtype=np.float32), np.zeros((0, alto, ancho), dtype=bool)
+        # retina_masks devuelve las máscaras a la resolución original del mosaico.
+        mascaras = r.masks.data.detach().cpu().numpy()[:, :alto, :ancho] > 0.5
+        return r.boxes.conf.detach().cpu().numpy(), mascaras
+
+    metricas = manifest.get("metricas_test") or {}
+    origen = "con huellas Overture sin revisión humana" if manifest.get("etiquetas") == "overture" else "en Chullo"
+    limitacion = (f"Modelo YOLO entrenado {origen}; en sus celdas de prueba: precisión {metricas['precision']:.3f}, "
+                  f"recuperación {metricas['recall']:.3f}, F1 {metricas['f1']:.3f}." if metricas else
+                  "Modelo YOLO sin métricas de prueba registradas.")
+    info = {"id": manifest["id"], "sha256": manifest["sha256"], "arquitectura": manifest.get("arquitectura", "YOLO-seg"),
+            "limitacion": limitacion}
+    return predecir, usado, info
+
+
+MAX_MOSAICOS = 1024
+
+
+def cargar_predictor(tipo: str | None, dispositivo: str, umbral: float):
+    if modelos.resolver_tipo(tipo) == "yolo":
+        return _predictor_yolo(dispositivo, umbral)
+    return _predictor_maskrcnn(dispositivo, umbral)
+
+
 def mascara_a_geometria(mascara_binaria, transform):
     """Convierte una máscara binaria a geometría Shapely preservando contornos."""
     piezas = [
@@ -111,15 +184,16 @@ def mascara_a_geometria(mascara_binaria, transform):
 def detectar_edificios(
     imagen_path: str | Path,
     salida_dir: str | Path,
-    umbral: float = 0.5,
+    umbral: float | None = None,
     dispositivo: str = "auto",
-    tamano_mosaico: int = 512,
-    solapamiento: int = 128,
+    tamano_mosaico: int | None = None,
+    solapamiento: int | None = None,
     area_minima_m2: float = 10.0,
     crs_analisis: str = "EPSG:32719",
     progreso=None,
     limites_path: str | Path | None = None,
     amarillo_m: float = 20,
+    modelo: str | None = None,
 ) -> dict:
     """Ejecuta la detección de edificios sobre una imagen y guarda GeoJSON.
 
@@ -130,13 +204,19 @@ def detectar_edificios(
             "Detector CNN no disponible: " + _ERROR_IMPORT
         )
 
-    import torch
     from backend.raster import validar_imagen
     from backend.spatial import construir_zonas, evaluar_edificio
     from shapely.geometry import box, mapping
 
+    tipo_modelo = modelos.resolver_tipo(modelo)
+    if umbral is None:
+        umbral = modelos.umbral_por_defecto(tipo_modelo)
     if not math.isfinite(umbral) or not 0 <= umbral <= 1:
         raise ValueError("El umbral debe estar entre 0 y 1.")
+    # Cada modelo trae su mosaico: YOLO usa el tamaño de sus recortes de entrenamiento.
+    mosaico_def, solape_def = modelos.parametros_mosaico(tipo_modelo)
+    tamano_mosaico = tamano_mosaico or mosaico_def
+    solapamiento = solape_def if solapamiento is None else solapamiento
     if tamano_mosaico < 32 or not 0 <= solapamiento < tamano_mosaico:
         raise ValueError("Mosaico o solapamiento inválidos.")
     if not math.isfinite(area_minima_m2) or area_minima_m2 < 0:
@@ -162,91 +242,75 @@ def detectar_edificios(
 
         filas = _inicios_mosaico(src.height, tamano_mosaico, solapamiento)
         columnas = _inicios_mosaico(src.width, tamano_mosaico, solapamiento)
-        total_mosaicos = len(filas) * len(columnas)
-
-        if total_mosaicos > 256:
+        # Solo cuentan los mosaicos que tocan las franjas; el resto no se lee.
+        ventanas = []
+        limite_raster = rasterio.windows.Window(0, 0, src.width, src.height)
+        for numero, (fila, col) in enumerate(((f, c) for f in filas for c in columnas), start=1):
+            ventana = rasterio.windows.Window(col, fila, tamano_mosaico, tamano_mosaico).intersection(limite_raster)
+            huella = box(*rasterio.windows.bounds(ventana, src.transform))
+            if _transformar_geometria(huella, transformador_metrico.transform).intersects(zonas["exterior"]):
+                ventanas.append((numero, ventana))
+        total_mosaicos = len(ventanas)
+        if total_mosaicos > MAX_MOSAICOS:
             raise ValueError(
-                f"La imagen requiere {total_mosaicos} mosaicos (máximo 256). "
-                "Recórtala antes de analizar."
+                f"Las franjas requieren {total_mosaicos} mosaicos (máximo {MAX_MOSAICOS}). "
+                "Recorta la imagen o usa mosaicos más grandes."
             )
 
         if progreso:
             progreso("Cargando modelo CNN…", 0.06)
-
-        modelo, dispositivo_usado = cargar_modelo(dispositivo)
+        predecir, dispositivo_usado, modelo_info = cargar_predictor(tipo_modelo, dispositivo, umbral)
 
         candidatos = []
-        numero_mosaico = 0
         mosaicos_procesados = 0
 
-        for fila in filas:
-            for col in columnas:
-                numero_mosaico += 1
-                ventana = rasterio.windows.Window(col, fila, tamano_mosaico, tamano_mosaico)
-                ventana = ventana.intersection(
-                    rasterio.windows.Window(0, 0, src.width, src.height)
-                )
-
-                huella = box(*rasterio.windows.bounds(ventana, src.transform))
-                if not _transformar_geometria(huella, transformador_metrico.transform).intersects(zonas["exterior"]):
-                    continue
-                datos = src.read([1, 2, 3], window=ventana)
-                valido = (src.read_masks([1, 2, 3], window=ventana) > 0).all(axis=0)
-                if src.count >= 4 and rasterio.enums.ColorInterp.alpha in src.colorinterp:
-                    alpha = src.colorinterp.index(rasterio.enums.ColorInterp.alpha) + 1
-                    valido &= src.read(alpha, window=ventana) > 0
-                if not valido.any():
-                    if progreso:
-                        progreso(
-                            f"Mosaico {numero_mosaico}/{total_mosaicos} sin datos.",
-                            0.1 + 0.75 * numero_mosaico / total_mosaicos,
-                            mosaico=numero_mosaico,
-                            total=total_mosaicos,
-                        )
-                    continue
-
-                # Normalizar a tensor RGB [0,1]
-                tensor = torch.from_numpy(datos[:3].astype(np.float32) / 255.0).to(dispositivo_usado)
-                mosaicos_procesados += 1
-
-                with torch.inference_mode():
-                    prediccion = modelo([tensor])[0]
-
-                puntuaciones = prediccion["scores"].detach().cpu().numpy()
-                etiquetas = prediccion["labels"].detach().cpu().numpy()
-                elegidos = np.flatnonzero((puntuaciones >= umbral) & (etiquetas == 1))
-
-                mascaras = prediccion["masks"][elegidos, 0, : int(ventana.height), : int(ventana.width)].detach().cpu().numpy()
-
-                for puntuacion, mascara in zip(puntuaciones[elegidos], mascaras):
-                    binaria = (mascara >= 0.5) & valido
-                    if not binaria.any():
-                        continue
-
-                    geometria = mascara_a_geometria(binaria, src.window_transform(ventana))
-                    if geometria.is_empty:
-                        continue
-
-                    # Área en metros cuadrados
-                    geometria_metrica = _transformar_geometria(geometria, transformador_metrico.transform)
-                    area = geometria_metrica.area
-                    if area < area_minima_m2:
-                        continue
-                    evaluacion = evaluar_edificio(geometria_metrica, zonas)
-                    if not evaluacion["dentro_banda"]:
-                        continue
-
-                    candidatos.append({
-                        "geometria": geometria,
-                        "confianza": float(puntuacion),
-                        "area_m2": float(area),
-                        "mosaico": numero_mosaico,
-                        "evaluacion": evaluacion,
-                    })
-
-                del prediccion, tensor
+        for avance, (numero_mosaico, ventana) in enumerate(ventanas, start=1):
+            datos = src.read([1, 2, 3], window=ventana)
+            valido = (src.read_masks([1, 2, 3], window=ventana) > 0).all(axis=0)
+            if src.count >= 4 and rasterio.enums.ColorInterp.alpha in src.colorinterp:
+                alpha = src.colorinterp.index(rasterio.enums.ColorInterp.alpha) + 1
+                valido &= src.read(alpha, window=ventana) > 0
+            if not valido.any():
                 if progreso:
-                    progreso(f"Mosaico {numero_mosaico}/{total_mosaicos} · {len(candidatos)} candidatos en franjas", 0.1 + 0.75 * numero_mosaico / total_mosaicos)
+                    progreso(
+                        f"Mosaico {avance}/{total_mosaicos} sin datos.",
+                        0.1 + 0.75 * avance / total_mosaicos,
+                        mosaico=avance,
+                        total=total_mosaicos,
+                    )
+                continue
+
+            mosaicos_procesados += 1
+            puntuaciones, mascaras = predecir(datos)
+
+            for puntuacion, mascara in zip(puntuaciones, mascaras):
+                binaria = mascara & valido
+                if not binaria.any():
+                    continue
+
+                geometria = mascara_a_geometria(binaria, src.window_transform(ventana))
+                if geometria.is_empty:
+                    continue
+
+                # Área en metros cuadrados
+                geometria_metrica = _transformar_geometria(geometria, transformador_metrico.transform)
+                area = geometria_metrica.area
+                if area < area_minima_m2:
+                    continue
+                evaluacion = evaluar_edificio(geometria_metrica, zonas)
+                if not evaluacion["dentro_banda"]:
+                    continue
+
+                candidatos.append({
+                    "geometria": geometria,
+                    "confianza": float(puntuacion),
+                    "area_m2": float(area),
+                    "mosaico": numero_mosaico,
+                    "evaluacion": evaluacion,
+                })
+
+            if progreso:
+                progreso(f"Mosaico {avance}/{total_mosaicos} · {len(candidatos)} candidatos en franjas", 0.1 + 0.75 * avance / total_mosaicos)
 
         if progreso:
             progreso("Vectorizando contornos…", 0.88)
@@ -270,7 +334,7 @@ def detectar_edificios(
             "observed_at": fuente_imagen.get("observed_at"),
             "inferred_at": ahora,
             "review_status": "Sin revisión manual · inferencia IA",
-            "model_id": MODEL_ID,
+            "model_id": modelo_info["id"],
             "image_id": imagen_id,
             "confidence": item["confianza"],
             "area_m2": item["area_m2"],
@@ -291,13 +355,15 @@ def detectar_edificios(
         "completado_en": datetime.now(timezone.utc).isoformat(),
         "count": len(registros),
         "counts_by_class": {c: sum(f["properties"]["clase"] == c for f in registros) for c in ("rojo", "amarillo")},
-        "modelo": MODEL_ID,
-        "model_sha256": LOCAL_MODEL_SHA256,
+        "modelo": modelo_info["id"],
+        "model_sha256": modelo_info["sha256"],
         "zonas": {"geometria": "corredor_entre_limites", "amarillo_m": amarillo_m, "limites_sha256": sha256_file(limites_path)},
         "cobertura": imagen_info,
         "imagen_fuente": {k: fuente_imagen.get(k) for k in ("source", "service_url", "attribution", "observed_at", "acquired_at")},
         "mosaicos_procesados": mosaicos_procesados,
-        "arquitectura": "Mask R-CNN ResNet50-FPN",
+        "arquitectura": modelo_info["arquitectura"],
+        "tamano_mosaico": tamano_mosaico,
+        "solapamiento": solapamiento,
         "imagen": str(imagen_path),
         "dispositivo": dispositivo_usado,
         "umbral": umbral,
@@ -308,7 +374,7 @@ def detectar_edificios(
             "Detecciones automáticas sin revisión humana.",
             "La confianza no es una probabilidad calibrada de peligro.",
             "Pueden existir omisiones y falsos positivos.",
-            "Modelo local piloto: F1 de instancias 0.249 en dos recortes; no garantiza separar viviendas.",
+            modelo_info["limitacion"],
             "Solo se analiza la cobertura del GeoTIFF; no se evalúan franjas fuera de ella.",
         ],
     }
@@ -373,8 +439,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Detección de edificios CNN")
     parser.add_argument("--imagen", required=True, help="Ruta al GeoTIFF RGB")
     parser.add_argument("--salida", default="outputs/detection", help="Directorio de salida")
-    parser.add_argument("--umbral", type=float, default=0.5, help="Umbral de confianza")
+    parser.add_argument("--umbral", type=float, default=None, help="Umbral de confianza (por defecto, el del modelo)")
     parser.add_argument("--dispositivo", default="auto", choices=["auto", "cpu", "cuda"])
+    parser.add_argument("--modelo", default=None, choices=list(modelos.TIPOS))
     args = parser.parse_args()
 
     manifiesto = detectar_edificios(
@@ -382,5 +449,6 @@ if __name__ == "__main__":
         args.salida,
         umbral=args.umbral,
         dispositivo=args.dispositivo,
+        modelo=args.modelo,
     )
     print(json.dumps(manifiesto, indent=2, ensure_ascii=False))

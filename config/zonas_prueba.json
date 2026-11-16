@@ -1,0 +1,25 @@
+{
+  "descripcion": "Zonas fuera de la torrentera Chullo para medir cuánto generaliza el detector. Centro de cada recorte de 128 × 128 m en WGS84.",
+  "zonas": [
+    {"id": "santiago_nunoa", "grupo": "fuera_peru", "nombre": "Santiago (Ñuñoa), Chile", "lat": -33.4560, "lon": -70.6000},
+    {"id": "el_alto", "grupo": "fuera_peru", "nombre": "El Alto, Bolivia", "lat": -16.5000, "lon": -68.1700},
+    {"id": "bogota_kennedy", "grupo": "fuera_peru", "nombre": "Bogotá (Kennedy), Colombia", "lat": 4.6300, "lon": -74.1500},
+    {"id": "cdmx_iztapalapa", "grupo": "fuera_peru", "nombre": "Ciudad de México (Iztapalapa)", "lat": 19.3550, "lon": -99.0600},
+    {"id": "quito_sur", "grupo": "fuera_peru", "nombre": "Quito (sur), Ecuador", "lat": -0.2800, "lon": -78.5400},
+    {"id": "buenos_aires_flores", "grupo": "fuera_peru", "nombre": "Buenos Aires (Flores), Argentina", "lat": -34.6300, "lon": -58.4600},
+    {"id": "madrid_carabanchel", "grupo": "fuera_peru", "nombre": "Madrid (Carabanchel), España", "lat": 40.3830, "lon": -3.7300},
+    {"id": "nairobi", "grupo": "fuera_peru", "nombre": "Nairobi, Kenia", "lat": -1.3130, "lon": 36.7880},
+    {"id": "el_cairo", "grupo": "fuera_peru", "nombre": "El Cairo, Egipto", "lat": 30.0500, "lon": 31.2400},
+    {"id": "phoenix", "grupo": "fuera_peru", "nombre": "Phoenix, Estados Unidos", "lat": 33.4800, "lon": -112.0700},
+    {"id": "aqp_cercado", "grupo": "arequipa", "nombre": "Arequipa (Cercado)", "lat": -16.3989, "lon": -71.5370},
+    {"id": "aqp_cerro_colorado", "grupo": "arequipa", "nombre": "Arequipa (Cerro Colorado)", "lat": -16.3780, "lon": -71.5600},
+    {"id": "aqp_paucarpata", "grupo": "arequipa", "nombre": "Arequipa (Paucarpata)", "lat": -16.4300, "lon": -71.5000},
+    {"id": "aqp_bustamante", "grupo": "arequipa", "nombre": "Arequipa (J. L. Bustamante y Rivero)", "lat": -16.4250, "lon": -71.5250},
+    {"id": "aqp_mariano_melgar", "grupo": "arequipa", "nombre": "Arequipa (Mariano Melgar)", "lat": -16.4050, "lon": -71.5100},
+    {"id": "lima_miraflores", "grupo": "lima", "nombre": "Lima (Miraflores)", "lat": -12.1200, "lon": -77.0300},
+    {"id": "lima_sjl", "grupo": "lima", "nombre": "Lima (San Juan de Lurigancho)", "lat": -11.9800, "lon": -77.0000},
+    {"id": "lima_comas", "grupo": "lima", "nombre": "Lima (Comas)", "lat": -11.9400, "lon": -77.0500},
+    {"id": "lima_ves", "grupo": "lima", "nombre": "Lima (Villa El Salvador)", "lat": -12.2100, "lon": -76.9400},
+    {"id": "lima_ate", "grupo": "lima", "nombre": "Lima (Ate)", "lat": -12.0300, "lon": -76.9200}
+  ]
+}

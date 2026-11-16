@@ -123,7 +123,7 @@ def test_pipeline_rgb_mascara_2d_y_salida_vacia(tmp_path, monkeypatch, imagen, l
         return [{'scores': torch.tensor([0.9 if hay_detecciones else 0.1]),'labels':torch.tensor([1]),'masks':mask}]
     monkeypatch.setattr(detector,'cargar_modelo',lambda dispositivo: (modelo,'cpu'))
     output = tmp_path/'salida'
-    manifest = detector.detectar_edificios(imagen,output,tamano_mosaico=32,solapamiento=0,limites_path=limites_path)
+    manifest = detector.detectar_edificios(imagen,output,tamano_mosaico=32,solapamiento=0,limites_path=limites_path,modelo='maskrcnn')
     features = json.loads((output/'buildings.geojson').read_text())['features']
     assert manifest['count'] == len(features) == int(hay_detecciones)
     if features:

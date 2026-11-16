@@ -1,0 +1,5 @@
+# Entrenamiento e inferencia YOLO-seg. Para GPU NVIDIA instala antes PyTorch con CUDA:
+#   python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+-r requirements-detection.txt
+ultralytics>=8.4
+overturemaps>=2.1  # opcional: etiquetas automáticas (scripts/importar_huellas_overture.py)
