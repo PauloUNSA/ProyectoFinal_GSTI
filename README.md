@@ -12,7 +12,7 @@ Visor local de los límites documentales ANA y detección automática de cubiert
 
 | Opción | Qué permite probar | Requisitos |
 | --- | --- | --- |
-| GitHub Pages | Mapa, franjas de 20 m, fichas y 405 detecciones guardadas | Navegador; sin instalar Python |
+| GitHub Pages | Mapa, franjas de 20 m, fichas y 442 detecciones guardadas del modelo YOLO26-Chullo | Navegador; sin instalar Python |
 | Docker / servidor Python | Recalcular franjas y ejecutar nuevas inferencias | Docker, o Python y pesos; memoria suficiente |
 
 La demo estática no ejecuta PyTorch. Las inferencias anteriores se identifican como resultados guardados. GitHub Pages sirve archivos estáticos; la CNN requiere el servidor completo.
@@ -118,7 +118,7 @@ python scripts/generate_bands.py --amarillo 20
 
 La API publica `web/outputs/detection/buildings.geojson` y `manifest.json`; se sirven bajo `/outputs/detection/`. El manifiesto registra conteos por color, modelo, imagen, cobertura y parámetros.
 
-La ejecución real de verificación del 31/10/2026 produjo **405 contornos candidatos: 118 rojos y 287 amarillos**, procesando 49 mosaicos con datos relevantes. Esto verifica que la inferencia funciona; no certifica la precisión de los contornos.
+Las detecciones publicadas (15/11/2026) son del modelo final **YOLO26-Chullo**: **442 contornos candidatos, 113 rojos y 329 amarillos**, con umbral de confianza 0.05. El Mask R-CNN piloto había dado 405 (118 rojos y 287 amarillos) el 31/10/2026. Ninguna cifra certifica la precisión de los contornos; ver la evaluación en [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md).
 
 ## Pruebas
 
@@ -137,15 +137,16 @@ Se verifican las franjas, el último vértice de ambas márgenes, anillos interi
 
 El modelo local sigue siendo **experimental**: su evaluación previa en dos recortes del proyecto original obtuvo F1 de instancias ≈0.249, con omisiones, falsos positivos y máscaras que unen techos. Esa cifra no mide su precisión en la nueva imagen Esri. Detecta cubiertas visibles; no confirma viviendas individuales ni su uso residencial. Es necesario revisar los contornos en el mapa.
 
-## Mejorar la detección con YOLO-seg
+## Modelo final: YOLO26-Chullo
 
-El proyecto incluye el flujo para reemplazar el modelo piloto por un **YOLO-seg** (Ultralytics) entrenado sobre la misma imagen Esri:
+El detector del visor es **YOLO26-Chullo** (`models/yolo26_chullo`): un YOLO26s-seg de Ultralytics entrenado a la vez con techos de [RAMP](https://source.coop/ramp/ramp), dibujados por personas en otras ciudades, y con huellas de Overture limpias de la torrentera y de 8 distritos de Arequipa.
 
-1. Anotar techos en QGIS sobre `data/training/yolo_chullo/celdas.geojson`. Ya están generadas 59 celdas de 128 m y un borrador con las detecciones actuales.
-2. `python scripts/armar_dataset_yolo.py`
-3. `python scripts/entrenar_yolo.py`
+- **Frente al Mask R-CNN piloto:** cubre bastante más área construida (F1 de área 0.53 de media frente a 0.31; 0.58 frente a 0.28 en la torrentera) y recorre el corredor en unos 12 s en CPU en vez de 62 s.
+- **Limitaciones:** contando techo por techo todavía omite muchos, y todas las métricas se midieron contra huellas automáticas, no contra una referencia revisada.
+- **Licencia:** por usar RAMP (CC BY-NC 4.0), el modelo es de uso no comercial.
+- **Volver al modelo anterior:** `CHULLO_MODELO=maskrcnn`.
 
-Cuando existe `models/yolo_chullo_v1/manifest.json`, el visor usa YOLO automáticamente; `CHULLO_MODELO=maskrcnn` vuelve al modelo anterior. Guía completa: [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md).
+Para mejorarlo, anota techos en QGIS sobre `data/training/yolo_chullo/celdas.geojson`, empezando por las 11 celdas test (`prioridad = 1`), y reentrena con `scripts/entrenar_yolo.py --sumar-ramp`. Guía completa y resultados: [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md). Figura por tramos: `python scripts/figura_detecciones.py`.
 
 ## Verificación del despliegue
 

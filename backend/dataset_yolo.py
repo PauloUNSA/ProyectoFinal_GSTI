@@ -114,7 +114,8 @@ def leer_techos(path, crs_raster):
         sin_modificar = bool(props.get("borrador_hash")) and hash_geometria(a_wgs(shape(f["geometry"]))) == props["borrador_hash"]
         for parte in getattr(geom, "geoms", [geom]):
             if parte.geom_type == "Polygon" and not parte.is_empty:
-                techos.append({"geom": a_raster(parte), "sin_modificar": sin_modificar})
+                techos.append({"geom": a_raster(parte), "sin_modificar": sin_modificar,
+                               "ignorar": bool(props.get("ignorar"))})
     return techos
 
 
@@ -150,88 +151,121 @@ def _escribir_recorte(src, col, fila, tam, techos, indice, destino_img, destino_
     def a_pixeles(xy):
         return np.column_stack((a * xy[:, 0] + b * xy[:, 1] + c, d * xy[:, 0] + e * xy[:, 1] + f))
 
-    lineas, sin_modificar = [], 0
+    lineas, sin_modificar, ignorar = [], 0, []
     for k in indice.query(huella, predicate="intersects"):
         techo = techos[k]
         px = transformar(techo["geom"], a_pixeles)
+        if techo.get("ignorar"):
+            ignorar.append(px)
+            continue
         nuevas = poligono_a_linea_yolo(px, tam, tam)
         lineas += nuevas
         sin_modificar += bool(nuevas) and techo["sin_modificar"]
     rgb = src.read([1, 2, 3], window=ventana).transpose(1, 2, 0)
+    if ignorar:
+        # Zonas dudosas en gris neutro (el mismo relleno de Ultralytics): ni techo ni fondo.
+        from rasterio.features import rasterize
+        mascara = rasterize([(g, 1) for g in ignorar], out_shape=(tam, tam), dtype="uint8").astype(bool)
+        rgb = rgb.copy()
+        rgb[mascara] = 114
     Image.fromarray(rgb).save(destino_img / f"{nombre}.png")
     (destino_lbl / f"{nombre}.txt").write_text("\n".join(lineas) + ("\n" if lineas else ""), encoding="utf-8")
     return len(lineas), sin_modificar
 
 
-def armar_dataset(imagen, celdas_path, techos_path, destino, imgsz=640, desplazados=True):
-    """Escribe images/, labels/, data.yaml y resumen.json en `destino`."""
+def armar_dataset(imagen, celdas_path, techos_path, destino, imgsz=640, desplazados=True, origen="anotacion_humana",
+                  extras=None):
+    """Escribe images/, labels/, data.yaml y resumen.json en `destino`.
+
+    `extras` agrega otras fuentes (por ejemplo, bloques de otros distritos):
+    lista de dicts con imagen, celdas, techos y, opcionalmente, desplazados.
+    Todas deben compartir el tamaño de celda y la resolución.
+    """
     import shutil
-    import rasterio
-    from shapely import STRtree
     destino = Path(destino)
     if destino.exists():
         if not (destino / "data.yaml").is_file():
             raise ValueError(f"{destino} existe y no parece un dataset generado; elige otra carpeta.")
         shutil.rmtree(destino)
-    celdas = leer_celdas(celdas_path)
-    completas = [c for c in celdas if c["completa"]]
-    if not any(c["split"] == "train" for c in completas):
+    fuentes = [{"imagen": imagen, "celdas": celdas_path, "techos": techos_path, "desplazados": desplazados}] + list(extras or [])
+    leidas = [(f, leer_celdas(f["celdas"])) for f in fuentes]
+    if not any(c["split"] == "train" and c["completa"] for _, celdas in leidas for c in celdas):
         raise ValueError("No hay celdas train con estado = completa en celdas.geojson.")
-    tamanos = {c["tamano_px"] for c in celdas}
+    tamanos = {c["tamano_px"] for _, celdas in leidas for c in celdas}
     if len(tamanos) != 1:
         raise ValueError("Todas las celdas deben tener el mismo tamano_px.")
     tam = tamanos.pop()
-    resumen = {"imagen": str(Path(imagen).name), "tile_px": tam, "imgsz": imgsz, "splits": {}, "avisos": []}
+    resumen = {"imagen": str(Path(imagen).name), "tile_px": tam, "imgsz": imgsz, "origen_etiquetas": origen,
+               "splits": {}, "fuentes": [], "avisos": []}
+    for split in SPLITS:
+        (destino / "images" / split).mkdir(parents=True)
+        (destino / "labels" / split).mkdir(parents=True)
+        resumen["splits"][split] = {"celdas": 0, "recortes": 0, "techos": 0, "recortes_vacios": 0,
+                                    "techos_borrador_sin_modificar": 0, "instancias_desplazadas": 0}
+    for k, (fuente, celdas) in enumerate(leidas):
+        info = _agregar_fuente(fuente, celdas, tam, destino, resumen["splits"])
+        if k == 0:
+            resumen["resolucion_m"] = info["resolucion_m"]
+            resumen["imagen_sha256"] = info["sha256"]
+        elif abs(info["resolucion_m"] - resumen["resolucion_m"]) > 1e-6:
+            raise ValueError(f"{info['imagen']} tiene otra resolución que {resumen['imagen']}.")
+        resumen["fuentes"].append(info)
+    for split in ("val", "test"):
+        if not resumen["splits"][split]["celdas"]:
+            resumen["avisos"].append(f"No hay celdas {split} completas: las métricas de {split} no serán fiables.")
+    total = sum(s["techos"] for s in resumen["splits"].values())
+    sin_mod = sum(s["techos_borrador_sin_modificar"] for s in resumen["splits"].values())
+    if origen == "anotacion_humana" and total and sin_mod / total > 0.5:
+        resumen["avisos"].append(f"{sin_mod} de {total} techos son del borrador sin editar; revisa que sean correctos.")
+    (destino / "data.yaml").write_text(
+        f"path: {destino.resolve().as_posix()}\ntrain: images/train\nval: images/val\ntest: images/test\n"
+        "names:\n  0: techo\n", encoding="utf-8")
+    (destino / "resumen.json").write_text(json.dumps(resumen, ensure_ascii=False, indent=2), encoding="utf-8")
+    return resumen
+
+
+def _agregar_fuente(fuente, celdas, tam, destino, stats_split):
+    """Recorta las celdas completas de una imagen y acumula conteos por split."""
+    import rasterio
+    from rasterio.windows import Window, bounds
+    from shapely import STRtree
+    from shapely.geometry import box
+    imagen = fuente["imagen"]
+    completas = [c for c in celdas if c["completa"]]
     with rasterio.open(imagen) as src:
-        resumen["resolucion_m"] = abs(src.transform.a)
-        resumen["imagen_sha256"] = _sha256(imagen)
         a_wgs = _transformador(src.crs, "EPSG:4326")
-        techos = leer_techos(techos_path, src.crs)
+        techos = leer_techos(fuente["techos"], src.crs)
         indice = STRtree([t["geom"] for t in techos])
-        from rasterio.windows import Window, bounds
-        from shapely.geometry import box
         for c in completas:
             # La ventana en píxeles debe caer sobre la misma celda dibujada en el mapa.
             centro = a_wgs(box(*bounds(Window(c["col_off"], c["row_off"], tam, tam), src.transform))).centroid
             if centro.distance(c["wgs84"].centroid) > 2e-5:  # ≈ 2 m
                 raise ValueError(f"La celda {c['id']} no coincide con {Path(imagen).name}; ¿se generó con otra imagen?")
         posiciones = {(c["col_off"], c["row_off"]): c for c in completas}
-        for split in SPLITS:
+        for c in completas:
+            split = c["split"]
             img_dir, lbl_dir = destino / "images" / split, destino / "labels" / split
-            img_dir.mkdir(parents=True), lbl_dir.mkdir(parents=True)
-            stats = {"celdas": 0, "recortes": 0, "techos": 0, "recortes_vacios": 0, "techos_borrador_sin_modificar": 0}
-            for c in (c for c in completas if c["split"] == split):
-                n, sin_mod = _escribir_recorte(src, c["col_off"], c["row_off"], tam, techos, indice, img_dir, lbl_dir, c["id"])
-                stats["celdas"] += 1
-                stats["recortes"] += 1
-                stats["techos"] += n
-                stats["recortes_vacios"] += n == 0
-                stats["techos_borrador_sin_modificar"] += sin_mod
-                if split != "train" or not desplazados:
-                    continue
-                # Recortes a media celda: solo si todas las celdas que cubren son train y completas.
-                medio = tam // 2
-                for dx, dy in ((medio, 0), (0, medio), (medio, medio)):
-                    col, fila = c["col_off"] + dx, c["row_off"] + dy
-                    cubren = {(c["col_off"] + a * tam, c["row_off"] + b * tam)
-                              for a in range(2 if dx else 1) for b in range(2 if dy else 1)}
-                    if all(p in posiciones and posiciones[p]["split"] == "train" for p in cubren):
-                        n, _ = _escribir_recorte(src, col, fila, tam, techos, indice, img_dir, lbl_dir, f"{c['id']}_d{dx}_{dy}")
-                        stats["recortes"] += 1
-                        stats["instancias_desplazadas"] = stats.get("instancias_desplazadas", 0) + n
-            resumen["splits"][split] = stats
-    for split in ("val", "test"):
-        if not resumen["splits"][split]["celdas"]:
-            resumen["avisos"].append(f"No hay celdas {split} completas: las métricas de {split} no serán fiables.")
-    total = sum(s["techos"] for s in resumen["splits"].values())
-    sin_mod = sum(s["techos_borrador_sin_modificar"] for s in resumen["splits"].values())
-    if total and sin_mod / total > 0.5:
-        resumen["avisos"].append(f"{sin_mod} de {total} techos son del borrador Mask R-CNN sin editar; revisa que sean correctos.")
-    (destino / "data.yaml").write_text(
-        f"path: {destino.resolve().as_posix()}\ntrain: images/train\nval: images/val\ntest: images/test\n"
-        "names:\n  0: techo\n", encoding="utf-8")
-    (destino / "resumen.json").write_text(json.dumps(resumen, ensure_ascii=False, indent=2), encoding="utf-8")
-    return resumen
+            stats = stats_split[split]
+            n, sin_mod = _escribir_recorte(src, c["col_off"], c["row_off"], tam, techos, indice, img_dir, lbl_dir, c["id"])
+            stats["celdas"] += 1
+            stats["recortes"] += 1
+            stats["techos"] += n
+            stats["recortes_vacios"] += n == 0
+            stats["techos_borrador_sin_modificar"] += sin_mod
+            if split != "train" or not fuente.get("desplazados", True):
+                continue
+            # Recortes a media celda: solo si todas las celdas que cubren son train y completas.
+            medio = tam // 2
+            for dx, dy in ((medio, 0), (0, medio), (medio, medio)):
+                col, fila = c["col_off"] + dx, c["row_off"] + dy
+                cubren = {(c["col_off"] + a * tam, c["row_off"] + b * tam)
+                          for a in range(2 if dx else 1) for b in range(2 if dy else 1)}
+                if all(p in posiciones and posiciones[p]["split"] == "train" for p in cubren):
+                    n, _ = _escribir_recorte(src, col, fila, tam, techos, indice, img_dir, lbl_dir, f"{c['id']}_d{dx}_{dy}")
+                    stats["recortes"] += 1
+                    stats["instancias_desplazadas"] += n
+        return {"imagen": Path(imagen).name, "sha256": _sha256(imagen), "resolucion_m": abs(src.transform.a),
+                "celdas_completas": len(completas)}
 
 
 def _sha256(path):
@@ -247,12 +281,14 @@ def celdas_a_geojson(celdas, tamano_px, conteo_borrador):
     return {"type": "FeatureCollection", "name": "celdas_anotacion", "features": [
         {"type": "Feature", "geometry": mapping(c["wgs84"]), "properties": {
             "id": c["id"], "estado": "pendiente", "split": c["split"], "orden": c["orden"],
+            # Anotar primero test (mide la mejora real), luego val y al final train.
+            "prioridad": {"test": 1, "val": 2}.get(c["split"], 3),
             "techos_borrador": conteo_borrador.get(c["id"], 0),
             "col_off": c["col_off"], "row_off": c["row_off"], "tamano_px": tamano_px}}
         for c in celdas]}
 
 
-def borrador_desde_detecciones(detecciones, celdas):
+def borrador_desde_detecciones(detecciones, celdas, origen="borrador_maskrcnn"):
     """Copia las detecciones como punto de partida, con una huella para saber si se editaron."""
     from shapely.geometry import mapping, shape
     from shapely import STRtree
@@ -266,6 +302,6 @@ def borrador_desde_detecciones(detecciones, celdas):
         for k in tocadas:
             conteo[celdas[k]["id"]] = conteo.get(celdas[k]["id"], 0) + 1
         features.append({"type": "Feature", "geometry": mapping(geom), "properties": {
-            "origen": "borrador_maskrcnn", "borrador_hash": hash_geometria(geom),
+            "origen": origen, "borrador_hash": hash_geometria(geom),
             "confianza_borrador": round(float(f["properties"].get("confidence", math.nan)), 3)}})
     return {"type": "FeatureCollection", "name": "techos", "features": features}, conteo

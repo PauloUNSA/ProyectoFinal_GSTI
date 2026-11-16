@@ -128,6 +128,87 @@ def test_borrador_marca_techos_sin_editar(tmp_path, raster):
     assert [t["sin_modificar"] for t in dataset_yolo.leer_techos(path, "EPSG:32719")] == [True, False]
 
 
+def test_comparacion_empareja_por_iou_una_sola_vez():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("comparar", BASE / "scripts/comparar_modelos.py")
+    comparar = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(comparar)
+    ref = [np.zeros((10, 10), bool) for _ in range(2)]
+    ref[0][0:4, 0:4] = True
+    ref[1][6:10, 6:10] = True
+    union = np.ones((10, 10), bool)  # una mancha que une ambos techos no acierta ninguno
+    casi = np.zeros((10, 10), bool)
+    casi[0:4, 0:3] = True    # IoU 0.75 con el primero; el duplicado no cuenta dos veces
+    pred, refs = comparar.emparejar([union, casi, casi.copy()], ref)
+    assert len(pred) == 1 and pred <= {1, 2} and refs == {0}
+    m = comparar.metricas(3, 2, len(pred))
+    assert (m["aciertos"], m["falsos_positivos"], m["omitidos"]) == (1, 2, 1)
+    assert m["f1"] == pytest.approx(2 * (1 / 3) * 0.5 / (1 / 3 + 0.5))
+
+
+def test_zonas_de_prueba_en_utm_local_y_fuera_de_la_torrentera():
+    import importlib.util
+    import rasterio
+    from rasterio.warp import transform_bounds
+    from shapely.geometry import Point
+    spec = importlib.util.spec_from_file_location("probar", BASE / "scripts/probar_otras_zonas.py")
+    probar = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(probar)
+    assert probar.epsg_utm(-16.4, -71.5) == 32719
+    assert probar.epsg_utm(40.38, -3.73) == 32630
+    assert probar.epsg_utm(30.05, 31.24) == 32636
+    with rasterio.open(BASE / "data/imagery/chullo/chullo_rgb.tif") as src:
+        torrentera = box(*transform_bounds(src.crs, "EPSG:4326", *src.bounds))
+    zonas = json.loads((BASE / "config/zonas_prueba.json").read_text(encoding="utf-8"))["zonas"]
+    assert len({z["id"] for z in zonas}) == len(zonas) == 20
+    assert not any(Point(z["lon"], z["lat"]).buffer(0.0025).intersects(torrentera) for z in zonas)
+
+
+def test_metrica_de_area_tolera_techos_unidos():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("comparar", BASE / "scripts/comparar_modelos.py")
+    comparar = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(comparar)
+    ref = [np.zeros((12, 12), bool) for _ in range(3)]
+    for k in range(3):
+        ref[k][0:4, 4 * k:4 * k + 4] = True
+    unido = ref[0] | ref[1] | ref[2]  # un solo contorno sobre tres techos vecinos (IoU 1/3 con cada uno)
+    assert comparar.emparejar([unido], ref) == (set(), set())  # por techo: cero aciertos
+    area = comparar.metricas_area(*comparar.pixeles_area([unido], ref, 12))
+    assert area["f1_area"] == 1.0 and area["area_referencia_m2"] == 48 * 0.25
+
+
+def test_alineacion_recupera_corrimiento_y_limpieza():
+    from affine import Affine
+    from shapely import affinity
+    from backend import huellas
+    rgb = np.zeros((200, 200, 3), dtype=np.uint8)
+    techos = []
+    for k in range(30):
+        x, y = 10 + (k % 6) * 30, 10 + (k // 6) * 36
+        rgb[y:y + 14, x:x + 18] = 220
+        techos.append(box(x, -y - 14, x + 18, -y))  # metros = píxeles, norte arriba
+    transform = Affine(1, 0, 0, 0, -1, 0)
+    corridas = [affinity.translate(t, 3, 2) for t in techos]  # 3 px a la derecha y 2 px hacia arriba
+    nuevas, registro = huellas.alinear(rgb, transform, corridas, ["overture:X"] * 30)
+    assert (registro[0]["dx_px"], registro[0]["dy_px"]) == (-3, 2) and registro[0]["aplicado"]
+    assert nuevas[0].equals_exact(techos[0], 1e-9)
+    conservados, descartes = huellas.limpiar([box(0, 0, 2, 2), box(0, 0, 10, 10), box(0, 0, 50, 50)])
+    assert conservados == [1] and descartes == {"diminuta": 1, "lote_o_manzana": 1}
+
+
+def test_huellas_grandes_se_ignoran_en_gris(tmp_path, raster, anotacion):
+    celdas_path, techos_path = anotacion
+    data = json.loads(techos_path.read_text())
+    data["features"][0]["properties"]["ignorar"] = True
+    techos_path.write_text(json.dumps(data))
+    resumen = dataset_yolo.armar_dataset(raster, celdas_path, techos_path, tmp_path / "ds", desplazados=False)
+    from PIL import Image
+    png = np.asarray(Image.open(tmp_path / "ds/images/train/c000.png"))
+    assert (png[11, 6] == 114).all()  # dentro del techo ignorado
+    assert resumen["splits"]["train"]["techos"] == 1
+
+
 def test_resolver_modelo(tmp_path, monkeypatch):
     monkeypatch.setenv("CHULLO_YOLO_DIR", str(tmp_path))
     monkeypatch.delenv("CHULLO_MODELO", raising=False)

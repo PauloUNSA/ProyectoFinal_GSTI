@@ -1,0 +1,67 @@
+{
+  "fuente": "Overture Maps · tema buildings",
+  "release": "2026-10-21.0",
+  "bbox_wgs84": [
+    -71.55570191016115,
+    -16.39185502743393,
+    -71.54967108773643,
+    -16.351410303606713
+  ],
+  "descargado_en": "2026-11-15T21:55:04.033809+00:00",
+  "edificios": 5061,
+  "por_fuente": {
+    "Microsoft ML Buildings": 580,
+    "Google Open Buildings": 2800,
+    "OpenStreetMap": 1697
+  },
+  "licencia": "ODbL 1.0",
+  "atribucion": "Huellas de edificios: Overture Maps Foundation (licencia ODbL), que integra © colaboradores de OpenStreetMap, Google Open Buildings y Microsoft ML Buildings Footprints.",
+  "revision_humana": false,
+  "limpieza": {
+    "entrada": 5077,
+    "conservadas": 5061,
+    "descartes": {
+      "diminuta": 13,
+      "lote_o_manzana": 3
+    },
+    "alineacion": [
+      {
+        "fuente": "overture:Google Open Buildings",
+        "ventana": [
+          0,
+          0
+        ],
+        "huellas": 2800,
+        "dx_px": 4,
+        "dy_px": 4,
+        "ganancia": 1.03,
+        "aplicado": false
+      },
+      {
+        "fuente": "overture:Microsoft ML Buildings",
+        "ventana": [
+          0,
+          0
+        ],
+        "huellas": 580,
+        "dx_px": -3,
+        "dy_px": 4,
+        "ganancia": 1.097,
+        "aplicado": true
+      },
+      {
+        "fuente": "overture:OpenStreetMap",
+        "ventana": [
+          0,
+          0
+        ],
+        "huellas": 1681,
+        "dx_px": 2,
+        "dy_px": -1,
+        "ganancia": 1.032,
+        "aplicado": false
+      }
+    ]
+  },
+  "advertencia": "Etiquetas automáticas: faltan techos y algunas huellas cubren un lote entero."
+}

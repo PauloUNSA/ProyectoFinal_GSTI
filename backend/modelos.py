@@ -17,7 +17,7 @@ TIPOS = ("auto", "yolo", "maskrcnn")
 
 
 def yolo_dir() -> Path:
-    return Path(os.getenv("CHULLO_YOLO_DIR", BASE_DIR / "models/yolo_chullo_v1"))
+    return Path(os.getenv("CHULLO_YOLO_DIR", BASE_DIR / "models/yolo26_chullo"))
 
 
 def manifiesto_yolo() -> dict | None:
