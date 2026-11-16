@@ -63,6 +63,10 @@ async function cargarEstadoDetector() {
       await cargarEdificiosGeoJSON("outputs/detection/buildings.geojson", window.MAP());
       mostrarEstadoDeteccion(manifest);
       estado.textContent = "Resultados guardados";
+      const notaModelo = document.getElementById("modelo-nota");
+      if (notaModelo && manifest.arquitectura) {
+        notaModelo.textContent = `Resultados guardados de ${manifest.arquitectura} (${manifest.modelo}). Requiere revisión de contornos: puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.`;
+      }
       estado.className = "ready";
       document.getElementById("btn-run-detect").disabled = true;
       document.getElementById("btn-run-detect").textContent = "Nuevas inferencias: ejecutar servidor Python";

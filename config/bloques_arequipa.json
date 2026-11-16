@@ -1,0 +1,13 @@
+{
+  "descripcion": "Bloques de 1 × 1 km (2000 px a 0.5 m) de otros distritos de Arequipa para ampliar el entrenamiento con huellas automáticas. Ninguno toca la imagen de la torrentera ni las zonas de config/zonas_prueba.json.",
+  "bloques": [
+    {"id": "cayma_este", "nombre": "Cayma (este)", "lat": -16.3750, "lon": -71.5350, "split": "train"},
+    {"id": "alto_selva_alegre", "nombre": "Alto Selva Alegre", "lat": -16.3800, "lon": -71.5150, "split": "train"},
+    {"id": "miraflores_aqp", "nombre": "Miraflores (Arequipa)", "lat": -16.3950, "lon": -71.5200, "split": "train"},
+    {"id": "socabaya", "nombre": "Socabaya", "lat": -16.4550, "lon": -71.5300, "split": "train"},
+    {"id": "hunter", "nombre": "Jacobo Hunter", "lat": -16.4450, "lon": -71.5550, "split": "val"},
+    {"id": "sachaca", "nombre": "Sachaca", "lat": -16.4250, "lon": -71.5650, "split": "train"},
+    {"id": "cerro_colorado_libertad", "nombre": "Cerro Colorado (La Libertad)", "lat": -16.3600, "lon": -71.5900, "split": "train"},
+    {"id": "jlbyr_sur", "nombre": "J. L. Bustamante y Rivero (sur)", "lat": -16.4450, "lon": -71.5100, "split": "train"}
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "id": "chullo/yolo26_chullo",
+  "title": "YOLO26-Chullo",
+  "arquitectura": "Ultralytics YOLO26s-seg",
+  "base_model": "yolo26s-seg.pt",
+  "filename": "weights.pt",
+  "sha256": "94c4c54a92365390f5ceb06ca7c238a7756bbecc0d15833df17e603f2c975e4b",
+  "size_bytes": 23339805,
+  "trained_at": "2026-11-16T00:12:28.876114+00:00",
+  "tile_px": 256,
+  "imgsz": 640,
+  "resolucion_m": 0.5,
+  "imagen_sha256": "8c5615cdd3c24c8812525c4b4e4267a29b90d4d3a559cc2a39bb9478e5986d1c",
+  "umbral_recomendado": 0.05,
+  "etiquetas": "overture",
+  "metricas_val": {
+    "precision": 0.13206174924403974,
+    "recall": 0.14516087381654905,
+    "f1": 0.1383018363102136,
+    "map50": 0.05393663646826695,
+    "map50_95": 0.013220046791490067,
+    "confianza_f1_max": 0.07307307307307308,
+    "medida": "Máscaras de instancia (Ultralytics val); P y R en la confianza de F1 máximo."
+  },
+  "metricas_test": {
+    "precision": 0.15419193756346666,
+    "recall": 0.12640449438202248,
+    "f1": 0.13892232178690547,
+    "map50": 0.04765128472726396,
+    "map50_95": 0.012356611313490133,
+    "confianza_f1_max": 0.06706706706706707,
+    "medida": "Máscaras de instancia (Ultralytics val); P y R en la confianza de F1 máximo."
+  },
+  "dataset": {
+    "imagen": "chullo_rgb.tif",
+    "tile_px": 256,
+    "imgsz": 640,
+    "origen_etiquetas": "overture",
+    "splits": {
+      "train": {
+        "celdas": 379,
+        "recortes": 425,
+        "techos": 15500,
+        "recortes_vacios": 72,
+        "techos_borrador_sin_modificar": 0,
+        "instancias_desplazadas": 1397
+      },
+      "val": {
+        "celdas": 61,
+        "recortes": 61,
+        "techos": 4220,
+        "recortes_vacios": 2,
+        "techos_borrador_sin_modificar": 0,
+        "instancias_desplazadas": 0
+      },
+      "test": {
+        "celdas": 11,
+        "recortes": 11,
+        "techos": 356,
+        "recortes_vacios": 1,
+        "techos_borrador_sin_modificar": 0,
+        "instancias_desplazadas": 0
+      }
+    },
+    "fuentes": [
+      {
+        "imagen": "chullo_rgb.tif",
+        "sha256": "8c5615cdd3c24c8812525c4b4e4267a29b90d4d3a559cc2a39bb9478e5986d1c",
+        "resolucion_m": 0.5,
+        "celdas_completas": 59
+      },
+      {
+        "imagen": "cayma_este.tif",
+        "sha256": "3f86353c6d1276bd5720b2b09724af8b3ca8342c52eea0bacc01cf3c70de9258",
+        "resolucion_m": 0.5,
+        "celdas_completas": 49
+      },
+      {
+        "imagen": "alto_selva_alegre.tif",
+        "sha256": "4255847f9f8fd60965a2cfbe69bd94b843fb6b9a79a0633a2235d0e0e17a55b7",
+        "resolucion_m": 0.5,
+        "celdas_completas": 49
+      },
+      {
+        "imagen": "miraflores_aqp.tif",
+        "sha256": "bbc83efc9ac9e25caac590d55c361849c363ebba6b21dcd1a1cfc5faff9b902d",
+        "resolucion_m": 0.5,
+        "celdas_completas": 49
+      },
+      {
+        "imagen": "socabaya.tif",
+        "sha256": "d28c07867abb0094b223f901559e0be4768d1ff64b0cbfb17f860004518be790",
+        "resolucion_m": 0.5,
+        "celdas_completas": 49
+      },
+      {
+        "imagen": "hunter.tif",
+        "sha256": "a1084e44400f33d2765311e0a4ac50dc0419a257199fb0eac20b2240891dcb64",
+        "resolucion_m": 0.5,
+        "celdas_completas": 49
+      },
+      {
+        "imagen": "sachaca.tif",
+        "sha256": "a3587b85cb1ed22714ce6a34784a32a579dcc1369cb4a010789b1cc8e29ef643",
+        "resolucion_m": 0.5,
+        "celdas_completas": 49
+      },
+      {
+        "imagen": "cerro_colorado_libertad.tif",
+        "sha256": "1ed509fffb57e44a941f89923201cb8bf8acdb80653493ad315e3c245b7ddc4f",
+        "resolucion_m": 0.5,
+        "celdas_completas": 49
+      },
+      {
+        "imagen": "jlbyr_sur.tif",
+        "sha256": "9a65577e25a12ce10ad588505ed93d45d63a71d07906778a6605b51ef0106b67",
+        "resolucion_m": 0.5,
+        "celdas_completas": 49
+      }
+    ],
+    "avisos": [],
+    "resolucion_m": 0.5,
+    "imagen_sha256": "8c5615cdd3c24c8812525c4b4e4267a29b90d4d3a559cc2a39bb9478e5986d1c"
+  },
+  "entrenamiento": {
+    "epocas": 40,
+    "paciencia": 15,
+    "lote": 16,
+    "run": "data\\training\\yolo_chullo\\runs\\20261115_183317",
+    "ultralytics": "8.4.213",
+    "torch": "2.11.0+cu128",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti"
+  },
+  "licencia": "Ultralytics YOLO y sus pesos: AGPL-3.0 (https://www.ultralytics.com/license). Preentrenado con RAMP (CC BY-NC 4.0, DevGlobal/OMS): uso no comercial con atribución.",
+  "imagen_fuente": "Esri World Imagery; se conservan su atribución y condiciones de uso.",
+  "limitaciones": [
+    "Entrenado y evaluado con huellas automáticas de Overture (Google, Microsoft, OSM) sin revisión humana: las métricas miden acuerdo con esas huellas, no exactitud.",
+    "Detecta cubiertas visibles; no confirma viviendas, uso residencial, peligro ni permiso para construir.",
+    "Las métricas valen para las celdas anotadas de esta imagen; no garantizan otras fechas o zonas.",
+    "Celdas vecinas pueden compartir techos en el borde: val y test no son totalmente independientes."
+  ],
+  "preentrenamiento": "RAMP entrenado junto con Arequipa (data/training/ramp_dataset)",
+  "evaluacion_area": {
+    "medida": "F1 de área construida contra huellas Overture (sin revisión humana); corredor: 11 celdas test; zonas: 5 de Arequipa, 5 de Lima y 10 fuera de Perú (scripts/probar_otras_zonas.py)",
+    "variantes": {
+      "Overture del corredor (36 celdas)": {
+        "corredor_test": 0.464,
+        "fuera_peru": 0.242,
+        "arequipa": 0.475,
+        "lima": 0.164
+      },
+      "Overture del corredor + 8 bloques de Arequipa": {
+        "corredor_test": 0.49,
+        "fuera_peru": 0.345,
+        "arequipa": 0.398,
+        "lima": 0.202
+      },
+      "RAMP afinado con Arequipa": {
+        "corredor_test": 0.491,
+        "fuera_peru": 0.329,
+        "arequipa": 0.419,
+        "lima": 0.205
+      },
+      "Solo RAMP": {
+        "corredor_test": 0.377,
+        "fuera_peru": 0.518,
+        "arequipa": 0.347,
+        "lima": 0.249
+      },
+      "YOLO26-Chullo: RAMP + Arequipa a la vez": {
+        "corredor_test": 0.46,
+        "fuera_peru": 0.448,
+        "arequipa": 0.418,
+        "lima": 0.219
+      },
+      "Mask R-CNN piloto": {
+        "corredor_test": 0.28,
+        "fuera_peru": 0.31,
+        "arequipa": 0.294,
+        "lima": 0.354
+      },
+      "YOLO26-Chullo con umbral 0.05 (final)": {
+        "corredor_test": 0.579,
+        "fuera_peru": 0.58,
+        "arequipa": 0.6,
+        "lima": 0.34
+      }
+    },
+    "elegido": "YOLO26-Chullo: mejor media y sin caídas fuera de la zona de entrenamiento",
+    "nota_umbral": "Las demás variantes se midieron con umbral 0.10 (piso que luego se quitó)."
+  },
+  "descripcion": "YOLO26s-seg de Ultralytics entrenado a la vez con techos de RAMP (revisados por personas) y huellas Overture limpias de la torrentera Chullo y 8 distritos de Arequipa. Modelo final del proyecto.",
+  "umbral_criterio": "Barrido 0.02–0.10 en las 12 celdas val del corredor (scripts/comparar_modelos.py --umbral-yolo): 0.05 da el mejor F1 por techo (0.21) con F1 de área 0.60. En test: F1 de área 0.58 y 72 % del área encontrada, frente a 0.46 y 41 % con el umbral anterior de 0.10."
+}

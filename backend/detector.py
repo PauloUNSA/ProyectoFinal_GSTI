@@ -145,7 +145,8 @@ def _predictor_yolo(dispositivo: str, umbral: float):
         return r.boxes.conf.detach().cpu().numpy(), mascaras
 
     metricas = manifest.get("metricas_test") or {}
-    limitacion = (f"Modelo YOLO entrenado en Chullo; en su prueba: precisión {metricas['precision']:.3f}, "
+    origen = "con huellas Overture sin revisión humana" if manifest.get("etiquetas") == "overture" else "en Chullo"
+    limitacion = (f"Modelo YOLO entrenado {origen}; en sus celdas de prueba: precisión {metricas['precision']:.3f}, "
                   f"recuperación {metricas['recall']:.3f}, F1 {metricas['f1']:.3f}." if metricas else
                   "Modelo YOLO sin métricas de prueba registradas.")
     info = {"id": manifest["id"], "sha256": manifest["sha256"], "arquitectura": manifest.get("arquitectura", "YOLO-seg"),

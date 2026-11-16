@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
   "estado": "completado",
-  "iniciado_en": "2026-10-31T20:01:32.030726+00:00",
-  "completado_en": "2026-10-31T20:05:57.132748+00:00",
-  "count": 405,
+  "iniciado_en": "2026-11-16T00:30:14.976945+00:00",
+  "completado_en": "2026-11-16T00:30:25.284178+00:00",
+  "count": 442,
   "counts_by_class": {
-    "rojo": 118,
-    "amarillo": 287
+    "rojo": 113,
+    "amarillo": 329
   },
-  "modelo": "chullo/maskrcnn_chullo_local_v1",
-  "model_sha256": "dcc985d4b57ec6ab0c6dbc36bf48f8b6433bfe61e9d89faf2445bb7b05d5f61c",
+  "modelo": "chullo/yolo26_chullo",
+  "model_sha256": "94c4c54a92365390f5ceb06ca7c238a7756bbecc0d15833df17e603f2c975e4b",
   "zonas": {
     "geometria": "corredor_entre_limites",
-    "amarillo_m": 20,
+    "amarillo_m": 20.0,
     "limites_sha256": "e08b04ef0648ed1b395b49db1a42efd29babbf452aaa5f350785eaee22079717"
   },
   "cobertura": {
-    "path": "C:\\Users\\paulo_xxg0vy8\\Documents\\Codex\\2026-10-21\\necesito-que-en-base-a-esto\\outputs\\chullo-unificado\\data\\imagery\\chullo\\chullo_rgb.tif",
+    "path": "C:\\Users\\diego\\OneDrive\\Desktop\\ProyectoFinal_GSTI\\data\\imagery\\chullo\\chullo_rgb.tif",
     "crs": "EPSG:32719",
     "width": 1177,
     "height": 8942,
@@ -27,11 +27,20 @@
       -16.351410303606713
     ]
   },
-  "mosaicos_procesados": 49,
-  "arquitectura": "Mask R-CNN ResNet50-FPN",
-  "imagen": "C:\\Users\\paulo_xxg0vy8\\Documents\\Codex\\2026-10-21\\necesito-que-en-base-a-esto\\outputs\\chullo-unificado\\data\\imagery\\chullo\\chullo_rgb.tif",
-  "dispositivo": "cpu",
-  "umbral": 0.5,
+  "imagen_fuente": {
+    "source": "Esri World Imagery",
+    "service_url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+    "attribution": "Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+    "observed_at": null,
+    "acquired_at": "2026-10-31T20:00:39.689468+00:00"
+  },
+  "mosaicos_procesados": 115,
+  "arquitectura": "Ultralytics YOLO26s-seg",
+  "tamano_mosaico": 256,
+  "solapamiento": 64,
+  "imagen": "C:\\Users\\diego\\OneDrive\\Desktop\\ProyectoFinal_GSTI\\data\\imagery\\chullo\\chullo_rgb.tif",
+  "dispositivo": "cuda",
+  "umbral": 0.05,
   "area_minima_m2": 10.0,
   "crs_analisis": "EPSG:32719",
   "outputs": {
@@ -41,14 +50,7 @@
     "Detecciones automáticas sin revisión humana.",
     "La confianza no es una probabilidad calibrada de peligro.",
     "Pueden existir omisiones y falsos positivos.",
-    "Modelo local piloto: F1 de instancias 0.249 en dos recortes; no garantiza separar viviendas.",
+    "Modelo YOLO entrenado con huellas Overture sin revisión humana; en sus celdas de prueba: precisión 0.154, recuperación 0.126, F1 0.139.",
     "Solo se analiza la cobertura del GeoTIFF; no se evalúan franjas fuera de ella."
-  ],
-  "imagen_fuente": {
-    "source": "Esri World Imagery",
-    "service_url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
-    "attribution": "Esri, Vantor, Earthstar Geographics, and the GIS User Community",
-    "observed_at": null,
-    "acquired_at": "2026-10-31T20:00:39.689468+00:00"
-  }
+  ]
 }
