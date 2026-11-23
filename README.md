@@ -81,7 +81,7 @@ python -m venv .venv-ml
 
 - **Rojo:** un único corredor que ocupa todo el espacio entre las líneas azul y morada. Su ancho sigue los límites existentes; no es un buffer fijo de 4 m desde el eje.
 - **Amarillo:** anillo exterior de 20 m por defecto, configurable entre 0 y 500 m. Se mide desde el borde del corredor rojo, con esquinas redondeadas para no exceder la distancia elegida. No es un retiro legal.
-- **Referencia central:** línea discontinua abierta entre ambas márgenes; nunca une artificialmente el final con el inicio.
+- **Referencia central:** se conserva internamente para las distancias, pero no se dibuja en el visor para evitar que se confunda con una carretera.
 
 Los 4 m documentales se conservan como referencia del documento; no desplazan ni sustituyen las coordenadas de los límites. Estas capas no son una validación legal ni un estudio de peligro.
 
