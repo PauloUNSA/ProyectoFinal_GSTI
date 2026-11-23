@@ -81,6 +81,21 @@ def test_clasifica_contorno_y_prioridad_roja(limites):
     assert evaluar_edificio(box(227260,8187049,227300,8187051),zonas)['clase'] == 'rojo'
 
 
+def test_cruce_huella_sin_distancia_fija_y_prioridad(limites):
+    a_wgs = Transformer.from_crs(32719, 4326, always_xy=True).transform
+    huella = {
+        "type": "FeatureCollection",
+        "features": [{"type": "Feature", "geometry": mapping(transform(a_wgs, box(227260,8187040,227300,8187060)))}],
+    }
+    zonas = construir_zonas(limites, huella_huaico=huella)
+    solo_huella = box(227280,8187049,227290,8187051)
+    assert zonas['exterior'].covers(solo_huella)
+    assert evaluar_edificio(solo_huella, zonas)['clase'] == 'amarillo'
+    assert evaluar_edificio(box(227268,8187049,227282,8187051), zonas)['clase'] == 'naranja'
+    assert evaluar_edificio(box(227260,8187049,227282,8187051), zonas)['clase'] == 'rojo'
+    assert evaluar_edificio(box(227305,8187049,227310,8187051), zonas)['clase'] == 'verde'
+
+
 def test_limites_reales_y_fajas_conservan_corredor():
     limites = json.loads((BASE/'web/layers/limites-faja-cayma.geojson').read_text())
     zonas = construir_zonas(limites)

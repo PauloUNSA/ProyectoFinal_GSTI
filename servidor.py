@@ -103,7 +103,7 @@ class Archivos(SimpleHTTPRequestHandler):
         if umbral is not None and (not math.isfinite(umbral) or not 0 <= umbral <= 1):
             raise ValueError("El umbral debe estar entre 0 y 1.")
         if not math.isfinite(amarillo) or amarillo != 0:
-            raise ValueError("La zona amarilla fue retirada; utiliza amarillo=0.")
+            raise ValueError("El alcance de huaicos procede de INGEMMET; utiliza amarillo=0 para desactivar el ancho fijo.")
         if params.get("salida", ["outputs/detection"])[0].strip("/") != "outputs/detection":
             raise ValueError("La salida del visor es outputs/detection.")
         validar_imagen(imagen)
@@ -164,7 +164,7 @@ class Archivos(SimpleHTTPRequestHandler):
         manifest_path = OUTPUTS_DIR / "manifest.json"
         if manifest_path.is_file() and (OUTPUTS_DIR/"buildings.geojson").is_file():
             candidato = json.loads(manifest_path.read_text(encoding="utf-8"))
-            if candidato.get("estado") == "completado" and candidato.get("zonas", {}).get("geometria") == "cauce_fajas_reconstruccion_4m":
+            if candidato.get("estado") == "completado" and candidato.get("zonas", {}).get("geometria") in {"cauce_fajas_reconstruccion_4m", "cauce_fajas_huella_a7270"}:
                 manifest = candidato
         self._send_json(200, {"servidor": "chullo-unificado", "puerto": self.server.server_address[1],
                               "cnn_disponible": error is None and os.getenv("CHULLO_ENABLE_DETECTION", "1") == "1", "error": error, "imagen": imagen,

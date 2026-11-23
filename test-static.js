@@ -12,9 +12,11 @@ const {chromium}=require('playwright');
   const total=(await (await page.request.get('http://127.0.0.1:4187/dist/outputs/detection/manifest.json')).json()).count;
   await page.waitForFunction(n=>typeof edificiosGeoJSON!=='undefined' && edificiosGeoJSON?.features?.length===n,total);
   assert.equal(await page.locator('#btn-run-detect').isDisabled(),true);
+  assert.equal(await page.evaluate(()=>edificioLayer.getLayers().length),total);
+  assert.match(await page.locator('#detect-status').textContent(),/Amarillo: [1-9]\d*/);
   assert.equal(await page.locator('#band-amarillo').count(),0);
   assert.equal(await page.evaluate(()=>window.OBTENER_BANDAS().features.filter(f=>f.properties.clase==='rojo').length),1);
-  for (const [clase,expected] of [['rojo','Rojo · cauce y riberas (aproximado)'],['naranja','Naranja · faja marginal (aproximada)']]) {
+  for (const [clase,expected] of [['rojo','Rojo · cauce y riberas (aproximado)'],['naranja','Naranja · faja marginal (aproximada)'],['amarillo','Amarillo · alcance simulado de huaicos (aproximado)']]) {
     await page.evaluate(clase=>{
       const layer=edificioLayer.getLayers().find(l=>l.feature.properties.clase===clase);
       layer.fire('click');layer.openPopup();
@@ -23,6 +25,9 @@ const {chromium}=require('playwright');
     assert.equal(await page.locator('.leaflet-popup-content strong').first().textContent(),expected);
     assert.doesNotMatch(await page.locator('#edificio-info').textContent(),/[ÃÂ�]/);
   }
+  await page.locator('#btn-ver-cruce-amarillo').click();
+  assert.equal(await page.locator('#edificio-info .chip.amarillo').isVisible(),true);
+  await page.locator('.leaflet-popup-close-button').click();
   const huella = page.locator('.leaflet-huellaHuaico-pane path');
   await huella.first().waitFor({state:'visible'});
   const visible = await huella.count();

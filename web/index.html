@@ -7,7 +7,7 @@
 <meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, límites de faja marginal, fajas marginales y detección de edificios por CNN.">
 <title>Chullo Unificado · Límites y posibles cubiertas</title>
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="simple.css?v=20261123-huella-a7270">
+<link rel="stylesheet" href="simple.css?v=20261123-cruce-a7270">
 </head>
 <body>
 <header>
@@ -50,10 +50,11 @@
 
       <div id="detector-panel">
         <h3>Detección de posibles cubiertas</h3>
-        <p>Clasifica cubiertas que tocan el cauce o una faja marginal. El rojo tiene prioridad. La capa de huaicos es una referencia visual a escala de sector.</p>
+        <p>Cruza las cubiertas detectadas con el cauce, las fajas marginales y el alcance simulado de huaicos. El cruce amarillo es aproximado y se interpreta a escala de sector.</p>
         <p class="note" id="modelo-nota">Detección CNN sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
         <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
         <div id="detect-status" class="detect-status"></div>
+        <button id="btn-ver-cruce-amarillo" class="secondary" type="button" hidden>Ver un cruce amarillo</button>
       </div>
 
       <div id="controles-panel" class="controles-panel">
@@ -96,9 +97,9 @@
 </dialog>
 
 <script src="vendor/leaflet.js"></script>
-<script src="data.js?v=20261123-huella-a7270"></script>
-<script src="bands.js?v=20261123-huella-a7270"></script>
-<script src="detection.js?v=20261123-huella-a7270"></script>
-<script src="simple.js?v=20261123-huella-a7270"></script>
+<script src="data.js?v=20261123-cruce-a7270"></script>
+<script src="bands.js?v=20261123-cruce-a7270"></script>
+<script src="detection.js?v=20261123-cruce-a7270"></script>
+<script src="simple.js?v=20261123-cruce-a7270"></script>
 </body>
 </html>

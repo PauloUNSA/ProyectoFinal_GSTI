@@ -13,7 +13,7 @@ COLORES = {"rojo": "#dc2626", "naranja": "#f97316", "amarillo": "#eab308", "verd
 ETIQUETAS = {
     "rojo": "Rojo · cauce y riberas (aproximado)",
     "naranja": "Naranja · faja marginal (aproximada)",
-    "amarillo": "Amarillo · franja exterior",
+    "amarillo": "Amarillo · alcance simulado de huaicos (aproximado)",
     "verde": "Fuera del ámbito · sin evaluación de seguridad",
     "desconocido": "Sin evaluación",
 }
@@ -71,15 +71,16 @@ def calcular_linea_cauce_desde_limites(limites):
     return LineString([((a[0]+b[0])/2, (a[1]+b[1])/2) for a, b in pares])
 
 
-def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719"):
+def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719", huella_huaico=None):
     from pyproj import Transformer
-    from shapely.geometry import Polygon
+    from shapely.geometry import Polygon, shape
+    from shapely.ops import unary_union
     from shapely import transform as _transform
     def transform(fn, geom):
         return _transform(geom, fn, interleaved=False)
     from shapely import make_valid
     if not math.isfinite(amarillo_m) or amarillo_m != 0:
-        raise ValueError("La zona amarilla fue retirada: amarillo_m debe ser 0.")
+        raise ValueError("El alcance de huaicos procede de INGEMMET: amarillo_m debe ser 0.")
     d, i = _margenes(limites)
     a_m = Transformer.from_crs("EPSG:4326", crs_metrico, always_xy=True).transform
     a_wgs = Transformer.from_crs(crs_metrico, "EPSG:4326", always_xy=True).transform
@@ -96,10 +97,18 @@ def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719"):
     izquierda = i_m.buffer(4, join_style=1).intersection(corredor)
     naranja = derecha.union(izquierda)
     rojo = corredor.difference(naranja)
-    exterior = corredor
+    amarillo = Polygon()
+    if huella_huaico is not None:
+        piezas = [shape(feature["geometry"]) for feature in huella_huaico["features"]]
+        if not piezas or any(g.geom_type not in ("Polygon", "MultiPolygon") or not g.is_valid or g.is_empty for g in piezas):
+            raise ValueError("La huella de huaicos debe contener polígonos válidos.")
+        # Las fronteras compartidas siguen clasificándose primero como cauce o faja.
+        amarillo = transform(a_m, unary_union(piezas)).difference(corredor)
+    exterior = corredor.union(amarillo)
     return {
         "rojo": rojo,
         "naranja": naranja,
+        "amarillo": amarillo,
         "faja_derecha": derecha,
         "faja_izquierda": izquierda,
         "corredor": corredor,
@@ -156,13 +165,15 @@ def evaluar_edificio(geometria_metrica, zonas):
         clase = "rojo"
     elif geometria_metrica.intersects(zonas["naranja"]):
         clase = "naranja"
+    elif geometria_metrica.intersects(zonas["amarillo"]):
+        clase = "amarillo"
     else:
         clase = "verde"
     return {
         "clase": clase,
         "etiqueta": ETIQUETAS[clase],
         "color": COLORES[clase],
-        "dentro_banda": clase in ("rojo", "naranja"),
+        "dentro_banda": clase in ("rojo", "naranja", "amarillo"),
         "distance_m": float(geometria_metrica.distance(zonas["rojo"])),
         "distance_axis_m": float(geometria_metrica.distance(zonas["cauce"])),
         "geometry_status": "reconstruccion_aproximada",
