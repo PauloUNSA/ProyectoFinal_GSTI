@@ -27,7 +27,7 @@ function dibujarBandasEnMapa(mapInstance, bandas) {
   // pero no se dibuja porque puede confundirse con una carretera.
   const capas = bandas.features.filter(f => ["rojo", "naranja"].includes(f.properties.clase)).map(f => {
     const clase = f.properties.clase;
-    const estilo = {color: f.properties.color, weight: 2, fillColor: f.properties.color, fillOpacity: clase === "rojo" ? 0.3 : 0.18};
+    const estilo = {color: f.properties.color, weight: 2, fillColor: f.properties.color, fillOpacity: clase === "rojo" ? 0.3 : 0.45};
     return L.geoJSON(f, {style: estilo, pane}).bindPopup(f.properties.etiqueta);
   });
   bandaLayer = L.featureGroup(capas);
