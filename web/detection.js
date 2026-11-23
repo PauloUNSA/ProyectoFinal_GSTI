@@ -27,11 +27,17 @@ function dibujarEdificios(mapInstance, geojson) {
   if (edificioLayer) mapInstance.removeLayer(edificioLayer);
   edificiosGeoJSON = geojson;
   const features = (geojson?.features || []).filter(f => clasesCubiertas.includes(f.properties?.clase));
+  const mapa = mapInstance.getContainer();
+  const leyenda = mapa.parentElement.querySelector(".map-legend");
+  const espacioLeyenda = leyenda
+    ? Math.max(12, leyenda.getBoundingClientRect().bottom - mapa.getBoundingClientRect().top + 12)
+    : 12;
   edificioLayer = L.geoJSON({type: "FeatureCollection", features}, {
     style: f => ({color: f.properties.clase === "amarillo" ? "#7c4a06" : f.properties.color, weight: 2, fillColor: f.properties.color, fillOpacity: f.properties.clase === "amarillo" ? 0.68 : 0.55}),
     onEachFeature: (f, layer) => {
       const p = f.properties;
-      layer.bindPopup(`<strong>${esc(p.etiqueta)}</strong><br>Distancia al rojo aproximado: ${Number(p.distance_m).toFixed(2)} m<br>Puntuación del detector: ${Number(p.confidence).toFixed(3)}<br>Contorno candidato pendiente de revisión.`);
+      layer.bindPopup(`<strong>${esc(p.etiqueta)}</strong><br>Distancia al rojo aproximado: ${Number(p.distance_m).toFixed(2)} m<br>Puntuación del detector: ${Number(p.confidence).toFixed(3)}<br>Contorno candidato pendiente de revisión.`,
+        {autoPanPaddingTopLeft: [12, espacioLeyenda], maxWidth: 300});
       layer.on("click", () => mostrarInfoEdificios(p));
     },
   });
