@@ -13,7 +13,7 @@ let limiteLayer = null;
 let verticesLayer = null;
 let edificioLayer = null;
 let satelitalLayer = null;
-// bandaLayer se declara en bands.js; ejeTorrentera se declara en data.js (ambos globales)
+// bandaLayer se declara en bands.js.
 
 const TILES_OSM = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 const TILES_SATELITAL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
@@ -70,21 +70,13 @@ function initMap() {
 // Cargar datos y dibujar capas
 // ------------------------------------------------------------------
 async function cargarTodo() {
-  if (window.CARGAR_HITOS) await window.CARGAR_HITOS();
-  if (window.CARGAR_LIMITES) await window.CARGAR_LIMITES();
-
-  const limites = window.CHULLO_BOUNDARIES;
-  if (limites && window.CALCULAR_EJE) {
-    ejeTorrentera = window.CALCULAR_EJE(limites);
-    window.ejeTorrentera = ejeTorrentera;
-  }
-
-  dibujarPuntos();
-  dibujarLimites();
-  await dibujarVertices();
-  // El análisis implementado es Cayma; los hitos de Yanahuara siguen consultables.
-  if (limiteLayer?.getBounds().isValid()) {
-    map.fitBounds(limiteLayer.getBounds(), {padding: [30, 30], maxZoom: 17, animate: false});
+  try {
+    await window.CARGAR_REFERENCIAS();
+    dibujarPuntos();
+    dibujarLimites();
+    dibujarVertices();
+  } catch (err) {
+    document.getElementById("ana-count").textContent = "No disponible";
   }
   try {
     await dibujarBandas();
@@ -94,7 +86,12 @@ async function cargarTodo() {
 
   configurarUI();
   try {
-    await cargarHuellaHuaico(map);
+    cargarHuellaHuaico(map);
+    if (huaicoLayer.getBounds().isValid()) {
+      const ambito = huaicoLayer.getBounds();
+      if (limiteLayer?.getBounds().isValid()) ambito.extend(limiteLayer.getBounds());
+      map.fitBounds(ambito, {padding: [30, 30], maxZoom: 17, animate: false});
+    }
   } catch (err) {
     document.getElementById("layer-huaico").disabled = true;
     document.getElementById("estado-huaico").textContent = err.message;
@@ -114,13 +111,12 @@ function dibujarPuntos() {
     { type: "FeatureCollection", features },
     {
       pointToLayer: (f, latlng) => {
-        const sector = f.properties.sector;
         const enRevision = f.properties.location_status === "source_conflict";
         return L.circleMarker(latlng, {
           radius: 7,
           color: "#fff",
           weight: 1.5,
-          fillColor: sector === "Cayma" ? "#285d43" : "#c77827",
+          fillColor: "#285d43",
           fillOpacity: enRevision ? 0.5 : 1,
           dashArray: enRevision ? "4 3" : null,
           bubblingMouseEvents: false,
@@ -177,10 +173,8 @@ function dibujarLimites() {
   }).addTo(map);
 }
 
-async function dibujarVertices() {
-  const respuesta = await fetch("layers/vertices-limites-cayma.geojson");
-  if (!respuesta.ok) return;
-  const vertices = await respuesta.json();
+function dibujarVertices() {
+  const vertices = window.CHULLO_VERTICES;
   verticesLayer = L.geoJSON(vertices, {
     pointToLayer: (f, latlng) => L.circleMarker(latlng, {
       radius: 3, weight: 1, color: "#fff", fillOpacity: 1,
@@ -305,9 +299,7 @@ function abrirFuente(id) {
     `;
   }
 
-  const referencia = p.sector === "Cayma"
-    ? "Expediente ANA Cayma · RD 1610-2018, rectificación RD 289-2019 del 22/03/2019"
-    : "Resolución ANA del 28/12/2017 · Yanahuara";
+  const referencia = "Expediente ANA Cayma · RD 1610-2018, rectificación RD 289-2019 del 22/03/2019";
 
   body.innerHTML =
     `<p class="source-document">${esc(referencia)}</p>` +

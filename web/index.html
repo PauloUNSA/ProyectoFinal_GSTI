@@ -12,7 +12,7 @@
 <body>
 <header>
   <div>
-    <p class="eyebrow">TORRENTERA CHULLO · AREQUIPA · MAPA UNIFICADO</p>
+    <p class="eyebrow">TORRENTERA CHULLO · CAYMA · AREQUIPA</p>
     <h1>Mapa, límites y posibles cubiertas</h1>
     <p class="sub">Puntos documentales ANA · cauce/riberas y fajas marginales de Cayma · posibles cubiertas</p>
   </div>
@@ -24,7 +24,7 @@
 
 <main>
   <div class="connections" aria-label="Estado de conexiones">
-    <span>ANA <b class="ready">60 registros · 12 en revisión</b></span>
+    <span>ANA <b id="ana-count" class="ready">Cargando…</b></span>
     <span>OpenStreetMap <b id="map-state">Cargando…</b></span>
     <span>CNN <b id="cnn-state" title="Detección de edificios con CNN">Comprobando…</b></span>
   </div>
@@ -47,7 +47,7 @@
           <input type="checkbox" id="layer-limites" checked> Límites exteriores de faja marginal (Cayma)
         </label>
         <label class="layer-toggle">
-          <input type="checkbox" id="layer-vertices" checked> 210 vértices de los límites (Cayma)
+          <input type="checkbox" id="layer-vertices" checked> Vértices documentales visibles en Cayma
         </label>
         <label class="layer-toggle">
           <input type="checkbox" id="layer-bandas" checked> Cauce y fajas marginales (aproximados)
@@ -78,9 +78,9 @@
 </dialog>
 
 <script src="vendor/leaflet.js"></script>
-<script src="data.js?v=20261123-cruce-a7270"></script>
-<script src="bands.js?v=20261123-cruce-a7270"></script>
-<script src="detection.js?v=20261123-etiquetas"></script>
-<script src="simple.js?v=20261123-visor"></script>
+<script src="data.js?v=20261123-cayma"></script>
+<script src="bands.js?v=20261123-cayma"></script>
+<script src="detection.js?v=20261123-cayma"></script>
+<script src="simple.js?v=20261123-cayma"></script>
 </body>
 </html>

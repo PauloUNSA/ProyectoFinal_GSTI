@@ -40,17 +40,16 @@ async function recalcularBandas(mapInstance, limites, rojoM, amarilloM) {
   return dibujarBandasEnMapa(mapInstance, await generarBandas(limites, rojoM, amarilloM));
 }
 
-async function cargarHuellaHuaico(mapInstance) {
-  const resp = await fetch("layers/huella-huaico-chullo-a7270.geojson");
-  if (!resp.ok) throw new Error("No se pudo cargar la huella de huaicos de INGEMMET.");
-  const geojson = await resp.json();
+function cargarHuellaHuaico(mapInstance) {
+  const huella = bandasGeoJSON?.features.find(f => f.properties.clase === "amarillo");
+  if (!huella) throw new Error("No se pudo cargar la huella de huaicos en Cayma.");
   const pane = mapInstance.createPane("huellaHuaico");
   pane.style.zIndex = 340;
-  huaicoLayer = L.geoJSON(geojson, {
+  huaicoLayer = L.geoJSON(huella, {
     pane,
     style: {color: "#eab308", weight: 2, fillColor: "#fde047", fillOpacity: 0.31},
   }).bindPopup(
-    '<strong>Alcance simulado de huaicos</strong><br>Contorno aproximado del anexo 4, INGEMMET (2022). Reúne las tres categorías de peligro de la fuente.<br><a href="huaicos.html">Ver el método y el plano original</a>'
+    '<strong>Alcance simulado de huaicos</strong><br>Contorno del anexo 4 de INGEMMET (2022) dentro de Cayma. Incluye peligro bajo, moderado y alto.<br><a href="huaicos.html">Ver el método y el plano original</a>'
   );
   if (document.getElementById("layer-huaico").checked) huaicoLayer.addTo(mapInstance);
 }

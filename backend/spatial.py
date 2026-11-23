@@ -71,7 +71,7 @@ def calcular_linea_cauce_desde_limites(limites):
     return LineString([((a[0]+b[0])/2, (a[1]+b[1])/2) for a, b in pares])
 
 
-def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719", huella_huaico=None):
+def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719", huella_huaico=None, distrito=None):
     from pyproj import Transformer
     from shapely.geometry import Polygon, shape
     from shapely.ops import unary_union
@@ -104,6 +104,16 @@ def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719", huella_huai
             raise ValueError("La huella de huaicos debe contener polígonos válidos.")
         # Las fronteras compartidas siguen clasificándose primero como cauce o faja.
         amarillo = transform(a_m, unary_union(piezas)).difference(corredor)
+    cauce = transform(a_m, calcular_linea_cauce_desde_limites(limites))
+    if distrito is not None:
+        ambito = transform(a_m, shape(distrito["geometry"]))
+        rojo = rojo.intersection(ambito)
+        derecha = derecha.intersection(ambito)
+        izquierda = izquierda.intersection(ambito)
+        naranja = naranja.intersection(ambito)
+        corredor = corredor.intersection(ambito)
+        amarillo = amarillo.intersection(ambito)
+        cauce = cauce.intersection(ambito)
     exterior = corredor.union(amarillo)
     return {
         "rojo": rojo,
@@ -113,7 +123,7 @@ def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719", huella_huai
         "faja_izquierda": izquierda,
         "corredor": corredor,
         "exterior": exterior,
-        "cauce": transform(a_m, calcular_linea_cauce_desde_limites(limites)),
+        "cauce": cauce,
         "a_wgs": a_wgs,
         "a_m": a_m,
         "amarillo_m": amarillo_m,
@@ -121,7 +131,7 @@ def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719", huella_huai
     }
 
 
-def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=0, crs_metrico="EPSG:32719"):
+def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=0, crs_metrico="EPSG:32719", huella_huaico=None, distrito=None):
     """GeoJSON íntegro: conserva anillos interiores y geometrías múltiples.
 
     Los límites exteriores son documentales. La separación interior usa 4 m
@@ -131,9 +141,12 @@ def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=0, crs_metrico="EPSG:3
     from shapely import transform as _transform
     def transform(fn, geom):
         return _transform(geom, fn, interleaved=False)
-    zonas = construir_zonas(limites, amarillo_m, crs_metrico)
+    zonas = construir_zonas(limites, amarillo_m, crs_metrico, huella_huaico, distrito)
     salida = {}
-    for clase in ("naranja", "rojo", "cauce"):
+    clases = ("naranja", "rojo", "cauce")
+    if huella_huaico is not None:
+        clases += ("amarillo",)
+    for clase in clases:
         salida[clase] = {
             "type": "Feature",
             "geometry": mapping(transform(zonas["a_wgs"], zonas[clase])),
@@ -150,6 +163,7 @@ def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=0, crs_metrico="EPSG:3
         "rojo_m_documental": rojo_m,
         "amarillo_m": amarillo_m,
         "crs": crs_metrico,
+        "distrito": distrito["properties"]["nombre"] if distrito else None,
         "medicion": "4 m hacia dentro desde cada límite exterior, recortados al corredor documental.",
         "buffer_join": "round",
         "red_scope": "Cauce y riberas aproximados: residual al descontar ambas fajas laterales reconstruidas.",

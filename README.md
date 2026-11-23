@@ -86,7 +86,7 @@ python -m venv .venv-ml
 
 La separación interior se **reconstruye de forma aproximada**: se intersecta el corredor entre ambos límites con un buffer de 4 m de cada línea lateral; la unión de las dos partes es naranja y el espacio restante es rojo. No se añaden 4 m fuera de los límites exteriores ni se retraen los extremos del tramo. Faltan coordenadas oficiales del límite superior de las riberas o un levantamiento para confirmar la separación. No debe presentarse como un polígono interior oficial de ANA.
 
-El visor y el detector comparten `backend/spatial.py`, en EPSG:32719. Cualquier intersección del contorno con rojo tiene prioridad roja; si toca una faja marginal y queda fuera del rojo, es naranja. Si solo toca el alcance simulado de huaicos, es amarillo. Se conserva el contorno completo y se filtran los candidatos fuera del ámbito. El parámetro legado `--amarillo` solo admite 0. La capa de huaicos tiene resolución de unos 28 m por píxel en el PDF y se interpreta por sector. La detección cruza cubiertas con las tres zonas dentro del GeoTIFF. La clase amarilla indica un cruce aproximado con la huella de huaicos. El manifiesto reporta el porcentaje de la huella exterior cubierto por la extensión de la imagen.
+El visor y el detector comparten `backend/spatial.py`, en EPSG:32719. Las tres zonas se recortan al límite distrital de referencia de Cayma (UBIGEO 040103), [cartografía censal del INEI publicada por GEOCATMIN](https://geocatmin.ingemmet.gob.pe/arcgis/rest/services/WGS84_18/WEBGIS_VALIDACION_DM_WGS84_18/MapServer/0). Los hitos y vértices del visor se limitan a los que caen dentro de ese ámbito. Si una cubierta cruza el límite distrital, se conserva su contorno completo y se clasifica por el cruce dentro de Cayma. Cualquier intersección del contorno con rojo tiene prioridad roja; si toca una faja marginal y queda fuera del rojo, es naranja. Si solo toca el alcance simulado de huaicos, es amarillo. Se conserva el contorno completo y se filtran los candidatos fuera del ámbito. El parámetro legado `--amarillo` solo admite 0. La capa de huaicos tiene resolución de unos 28 m por píxel en el PDF y se interpreta por sector. La detección cruza cubiertas con las tres zonas dentro del GeoTIFF. La clase amarilla indica un cruce aproximado con la huella de huaicos. El manifiesto reporta el porcentaje de la huella exterior cubierto por la extensión de la imagen.
 
 El [origen del amarillo y el método](web/huaicos.html) documentan la digitalización. Para reproducir el GeoJSON con el PDF original, instala `pypdf` en el entorno del proyecto y ejecuta `python scripts/generate_huella_huaico.py ruta/al/A7270.pdf`.
 
@@ -115,7 +115,7 @@ Para ejecutar una nueva inferencia local, consulta [Ejecución y salidas](#ejecu
 
 ## Imagen y modelo incluidos
 
-- `data/imagery/chullo/chullo_rgb.tif`: GeoTIFF RGB real, EPSG:32719, 1177 × 8942 píxeles, que cubre el corredor ANA con contexto alrededor.
+- `data/imagery/chullo/chullo_rgb.tif`: GeoTIFF RGB real, EPSG:32719, 2188 × 8852 píxeles, con cobertura completa de las zonas del tramo de Chullo dentro de Cayma.
 - `data/imagery/chullo/chullo_rgb.json`: procedencia, extensiones devueltas por ArcGIS, parámetros de las tres capturas y hashes. Fuente: [Esri World Imagery](https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer). Se conservan los créditos del proveedor. La fecha de descarga no se presenta como fecha de captura.
 - `data/imagery/chullo/captura_original_sin_crs.png`: respaldo de la imagen que antes estaba renombrada como `.tif`, sin coordenadas.
 - `models/yolo26_chullo/`: modelo activo YOLO26s-seg, manifiesto y pesos SHA256 verificados. Su entrenamiento y evaluación se documentan en `docs/ENTRENAMIENTO_YOLO.md`.
@@ -136,7 +136,7 @@ python scripts/generate_bands.py --amarillo 0
 
 La API publica `web/outputs/detection/buildings.geojson` y `manifest.json`; se sirven bajo `/outputs/detection/`. El manifiesto registra conteos por color, modelo, imagen, cobertura y parámetros.
 
-El cruce actual del **23/11/2026** con YOLO26-Chullo, umbral 0,05 y 196 mosaicos, dio **2169 contornos candidatos**: 56 rojos, 58 naranjas y 2055 amarillos. El GeoTIFF abarca el 76,5 % de la huella amarilla digitalizada. Los contornos son resultados del modelo pendientes de revisión.
+En la corrida de **Cayma del 23/11/2026**, YOLO26-Chullo procesó 193 mosaicos con umbral 0,05 y obtuvo **1911 contornos candidatos**: 38 rojos, 37 naranjas y 1836 amarillos. El GeoTIFF cubre el **100 % de las tres zonas** recortadas a Cayma, incluidas las **82,66 ha de huella amarilla digitalizada**. Los contornos requieren revisión.
 
 Una corrida previa del **23/11/2026**, sobre el cauce y las dos fajas marginales reconstruidas, produjo **123 contornos candidatos: 57 rojos y 66 naranjas**, en 93 mosaicos, con YOLO26-Chullo y umbral 0.05. El cambio de conteo responde al ámbito retirado y a la nueva clasificación; no prueba una mejora de precisión. Los pesos son los mismos verificados el 22/11/2026.
 

@@ -228,12 +228,15 @@ def detectar_edificios(
     salida_dir.mkdir(parents=True, exist_ok=True)
     imagen_info = validar_imagen(imagen_path)
     capas = Path(__file__).resolve().parents[1] / "web/layers"
+    distrito_path = capas / "distrito-cayma.geojson" if limites_path is None else None
     if limites_path is None and huella_huaico_path is None:
         huella_huaico_path = capas / "huella-huaico-chullo-a7270.geojson"
     limites_path = Path(limites_path or capas / "limites-faja-cayma.geojson")
     huella_path = Path(huella_huaico_path) if huella_huaico_path is not None else None
     huella = json.loads(huella_path.read_text(encoding="utf-8-sig")) if huella_path else None
-    zonas = construir_zonas(json.loads(limites_path.read_text(encoding="utf-8-sig")), amarillo_m, crs_analisis, huella_huaico=huella)
+    distrito = json.loads(distrito_path.read_text(encoding="utf-8")) if distrito_path else None
+    zonas = construir_zonas(json.loads(limites_path.read_text(encoding="utf-8-sig")),
+                            amarillo_m, crs_analisis, huella_huaico=huella, distrito=distrito)
     iniciado = datetime.now(timezone.utc).isoformat()
 
     cobertura_huella_pct = None
@@ -247,6 +250,7 @@ def detectar_edificios(
         amarillo = zonas["amarillo"]
         if not amarillo.is_empty:
             cobertura_huella_pct = round(100 * amarillo.intersection(cobertura).area / amarillo.area, 1)
+        porcentaje_cobertura = round(100 * zonas["exterior"].intersection(cobertura).area / zonas["exterior"].area, 2)
         if not cobertura.intersects(zonas["exterior"]):
             raise ValueError("La imagen no cubre las franjas del sector Chullo.")
 
@@ -368,7 +372,13 @@ def detectar_edificios(
         "modelo": modelo_info["id"],
         "model_sha256": modelo_info["sha256"],
         "zonas": {
-            "geometria": "cauce_fajas_huella_a7270" if huella_path else "cauce_fajas_reconstruccion_4m",
+            "geometria": (
+                "cauce_fajas_huella_a7270_cayma" if distrito
+                else "cauce_fajas_huella_a7270" if huella_path else "cauce_fajas_reconstruccion_4m"
+            ),
+            "distrito": distrito["properties"]["nombre"] if distrito else None,
+            "distrito_sha256": sha256_file(distrito_path) if distrito_path else None,
+            "ambito_cobertura_imagen_pct": porcentaje_cobertura,
             "faja_m_por_margen": 4,
             "separacion_interior": "aproximada",
             "amarillo_m": amarillo_m,

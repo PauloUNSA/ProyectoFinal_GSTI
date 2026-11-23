@@ -14,7 +14,7 @@ const zonasCubiertas = {
     etiqueta: "Amarillo · Edificación construida en el alcance simulado de huaicos",
   },
 };
-const resultadosVersion = "20261123-cruce-a7270";
+const resultadosVersion = "20261123-cayma";
 
 function dibujarEdificios(mapInstance, geojson) {
   if (edificioLayer) mapInstance.removeLayer(edificioLayer);

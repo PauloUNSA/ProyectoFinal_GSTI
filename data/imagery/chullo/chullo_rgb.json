@@ -1,7 +1,7 @@
 {
   "source": "Esri World Imagery",
   "service_url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
-  "acquired_at": "2026-10-31T20:00:39.689468+00:00",
+  "acquired_at": "2026-11-23T21:31:15.007777+00:00",
   "observed_at": null,
   "observed_at_note": "La fecha de captura no se infiere de la fecha de descarga.",
   "attribution": "Esri, Vantor, Earthstar Geographics, and the GIS User Community",
@@ -10,86 +10,87 @@
     {
       "params": {
         "f": "json",
-        "bbox": "227024.0,8188978.5,227612.5,8190478.5",
+        "bbox": "227018.5,8188947.0,228128.5,8190463.0",
         "bboxSR": 32719,
         "imageSR": 32719,
-        "size": "1177,3000",
-        "format": "png24",
-        "transparent": "false"
+        "size": "2220,3032",
+        "format": "png32",
+        "transparent": "true"
       },
       "extent": {
-        "xmin": 227024,
-        "ymin": 8188978.5,
-        "xmax": 227612.5,
-        "ymax": 8190478.5,
+        "xmin": 227018.5,
+        "ymin": 8188947,
+        "xmax": 228128.5,
+        "ymax": 8190463,
         "spatialReference": {
           "wkid": 32719,
           "latestWkid": 32719
         }
       },
-      "width": 1177,
-      "height": 3000,
-      "sha256_response_image": "daccb7ae4396e05d7f70cac55f37589a0dcfd83b063b4ef36f8b2bc542eb4829"
+      "width": 2220,
+      "height": 3032,
+      "sha256_response_image": "2bd2cbabf0ec096ea0dc341054b7578e0ba4ec4b7500227f207cf412697a3dea"
     },
     {
       "params": {
         "f": "json",
-        "bbox": "227024.0,8187478.5,227612.5,8188978.5",
+        "bbox": "227018.5,8187447.0,228128.5,8188963.0",
         "bboxSR": 32719,
         "imageSR": 32719,
-        "size": "1177,3000",
-        "format": "png24",
-        "transparent": "false"
+        "size": "2220,3032",
+        "format": "png32",
+        "transparent": "true"
       },
       "extent": {
-        "xmin": 227024,
-        "ymin": 8187478.5,
-        "xmax": 227612.5,
-        "ymax": 8188978.5,
+        "xmin": 227018.5,
+        "ymin": 8187447,
+        "xmax": 228128.5,
+        "ymax": 8188963,
         "spatialReference": {
           "wkid": 32719,
           "latestWkid": 32719
         }
       },
-      "width": 1177,
-      "height": 3000,
-      "sha256_response_image": "6b2490e7d7e2d7831f5aeca152dbeb2d44375f28ed80c4c4921de86ee9f51381"
+      "width": 2220,
+      "height": 3032,
+      "sha256_response_image": "bceed5a8dc905c9603d3bd13f38cdfad688ab40004593c3e2523f59e994ad11e"
     },
     {
       "params": {
         "f": "json",
-        "bbox": "227024.0,8186007.5,227612.5,8187478.5",
+        "bbox": "227018.5,8186021.0,228128.5,8187463.0",
         "bboxSR": 32719,
         "imageSR": 32719,
-        "size": "1177,2942",
-        "format": "png24",
-        "transparent": "false"
+        "size": "2220,2884",
+        "format": "png32",
+        "transparent": "true"
       },
       "extent": {
-        "xmin": 227024,
-        "ymin": 8186007.5,
-        "xmax": 227612.5,
-        "ymax": 8187478.5,
+        "xmin": 227018.5,
+        "ymin": 8186021,
+        "xmax": 228128.5,
+        "ymax": 8187463,
         "spatialReference": {
           "wkid": 32719,
           "latestWkid": 32719
         }
       },
-      "width": 1177,
-      "height": 2942,
-      "sha256_response_image": "38ab28ca9389ff8d2efed738dd225f269d47b681d874898050ae7471342a0d90"
+      "width": 2220,
+      "height": 2884,
+      "sha256_response_image": "0bf0ae9a35f1c7d5d7755d52f848696cb778d48730d3fe87b705a1ae4c7fd562"
     }
   ],
   "crs": "EPSG:32719",
   "bounds": [
-    227024.0,
-    8186007.5,
-    227612.5,
-    8190478.5
+    227026.5,
+    8186029.0,
+    228120.5,
+    8190455.0
   ],
   "resolution_m": 0.5,
   "resolution_note": "Paso de la rejilla exportada; no certifica resolución nativa ni precisión posicional.",
-  "width": 1177,
-  "height": 8942,
-  "sha256": "8c5615cdd3c24c8812525c4b4e4267a29b90d4d3a559cc2a39bb9478e5986d1c"
+  "ambito": "Tramo Chullo en Cayma",
+  "width": 2188,
+  "height": 8852,
+  "sha256": "73fc6bdf90657dbe7c18318494822fc1d211d94451a02609ab9d8c5f626d1828"
 }

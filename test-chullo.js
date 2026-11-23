@@ -13,11 +13,14 @@ const { chromium } = require('playwright');
   page.on('pageerror', err => errors.push(err.message));
   try {
     assert.equal((await page.goto(base)).status(),200);
-    await page.waitForFunction(() => window.OBTENER_BANDAS?.()?.features?.length === 3);
+    await page.waitForFunction(() => window.OBTENER_BANDAS?.()?.features?.length === 4);
     await page.waitForFunction(() => document.querySelector('#cnn-state').textContent !== 'Comprobando…');
     const serverStatus = await (await page.request.get(base + '/api/status')).json();
     if (serverStatus.manifest) {
       assert.equal(await page.locator('#cnn-state').textContent(),'Resultados guardados');
+      assert.equal(serverStatus.manifest.zonas.distrito, 'Cayma');
+      assert.equal(serverStatus.manifest.zonas.ambito_cobertura_imagen_pct, 100);
+      assert.equal(serverStatus.manifest.zonas.huella_cobertura_imagen_pct, 100);
       assert.equal(await page.evaluate(() => edificioLayer.getLayers().length),serverStatus.manifest.count);
       for (const [clase, conteo] of Object.entries(serverStatus.manifest.counts_by_class)) {
         assert.equal(await page.locator(`#edificio-info strong.${clase}`).textContent(),String(conteo));

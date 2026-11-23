@@ -42,8 +42,14 @@ class ServidorLocal(ThreadingHTTPServer):
 def leer_bandas(amarillo=0):
     from backend.spatial import generar_poligonos_banda
     limites = json.loads(LIMITES_PATH.read_text(encoding="utf-8-sig"))
-    bandas = generar_poligonos_banda(limites, amarillo_m=amarillo)
-    return {"type": "FeatureCollection", "features": [bandas[c] for c in ("naranja", "rojo", "cauce") if bandas[c]["geometry"]["coordinates"]], "metadata": bandas["metadata"]}
+    huella = json.loads(LIMITES_PATH.with_name("huella-huaico-chullo-a7270.geojson").read_text(encoding="utf-8"))
+    distrito = json.loads(LIMITES_PATH.with_name("distrito-cayma.geojson").read_text(encoding="utf-8"))
+    bandas = generar_poligonos_banda(limites, amarillo_m=amarillo, huella_huaico=huella, distrito=distrito)
+    return {
+        "type": "FeatureCollection",
+        "features": [bandas[c] for c in ("naranja", "rojo", "cauce", "amarillo") if bandas[c]["geometry"]["coordinates"]],
+        "metadata": bandas["metadata"],
+    }
 
 
 class Archivos(SimpleHTTPRequestHandler):
@@ -164,7 +170,7 @@ class Archivos(SimpleHTTPRequestHandler):
         manifest_path = OUTPUTS_DIR / "manifest.json"
         if manifest_path.is_file() and (OUTPUTS_DIR/"buildings.geojson").is_file():
             candidato = json.loads(manifest_path.read_text(encoding="utf-8"))
-            if candidato.get("estado") == "completado" and candidato.get("zonas", {}).get("geometria") in {"cauce_fajas_reconstruccion_4m", "cauce_fajas_huella_a7270"}:
+            if candidato.get("estado") == "completado" and candidato.get("zonas", {}).get("geometria") == "cauce_fajas_huella_a7270_cayma":
                 manifest = candidato
         self._send_json(200, {"servidor": "chullo-unificado", "puerto": self.server.server_address[1],
                               "cnn_disponible": error is None and os.getenv("CHULLO_ENABLE_DETECTION", "1") == "1", "error": error, "imagen": imagen,

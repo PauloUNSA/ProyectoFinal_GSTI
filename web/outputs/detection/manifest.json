@@ -1,34 +1,37 @@
 {
   "schema_version": 1,
   "estado": "completado",
-  "iniciado_en": "2026-11-23T19:17:01.528982+00:00",
-  "completado_en": "2026-11-23T19:19:17.945730+00:00",
-  "count": 2169,
+  "iniciado_en": "2026-11-23T21:31:17.385317+00:00",
+  "completado_en": "2026-11-23T21:32:14.574922+00:00",
+  "count": 1911,
   "counts_by_class": {
-    "rojo": 56,
-    "naranja": 58,
-    "amarillo": 2055
+    "rojo": 38,
+    "naranja": 37,
+    "amarillo": 1836
   },
   "modelo": "chullo/yolo26_chullo",
   "model_sha256": "94c4c54a92365390f5ceb06ca7c238a7756bbecc0d15833df17e603f2c975e4b",
   "zonas": {
-    "geometria": "cauce_fajas_huella_a7270",
+    "geometria": "cauce_fajas_huella_a7270_cayma",
+    "distrito": "Cayma",
+    "distrito_sha256": "7133f801d90dc6214e3124344fc82cdab2ca87b9f5b348f135dbd26b2a2f48ac",
+    "ambito_cobertura_imagen_pct": 100.0,
     "faja_m_por_margen": 4,
     "separacion_interior": "aproximada",
     "amarillo_m": 0,
     "limites_sha256": "e08b04ef0648ed1b395b49db1a42efd29babbf452aaa5f350785eaee22079717",
     "huella_sha256": "12340f39dbf057677a96cb1c1eaeea2f328c75a7a866a46ea79d1c2ab5c59197",
-    "huella_cobertura_imagen_pct": 76.5
+    "huella_cobertura_imagen_pct": 100.0
   },
   "cobertura": {
     "crs": "EPSG:32719",
-    "width": 1177,
-    "height": 8942,
+    "width": 2188,
+    "height": 8852,
     "bounds_wgs84": [
-      -71.55570191016115,
-      -16.39185502743393,
-      -71.54967108773643,
-      -16.351410303606713
+      -71.55567598742792,
+      -16.391718469796484,
+      -71.54492212297649,
+      -16.351622817517224
     ]
   },
   "imagen_fuente": {
@@ -36,9 +39,9 @@
     "service_url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
     "attribution": "Esri, Vantor, Earthstar Geographics, and the GIS User Community",
     "observed_at": null,
-    "acquired_at": "2026-10-31T20:00:39.689468+00:00"
+    "acquired_at": "2026-11-23T21:31:15.007777+00:00"
   },
-  "mosaicos_procesados": 196,
+  "mosaicos_procesados": 193,
   "arquitectura": "Ultralytics YOLO26s-seg",
   "tamano_mosaico": 256,
   "solapamiento": 64,

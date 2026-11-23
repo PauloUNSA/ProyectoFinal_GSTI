@@ -193,7 +193,15 @@ def test_no_permite_dos_servidores_en_el_mismo_puerto(api):
 def test_api_bandas_reales_e_inputs_invalidos(api):
     with urllib.request.urlopen(api+'/api/bands?amarillo=0') as r:
         data = json.load(r)
-    assert [f['properties']['clase'] for f in data['features']] == ['naranja','rojo','cauce']
+    assert [f['properties']['clase'] for f in data['features']] == ['naranja','rojo','cauce','amarillo']
+    assert data['metadata']['distrito'] == 'Cayma'
+    capas = BASE / 'web/layers'
+    distrito = shape(json.loads((capas / 'distrito-cayma.geojson').read_text(encoding='utf-8'))['geometry'])
+    huella = json.loads((capas / 'huella-huaico-chullo-a7270.geojson').read_text(encoding='utf-8'))
+    amarillo = next(shape(f['geometry']) for f in data['features'] if f['properties']['clase'] == 'amarillo')
+    assert all(distrito.buffer(1e-7).covers(shape(f['geometry'])) for f in data['features'])
+    assert all(shape(f['geometry']).intersection(distrito).difference(amarillo.buffer(1e-7)).area < 1e-12
+               for f in huella['features'])
     for query in ('nan','-1','abc'):
         with pytest.raises(urllib.error.HTTPError) as exc:
             urllib.request.urlopen(api+'/api/bands?amarillo='+query)

@@ -9,9 +9,13 @@ const {chromium}=require('playwright');
   const errors=[];const api=[];page.on('pageerror',e=>errors.push(e.message));
   page.on('request',r=>{if(new URL(r.url()).pathname.startsWith('/api/'))api.push(r.url())});
   for(let i=0;i<30;i++){try{await page.goto('http://127.0.0.1:4187/dist/');break;}catch(e){await new Promise(r=>setTimeout(r,200));}}
-  const {count: total, counts_by_class: counts} = await (await page.request.get('http://127.0.0.1:4187/dist/outputs/detection/manifest.json')).json();
+  const {count: total, counts_by_class: counts, zonas} = await (await page.request.get('http://127.0.0.1:4187/dist/outputs/detection/manifest.json')).json();
   await page.waitForFunction(n=>edificioLayer?.getLayers().length===n,total);
   assert.equal(await page.locator('#cnn-state').textContent(),'Resultados guardados');
+  assert.equal(zonas.distrito,'Cayma');
+  assert.equal(zonas.ambito_cobertura_imagen_pct,100);
+  assert.equal(zonas.huella_cobertura_imagen_pct,100);
+  assert.equal(await page.evaluate(() => window.CHULLO_DATA.features.every(f => f.properties.sector === 'Cayma')),true);
   assert.equal(await page.locator('.map-legend').count(),0);
   for (const [clase, zona, color] of [
     ['rojo', /cauce o de las riberas/, 'rgb(185, 28, 28)'],
