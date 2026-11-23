@@ -7,7 +7,7 @@
 <meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, límites de faja marginal, fajas marginales y detección de edificios por CNN.">
 <title>Chullo Unificado · Límites y posibles cubiertas</title>
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="simple.css?v=20261123-cruce-a7270">
+<link rel="stylesheet" href="simple.css?v=20261123-visor">
 </head>
 <body>
 <header>
@@ -32,30 +32,17 @@
   <section class="workspace" aria-label="Consulta de hitos y edificaciones">
     <div class="map-panel">
       <div id="map" aria-label="Mapa de Chullo con OpenStreetMap y fajas marginales"></div>
-      <p class="map-legend"><span style="color:#dc2626">■</span> Cauce y riberas · <span style="color:#f97316">■</span> Dos fajas marginales de 4 m · <span style="color:#b47c05">■</span> Alcance simulado de huaicos<br><small>Capas aproximadas. Amarillo a escala de sector · INGEMMET 2022.</small></p>
+      <div class="map-legend">
+        <span class="legend-item"><i class="rojo" aria-hidden="true"></i>Cauce y riberas</span>
+        <span class="legend-item"><i class="naranja" aria-hidden="true"></i>Dos fajas marginales de 4 m</span>
+        <span class="legend-item"><i class="amarillo" aria-hidden="true"></i>Alcance simulado de huaicos</span>
+        <small>Capas aproximadas. Amarillo a escala de sector · INGEMMET 2022.</small>
+      </div>
     </div>
 
     <aside>
-      <h2>Contorno seleccionado</h2>
-      <div id="edificio-info">
-        <p class="vacio">Selecciona un contorno candidato en el mapa para ver su ficha.</p>
-      </div>
-
-      <div id="faja-info" class="faja-panel">
-        <h3>Límites de faja marginal (documental ANA)</h3>
-        <p>Cayma · 210 vértices de los límites exteriores y 48 hitos de señalización. Expediente RD 1610-2018 y rectificación RD 289-2019. Ancho documental de faja marginal: 4 m por margen.</p>
-        <p>Las líneas azul y morada son los límites exteriores documentales. Naranja: dos fajas marginales reconstruidas a 4 m hacia dentro; rojo: cauce y riberas aproximados entre ellas. Falta confirmar los límites interiores con cartografía o levantamiento actualizado.</p>
-        <p><a href="normativa.html" target="_blank" rel="noopener">Ver documentos y justificación de las distancias</a></p>
-      </div>
-
-      <div id="detector-panel">
-        <h3>Detección de posibles cubiertas</h3>
-        <p>Cruza las cubiertas detectadas con el cauce, las fajas marginales y el alcance simulado de huaicos. El cruce amarillo es aproximado y se interpreta a escala de sector.</p>
-        <p class="note" id="modelo-nota">Detección CNN sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
-        <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
-        <div id="detect-status" class="detect-status"></div>
-        <button id="btn-ver-cruce-amarillo" class="secondary" type="button" hidden>Ver un cruce amarillo</button>
-      </div>
+      <h2>Cubiertas detectadas</h2>
+      <p id="edificio-info" role="status">Cargando contornos…</p>
 
       <div id="controles-panel" class="controles-panel">
         <h3>Controles de visualización</h3>
@@ -82,7 +69,7 @@
         <label class="layer-toggle">
           <input type="checkbox" id="layer-satelital" checked> Vista satelital (Esri)
         </label>
-        <div id="panel-info" class="info-panel"></div>
+        <p id="estado-bandas" role="status"></p>
       </div>
     </aside>
   </section>
@@ -99,7 +86,7 @@
 <script src="vendor/leaflet.js"></script>
 <script src="data.js?v=20261123-cruce-a7270"></script>
 <script src="bands.js?v=20261123-cruce-a7270"></script>
-<script src="detection.js?v=20261123-cruce-a7270-2"></script>
-<script src="simple.js?v=20261123-cruce-a7270"></script>
+<script src="detection.js?v=20261123-visor"></script>
+<script src="simple.js?v=20261123-visor"></script>
 </body>
 </html>

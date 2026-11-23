@@ -12,7 +12,7 @@ Visor de los límites documentales ANA y detección de posibles cubiertas con YO
 
 | Opción | Qué permite probar | Requisitos |
 | --- | --- | --- |
-| GitHub Pages | Mapa del cauce/riberas y las dos fajas marginales aproximadas, fichas y detecciones guardadas de YOLO26-Chullo | Navegador; sin instalar Python |
+| GitHub Pages | Mapa del cauce/riberas y las dos fajas marginales aproximadas, detecciones guardadas de YOLO26-Chullo | Navegador; sin instalar Python |
 | Docker / servidor Python | Ejecutar nuevas inferencias | Docker, o Python y pesos; memoria suficiente |
 
 La demo estática no ejecuta PyTorch. Las inferencias anteriores se identifican como resultados guardados. GitHub Pages sirve archivos estáticos; la CNN requiere el servidor completo.
@@ -45,7 +45,7 @@ docker build -t chullo-gsti .
 docker run --rm -p 8080:8080 -e CHULLO_ENABLE_DETECTION=1 chullo-gsti
 ```
 
-Abre http://localhost:8080/. Esta variante permite ejecutar nuevas inferencias desde el botón del visor. La imagen incluye PyTorch CPU y el checkpoint verificado. Si el proveedor solo entrega el puntero Git LFS, `scripts/ensure_weights.py` obtiene la revisión pública fijada y comprueba su SHA256.
+Abre http://localhost:8080/. Con la detección activada, puedes iniciar una inferencia nueva con `Invoke-RestMethod 'http://localhost:8080/api/detect'` desde PowerShell. La imagen incluye PyTorch CPU y el checkpoint verificado. Si el proveedor solo entrega el puntero Git LFS, `scripts/ensure_weights.py` obtiene la revisión pública fijada y comprueba su SHA256.
 
 Para un servidor remoto: enlaza el contenedor a su puerto público y configura `HOST=0.0.0.0` y `PORT` (por defecto 8080). El contenedor usa esos valores. Reserva inicialmente unos **4 GB de RAM** para probar la CNN y ajusta según el consumo real. No se ha medido un mínimo garantizado en todos los proveedores.
 
@@ -108,11 +108,10 @@ Fuentes directas: [expediente ANA](https://repositorio.ana.gob.pe/bitstream/20.5
 
 1. Abre `iniciar.bat`, o ejecuta `python servidor.py --abrir` desde esta carpeta.
 2. Visita http://127.0.0.1:4173/.
-3. Pulsa **Ejecutar detección CNN sobre imagen del sector**. El servidor selecciona YOLO26 y su umbral recomendado; la duración depende del equipo y del modelo.
-4. Selecciona un contorno para consultar distancias y puntuación.
-5. Consulta **Documentos y distancias** para distinguir los límites documentales de la separación interior aproximada.
+3. Los resultados guardados se cargan al abrir el visor. Selecciona un contorno para ver su clasificación.
+4. Consulta **Ver planos y origen del amarillo** para revisar el trazado y las fuentes de INGEMMET.
 
-Los resultados completos guardados se cargan al abrir el visor. Un fallo devuelve un error real y conserva los archivos de la última detección válida.
+Para ejecutar una nueva inferencia local, consulta [Ejecución y salidas](#ejecución-y-salidas).
 
 ## Imagen y modelo incluidos
 

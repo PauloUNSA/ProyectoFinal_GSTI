@@ -17,8 +17,9 @@ const { chromium } = require('playwright');
     await page.waitForFunction(() => document.querySelector('#cnn-state').textContent !== 'Comprobando…');
     const serverStatus = await (await page.request.get(base + '/api/status')).json();
     if (serverStatus.manifest) {
-      await page.waitForFunction(total => edificiosGeoJSON?.features?.length === total, serverStatus.manifest.count);
+      assert.equal(await page.locator('#cnn-state').textContent(),'Resultados guardados');
       assert.equal(await page.evaluate(() => edificioLayer.getLayers().length),serverStatus.manifest.count);
+      assert.match(await page.locator('#edificio-info').textContent(),new RegExp(serverStatus.manifest.count + ' contornos candidatos'));
     }
     const geometry = await page.evaluate(() => {
       const bands = window.OBTENER_BANDAS();
@@ -35,17 +36,16 @@ const { chromium } = require('playwright');
     await page.screenshot({path:path.join(out,'franjas-corregidas.png'),fullPage:true});
     if (process.env.CHULLO_PREVIEW) await page.locator('#map').screenshot({path:process.env.CHULLO_PREVIEW});
     assert.equal(await page.locator('#band-amarillo').count(),0);
-    assert.match(await page.locator('#panel-info').textContent(),/aproximada/);
+    assert.equal(await page.locator('#btn-run-detect, #btn-ver-cruce-amarillo, #faja-info, #detector-panel, #panel-info').count(),0);
     assert.equal(await page.locator('.leaflet-franjas-pane path[stroke="#eab308"]').count(),0);
     await page.locator('#layer-bandas').uncheck();
     assert.equal(await page.evaluate(() => window.MAP().hasLayer(bandaLayer)),false);
     await page.locator('#layer-bandas').check();
-    // Prueba de UI con un fallo explícito: nunca debe mostrar éxito/0 edificios.
-    await page.route('**/api/detect?*',route => route.fulfill({status:422,contentType:'application/json',body:JSON.stringify({estado:'error',error:'Imagen de prueba inválida'})}));
-    await page.locator('#btn-run-detect').click();
-    await page.waitForFunction(() => document.querySelector('#cnn-state').textContent === 'Error CNN');
-    assert.match(await page.locator('#detect-status').textContent(),/Imagen de prueba inválida/);
-    assert.equal(await page.locator('#btn-run-detect').isEnabled(),true);
+    // Un fallo de carga debe distinguirse de un resultado con cero contornos.
+    await page.route('**/api/status',route => route.fulfill({status:500}));
+    await page.reload();
+    await page.waitForFunction(() => document.querySelector('#cnn-state').textContent === 'No disponible');
+    assert.equal(await page.locator('#edificio-info').textContent(),'No se pudieron cargar los contornos.');
     assert.deepEqual(errors,[]);
     console.log('PASS: geometría única, fajas marginales naranjas, eje oculto, controles y error CNN honesto.');
   } finally {

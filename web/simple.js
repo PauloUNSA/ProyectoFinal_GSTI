@@ -89,7 +89,7 @@ async function cargarTodo() {
   try {
     await dibujarBandas();
   } catch (err) {
-    document.getElementById("panel-info").textContent = err.message;
+    document.getElementById("estado-bandas").textContent = err.message;
   }
 
   configurarUI();
@@ -215,28 +215,6 @@ async function dibujarBandas() {
   if (window.DIBUJAR_BANDAS) {
     bandaLayer = await window.RECALCULAR_BANDAS(map, limites, cfg.rojoM, cfg.amarilloM);
   }
-
-  actualizarInfoPanel();
-}
-
-// ------------------------------------------------------------------
-// Edificios detectados
-// ------------------------------------------------------------------
-function dibujarEdificiosDetectados(geojson) {
-  if (!map) return;
-  if (window.DIBUJAR_EDIFICIOS) {
-    const cfg = window.CONFIG || { rojoM: 4, amarilloM: 0 };
-    edificioLayer = window.DIBUJAR_EDIFICIOS(map, geojson, cfg.rojoM, cfg.amarilloM);
-  }
-}
-
-function limpiarEdificios() {
-  if (edificioLayer && map) {
-    map.removeLayer(edificioLayer);
-    edificioLayer = null;
-  }
-  const panel = document.getElementById("edificio-info");
-  if (panel) panel.innerHTML = `<p class="vacio">Edificios eliminados. Ejecuta la detección CNN para volver a cargarlos.</p>`;
 }
 
 // ------------------------------------------------------------------
@@ -257,47 +235,6 @@ function configurarUI() {
     const el = document.getElementById(id);
     if (el) el.addEventListener("change", fn);
   });
-
-  // El detector gestiona su estado y conserva resultados si falla.
-  const btnDetect = document.getElementById("btn-run-detect");
-  if (btnDetect && window.EJECUTAR_DETECCION) {
-    btnDetect.addEventListener("click", async () => {
-      btnDetect.disabled = true;
-      btnDetect.textContent = "Procesando CNN…";
-      const status = document.getElementById("detect-status");
-      if (status) status.innerHTML = `<p>Ejecutando detector CNN… esto puede tardar varios minutos.</p>`;
-
-      try {
-        const imagen = "data/imagery/chullo/chullo_rgb.tif";
-        await window.EJECUTAR_DETECCION(imagen);
-      } catch (err) {
-        console.error("Error en detección CNN:", err);
-        if (status) status.innerHTML = `<p style="color:#dc2626">Error: ${err.message}</p>`;
-        alert(`No se pudo ejecutar la detección: ${err.message}`);
-      } finally {
-        btnDetect.disabled = false;
-        btnDetect.textContent = "Ejecutar detección CNN sobre imagen del sector";
-      }
-    });
-  }
-
-  const btnDetected = document.getElementById("btn-detected");
-  if (btnDetected && window.EJECUTAR_DETECCION) {
-    btnDetected.addEventListener("click", async () => {
-      btnDetected.disabled = true;
-      btnDetected.textContent = "Procesando CNN…";
-      try {
-        const imagen = "data/imagery/chullo/chullo_rgb.tif";
-        await window.EJECUTAR_DETECCION(imagen);
-      } catch (err) {
-        console.error("Error en detección CNN:", err);
-        alert(`No se pudo ejecutar la detección: ${err.message}`);
-      } finally {
-        btnDetected.disabled = false;
-        btnDetected.textContent = "Detectar edificios (CNN)";
-      }
-    });
-  }
 
   const dialog = document.getElementById("source-dialog");
   const btnClose = document.getElementById("close-source");
@@ -333,19 +270,6 @@ function toggleSatelital(ev) {
   } else {
     if (map.hasLayer(satelitalLayer)) map.removeLayer(satelitalLayer);
   }
-}
-
-// ------------------------------------------------------------------
-// Paneles laterales
-// ------------------------------------------------------------------
-function actualizarInfoPanel() {
-  const panel = document.getElementById("panel-info");
-  if (!panel) return;
-  panel.innerHTML =
-    `<strong>Dos fajas marginales, una por cada lateral</strong><br>` +
-    `Naranja: fajas marginales de 4 m, reconstruidas hacia dentro de los límites exteriores.<br>` +
-    `Rojo: cauce y riberas aproximados, entre ambas fajas marginales.<br>` +
-    `La separación interior es aproximada: faltan coordenadas oficiales del borde superior de las riberas. Fuera de estos colores no se ha evaluado seguridad ni permiso para construir.`;
 }
 
 function abrirFuente(id) {
@@ -406,6 +330,4 @@ if (document.readyState === "loading") {
 }
 
 window.MAP = () => map;
-window.DIBUJAR_EDIFICIOS_DETECTADOS = dibujarEdificiosDetectados;
-window.LIMPIAR_EDIFICIOS = limpiarEdificios;
 window.OBTENER_CONFIG = () => window.CONFIG || { rojoM: 4, amarilloM: 0 };

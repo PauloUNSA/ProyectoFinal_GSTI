@@ -3,22 +3,23 @@
 /* Controles sobre el mapa */
 .map-controls{position:absolute;left:14px;top:14px;z-index:500;display:flex;flex-direction:column;gap:8px;background:#fffffff2;border:1px solid #d7dfd1;border-radius:7px;padding:10px 12px;max-width:340px} .layer-toggle{display:flex;align-items:center;gap:8px;font-size:16px;margin:0}.layer-toggle input{width:18px;height:18px;min-height:18px;padding:0;flex:0 0 18px;accent-color:#216aab}.band-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:end;font-size:15px}.band-controls label{font-size:15px;margin:0}.band-controls input{width:70px;padding:6px 8px;font-size:14px}.band-controls button{font-size:14px;padding:8px 12px;min-height:36px;background:#daaa2c;border-color:#c99a1c;color:#24342d}.band-controls button:hover{filter:brightness(.95)}
 
-/* Informacion y ficha */
-.info-panel{font-size:16px;color:var(--muted);margin-top:10px;padding:6px 8px;background:#f1f5eb;border-radius:5px;border:1px solid #d7dfd1;max-width:330px} .edificio-info,.faja-panel{font-size:17px;margin-top:12px}.edificio-info h3,.faja-panel h3{font-size:20px;margin:0 0 8px}.edificio-info p,.faja-panel p{margin:0 0 8px}.vacio{color:var(--muted);font-style:italic}.note{font-size:15px;color:#88601f;margin-top:6px}.detect-status{font-size:15px;margin-top:8px;color:var(--muted)}
+#estado-bandas:empty,#estado-huaico:empty{display:none}
 
 /* Leyenda */
-.map-legend{position:absolute;left:14px;top:14px;z-index:450;display:flex;gap:12px;flex-wrap:wrap;background:#fffffff2;border:1px solid #d7dfd1;border-radius:6px;padding:8px 10px;font-size:16px;pointer-events:none;max-width:calc(100% - 80px);margin-left:40px}.map-legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}.map-legend .cayma{background:#285d43}.map-legend .yana{background:#c77827}.map-legend .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}.map-legend .rojo{background:#dc2626}.map-legend .amarillo{background:#eab308}.map-legend .verde{background:#16a34a}.map-legend .edificio{width:14px;height:14px;background:#182d43;border:2px solid #fff;box-sizing:border-box}
+.map-legend{position:absolute;left:14px;top:14px;z-index:450;display:flex;gap:4px 12px;flex-wrap:wrap;background:#fffffff2;border:1px solid #d7dfd1;border-radius:6px;padding:8px 10px;font-size:16px;pointer-events:none;max-width:calc(100% - 80px);margin-left:40px}
+.map-legend .legend-item{display:inline-flex;align-items:center;gap:6px}
+.map-legend i{width:9px;height:9px;flex:0 0 9px}
+.map-legend .rojo{background:#dc2626}
+.map-legend .naranja{background:#f97316}
+.map-legend .amarillo{background:#b47c05}
+.map-legend small{flex-basis:100%}
 
 /* Fuente y popup */
 #source-dialog{width:min(850px,94vw);max-height:90vh;overflow:auto;border:1px solid #c7d3c3;border-radius:10px;padding:24px;color:#243b2d;background:white;box-shadow:0 15px 70px #0004}#source-dialog::backdrop{background:#13251db8}.source-head{display:flex;align-items:start;justify-content:space-between;gap:15px;margin-bottom:16px}.source-head h2{margin:0}.source-head button{background:#eef2e8;border-color:#d4decd;color:#263f2c;font-size:25px;min-height:40px;line-height:1;padding:3px 11px}.source-document{font-size:18px;margin-bottom:5px}.source-location{font-size:17px;color:#586f5c}.source-values{width:100%;border-collapse:collapse;margin:18px 0 24px;font-size:18px}.source-values th,.source-values td{padding:11px;border:1px solid #d4decf;text-align:left}.source-values th{font-size:16px;background:#f1f5eb}.source-values td{background:#fff9de;font-weight:600}.scan-source{padding:12px;background:#f8f9f4;border:1px solid #dbe4d4;border-radius:6px;overflow:auto}.scan-source img{display:block;width:100%;min-width:520px;height:auto}.scan-source .source-row{outline:none}.literal-source{background:#fafafa;border:1px solid #e2e8e5;padding:12px;border-radius:5px;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,monospace;font-size:15px;line-height:1.5;max-height:300px;overflow:auto}.source-projection{font-size:15px;color:var(--muted);margin-top:12px}.full-source{display:inline-block;margin-top:10px;color:#245b42}
 
-/* Panel edificio */
-#edificio-info{font-size:17px}#edificio-info dl{grid-template-columns:90px 1fr;gap:6px;margin:10px 0;font-size:16px}#edificio-info strong{display:block;font-size:18px;margin-top:10px}.chip{display:inline-block;padding:3px 8px;border-radius:10px;font-size:14px;font-weight:700;color:#fff}.chip.rojo{background:#dc2626}.chip.amarillo{background:#eab308;color:#24342d}.chip.verde{background:#16a34a}
-/* Mantener el mapa legible aunque crezca la explicación documental. */
+#edificio-info{font-size:17px}
 .workspace aside{padding:18px;max-height:740px;overflow-y:auto;min-width:0}
 .workspace aside h2{font-size:26px;line-height:1.2;margin:0 0 14px}
 .map-panel{height:740px;min-height:490px}
 #map{height:740px;min-height:490px}
 @media(max-width:750px){header{flex-wrap:wrap}.acciones{flex-wrap:wrap}.map-panel,#map{height:460px;min-height:460px}.workspace aside{max-height:none;overflow:visible}}
-
-.chip.naranja { background: #c2410c; color: white; }
