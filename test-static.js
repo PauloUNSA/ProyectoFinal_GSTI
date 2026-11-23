@@ -12,9 +12,9 @@ const {chromium}=require('playwright');
   const total=(await (await page.request.get('http://127.0.0.1:4187/dist/outputs/detection/manifest.json')).json()).count;
   await page.waitForFunction(n=>typeof edificiosGeoJSON!=='undefined' && edificiosGeoJSON?.features?.length===n,total);
   assert.equal(await page.locator('#btn-run-detect').isDisabled(),true);
-  assert.equal(await page.locator('#btn-recalcular-bandas').isDisabled(),true);
+  assert.equal(await page.locator('#band-amarillo').count(),0);
   assert.equal(await page.evaluate(()=>window.OBTENER_BANDAS().features.filter(f=>f.properties.clase==='rojo').length),1);
-  for (const [clase,expected] of [['rojo','Rojo · entre límites documentales ANA'],['amarillo','Amarillo · franja exterior']]) {
+  for (const [clase,expected] of [['rojo','Rojo · cauce y riberas (aproximado)'],['naranja','Naranja · faja marginal (aproximada)']]) {
     await page.evaluate(clase=>{
       const layer=edificioLayer.getLayers().find(l=>l.feature.properties.clase===clase);
       layer.fire('click');layer.openPopup();

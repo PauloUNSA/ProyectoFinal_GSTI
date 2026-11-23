@@ -43,69 +43,56 @@ def test_cauce_abierto_y_ultimo_vertice(limites):
     assert calcular_linea_cauce_desde_limites(None) is None
 
 
-def test_rojo_cubre_margenes_y_amarillo_conserva_hueco(limites):
-    zonas = construir_zonas(limites,20)
-    bandas = generar_poligonos_banda(limites,4,20)
+def test_particion_cauce_y_dos_fajas_sin_ampliacion(limites):
+    zonas = construir_zonas(limites)
+    bandas = generar_poligonos_banda(limites)
     rojo = transform(zonas['a_m'], shape(bandas['rojo']['geometry']))
-    amarillo = transform(zonas['a_m'], shape(bandas['amarillo']['geometry']))
+    naranja = transform(zonas['a_m'], shape(bandas['naranja']['geometry']))
+    assert rojo.is_valid and naranja.is_valid
+    assert rojo.intersection(naranja).area < 1e-5
+    assert rojo.union(naranja).symmetric_difference(zonas['corredor']).area < 1e-5
     for f in limites['features']:
-        # Incluye el vértice final, omitido antes por el buffer JS.
         margen = transform(zonas['a_m'], shape(f['geometry']))
-        assert margen.difference(rojo.buffer(1e-6)).is_empty
+        assert margen.difference(naranja.buffer(1e-6)).is_empty
     assert rojo.covers(Point(227240,8187050))
-    assert rojo.is_valid and amarillo.is_valid
-    assert rojo.intersection(amarillo).area < 1e-5
-    assert not amarillo.covers(Point(227240,8187050))
-    assert amarillo.covers(Point(227280,8187050))
-    assert len(bandas['amarillo']['geometry']['coordinates']) == 2
+    assert zonas['faja_derecha'].area > 0 and zonas['faja_izquierda'].area > 0
+    assert bandas['metadata']['separacion_interior'].startswith('aproximada')
 
 
-def test_direccion_invertida_y_ancho_cero(limites):
-    antes = construir_zonas(limites,0)
+def test_direccion_invertida(limites):
+    antes = construir_zonas(limites)
     limites['features'][1]['geometry']['coordinates'] = list(reversed(limites['features'][1]['geometry']['coordinates']))
-    despues = construir_zonas(limites,0)
+    despues = construir_zonas(limites)
     assert antes['rojo'].equals(despues['rojo'])
-    assert despues['amarillo'].is_empty
+    assert antes['naranja'].equals(despues['naranja'])
 
-@pytest.mark.parametrize('ancho',[-1,501,float('nan'),float('inf')])
-def test_rechazar_ancho_invalido(limites, ancho):
+
+@pytest.mark.parametrize('ancho',[-1,20,501,float('nan'),float('inf')])
+def test_rechazar_zona_amarilla_retirada(limites, ancho):
     with pytest.raises(ValueError):
         construir_zonas(limites,ancho)
 
 
 def test_clasifica_contorno_y_prioridad_roja(limites):
-    zonas = construir_zonas(limites,20)
+    zonas = construir_zonas(limites)
     assert evaluar_edificio(box(227230,8187040,227250,8187060),zonas)['clase'] == 'rojo'
-    assert evaluar_edificio(box(227272,8187049,227280,8187051),zonas)['clase'] == 'amarillo'
-    assert evaluar_edificio(box(227310,8187049,227320,8187051),zonas)['clase'] == 'verde'
-    # Cruza las dos zonas aunque su centro quede fuera del rojo.
+    assert evaluar_edificio(box(227268,8187049,227269,8187051),zonas)['clase'] == 'naranja'
+    assert evaluar_edificio(box(227280,8187049,227290,8187051),zonas)['clase'] == 'verde'
     assert evaluar_edificio(box(227260,8187049,227300,8187051),zonas)['clase'] == 'rojo'
 
 
-def test_limites_reales_sin_atraso_ni_solapamientos():
+def test_limites_reales_y_fajas_conservan_corredor():
     limites = json.loads((BASE/'web/layers/limites-faja-cayma.geojson').read_text())
-    bandas = generar_poligonos_banda(limites)
-    rojo, amarillo = (shape(bandas[c]['geometry']) for c in ('rojo','amarillo'))
-    assert rojo.is_valid and amarillo.is_valid
-    assert rojo.intersection(amarillo).area < 1e-15
-    assert len(bandas['cauce']['geometry']['coordinates']) == 105
+    zonas = construir_zonas(limites)
+    rojo, naranja = zonas['rojo'], zonas['naranja']
+    assert rojo.is_valid and naranja.is_valid
+    assert rojo.intersection(naranja).area < 1e-6
+    assert rojo.union(naranja).symmetric_difference(zonas['corredor']).area < 1e-6
     assert len(calcular_linea_cauce_desde_limites(limites).coords) == 105
-
-
-def test_anillo_no_prolonga_esquinas_mas_de_20_metros(limites):
-    zonas = construir_zonas(limites, 20)
-    rojo, exterior = zonas['rojo'], zonas['exterior']
-    # Una esquina de inglete puede sobrepasar el ancho aun cuando el buffer
-    # se haya pedido con 20 m. Comprobar distancias, no solo el parámetro.
-    inglete = rojo.buffer(20, join_style=2)
-    punta_antigua = max((Point(c) for c in inglete.exterior.coords), key=rojo.distance)
-    assert rojo.distance(punta_antigua) > 20.1
-    assert inglete.covers(punta_antigua)
-    assert evaluar_edificio(punta_antigua, zonas)['clase'] == 'verde'
-    for k in range(2001):
-        punto = exterior.boundary.interpolate(k / 2000, normalized=True)
-        assert rojo.distance(punto) <= 20 + 1e-6
-    assert exterior.difference(rojo.buffer(20 + 1e-6)).is_empty
+    for f in limites['features']:
+        margen = transform(zonas['a_m'],shape(f['geometry']))
+        assert margen.difference(naranja.buffer(1e-6)).is_empty
+    assert 'amarillo' not in generar_poligonos_banda(limites)
 
 
 def test_vertices_publicados_copian_las_210_coordenadas_documentales():
@@ -189,9 +176,9 @@ def test_no_permite_dos_servidores_en_el_mismo_puerto(api):
 
 
 def test_api_bandas_reales_e_inputs_invalidos(api):
-    with urllib.request.urlopen(api+'/api/bands?amarillo=20') as r:
+    with urllib.request.urlopen(api+'/api/bands?amarillo=0') as r:
         data = json.load(r)
-    assert [f['properties']['clase'] for f in data['features']] == ['amarillo','rojo','cauce']
+    assert [f['properties']['clase'] for f in data['features']] == ['naranja','rojo','cauce']
     for query in ('nan','-1','abc'):
         with pytest.raises(urllib.error.HTTPError) as exc:
             urllib.request.urlopen(api+'/api/bands?amarillo='+query)

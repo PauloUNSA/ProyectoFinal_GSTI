@@ -23,21 +23,20 @@ const { chromium } = require('playwright');
     const geometry = await page.evaluate(() => {
       const bands = window.OBTENER_BANDAS();
       const red = bands.features.filter(f => f.properties.clase === 'rojo');
-      const yellow = bands.features.find(f => f.properties.clase === 'amarillo');
+      const orange = bands.features.find(f => f.properties.clase === 'naranja');
       const axis = bands.features.find(f => f.properties.clase === 'cauce');
-      return {redCount:red.length, yellowRings:yellow.geometry.coordinates.length,
+      return {redCount:red.length, orange:!!orange.geometry.coordinates.length,
               open:JSON.stringify(axis.geometry.coordinates[0]) !== JSON.stringify(axis.geometry.coordinates.at(-1)),
               layerCount:window.MAP().hasLayer(bandaLayer), satelliteChecked:document.querySelector('#layer-satelital').checked};
     });
-    assert.deepEqual(geometry,{redCount:1,yellowRings:2,open:true,layerCount:true,satelliteChecked:true});
+    assert.deepEqual(geometry,{redCount:1,orange:true,open:true,layerCount:true,satelliteChecked:true});
     await page.evaluate(() => window.MAP().setView([-16.3901,-71.5516],19));
     await page.waitForTimeout(1800);
     await page.screenshot({path:path.join(out,'franjas-corregidas.png'),fullPage:true});
     if (process.env.CHULLO_PREVIEW) await page.locator('#map').screenshot({path:process.env.CHULLO_PREVIEW});
-    await page.locator('#band-amarillo').fill('30');
-    await page.locator('#btn-recalcular-bandas').click();
-    await page.waitForFunction(() => window.OBTENER_BANDAS().metadata.amarillo_m === 30);
-    assert.match(await page.locator('#panel-info').textContent(),/30 m/);
+    assert.equal(await page.locator('#band-amarillo').count(),0);
+    assert.match(await page.locator('#panel-info').textContent(),/aproximada/);
+    assert.equal(await page.locator('.leaflet-franjas-pane path[stroke="#eab308"]').count(),0);
     await page.locator('#layer-bandas').uncheck();
     assert.equal(await page.evaluate(() => window.MAP().hasLayer(bandaLayer)),false);
     await page.locator('#layer-bandas').check();
@@ -47,9 +46,8 @@ const { chromium } = require('playwright');
     await page.waitForFunction(() => document.querySelector('#cnn-state').textContent === 'Error CNN');
     assert.match(await page.locator('#detect-status').textContent(),/Imagen de prueba inválida/);
     assert.equal(await page.locator('#btn-run-detect').isEnabled(),true);
-    assert.equal(await page.locator('#btn-recalcular-bandas').isEnabled(),true);
     assert.deepEqual(errors,[]);
-    console.log('PASS: geometría única, hueco amarillo, eje abierto, controles y error CNN honesto.');
+    console.log('PASS: geometría única, fajas marginales naranjas, eje oculto, controles y error CNN honesto.');
   } finally {
     await browser.close();
   }

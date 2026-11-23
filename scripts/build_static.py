@@ -17,7 +17,7 @@ def build():
     shutil.copytree(BASE/'web',destino)
     p=destino/'index.html'
     p.write_text(p.read_text(encoding='utf-8').replace('<script src="vendor/leaflet.js">','<script>window.CHULLO_STATIC = true;</script>\n<script src="vendor/leaflet.js">'),encoding='utf-8')
-    (destino/'layers/bandas-proximidad.geojson').write_text(json.dumps(leer_bandas(20),ensure_ascii=False),encoding='utf-8')
+    (destino/'layers/bandas-proximidad.geojson').write_text(json.dumps(leer_bandas(0),ensure_ascii=False),encoding='utf-8')
     (destino/'.nojekyll').touch()
     # Los datos públicos no necesitan rutas locales de la máquina que infirió.
     p=destino/'outputs/detection/manifest.json';m=json.loads(p.read_text(encoding='utf-8'))

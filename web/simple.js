@@ -163,7 +163,7 @@ function dibujarLimites() {
     onEachFeature: (feature, layer) => {
       const p = feature.properties;
       layer.bindPopup(
-        `<strong>Límite exterior de faja · ${p.bank}</strong><br>` +
+        `<strong>Límite exterior de faja marginal · ${p.bank}</strong><br>` +
         `Cayma · ${p.vertices} vértices · Tabla 02 · RD 1610-2018, expediente rectificado por RD 289-2019. No es un levantamiento actual.`,
         { maxWidth: 300 }
       );
@@ -204,7 +204,7 @@ async function dibujarBandas() {
   const limites = window.CHULLO_BOUNDARIES;
   if (!limites) return;
 
-  const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
+  const cfg = window.CONFIG || { rojoM: 4, amarilloM: 0 };
 
   if (window.DIBUJAR_BANDAS) {
     bandaLayer = await window.RECALCULAR_BANDAS(map, limites, cfg.rojoM, cfg.amarilloM);
@@ -219,7 +219,7 @@ async function dibujarBandas() {
 function dibujarEdificiosDetectados(geojson) {
   if (!map) return;
   if (window.DIBUJAR_EDIFICIOS) {
-    const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
+    const cfg = window.CONFIG || { rojoM: 4, amarilloM: 0 };
     edificioLayer = window.DIBUJAR_EDIFICIOS(map, geojson, cfg.rojoM, cfg.amarilloM);
   }
 }
@@ -249,21 +249,6 @@ function configurarUI() {
   Object.entries(toggles).forEach(([id, fn]) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("change", fn);
-  });
-
-  document.getElementById("btn-recalcular-bandas").addEventListener("click", async () => {
-    const input = document.getElementById("band-amarillo");
-    if (!input.reportValidity()) return;
-    const previo = window.CONFIG.amarilloM;
-    window.CONFIG.amarilloM = Number(input.value);
-    try {
-      await dibujarBandas();
-      limpiarEdificios();
-      document.getElementById("detect-status").textContent = "Franjas actualizadas. Ejecuta la CNN para analizar este ancho.";
-    } catch (err) {
-      window.CONFIG.amarilloM = previo;
-      document.getElementById("panel-info").textContent = err.message;
-    }
   });
 
   // El detector gestiona su estado y conserva resultados si falla.
@@ -349,15 +334,11 @@ function toggleSatelital(ev) {
 function actualizarInfoPanel() {
   const panel = document.getElementById("panel-info");
   if (!panel) return;
-  const cfg = window.CONFIG || { rojoM: 4, amarilloM: 20 };
-  const rojo = cfg.rojoM;
-  const amarillo = cfg.amarilloM;
-  const exterior = rojo + amarillo;
   panel.innerHTML =
-    `<strong>Corredor documental y proximidad</strong><br>` +
-    `Rojo: espacio entre límites exteriores; incluye cauce y fajas.<br>` +
-    `Amarillo: hasta ${amarillo} m de distancia desde el corredor, con esquinas redondeadas.<br>` +
-    `La franja amarilla es exploratoria y no autoriza construir.`;
+    `<strong>Dos fajas marginales, una por cada lateral</strong><br>` +
+    `Naranja: fajas marginales de 4 m, reconstruidas hacia dentro de los límites exteriores.<br>` +
+    `Rojo: cauce y riberas aproximados, entre ambas fajas marginales.<br>` +
+    `La separación interior es aproximada: faltan coordenadas oficiales del borde superior de las riberas. Fuera de estos colores no se ha evaluado seguridad ni permiso para construir.`;
 }
 
 function abrirFuente(id) {
@@ -420,4 +401,4 @@ if (document.readyState === "loading") {
 window.MAP = () => map;
 window.DIBUJAR_EDIFICIOS_DETECTADOS = dibujarEdificiosDetectados;
 window.LIMPIAR_EDIFICIOS = limpiarEdificios;
-window.OBTENER_CONFIG = () => window.CONFIG || { rojoM: 4, amarilloM: 20 };
+window.OBTENER_CONFIG = () => window.CONFIG || { rojoM: 4, amarilloM: 0 };

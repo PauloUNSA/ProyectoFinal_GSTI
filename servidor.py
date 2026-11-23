@@ -39,11 +39,11 @@ class ServidorLocal(ThreadingHTTPServer):
         super().server_bind()
 
 
-def leer_bandas(amarillo=20):
+def leer_bandas(amarillo=0):
     from backend.spatial import generar_poligonos_banda
     limites = json.loads(LIMITES_PATH.read_text(encoding="utf-8-sig"))
     bandas = generar_poligonos_banda(limites, amarillo_m=amarillo)
-    return {"type": "FeatureCollection", "features": [bandas[c] for c in ("amarillo", "rojo", "cauce") if bandas[c]["geometry"]["coordinates"]], "metadata": bandas["metadata"]}
+    return {"type": "FeatureCollection", "features": [bandas[c] for c in ("naranja", "rojo", "cauce") if bandas[c]["geometry"]["coordinates"]], "metadata": bandas["metadata"]}
 
 
 class Archivos(SimpleHTTPRequestHandler):
@@ -63,7 +63,7 @@ class Archivos(SimpleHTTPRequestHandler):
             params = parse_qs(parsed.query)
             try:
                 if parsed.path == "/api/bands":
-                    self._send_json(200, leer_bandas(float(params.get("amarillo", [20])[0])))
+                    self._send_json(200, leer_bandas(float(params.get("amarillo", [0])[0])))
                 elif parsed.path == "/api/detect":
                     self._run_detection(params)
                 elif parsed.path == "/api/status":
@@ -99,11 +99,11 @@ class Archivos(SimpleHTTPRequestHandler):
         if os.getenv("CHULLO_PUBLIC", "0") == "1" and imagen.resolve() != DEFAULT_IMAGE.resolve():
             raise ValueError("El servidor público solo analiza la imagen del sector configurada.")
         umbral = float(params["umbral"][0]) if params.get("umbral") else None
-        amarillo = float(params.get("amarillo", [20])[0])
+        amarillo = float(params.get("amarillo", [0])[0])
         if umbral is not None and (not math.isfinite(umbral) or not 0 <= umbral <= 1):
             raise ValueError("El umbral debe estar entre 0 y 1.")
-        if not math.isfinite(amarillo) or not 0 <= amarillo <= 500:
-            raise ValueError("El ancho amarillo debe estar entre 0 y 500 m.")
+        if not math.isfinite(amarillo) or amarillo != 0:
+            raise ValueError("La zona amarilla fue retirada; utiliza amarillo=0.")
         if params.get("salida", ["outputs/detection"])[0].strip("/") != "outputs/detection":
             raise ValueError("La salida del visor es outputs/detection.")
         validar_imagen(imagen)
@@ -164,7 +164,7 @@ class Archivos(SimpleHTTPRequestHandler):
         manifest_path = OUTPUTS_DIR / "manifest.json"
         if manifest_path.is_file() and (OUTPUTS_DIR/"buildings.geojson").is_file():
             candidato = json.loads(manifest_path.read_text(encoding="utf-8"))
-            if candidato.get("estado") == "completado" and candidato.get("zonas", {}).get("geometria") == "corredor_entre_limites":
+            if candidato.get("estado") == "completado" and candidato.get("zonas", {}).get("geometria") == "cauce_fajas_reconstruccion_4m":
                 manifest = candidato
         self._send_json(200, {"servidor": "chullo-unificado", "puerto": self.server.server_address[1],
                               "cnn_disponible": error is None and os.getenv("CHULLO_ENABLE_DETECTION", "1") == "1", "error": error, "imagen": imagen,

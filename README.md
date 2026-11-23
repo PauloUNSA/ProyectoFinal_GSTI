@@ -1,6 +1,6 @@
 # ProyectoFinal_GSTI
 
-Proyecto Chullo Unificado: visor de franjas ANA y detección de cubiertas con CNN.
+Proyecto Chullo Unificado: visor del cauce y las fajas marginales y detección de cubiertas con CNN.
 
 Visor de los límites documentales ANA y detección de posibles cubiertas con YOLO26-Chullo. Mask R-CNN se conserva como alternativa experimental explícita.
 
@@ -12,8 +12,8 @@ Visor de los límites documentales ANA y detección de posibles cubiertas con YO
 
 | Opción | Qué permite probar | Requisitos |
 | --- | --- | --- |
-| GitHub Pages | Mapa, corredor documental, proximidad exploratoria de 20 m, fichas y detecciones guardadas de YOLO26-Chullo | Navegador; sin instalar Python |
-| Docker / servidor Python | Recalcular franjas y ejecutar nuevas inferencias | Docker, o Python y pesos; memoria suficiente |
+| GitHub Pages | Mapa del cauce/riberas y las dos fajas marginales aproximadas, fichas y detecciones guardadas de YOLO26-Chullo | Navegador; sin instalar Python |
+| Docker / servidor Python | Ejecutar nuevas inferencias | Docker, o Python y pesos; memoria suficiente |
 
 La demo estática no ejecuta PyTorch. Las inferencias anteriores se identifican como resultados guardados. GitHub Pages sirve archivos estáticos; la CNN requiere el servidor completo.
 
@@ -24,7 +24,7 @@ La demo estática no ejecuta PyTorch. Las inferencias anteriores se identifican 
 3. Ejecuta **Actions → Publicar visor en GitHub Pages → Run workflow** sobre `main` (o realiza un push a `main`).
 4. Espera a que termine el despliegue. El trabajo muestra la URL en el entorno `github-pages`.
 
-El archivo `.github/workflows/pages.yml` genera y publica `dist/` automáticamente. Esta demo no descarga el modelo LFS: usa los contornos guardados y genera las franjas mediante Shapely/PyProj. Funciona bajo el subdirectorio de un repositorio de Pages.
+El archivo `.github/workflows/pages.yml` genera y publica `dist/` automáticamente. Esta demo no descarga el modelo LFS: usa los contornos guardados y genera las zonas mediante Shapely/PyProj. Funciona bajo el subdirectorio de un repositorio de Pages.
 
 Para generar y probar los mismos archivos en tu equipo:
 
@@ -77,25 +77,26 @@ python -m venv .venv-ml
 .venv-ml\Scripts\python servidor.py --abrir
 ```
 
-## Franjas corregidas
+## Cauce y dos fajas marginales
 
-- **Rojo:** un único corredor que ocupa todo el espacio entre las líneas azul y morada. Su ancho sigue los límites existentes; no es un buffer fijo de 4 m desde el eje.
-- **Amarillo:** anillo exterior de 20 m por defecto, configurable entre 0 y 500 m. Se mide desde el borde del corredor rojo, con esquinas redondeadas para no exceder la distancia elegida. No es un retiro legal.
-- **Referencia central:** se conserva internamente para las distancias, pero no se dibuja en el visor para evitar que se confunda con una carretera.
+- **Rojo:** cauce y riberas aproximados.
+- **Naranja:** dos fajas marginales laterales aproximadas, de 4 m por margen.
+- **Líneas azul y morada:** límites exteriores documentales, 105 vértices por margen. El eje central no se dibuja.
+- **Fuera de estos colores:** ámbito sin evaluación de seguridad ni edificabilidad. Se retiró la zona amarilla de 20 m.
 
-Los 4 m documentales se conservan como referencia del documento; no desplazan ni sustituyen las coordenadas de los límites. Estas capas no son una validación legal ni un estudio de peligro.
+La separación interior se **reconstruye de forma aproximada**: se intersecta el corredor entre ambos límites con un buffer de 4 m de cada línea lateral; la unión de las dos partes es naranja y el espacio restante es rojo. No se añaden 4 m fuera de los límites exteriores ni se retraen los extremos del tramo. Faltan coordenadas oficiales del límite superior de las riberas o un levantamiento para confirmar la separación. No debe presentarse como un polígono interior oficial de ANA.
 
-El visor y la CNN comparten la geometría calculada en `backend/spatial.py`, en EPSG:32719. La intersección de cualquier parte del contorno con rojo tiene prioridad roja; si solo toca la zona exterior se clasifica amarillo. Se conservan los contornos completos. No se muestran candidatos fuera de ambas zonas.
+El visor y el detector comparten `backend/spatial.py`, en EPSG:32719. Cualquier intersección del contorno con rojo tiene prioridad roja; si solo toca una faja marginal, es naranja. Se conserva el contorno completo y se filtran los candidatos fuera del ámbito. El parámetro legado `--amarillo` solo admite 0.
 
 ## Documentos y distancias
 
-El visor incluye [la justificación y sus fuentes](web/normativa.html). Revisión documental al **22/11/2026**:
+El visor incluye [la justificación y sus fuentes](web/normativa.html). Revisión documental al **23/11/2026**:
 
 - **Cauce, ribera y faja marginal son diferentes.** Ley 29338 art. 74 y DS 001-2010-AG arts. 108, 111 y 113–115. La AAA fija la faja; estar fuera de ella no acredita seguridad o permiso para construir.
 - **Chullo en Cayma:** RD 1610-2018 y rectificación RD 289-2019 del 22/03/2019. El expediente fija 4 m de faja por margen. La RJ 332-2016-ANA art. 12 define mínimos por pendiente, material y protección; para >2 % y conglomerado contempla 4 m desde el límite superior de ribera. No son 4 m desde el eje ni una regla basada solo en profundidad. Los arts. 13–14 regulan mayor ancho y modificaciones.
 - **Puntos trazables:** 210 vértices (105 por línea) representan los límites exteriores digitalizados; 48 hitos de Cayma son referencias de señalización. El visor muestra ambos y permite descargar los vértices. La capa nueva copia exactamente las coordenadas existentes; no inventa una actualización de campo. La antigüedad no prueba caducidad: confirmar cartografía aplicable con AAA Caplina Ocoña/ALA Chili.
-- **Rojo:** corredor entre límites exteriores. Incluye cauce y fajas; no equivale solo al cauce ni a las dos fajas aisladas. El eje discontinuo es una referencia geométrica, no un levantamiento de la corriente.
-- **Amarillo:** distancia exploratoria configurable desde ese corredor. Los 20 m no provienen de un retiro universal de RNE/PDM. Las esquinas se redondean; se corrigieron las puntas de los ingletes que podían superar el ancho configurado.
+- **Colores actuales:** rojo para cauce/riberas aproximados; naranja para las dos fajas marginales reconstruidas. La zona amarilla fue retirada. Fuera del color no significa terreno seguro ni edificable.
+- **Revisión ampliada:** [informe y páginas exactas](web/docs/revision-normativa-20261123.html) e [inventario](web/docs/inventario-rne-pdm-20261123.json). Se descargaron los 74 PDF enlazados en el catálogo RNE y cuatro paquetes PDM con 27 PDF; junto a antecedentes y duplicados, 113 archivos y 2428 páginas. Los TXT están paginados; 230 páginas recibieron OCR. No se identificó una distancia adicional uniforme que sustente 20 m, pero sí restricciones por riesgo y zonificación. Los rótulos sin enlace del índice y un anexo de coordenadas no incluido permanecen fuera de cobertura; no se afirma haber leído documentos inaccesibles.
 - **RNE pertinente:** TH.050 arts. 3 y 8 (riberas y laderas); A.010 arts. 4 y 8 (parámetros y retiros desde linderos). No establecen la equivalencia profundidad de 10 m → margen de 0,5 m.
 - **PDM:** OM 961 y OM 975, reglamento Título III cap. 1. El horizonte 2025 no deroga automáticamente el plan (DS 012-2022-VIVIENDA art. 40.2). El nuevo PDM 2026–2045 está en consulta pública hasta el 06/12/2026 según IMPLA. La MPA reconoce restricciones judiciales del plan anterior: verificar aplicación por sector. No se asignó zonificación a cada detección sin una capa predial oficial.
 
@@ -107,7 +108,7 @@ Fuentes directas: [expediente ANA](https://repositorio.ana.gob.pe/bitstream/20.5
 2. Visita http://127.0.0.1:4173/.
 3. Pulsa **Ejecutar detección CNN sobre imagen del sector**. El servidor selecciona YOLO26 y su umbral recomendado; la duración depende del equipo y del modelo.
 4. Selecciona un contorno para consultar distancias y puntuación.
-5. Si cambias el ancho amarillo y recalculas, vuelve a ejecutar la CNN. El visor limpia el resultado anterior para evitar mostrar una clasificación con otro ancho.
+5. Consulta **Documentos y distancias** para distinguir los límites documentales de la separación interior aproximada.
 
 Los resultados completos guardados se cargan al abrir el visor. Un fallo devuelve un error real y conserva los archivos de la última detección válida.
 
@@ -128,13 +129,15 @@ Para repetir la captura local del corredor: `python scripts/prepare_imagery.py` 
 Instala las dependencias si faltan: `python -m pip install -r requirements-detection.txt`.
 
 ```powershell
-python scripts/run_detection.py --imagen data/imagery/chullo/chullo_rgb.tif --salida web/outputs/detection --modelo yolo --amarillo 20
-python scripts/generate_bands.py --amarillo 20
+python scripts/run_detection.py --imagen data/imagery/chullo/chullo_rgb.tif --salida web/outputs/detection --modelo yolo --amarillo 0
+python scripts/generate_bands.py --amarillo 0
 ```
 
 La API publica `web/outputs/detection/buildings.geojson` y `manifest.json`; se sirven bajo `/outputs/detection/`. El manifiesto registra conteos por color, modelo, imagen, cobertura y parámetros.
 
-La verificación local del **22/11/2026** con **YOLO26-Chullo**, umbral 0.05 y anillo redondeado de 20 m produjo **437 contornos candidatos: 114 rojos y 323 amarillos**, en 115 mosaicos y 67,34 s de CPU en este equipo. Los contornos son cerrados y válidos; falta validar su correspondencia con techos reales. La versión guardada del 15/11/2026 tenía 442 (113 rojos y 329 amarillos) con la geometría anterior. El cambio de geometría y las diferencias del entorno de inferencia impiden atribuir toda variación de conteo al detector. El Mask R-CNN piloto había dado 405 (118 rojos y 287 amarillos) el 31/10/2026. Ninguna cifra certifica la precisión de los contornos; ver la evaluación en [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md).
+La corrida actual del **23/11/2026**, sin zona amarilla y con las dos fajas marginales reconstruidas, produjo **123 contornos candidatos: 57 rojos y 66 naranjas**, en 115 mosaicos, con YOLO26-Chullo y umbral 0.05. El cambio de conteo responde al ámbito retirado y a la nueva clasificación; no prueba una mejora de precisión. Los pesos son los mismos verificados el 22/11/2026.
+
+La verificación histórica del **22/11/2026** con **YOLO26-Chullo**, umbral 0.05 y anillo redondeado de 20 m produjo **437 contornos candidatos: 114 rojos y 323 amarillos**, en 115 mosaicos y 67,34 s de CPU en este equipo. Los contornos son cerrados y válidos; falta validar su correspondencia con techos reales. La versión guardada del 15/11/2026 tenía 442 (113 rojos y 329 amarillos) con la geometría anterior. El cambio de geometría y las diferencias del entorno de inferencia impiden atribuir toda variación de conteo al detector. El Mask R-CNN piloto había dado 405 (118 rojos y 287 amarillos) el 31/10/2026. Ninguna cifra certifica la precisión de los contornos; ver la evaluación en [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md).
 
 ## Pruebas
 
@@ -147,7 +150,7 @@ npm test
 
 Si la instalación local de pytest carga plugins ajenos incompatibles con la consola, usa `$env:PYTEST_DISABLE_PLUGIN_AUTOLOAD='1'` antes de ejecutar pytest.
 
-Se verifican las franjas, el último vértice de ambas márgenes, anillos interiores, prioridad por intersección del contorno, máscaras RGB bidimensionales, resultado vacío real y preservación de resultados ante errores. La prueba del navegador comprueba controles, geometría y presentación honesta de errores. La inferencia real se comprobó también a través de la API con un recorte del GeoTIFF.
+Se verifican la partición rojo/naranja sin solapamientos ni ampliación exterior, el último vértice de ambas márgenes, prioridad por intersección del contorno, máscaras RGB bidimensionales, resultado vacío real y preservación de resultados ante errores. La prueba del navegador comprueba controles, geometría y presentación honesta de errores. La inferencia real se comprobó también a través de la API con un recorte del GeoTIFF.
 
 ## Alcance de la CNN
 

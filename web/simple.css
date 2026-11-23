@@ -20,3 +20,5 @@
 .map-panel{height:740px;min-height:490px}
 #map{height:740px;min-height:490px}
 @media(max-width:750px){header{flex-wrap:wrap}.acciones{flex-wrap:wrap}.map-panel,#map{height:460px;min-height:460px}.workspace aside{max-height:none;overflow:visible}}
+
+.chip.naranja { background: #c2410c; color: white; }

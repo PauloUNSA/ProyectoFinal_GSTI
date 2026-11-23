@@ -1,7 +1,7 @@
-"""Franjas y clasificación geométrica, compartidas por el visor y la CNN.
+"""Cauce/riberas y dos fajas marginales, compartidos por visor y detector.
 
-El rojo ocupa el corredor entre los dos límites documentales. El amarillo
-es su ampliación exterior en metros UTM, excluyendo el corredor rojo.
+Reconstrucción aproximada: 4 m hacia dentro de cada límite exterior ANA.
+El residual central no sustituye una delimitación interior medida en campo.
 """
 from __future__ import annotations
 
@@ -9,11 +9,12 @@ from dataclasses import dataclass
 import math
 from typing import Optional
 
-COLORES = {"rojo": "#dc2626", "amarillo": "#eab308", "verde": "#16a34a", "desconocido": "#66788b"}
+COLORES = {"rojo": "#dc2626", "naranja": "#f97316", "amarillo": "#eab308", "verde": "#16a34a", "desconocido": "#66788b"}
 ETIQUETAS = {
-    "rojo": "Rojo · entre límites documentales ANA",
+    "rojo": "Rojo · cauce y riberas (aproximado)",
+    "naranja": "Naranja · faja marginal (aproximada)",
     "amarillo": "Amarillo · franja exterior",
-    "verde": "Verde · fuera de franjas",
+    "verde": "Fuera del ámbito · sin evaluación de seguridad",
     "desconocido": "Sin evaluación",
 }
 
@@ -70,15 +71,15 @@ def calcular_linea_cauce_desde_limites(limites):
     return LineString([((a[0]+b[0])/2, (a[1]+b[1])/2) for a, b in pares])
 
 
-def construir_zonas(limites, amarillo_m=20, crs_metrico="EPSG:32719"):
+def construir_zonas(limites, amarillo_m=0, crs_metrico="EPSG:32719"):
     from pyproj import Transformer
     from shapely.geometry import Polygon
     from shapely import transform as _transform
     def transform(fn, geom):
         return _transform(geom, fn, interleaved=False)
     from shapely import make_valid
-    if not math.isfinite(amarillo_m) or not 0 <= amarillo_m <= 500:
-        raise ValueError("El ancho amarillo debe estar entre 0 y 500 metros.")
+    if not math.isfinite(amarillo_m) or amarillo_m != 0:
+        raise ValueError("La zona amarilla fue retirada: amarillo_m debe ser 0.")
     d, i = _margenes(limites)
     a_m = Transformer.from_crs("EPSG:4326", crs_metrico, always_xy=True).transform
     a_wgs = Transformer.from_crs(crs_metrico, "EPSG:4326", always_xy=True).transform
@@ -88,12 +89,20 @@ def construir_zonas(limites, amarillo_m=20, crs_metrico="EPSG:32719"):
         rojo = make_valid(rojo)
     if rojo.geom_type not in ("Polygon", "MultiPolygon") or rojo.is_empty:
         raise ValueError("Los límites no forman un corredor poligonal válido.")
-    # Los ingletes prolongan las esquinas más allá del ancho solicitado.
-    # Las uniones redondas representan la distancia máxima desde el corredor.
-    exterior = rojo.buffer(amarillo_m, join_style=1) if amarillo_m else rojo
+    corredor = rojo
+    # Recortar buffers de las dos líneas laterales al corredor: nunca ampliar
+    # fuera de los límites ni retraer artificialmente los extremos del tramo.
+    derecha = d_m.buffer(4, join_style=1).intersection(corredor)
+    izquierda = i_m.buffer(4, join_style=1).intersection(corredor)
+    naranja = derecha.union(izquierda)
+    rojo = corredor.difference(naranja)
+    exterior = corredor
     return {
         "rojo": rojo,
-        "amarillo": exterior.difference(rojo),
+        "naranja": naranja,
+        "faja_derecha": derecha,
+        "faja_izquierda": izquierda,
+        "corredor": corredor,
         "exterior": exterior,
         "cauce": transform(a_m, calcular_linea_cauce_desde_limites(limites)),
         "a_wgs": a_wgs,
@@ -103,11 +112,11 @@ def construir_zonas(limites, amarillo_m=20, crs_metrico="EPSG:32719"):
     }
 
 
-def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=20, crs_metrico="EPSG:32719"):
+def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=0, crs_metrico="EPSG:32719"):
     """GeoJSON íntegro: conserva anillos interiores y geometrías múltiples.
 
-    rojo_m se conserva como metadato documental; el ancho real del corredor
-    lo fijan las líneas azul y morada, no un buffer constante desde el eje.
+    Los límites exteriores son documentales. La separación interior usa 4 m
+    de distancia a cada línea lateral y es una reconstrucción aproximada.
     """
     from shapely.geometry import mapping
     from shapely import transform as _transform
@@ -115,7 +124,7 @@ def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=20, crs_metrico="EPSG:
         return _transform(geom, fn, interleaved=False)
     zonas = construir_zonas(limites, amarillo_m, crs_metrico)
     salida = {}
-    for clase in ("amarillo", "rojo", "cauce"):
+    for clase in ("naranja", "rojo", "cauce"):
         salida[clase] = {
             "type": "Feature",
             "geometry": mapping(transform(zonas["a_wgs"], zonas[clase])),
@@ -126,14 +135,17 @@ def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=20, crs_metrico="EPSG:
             },
         }
     salida["metadata"] = {
-        "geometria": "corredor_entre_limites",
+        "geometria": "cauce_fajas_reconstruccion_4m",
+        "faja_m_por_margen": 4,
+        "separacion_interior": "aproximada; sin coordenadas interiores oficiales",
         "rojo_m_documental": rojo_m,
         "amarillo_m": amarillo_m,
         "crs": crs_metrico,
-        "medicion": "Amarillo desde el borde del corredor; rojo entre ambos límites documentales.",
+        "medicion": "4 m hacia dentro desde cada límite exterior, recortados al corredor documental.",
         "buffer_join": "round",
-        "red_scope": "Corredor reconstruido entre límites exteriores documentales; incluye cauce y fajas, no equivale al cauce solo.",
-        "yellow_scope": "Franja exploratoria de proximidad; no es un retiro legal ni un límite de peligro.",
+        "red_scope": "Cauce y riberas aproximados: residual al descontar ambas fajas laterales reconstruidas.",
+        "orange_scope": "Dos fajas marginales aproximadas de 4 m hacia dentro de los límites exteriores.",
+        "outside_scope": "Sin evaluación; no implica seguridad ni autorización de edificar.",
     }
     return salida
 
@@ -142,15 +154,16 @@ def evaluar_edificio(geometria_metrica, zonas):
     """Da prioridad al rojo cuando cualquier parte del contorno lo toca."""
     if geometria_metrica.intersects(zonas["rojo"]):
         clase = "rojo"
-    elif geometria_metrica.intersects(zonas["exterior"]):
-        clase = "amarillo"
+    elif geometria_metrica.intersects(zonas["naranja"]):
+        clase = "naranja"
     else:
         clase = "verde"
     return {
         "clase": clase,
         "etiqueta": ETIQUETAS[clase],
         "color": COLORES[clase],
-        "dentro_banda": clase in ("rojo", "amarillo"),
+        "dentro_banda": clase in ("rojo", "naranja"),
         "distance_m": float(geometria_metrica.distance(zonas["rojo"])),
         "distance_axis_m": float(geometria_metrica.distance(zonas["cauce"])),
+        "geometry_status": "reconstruccion_aproximada",
     }

@@ -16,10 +16,10 @@ const CHULLO = {
   crs: { original: "EPSG:32719", geojson: "EPSG:4326" },
 };
 
-// 4 m: ancho documental por margen. 20 m: proximidad exploratoria, sin carácter legal.
+// 4 m por faja marginal; separación interior aproximada, sin zona amarilla.
 const CONFIG = {
   rojoM: 4,
-  amarilloM: 20,
+  amarilloM: 0,
   umbralDeteccion: 0.5,
 };
 

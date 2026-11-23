@@ -28,7 +28,7 @@ def main() -> None:
     parser.add_argument("--umbral", type=float, default=None, help="Umbral de confianza (0-1); por defecto, el del modelo")
     parser.add_argument("--modelo", default=None, choices=["auto", "yolo", "maskrcnn"],
                         help="Modelo; por defecto CHULLO_MODELO o auto (YOLO si está entrenado)")
-    parser.add_argument("--amarillo", type=float, default=20, help="Ancho exterior desde los límites documentales (m)")
+    parser.add_argument("--amarillo", type=float, default=0, help="Compatibilidad: solo 0; la zona amarilla fue retirada")
     parser.add_argument(
         "--dispositivo",
         default="auto",

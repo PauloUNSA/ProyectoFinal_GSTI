@@ -1,62 +1,15 @@
 {
-  "schema_version": 1,
-  "provider_id": "chullo_unificado_proximity_demo",
-  "rule_version": "2026.11.documentary.round.2",
-  "mode": "documentary_corridor",
-  "title": "Reglas de proximidad Chullo Unificado",
-  "source": "Límites exteriores digitalizados del expediente ANA RD 1610-2018 y rectificación RD 289-2019. Amarillo exploratorio, con esquinas redondas; no es un retiro oficial.",
-  "red_scope": "Corredor entre límites exteriores documentales; contiene cauce y fajas, no solo el cauce.",
-  "field_validation": "Coordenadas documentales. Su fecha no demuestra por sí sola caducidad ni coincidencia actual; confirmar con AAA Caplina Ocoña/ALA Chili y levantamiento.",
-  "default_thresholds": {
-    "yellow_width_m": 20
-  },
-  "notice": "No determina peligro ni permiso para construir; verde no implica seguridad.",
-  "pending_factors": [
-    "Terreno: falta verificar pendiente, elevación y geometría del cauce.",
-    "Caudal y arrastre: falta evaluar lluvias, flujo, desbordes y transporte de materiales.",
-    "Faja marginal y uso del suelo: contrastar delimitación documental con cartografía y resoluciones vigentes; falta zonificación predial oficial."
-  ],
+  "schema_version": 2,
+  "rule_version": "2026.11.cauce-fajas.1",
+  "mode": "cauce_fajas_reconstruccion_4m",
+  "title": "Cauce y dos fajas marginales de Cayma",
+  "source": "RD 1610-2018, rectificada por RD 289-2019; 210 vértices de límites exteriores y ancho de 4 m por margen.",
+  "geometry_status": "Separación interior aproximada; faltan coordenadas interiores oficiales.",
+  "construction": "Intersección del corredor documental con buffer interior de 4 m desde cada línea lateral; rojo residual. Sin ampliación exterior.",
+  "notice": "Fuera del ámbito no se evalúa seguridad ni permiso de edificar.",
   "rules": {
-    "red": {
-      "label": "Rojo · prioridad de revisión alta",
-      "priority": "Revisión alta por proximidad",
-      "reason": "El contorno toca el corredor entre ambos límites documentales.",
-      "potential_exposure": "La cercanía justifica revisar exposición a desbordes y arrastre; el modelo no determina si ocurre.",
-      "actions": [
-        "Priorizar una revisión técnica del lugar y del contorno detectado.",
-        "Contrastar la ubicación con estudios del cauce y delimitaciones oficiales antes de decidir una construcción."
-      ]
-    },
-    "yellow": {
-      "label": "Amarillo · revisión preventiva",
-      "priority": "Revisión preventiva",
-      "reason": "El contorno no toca rojo y sí toca su anillo exterior amarillo.",
-      "potential_exposure": "La cercanía justifica revisar exposición a desbordes y arrastre; el modelo no determina si ocurre.",
-      "actions": [
-        "Verificar preventivamente el terreno, el contorno y los posibles recorridos del agua.",
-        "Consultar estudios y delimitaciones oficiales antes de tomar decisiones sobre el uso del suelo."
-      ]
-    },
-    "green": {
-      "label": "Verde · menor proximidad",
-      "priority": "Menor proximidad; seguridad sin evaluar",
-      "reason": "El contorno no toca el corredor ni su anillo exterior. La detección del visor filtra estos candidatos.",
-      "potential_exposure": "Una mayor distancia al eje no descarta desbordes, otros cauces ni condiciones del terreno. Verde no significa seguro ni edificable.",
-      "actions": [
-        "Comprobar otros cauces, la topografía y las condiciones locales.",
-        "Verificar estudios y permisos aplicables; este color no autoriza construir."
-      ]
-    },
-    "unknown": {
-      "label": "Sin evaluación",
-      "priority": "Datos insuficientes",
-      "reason": "No existe una distancia válida para asignar un color.",
-      "potential_exposure": "Sin una medición válida no se puede interpretar la proximidad ni descartar exposición.",
-      "actions": [
-        "Revisar la geometría de la edificación, el eje del cauce y su georreferenciación.",
-        "Repetir el análisis cuando existan datos válidos."
-      ]
-    }
-  },
-  "classification": "Intersección del contorno completo con el corredor rojo o su anillo amarillo; prioridad roja."
+    "red": "Cauce y riberas aproximados; prioridad si cualquier parte del contorno toca rojo.",
+    "orange": "Dos fajas marginales aproximadas, una por lateral.",
+    "outside": "Sin evaluación. No se representa una zona amarilla ni una zona segura."
+  }
 }

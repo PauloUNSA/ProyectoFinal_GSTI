@@ -192,7 +192,7 @@ def detectar_edificios(
     crs_analisis: str = "EPSG:32719",
     progreso=None,
     limites_path: str | Path | None = None,
-    amarillo_m: float = 20,
+    amarillo_m: float = 0,
     modelo: str | None = None,
 ) -> dict:
     """Ejecuta la detección de edificios sobre una imagen y guarda GeoJSON.
@@ -354,10 +354,10 @@ def detectar_edificios(
         "iniciado_en": iniciado,
         "completado_en": datetime.now(timezone.utc).isoformat(),
         "count": len(registros),
-        "counts_by_class": {c: sum(f["properties"]["clase"] == c for f in registros) for c in ("rojo", "amarillo")},
+        "counts_by_class": {c: sum(f["properties"]["clase"] == c for f in registros) for c in ("rojo", "naranja")},
         "modelo": modelo_info["id"],
         "model_sha256": modelo_info["sha256"],
-        "zonas": {"geometria": "corredor_entre_limites", "amarillo_m": amarillo_m, "limites_sha256": sha256_file(limites_path)},
+        "zonas": {"geometria": "cauce_fajas_reconstruccion_4m", "faja_m_por_margen": 4, "separacion_interior": "aproximada", "amarillo_m": amarillo_m, "limites_sha256": sha256_file(limites_path)},
         "cobertura": imagen_info,
         "imagen_fuente": {k: fuente_imagen.get(k) for k in ("source", "service_url", "attribution", "observed_at", "acquired_at")},
         "mosaicos_procesados": mosaicos_procesados,
@@ -375,7 +375,8 @@ def detectar_edificios(
             "La confianza no es una probabilidad calibrada de peligro.",
             "Pueden existir omisiones y falsos positivos.",
             modelo_info["limitacion"],
-            "Solo se analiza la cobertura del GeoTIFF; no se evalúan franjas fuera de ella.",
+            "Solo se analiza la cobertura del GeoTIFF y el corredor documental.",
+            "Separación rojo/naranja aproximada: 4 m hacia dentro de los límites exteriores. No es una delimitación interior oficial.",
         ],
     }
 

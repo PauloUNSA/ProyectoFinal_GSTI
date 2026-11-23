@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <base href="./">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, límites de faja, franjas de proximidad y detección de edificios por CNN.">
+<meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, límites de faja marginal, fajas marginales y detección de edificios por CNN.">
 <title>Chullo Unificado · Límites y posibles cubiertas</title>
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="simple.css">
+<link rel="stylesheet" href="simple.css?v=20261123-rojo-naranja">
 </head>
 <body>
 <header>
   <div>
     <p class="eyebrow">TORRENTERA CHULLO · AREQUIPA · MAPA UNIFICADO</p>
     <h1>Mapa, límites y posibles cubiertas</h1>
-    <p class="sub">Puntos documentales ANA · corredor de Cayma · proximidad exploratoria · posibles cubiertas</p>
+    <p class="sub">Puntos documentales ANA · cauce/riberas y fajas marginales de Cayma · posibles cubiertas</p>
   </div>
   <div class="acciones">
     <a class="button secondary" href="layers/vertices-limites-cayma.geojson" download>Descargar 210 vértices</a>
@@ -31,7 +31,8 @@
 
   <section class="workspace" aria-label="Consulta de hitos y edificaciones">
     <div class="map-panel">
-      <div id="map" aria-label="Mapa de Chullo con OpenStreetMap y franjas de proximidad"></div>
+      <div id="map" aria-label="Mapa de Chullo con OpenStreetMap y fajas marginales"></div>
+      <p class="map-legend"><span style="color:#dc2626">■</span> Cauce y riberas · <span style="color:#f97316">■</span> Dos fajas marginales de 4 m<br><small>Separación interior aproximada. Fuera del color: seguridad sin evaluar.</small></p>
     </div>
 
     <aside>
@@ -42,14 +43,14 @@
 
       <div id="faja-info" class="faja-panel">
         <h3>Límites de faja marginal (documental ANA)</h3>
-        <p>Cayma · 210 vértices de los límites exteriores y 48 hitos de señalización. Expediente RD 1610-2018 y rectificación RD 289-2019. Ancho documental de faja: 4 m por margen.</p>
+        <p>Cayma · 210 vértices de los límites exteriores y 48 hitos de señalización. Expediente RD 1610-2018 y rectificación RD 289-2019. Ancho documental de faja marginal: 4 m por margen.</p>
         <p>El rojo contiene el espacio entre ambos límites exteriores, incluido el cauce y las fajas. No representa únicamente el cauce. Son coordenadas documentales, pendientes de contraste con ANA y campo para su aplicación actual.</p>
         <p><a href="normativa.html" target="_blank" rel="noopener">Ver documentos y justificación de las distancias</a></p>
       </div>
 
       <div id="detector-panel">
         <h3>Detección de posibles cubiertas</h3>
-        <p>Detecta cubiertas que tocan las zonas roja y amarilla. El rojo tiene prioridad si un contorno toca ambas zonas.</p>
+        <p>Detecta cubiertas que tocan las zonas roja y naranja. El rojo tiene prioridad si un contorno toca ambas zonas.</p>
         <p class="note" id="modelo-nota">Detección CNN sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
         <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
         <div id="detect-status" class="detect-status"></div>
@@ -61,13 +62,13 @@
           <input type="checkbox" id="layer-hitos" checked> Puntos ANA
         </label>
         <label class="layer-toggle">
-          <input type="checkbox" id="layer-limites" checked> Límites de faja (Cayma)
+          <input type="checkbox" id="layer-limites" checked> Límites exteriores de faja marginal (Cayma)
         </label>
         <label class="layer-toggle">
           <input type="checkbox" id="layer-vertices" checked> 210 vértices de los límites (Cayma)
         </label>
         <label class="layer-toggle">
-          <input type="checkbox" id="layer-bandas" checked> Corredor documental y proximidad
+          <input type="checkbox" id="layer-bandas" checked> Cauce y fajas marginales (aproximados)
         </label>
         <label class="layer-toggle">
           <input type="checkbox" id="layer-edificios" checked> Edificios detectados (CNN)
@@ -75,11 +76,6 @@
         <label class="layer-toggle">
           <input type="checkbox" id="layer-satelital" checked> Vista satelital (Esri)
         </label>
-        <div class="band-controls">
-          <p>Rojo: corredor entre límites exteriores. Amarillo: distancia exploratoria desde su borde, sin carácter de retiro legal.</p>
-          <label>Proximidad amarilla (m): <input type="number" id="band-amarillo" value="20" min="0" max="500" step="1" required></label>
-          <button id="btn-recalcular-bandas">Recalcular franjas</button>
-        </div>
         <div id="panel-info" class="info-panel"></div>
       </div>
     </aside>
@@ -95,9 +91,9 @@
 </dialog>
 
 <script src="vendor/leaflet.js"></script>
-<script src="data.js"></script>
-<script src="bands.js?v=20261123-sin-eje"></script>
-<script src="detection.js"></script>
-<script src="simple.js"></script>
+<script src="data.js?v=20261123-rojo-naranja"></script>
+<script src="bands.js?v=20261123-rojo-naranja"></script>
+<script src="detection.js?v=20261123-rojo-naranja"></script>
+<script src="simple.js?v=20261123-rojo-naranja"></script>
 </body>
 </html>
