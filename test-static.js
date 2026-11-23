@@ -26,7 +26,7 @@ const {chromium}=require('playwright');
   assert.equal(await page.locator('#btn-run-detect, #btn-ver-cruce-amarillo, #faja-info, #detector-panel, #panel-info').count(),0);
   assert.equal(await page.locator('#band-amarillo').count(),0);
   assert.equal(await page.evaluate(()=>window.OBTENER_BANDAS().features.filter(f=>f.properties.clase==='rojo').length),1);
-  for (const [clase,expected] of [['rojo','Rojo · cauce y riberas (aproximado)'],['naranja','Naranja · faja marginal (aproximada)'],['amarillo','Amarillo · alcance simulado de huaicos (aproximado)']]) {
+  for (const [clase,expected] of [['rojo','Rojo · Edificación construida en cauce o riberas'],['naranja','Naranja · Edificación construida en la faja marginal'],['amarillo','Amarillo · Edificación construida en el alcance simulado de huaicos']]) {
     await page.evaluate(clase=>{
       const layer=edificioLayer.getLayers().find(l=>l.feature.properties.clase===clase);
       layer.openPopup();
