@@ -24,8 +24,8 @@ jobs:
       - run: pip install numpy shapely pyproj
       - run: python scripts/build_static.py
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: dist
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5.0.1
