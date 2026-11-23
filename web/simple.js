@@ -93,6 +93,12 @@ async function cargarTodo() {
   }
 
   configurarUI();
+  try {
+    await cargarHuellaHuaico(map);
+  } catch (err) {
+    document.getElementById("layer-huaico").disabled = true;
+    document.getElementById("estado-huaico").textContent = err.message;
+  }
   await window.CARGAR_ESTADO_DETECTOR();
 }
 
@@ -242,6 +248,7 @@ function configurarUI() {
     "layer-limites": () => toggleCapa(limiteLayer, "layer-limites"),
     "layer-vertices": () => toggleCapa(verticesLayer, "layer-vertices"),
     "layer-bandas": () => toggleCapa(bandaLayer, "layer-bandas"),
+    "layer-huaico": () => toggleCapa(huaicoLayer, "layer-huaico"),
     "layer-edificios": () => toggleCapa(edificioLayer, "layer-edificios"),
     "layer-satelital": toggleSatelital,
   };

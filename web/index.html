@@ -7,7 +7,7 @@
 <meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, límites de faja marginal, fajas marginales y detección de edificios por CNN.">
 <title>Chullo Unificado · Límites y posibles cubiertas</title>
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="simple.css?v=20261123-rojo-naranja-2">
+<link rel="stylesheet" href="simple.css?v=20261123-huella-a7270">
 </head>
 <body>
 <header>
@@ -32,7 +32,7 @@
   <section class="workspace" aria-label="Consulta de hitos y edificaciones">
     <div class="map-panel">
       <div id="map" aria-label="Mapa de Chullo con OpenStreetMap y fajas marginales"></div>
-      <p class="map-legend"><span style="color:#dc2626">■</span> Cauce y riberas · <span style="color:#f97316">■</span> Dos fajas marginales de 4 m<br><small>Separación interior aproximada. Fuera del color: seguridad sin evaluar.</small></p>
+      <p class="map-legend"><span style="color:#dc2626">■</span> Cauce y riberas · <span style="color:#f97316">■</span> Dos fajas marginales de 4 m · <span style="color:#b47c05">■</span> Alcance simulado de huaicos<br><small>Capas aproximadas. Amarillo a escala de sector · INGEMMET 2022.</small></p>
     </div>
 
     <aside>
@@ -50,7 +50,7 @@
 
       <div id="detector-panel">
         <h3>Detección de posibles cubiertas</h3>
-        <p>Detecta cubiertas que tocan las zonas roja y naranja. El rojo tiene prioridad si un contorno toca ambas zonas.</p>
+        <p>Clasifica cubiertas que tocan el cauce o una faja marginal. El rojo tiene prioridad. La capa de huaicos es una referencia visual a escala de sector.</p>
         <p class="note" id="modelo-nota">Detección CNN sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
         <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
         <div id="detect-status" class="detect-status"></div>
@@ -70,6 +70,11 @@
         <label class="layer-toggle">
           <input type="checkbox" id="layer-bandas" checked> Cauce y fajas marginales (aproximados)
         </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-huaico" checked> Alcance simulado de huaicos (INGEMMET)
+        </label>
+        <p><a href="huaicos.html">Ver planos y origen del amarillo</a></p>
+        <p id="estado-huaico" role="status"></p>
         <label class="layer-toggle">
           <input type="checkbox" id="layer-edificios" checked> Edificios detectados (CNN)
         </label>
@@ -91,9 +96,9 @@
 </dialog>
 
 <script src="vendor/leaflet.js"></script>
-<script src="data.js?v=20261123-rojo-naranja-2"></script>
-<script src="bands.js?v=20261123-rojo-naranja-2"></script>
-<script src="detection.js?v=20261123-rojo-naranja-2"></script>
-<script src="simple.js?v=20261123-rojo-naranja-2"></script>
+<script src="data.js?v=20261123-huella-a7270"></script>
+<script src="bands.js?v=20261123-huella-a7270"></script>
+<script src="detection.js?v=20261123-huella-a7270"></script>
+<script src="simple.js?v=20261123-huella-a7270"></script>
 </body>
 </html>

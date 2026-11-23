@@ -82,11 +82,13 @@ python -m venv .venv-ml
 - **Rojo:** cauce y riberas aproximados.
 - **Naranja:** dos fajas marginales laterales aproximadas, de 4 m por margen.
 - **Líneas azul y morada:** límites exteriores documentales, 105 vértices por margen. El eje central no se dibuja.
-- **Fuera de estos colores:** ámbito sin evaluación de seguridad ni edificabilidad. Se retiró la zona amarilla de 20 m.
+- **Fuera de estos colores:** ámbito sin evaluación de seguridad ni edificabilidad. El amarillo actual representa el alcance simulado de huaicos, según el anexo 4 del informe A7270 de INGEMMET (2022).
 
 La separación interior se **reconstruye de forma aproximada**: se intersecta el corredor entre ambos límites con un buffer de 4 m de cada línea lateral; la unión de las dos partes es naranja y el espacio restante es rojo. No se añaden 4 m fuera de los límites exteriores ni se retraen los extremos del tramo. Faltan coordenadas oficiales del límite superior de las riberas o un levantamiento para confirmar la separación. No debe presentarse como un polígono interior oficial de ANA.
 
-El visor y el detector comparten `backend/spatial.py`, en EPSG:32719. Cualquier intersección del contorno con rojo tiene prioridad roja; si solo toca una faja marginal, es naranja. Se conserva el contorno completo y se filtran los candidatos fuera del ámbito. El parámetro legado `--amarillo` solo admite 0.
+El visor y el detector comparten `backend/spatial.py`, en EPSG:32719. Cualquier intersección del contorno con rojo tiene prioridad roja; si solo toca una faja marginal, es naranja. Se conserva el contorno completo y se filtran los candidatos fuera del ámbito. El parámetro legado `--amarillo` solo admite 0. La capa de huaicos tiene resolución de unos 28 m por píxel en el PDF y se interpreta por sector. La clasificación automática de cubiertas utiliza el cauce y las fajas marginales.
+
+El [origen del amarillo y el método](web/huaicos.html) documentan la digitalización. Para reproducir el GeoJSON con el PDF original, instala `pypdf` en el entorno del proyecto y ejecuta `python scripts/generate_huella_huaico.py ruta/al/A7270.pdf`.
 
 ## Documentos y distancias
 
@@ -95,7 +97,7 @@ El visor incluye [la justificación y sus fuentes](web/normativa.html). Revisió
 - **Cauce, ribera y faja marginal son diferentes.** Ley 29338 art. 74 y DS 001-2010-AG arts. 108, 111 y 113–115. La AAA fija la faja; estar fuera de ella no acredita seguridad o permiso para construir.
 - **Chullo en Cayma:** RD 1610-2018 y rectificación RD 289-2019 del 22/03/2019. El expediente fija 4 m de faja por margen. La RJ 332-2016-ANA art. 12 define mínimos por pendiente, material y protección; para >2 % y conglomerado contempla 4 m desde el límite superior de ribera. No son 4 m desde el eje ni una regla basada solo en profundidad. Los arts. 13–14 regulan mayor ancho y modificaciones.
 - **Puntos trazables:** 210 vértices (105 por línea) representan los límites exteriores digitalizados; 48 hitos de Cayma son referencias de señalización. El visor muestra ambos y permite descargar los vértices. La capa nueva copia exactamente las coordenadas existentes; no inventa una actualización de campo. La antigüedad no prueba caducidad: confirmar cartografía aplicable con AAA Caplina Ocoña/ALA Chili.
-- **Colores actuales:** rojo para cauce/riberas aproximados; naranja para las dos fajas marginales reconstruidas. La zona amarilla fue retirada. Fuera del color no significa terreno seguro ni edificable.
+- **Colores actuales:** rojo para cauce/riberas aproximados; naranja para las dos fajas marginales reconstruidas. Se retiró el anillo de 20 m. El amarillo de INGEMMET es una capa de peligro simulado. Fuera del color no significa terreno seguro ni edificable.
 - **Revisión ampliada:** [informe y páginas exactas](web/docs/revision-normativa-20261123.html) e [inventario](web/docs/inventario-rne-pdm-20261123.json). Se descargaron los 74 PDF enlazados en el catálogo RNE y cuatro paquetes PDM con 27 PDF; junto a antecedentes y duplicados, 113 archivos y 2428 páginas. Los TXT están paginados; 230 páginas recibieron OCR. No se identificó una distancia adicional uniforme que sustente 20 m, pero sí restricciones por riesgo y zonificación. Los rótulos sin enlace del índice y un anexo de coordenadas no incluido permanecen fuera de cobertura; no se afirma haber leído documentos inaccesibles.
 - **RNE pertinente:** TH.050 arts. 3 y 8 (riberas y laderas); A.010 arts. 4 y 8 (parámetros y retiros desde linderos). No establecen la equivalencia profundidad de 10 m → margen de 0,5 m.
 - **PDM:** OM 961 y OM 975, reglamento Título III cap. 1. El horizonte 2025 no deroga automáticamente el plan (DS 012-2022-VIVIENDA art. 40.2). El nuevo PDM 2026–2045 está en consulta pública hasta el 06/12/2026 según IMPLA. La MPA reconoce restricciones judiciales del plan anterior: verificar aplicación por sector. No se asignó zonificación a cada detección sin una capa predial oficial.
@@ -135,7 +137,7 @@ python scripts/generate_bands.py --amarillo 0
 
 La API publica `web/outputs/detection/buildings.geojson` y `manifest.json`; se sirven bajo `/outputs/detection/`. El manifiesto registra conteos por color, modelo, imagen, cobertura y parámetros.
 
-La corrida actual del **23/11/2026**, sin zona amarilla y con las dos fajas marginales reconstruidas, produjo **123 contornos candidatos: 57 rojos y 66 naranjas**, en 115 mosaicos, con YOLO26-Chullo y umbral 0.05. El cambio de conteo responde al ámbito retirado y a la nueva clasificación; no prueba una mejora de precisión. Los pesos son los mismos verificados el 22/11/2026.
+La corrida actual del **23/11/2026**, sobre el cauce y las dos fajas marginales reconstruidas, produjo **123 contornos candidatos: 57 rojos y 66 naranjas**, en 115 mosaicos, con YOLO26-Chullo y umbral 0.05. El cambio de conteo responde al ámbito retirado y a la nueva clasificación; no prueba una mejora de precisión. Los pesos son los mismos verificados el 22/11/2026.
 
 La verificación histórica del **22/11/2026** con **YOLO26-Chullo**, umbral 0.05 y anillo redondeado de 20 m produjo **437 contornos candidatos: 114 rojos y 323 amarillos**, en 115 mosaicos y 67,34 s de CPU en este equipo. Los contornos son cerrados y válidos; falta validar su correspondencia con techos reales. La versión guardada del 15/11/2026 tenía 442 (113 rojos y 329 amarillos) con la geometría anterior. El cambio de geometría y las diferencias del entorno de inferencia impiden atribuir toda variación de conteo al detector. El Mask R-CNN piloto había dado 405 (118 rojos y 287 amarillos) el 31/10/2026. Ninguna cifra certifica la precisión de los contornos; ver la evaluación en [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md).
 

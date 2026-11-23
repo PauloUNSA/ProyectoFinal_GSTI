@@ -23,6 +23,14 @@ const {chromium}=require('playwright');
     assert.equal(await page.locator('.leaflet-popup-content strong').first().textContent(),expected);
     assert.doesNotMatch(await page.locator('#edificio-info').textContent(),/[ÃÂ�]/);
   }
+  const huella = page.locator('.leaflet-huellaHuaico-pane path');
+  await huella.first().waitFor({state:'visible'});
+  const visible = await huella.count();
+  await page.locator('#layer-huaico').uncheck();
+  assert.equal(await huella.count(), 0);
+  await page.locator('#layer-huaico').check();
+  assert.equal(await huella.count(), visible);
+  assert.equal((await page.request.get('http://127.0.0.1:4187/dist/huaicos.html')).status(), 200);
   await page.locator('#layer-edificios').uncheck();await page.locator('#layer-edificios').check();
   assert.deepEqual(api,[]);assert.deepEqual(errors,[]);
   console.log(`PASS: demo bajo /dist/, ${total} contornos, franjas, controles, sin peticiones API ni errores JS.`);
