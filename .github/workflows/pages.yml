@@ -4,6 +4,7 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -27,5 +28,18 @@ jobs:
       - uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: dist
+      - name: Esperar a que GitHub liste el paquete para Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          endpoint="repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=github-pages"
+          for intento in {1..10}; do
+            if gh api "$endpoint" --jq '.artifacts | any(.name == "github-pages" and (.expired | not))' | grep -qx true; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::GitHub todavía no lista el paquete de Pages para esta ejecución."
+          exit 1
       - id: deployment
         uses: actions/deploy-pages@v5.0.1
