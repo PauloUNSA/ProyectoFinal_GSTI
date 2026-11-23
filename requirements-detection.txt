@@ -6,3 +6,4 @@ shapely>=2.1
 pyproj>=3.5
 requests>=2.31
 Pillow>=10
+ultralytics==8.4.213

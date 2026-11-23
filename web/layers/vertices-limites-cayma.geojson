@@ -1,0 +1,4211 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5513787809755,
+          -16.391059363786948
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 1,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55133500601492,
+          -16.39057214035041
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 2,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55128258165523,
+          -16.390139216818152
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 3,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55112059618341,
+          -16.38991537035437
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 4,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55119108870551,
+          -16.389580312419003
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 5,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-6",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55126311016986,
+          -16.389362658393118
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 6,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-7",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55143474877593,
+          -16.388890885402148
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 7,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-8",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55160803356398,
+          -16.38854554732285
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 8,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55180073462236,
+          -16.388254168459223
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 9,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55207492846415,
+          -16.387754052867262
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 10,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-11",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55224632888185,
+          -16.3872642174932
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 11,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55257106283969,
+          -16.38705252772238
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 12,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55270880543857,
+          -16.386852140517888
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 13,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-14",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55275893666516,
+          -16.386390874819753
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 14,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55273693117252,
+          -16.38613823226211
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 15,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-16",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55230946843218,
+          -16.385646634701743
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 16,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-17",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55231600035691,
+          -16.385429775559803
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 17,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-18",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55240296576508,
+          -16.384922900234763
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 18,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-19",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55231347417006,
+          -16.38451752431497
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 19,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-20",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55220409622206,
+          -16.38402206471561
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 20,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-21",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55210572093077,
+          -16.383652926382013
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 21,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-22",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55211878579087,
+          -16.383219207989892
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 22,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-23",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55205665610009,
+          -16.38275930467384
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 23,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-24",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55213708951284,
+          -16.38246928862058
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 24,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-25",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55228289150254,
+          -16.382169446716627
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 25,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-26",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55237350296517,
+          -16.381942534579384
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 26,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-27",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.552704996076,
+          -16.38153204876552
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 27,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-28",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55286903640454,
+          -16.38119585528184
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 28,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-29",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55304931603648,
+          -16.380669782251825
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 29,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-30",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55319488032126,
+          -16.38035187792694
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 30,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-31",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55342228692976,
+          -16.379852330126532
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 31,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-32",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55354925769703,
+          -16.379543683914335
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 32,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-33",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55381502416176,
+          -16.37911593009195
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 33,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-34",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5540446638736,
+          -16.378787972120534
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 34,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-35",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55438585679254,
+          -16.378404464369876
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 35,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-36",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5546434420543,
+          -16.378067134098377
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 36,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-37",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55472469447723,
+          -16.377840335138124
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 37,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-38",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55464397019124,
+          -16.377389691289043
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 38,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-39",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55449158432577,
+          -16.377183794737622
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 39,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-40",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55436514549861,
+          -16.376814998177963
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 40,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-41",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55429342470954,
+          -16.37633714720496
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 41,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-42",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55423105932346,
+          -16.375859182553622
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 42,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-43",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55415069060483,
+          -16.375435631347067
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 43,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-44",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5540259010162,
+          -16.375193269152344
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 44,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-45",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55375996577314,
+          -16.374889392801716
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 45,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-46",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55360770070429,
+          -16.37469252622514
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 46,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-47",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55338689440458,
+          -16.37426164651301
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 47,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-48",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55318550433407,
+          -16.37388472578393
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 48,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-49",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55292786887632,
+          -16.373499454744564
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 49,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-50",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55264240534534,
+          -16.373132585871634
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 50,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-51",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55236641522384,
+          -16.372774634043527
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 51,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-52",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55210937068647,
+          -16.372434516921878
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 52,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-53",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55185091685094,
+          -16.37198602638382
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 53,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-54",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55176202388965,
+          -16.371625804193524
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 54,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-55",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55184022293278,
+          -16.371164198016928
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 55,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-56",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55193783614996,
+          -16.37075655143507
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 56,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-57",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55206327794956,
+          -16.370330502336753
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 57,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-58",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5521978389053,
+          -16.369886277610778
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 58,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-59",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5522950985582,
+          -16.36945153777453
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 59,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-60",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55246813465463,
+          -16.369088138895542
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 60,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-61",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55268070398832,
+          -16.368886845478038
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 61,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-62",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55298623062771,
+          -16.368639261732145
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 62,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-63",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55316173345446,
+          -16.36846551510379
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 63,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-64",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55339195238656,
+          -16.368182714521488
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 64,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-65",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55339707474239,
+          -16.36785748239654
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 65,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-66",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5532812941062,
+          -16.36758791207436
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 66,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-67",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55317498586022,
+          -16.367327259231924
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 67,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-68",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55316163492189,
+          -16.367020316148707
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 68,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-69",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55314875425336,
+          -16.36674949735426
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 69,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-70",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55310522460165,
+          -16.366280335283086
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 70,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-71",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55309970061349,
+          -16.36585587467428
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 71,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-72",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5529629802638,
+          -16.365414940351066
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 72,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-73",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55289185877774,
+          -16.364982242758465
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 73,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-74",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55294187425548,
+          -16.364511945927205
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 74,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-75",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5530866080747,
+          -16.364130825359165
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 75,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-76",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5532222221574,
+          -16.363767880373434
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 76,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-77",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55338437089193,
+          -16.36328719096818
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 77,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-78",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5534541515932,
+          -16.362897946948582
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 78,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-79",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55360694509163,
+          -16.36241737097796
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 79,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-80",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55372255618052,
+          -16.36195531101276
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 80,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-81",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55376380340253,
+          -16.361530283101025
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 81,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-82",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55395412978773,
+          -16.361058284293314
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 82,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-83",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55396707907822,
+          -16.36061553466513
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 83,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-84",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5539609676142,
+          -16.360145918736254
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 84,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-85",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55389008269081,
+          -16.359731283481178
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 85,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-86",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55384667290747,
+          -16.359271152390438
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 86,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-87",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55387856610264,
+          -16.35884623793003
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 87,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-88",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55384639103696,
+          -16.35853049056919
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 88,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-89",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55371179168435,
+          -16.358252115397562
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 89,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-90",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55354913066337,
+          -16.357974080384214
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 90,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-91",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55332917123685,
+          -16.357606414893905
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 91,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-92",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5533055292319,
+          -16.35722733626286
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 92,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-93",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.553318011168,
+          -16.356748462025845
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 93,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-94",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55329378220567,
+          -16.35632422792943
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 94,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-95",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55336403257677,
+          -16.35597110836793
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 95,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-96",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55336997998747,
+          -16.355709093529914
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 96,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-97",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55333862924256,
+          -16.355456563407753
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 97,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-98",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5533699368831,
+          -16.354986493396524
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 98,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-99",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55349572292958,
+          -16.35458753798761
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 99,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-100",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55366874770509,
+          -16.354224139828187
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 100,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-101",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55382259436222,
+          -16.353824844115845
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 101,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-102",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55400367959848,
+          -16.35336199052721
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 102,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-103",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55408269480778,
+          -16.35296360214061
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 103,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-104",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55389139016283,
+          -16.352640751573343
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 104,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-R-vertex-105",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55362396414085,
+          -16.352219466011178
+        ]
+      },
+      "properties": {
+        "bank": "Derecha",
+        "position": 105,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55123856421234,
+          -16.391070098218474
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 1,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55119502484966,
+          -16.390600936842844
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 2,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55118025836917,
+          -16.39018562119371
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 3,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55097102461558,
+          -16.389926218036113
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 4,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55103192661484,
+          -16.389573211507624
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 5,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-6",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55112218888864,
+          -16.389319206153417
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 6,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-7",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55128458992927,
+          -16.38885657784531
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 7,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-8",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55148547098192,
+          -16.388474774936856
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 8,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5516413384005,
+          -16.388229005724007
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 9,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55192488811872,
+          -16.387728776724348
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 10,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-11",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55210552671008,
+          -16.387229796789104
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 11,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55244838335108,
+          -16.386972724743227
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 12,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55256800353982,
+          -16.386817720092345
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 13,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-14",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55260913270305,
+          -16.38638366115353
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 14,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55257812500099,
+          -16.386158225323587
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 15,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-16",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55216037083339,
+          -16.385693607031804
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 16,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-17",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55216607946912,
+          -16.385413530404147
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 17,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-18",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55225304527413,
+          -16.38490665508675
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 18,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-19",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55217373270213,
+          -16.384564382978905
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 19,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-20",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55205476452556,
+          -16.38405097466888
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 20,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-21",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55197474718219,
+          -16.383654515945295
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 21,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-22",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55199728519165,
+          -16.383229715055155
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 22,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-23",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55190685488803,
+          -16.382752090108873
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 23,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-24",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55199605571688,
+          -16.382416805198893
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 24,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-25",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55215109549462,
+          -16.38210781876214
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 25,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-26",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5522697726457,
+          -16.381880566049386
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 26,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-27",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55260126591355,
+          -16.38147008038118
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 27,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-28",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55274718426071,
+          -16.38117926940104
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 28,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-29",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55290840109126,
+          -16.3806263303519
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 29,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-30",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55305396559802,
+          -16.38030842609576
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 30,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-31",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55328125491143,
+          -16.37979984733866
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 31,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-32",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55341734565577,
+          -16.379473025484355
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 32,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-33",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5536923497401,
+          -16.379036127155157
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 33,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-34",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55392187193915,
+          -16.378699138239636
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 34,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-35",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55427241999716,
+          -16.37831551707007
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 35,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-36",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5545116484848,
+          -16.378005507318452
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 36,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-37",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55457454418061,
+          -16.377806028786555
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 37,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-38",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55452353266914,
+          -16.37748147880355
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 38,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-39",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5543615565354,
+          -16.377257633642692
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 39,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-40",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55421570202563,
+          -16.376834877804885
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 40,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-41",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55414398157892,
+          -16.376357026731217
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 41,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-42",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55408149888608,
+          -16.375870030924254
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 42,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-43",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55400148340706,
+          -16.37547357280303
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 43,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-44",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55389587421463,
+          -16.375267107619944
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 44,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-45",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55365847405464,
+          -16.37499901469421
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 45,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-46",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55346831917633,
+          -16.37476647795653
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 46,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-47",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55324727785114,
+          -16.37431753593176
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 47,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-48",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55305547793094,
+          -16.373958563661844
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 48,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-49",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55278837023013,
+          -16.373564374876363
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 49,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-50",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55250290681872,
+          -16.37319750579244
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 50,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-51",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5522459789472,
+          -16.372866420038807
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 51,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-52",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55196975486348,
+          -16.372490405368204
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 52,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-53",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55171118371562,
+          -16.37203288354437
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 53,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-54",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55161234874141,
+          -16.37162761929131
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 54,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-55",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55169019563006,
+          -16.371138919873367
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 55,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-56",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55179704631175,
+          -16.370722128793737
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 56,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-57",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55192237091018,
+          -16.37028704865659
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 57,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-58",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5520571672087,
+          -16.369860886140163
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 58,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-59",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5521543096661,
+          -16.369417115245163
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 59,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-60",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5523269934649,
+          -16.36902662320927
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 60,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-61",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55255780191236,
+          -16.368788978683163
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 61,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-62",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55288239030345,
+          -16.368568261391083
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 62,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-63",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55306724771401,
+          -16.36839440136139
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 63,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-64",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55324180983905,
+          -16.368148406111004
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 64,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-65",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55325710982257,
+          -16.36788627798533
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 65,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-66",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55314179952563,
+          -16.367652831862596
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 66,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-67",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55303490371405,
+          -16.3673470235491
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 67,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-68",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5530120809845,
+          -16.367031162821924
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 68,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-69",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55299931805051,
+          -16.366769375066383
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 69,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-70",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55292784296455,
+          -16.366309584383448
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 70,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-71",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55295014754499,
+          -16.365866721179476
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 71,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-72",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55281378004666,
+          -16.365452879951043
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 72,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-73",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55274230633478,
+          -16.36499308902408
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 73,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-74",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55275443475936,
+          -16.364487121631672
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 74,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-75",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55289928645911,
+          -16.364115032222863
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 75,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-76",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55306296383506,
+          -16.36375174695671
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 76,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-77",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55323434974225,
+          -16.36326191308618
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 77,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-78",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55330424826438,
+          -16.362881700152798
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 78,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-79",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55345704214027,
+          -16.362401124240293
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 79,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-80",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55357277111328,
+          -16.36194809538528
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 80,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-81",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55361366610359,
+          -16.36149597422578
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 81,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-82",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5536820359957,
+          -16.36099835730144
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 82,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-83",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55372351845728,
+          -16.360591391533166
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 83,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-84",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55381130147605,
+          -16.360147734160147
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 84,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-85",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55375012351581,
+          -16.359760078587925
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 85,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-86",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55369688991514,
+          -16.359263936560485
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 86,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-87",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55368177806936,
+          -16.358821527154873
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 87,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-88",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55365942738354,
+          -16.35854179059243
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 88,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-89",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5535720684768,
+          -16.358298972403958
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 89,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-90",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55340964255828,
+          -16.358038999424117
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 90,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-91",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55315156237567,
+          -16.357617600923767
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 91,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-92",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55315527790653,
+          -16.357183995486782
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 92,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-93",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55320576345137,
+          -16.356749822986632
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 93,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-94",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55314400144186,
+          -16.356317011382814
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 94,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-95",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5532143695499,
+          -16.35597292291799
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 95,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-96",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55320149184864,
+          -16.35570210377932
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 96,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-97",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55310466391138,
+          -16.35545036739495
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 97,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-98",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55317303533889,
+          -16.35495275049491
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 98,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-99",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55313933618139,
+          -16.354519598547963
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 99,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-100",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55348949751126,
+          -16.35410889053321
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 100,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-101",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55361657509273,
+          -16.353809277057376
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 101,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-102",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55348792797471,
+          -16.353268886259194
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 102,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-103",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5537272507296,
+          -16.352967911966218
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 103,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-104",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5535660046312,
+          -16.352798249241754
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 104,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Cayma-limite-L-vertex-105",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.55310191498079,
+          -16.35236128203213
+        ]
+      },
+      "properties": {
+        "bank": "Izquierda",
+        "position": 105,
+        "total": 105,
+        "source_page": 55,
+        "source": "ANA-Cayma.pdf",
+        "role": "documentary_outer_limit_vertex",
+        "notice": "Posición en línea digitalizada; no es un código oficial ni medición de campo."
+      }
+    }
+  ],
+  "metadata": {
+    "source": "limites-faja-cayma.geojson",
+    "count": 210,
+    "crs": "EPSG:4326",
+    "notice": "Copia exacta de los vértices existentes; no incorpora una delimitación nueva."
+  }
+}

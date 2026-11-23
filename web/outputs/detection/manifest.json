@@ -1,22 +1,23 @@
 {
   "schema_version": 1,
   "estado": "completado",
-  "iniciado_en": "2026-11-16T00:30:14.976945+00:00",
-  "completado_en": "2026-11-16T00:30:25.284178+00:00",
-  "count": 442,
+  "iniciado_en": "2026-11-22T20:12:01.421874-05:00",
+  "completado_en": "2026-11-22T20:13:08.759849-05:00",
+  "count": 437,
   "counts_by_class": {
-    "rojo": 113,
-    "amarillo": 329
+    "rojo": 114,
+    "amarillo": 323
   },
   "modelo": "chullo/yolo26_chullo",
   "model_sha256": "94c4c54a92365390f5ceb06ca7c238a7756bbecc0d15833df17e603f2c975e4b",
   "zonas": {
     "geometria": "corredor_entre_limites",
     "amarillo_m": 20.0,
-    "limites_sha256": "e08b04ef0648ed1b395b49db1a42efd29babbf452aaa5f350785eaee22079717"
+    "limites_sha256": "e08b04ef0648ed1b395b49db1a42efd29babbf452aaa5f350785eaee22079717",
+    "buffer_join": "round"
   },
   "cobertura": {
-    "path": "C:\\Users\\diego\\OneDrive\\Desktop\\ProyectoFinal_GSTI\\data\\imagery\\chullo\\chullo_rgb.tif",
+    "path": "data/imagery/chullo/chullo_rgb.tif",
     "crs": "EPSG:32719",
     "width": 1177,
     "height": 8942,
@@ -32,14 +33,14 @@
     "service_url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
     "attribution": "Esri, Vantor, Earthstar Geographics, and the GIS User Community",
     "observed_at": null,
-    "acquired_at": "2026-10-31T20:00:39.689468+00:00"
+    "acquired_at": "2026-10-31T15:00:39.689468-05:00"
   },
   "mosaicos_procesados": 115,
   "arquitectura": "Ultralytics YOLO26s-seg",
   "tamano_mosaico": 256,
   "solapamiento": 64,
-  "imagen": "C:\\Users\\diego\\OneDrive\\Desktop\\ProyectoFinal_GSTI\\data\\imagery\\chullo\\chullo_rgb.tif",
-  "dispositivo": "cuda",
+  "imagen": "data/imagery/chullo/chullo_rgb.tif",
+  "dispositivo": "cpu",
   "umbral": 0.05,
   "area_minima_m2": 10.0,
   "crs_analisis": "EPSG:32719",

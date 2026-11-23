@@ -16,7 +16,7 @@ const CHULLO = {
   crs: { original: "EPSG:32719", geojson: "EPSG:4326" },
 };
 
-// Configuración por defecto (valores ANA: faja documental 4 m, franja seguridad 20 m)
+// 4 m: ancho documental por margen. 20 m: proximidad exploratoria, sin carácter legal.
 const CONFIG = {
   rojoM: 4,
   amarilloM: 20,
@@ -79,7 +79,7 @@ function calcularEjeTorrentera(limites) {
     geometry: { type: "LineString", coordinates: ejeCoords },
     properties: {
       role: "torrentera_axis",
-      description: "Línea del cauce de la torrentera Chullo (unión de límites documentales ANA)",
+      description: "Referencia geométrica entre límites documentales; no es un eje del cauce levantado en campo",
       fuente: "ANA Cayma · Tabla 02 de vértices (planos pp. 40-44)",
     },
   };

@@ -7,9 +7,9 @@ function mostrarInfoEdificios(info) {
   const panel = document.getElementById("edificio-info");
   if (!panel) return;
   if (!info) {
-    panel.textContent = "Selecciona un edificio detectado para ver su ficha.";
+    panel.textContent = "Selecciona un contorno candidato para ver su ficha.";
   } else if (info.total !== undefined) {
-    panel.innerHTML = `<strong>${info.total} edificaciones en las franjas</strong><br>` +
+    panel.innerHTML = `<strong>${info.total} contornos candidatos en las franjas</strong><br>` +
       `Rojo: ${info.rojo} · Amarillo: ${info.amarillo}<p>Selecciona un contorno para ver su ficha.</p>`;
   } else {
     const p = info;
@@ -17,7 +17,7 @@ function mostrarInfoEdificios(info) {
       `<p><strong>ID:</strong> ${esc(p.building_id)}<br>` +
       `<strong>Distancia al corredor rojo:</strong> ${Number(p.distance_m).toFixed(2)} m<br>` +
       `<strong>Distancia a la referencia central:</strong> ${Number(p.distance_axis_m).toFixed(2)} m<br>` +
-      `<strong>Puntuación CNN:</strong> ${Number(p.confidence).toFixed(3)}</p>` +
+      `<strong>Puntuación del detector:</strong> ${Number(p.confidence).toFixed(3)} (no es una probabilidad calibrada)</p>` +
       `<p>Se clasifica el contorno completo: si toca el rojo, tiene prioridad roja. La CNN detecta cubiertas; no confirma el uso residencial.</p>`;
   }
 }
@@ -30,7 +30,7 @@ function dibujarEdificios(mapInstance, geojson) {
     style: f => ({color: f.properties.color, weight: 2, fillColor: f.properties.color, fillOpacity: 0.55}),
     onEachFeature: (f, layer) => {
       const p = f.properties;
-      layer.bindPopup(`<strong>${esc(p.etiqueta)}</strong><br>Distancia al corredor: ${Number(p.distance_m).toFixed(2)} m<br>Puntuación CNN: ${Number(p.confidence).toFixed(3)}`);
+      layer.bindPopup(`<strong>${esc(p.etiqueta)}</strong><br>Distancia al corredor: ${Number(p.distance_m).toFixed(2)} m<br>Puntuación del detector: ${Number(p.confidence).toFixed(3)}<br>Contorno candidato pendiente de revisión.`);
       layer.on("click", () => mostrarInfoEdificios(p));
     },
   });
@@ -49,7 +49,7 @@ async function cargarEdificiosGeoJSON(ruta, mapInstance) {
 function mostrarEstadoDeteccion(manifest) {
   const counts = manifest.counts_by_class || {};
   document.getElementById("detect-status").textContent =
-    `Inferencia completada: ${manifest.count} edificaciones en las franjas (rojo: ${counts.rojo || 0}; amarillo: ${counts.amarillo || 0})` +
+    `Inferencia completada: ${manifest.count} contornos candidatos (rojo: ${counts.rojo || 0}; amarillo: ${counts.amarillo || 0})` +
     `${manifest.arquitectura ? ` · ${manifest.arquitectura}` : ""}. Revisa los contornos en el mapa.`;
 }
 

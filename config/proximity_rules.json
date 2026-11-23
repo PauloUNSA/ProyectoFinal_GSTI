@@ -1,10 +1,12 @@
 {
   "schema_version": 1,
   "provider_id": "chullo_unificado_proximity_demo",
-  "rule_version": "2026.10.corridor.1",
+  "rule_version": "2026.11.documentary.round.2",
   "mode": "documentary_corridor",
   "title": "Reglas de proximidad Chullo Unificado",
-  "source": "Geometría de los límites documentales del proyecto; el ancho amarillo es configurable, no un umbral oficial de peligro.",
+  "source": "Límites exteriores digitalizados del expediente ANA RD 1610-2018 y rectificación RD 289-2019. Amarillo exploratorio, con esquinas redondas; no es un retiro oficial.",
+  "red_scope": "Corredor entre límites exteriores documentales; contiene cauce y fajas, no solo el cauce.",
+  "field_validation": "Coordenadas documentales. Su fecha no demuestra por sí sola caducidad ni coincidencia actual; confirmar con AAA Caplina Ocoña/ALA Chili y levantamiento.",
   "default_thresholds": {
     "yellow_width_m": 20
   },
@@ -12,7 +14,7 @@
   "pending_factors": [
     "Terreno: falta verificar pendiente, elevación y geometría del cauce.",
     "Caudal y arrastre: falta evaluar lluvias, flujo, desbordes y transporte de materiales.",
-    "Faja marginal y uso del suelo: faltan delimitaciones y autorizaciones oficiales aplicables."
+    "Faja marginal y uso del suelo: contrastar delimitación documental con cartografía y resoluciones vigentes; falta zonificación predial oficial."
   ],
   "rules": {
     "red": {

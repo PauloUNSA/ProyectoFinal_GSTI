@@ -1,0 +1,181 @@
+{
+  "fecha_local": "2026-11-22",
+  "commit_base": "8694d396ad0e8aa6e1cef7aea0045fef6168b568",
+  "modificacion_geometrica": "Anillo exterior de 20 m con uniones redondas en vez de ingletes; se conservan límites documentales.",
+  "inferencia": {
+    "estado": "completado",
+    "modelo": "chullo/yolo26_chullo",
+    "sha256": "94c4c54a92365390f5ceb06ca7c238a7756bbecc0d15833df17e603f2c975e4b",
+    "count": 437,
+    "counts_by_class": {
+      "rojo": 114,
+      "amarillo": 323
+    },
+    "mosaicos": 115,
+    "mosaico_px": 256,
+    "solapamiento_px": 64,
+    "umbral": 0.05,
+    "area_minima_m2": 10.0,
+    "dispositivo": "cpu",
+    "duracion_s": 67.337975
+  },
+  "comparacion_con_442_guardados": {
+    "before": {
+      "count": 442,
+      "classes": {
+        "rojo": 113,
+        "amarillo": 329
+      },
+      "sum_area_m2": 70847.75,
+      "median_area_m2": 103.375,
+      "max_area_m2": 1274.0,
+      "area_above_400_count": 35,
+      "area_above_1000_count": 2,
+      "confidence_min_median_max": [
+        0.050129808485507965,
+        0.08676156029105186,
+        0.8259211778640747
+      ]
+    },
+    "after": {
+      "count": 437,
+      "classes": {
+        "rojo": 114,
+        "amarillo": 323
+      },
+      "sum_area_m2": 70424.75,
+      "median_area_m2": 104.25,
+      "max_area_m2": 1274.0,
+      "area_above_400_count": 35,
+      "area_above_1000_count": 2,
+      "confidence_min_median_max": [
+        0.05013471469283104,
+        0.08697501569986343,
+        0.82586270570755
+      ]
+    },
+    "exact_geometry_ids": 378,
+    "same_candidate_with_changed_geometry": 58,
+    "minimum_matched_iou": 0.6334841628968488,
+    "removed_candidates": [
+      {
+        "id": "ai_0333509d0f5a3a2c",
+        "class": "amarillo",
+        "area_m2": 153.75
+      },
+      {
+        "id": "ai_35a99d9fc3952a53",
+        "class": "amarillo",
+        "area_m2": 63.75
+      },
+      {
+        "id": "ai_385f4de25b88aa8f",
+        "class": "amarillo",
+        "area_m2": 56.0
+      },
+      {
+        "id": "ai_862e5602c11d023c",
+        "class": "amarillo",
+        "area_m2": 41.25
+      },
+      {
+        "id": "ai_b6607c578c89288d",
+        "class": "amarillo",
+        "area_m2": 84.0
+      },
+      {
+        "id": "ai_f1eaa276cc25e425",
+        "class": "amarillo",
+        "area_m2": 96.25
+      }
+    ],
+    "new_candidates": [
+      "ai_5888aae871c811bd"
+    ],
+    "class_changes": [],
+    "nota": "Los IDs dependen de la geometría exacta. 58 máscaras cambian al repetir en PyTorch/OpenCV distintos; 378 mantienen ID. No atribuir toda diferencia exclusivamente al nuevo buffer."
+  },
+  "validacion_geometrica": {
+    "issues": {
+      "invalid": [],
+      "empty": [],
+      "unclosed_rings": [],
+      "classification_mismatch": [],
+      "distance_mismatch": []
+    },
+    "tolerancia_reproyeccion_m": 1e-06,
+    "alcance": "Geometrías no vacías, válidas y cerradas; clase y distancia coherentes con franjas. Esto no valida que sean techos reales."
+  },
+  "caso_fig2b": [
+    {
+      "historical_id": "ai_828910f66f585434",
+      "historical_area_m2": 2361.25,
+      "historical_confidence": 0.6509250402450562,
+      "historical_class": "amarillo",
+      "center_lon_lat": [
+        -71.55149510644591,
+        -16.370734873109537
+      ],
+      "crop_bounds_utm": [
+        227384.0,
+        8188284.0,
+        227504.5,
+        8188404.5
+      ],
+      "new_candidates_touching_historical_region": 0,
+      "new_area_inside_historical_region_m2": 0.0,
+      "new_candidates_touching_region": [],
+      "old_contours_in_crop": 17,
+      "new_contours_in_crop": 10,
+      "interpretation": "Comparación visual de predicciones sobre idéntico RGB; sin referencia humana, no mide exactitud."
+    }
+  ],
+  "inspeccion_visual": {
+    "descripcion": "Se inspeccionaron los 12 contornos más grandes y 12 selecciones con predominio verde; las selecciones se solapan y no son muestra representativa.",
+    "hallazgos": "Se observan techos grandes reales, uniones de techos vecinos y fragmentos. El predominio verde también aparece en techos reales; no se usa como filtro.",
+    "revision_formal": false,
+    "conclusion_fig2b": "En el mismo RGB, la parcela agrícola antes rodeada por 2361,25 m² no tiene candidatos YOLO ni área predicha dentro de ese contorno histórico."
+  },
+  "pruebas": {
+    "backend": {
+      "passed": 51,
+      "failed": 0,
+      "log": "pytest-final.log"
+    },
+    "visor_completo": {
+      "estado": "PASS",
+      "log": "test-browser.log"
+    },
+    "demo_estatica": {
+      "estado": "PASS",
+      "count": 437,
+      "sin_api": true,
+      "sin_errores_js": true,
+      "log": "test-static.log"
+    }
+  },
+  "despliegue": {
+    "cambios": [
+      "Ultralytics 8.4.213 en requirements-detection",
+      "Docker copia YOLO y Mask R-CNN",
+      "Bibliotecas Linux de OpenCV",
+      "Ambos checkpoints se verifican o recuperan por SHA256 y revisión fija"
+    ],
+    "fallback": "CHULLO_MODELO=maskrcnn",
+    "docker_build_verificado": false,
+    "limite_verificacion_docker": "Docker Desktop Linux daemon no iniciado; no se ejecutó build."
+  },
+  "runtime": {
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "versions": {
+      "torch": "2.15.0+cpu",
+      "torchvision": "0.29.2+cpu",
+      "rasterio": "1.5.2",
+      "shapely": "2.2.0",
+      "pyproj": "3.8.0",
+      "numpy": "2.5.1",
+      "ultralytics": "8.4.213",
+      "opencv-python": "5.1.0.95"
+    }
+  }
+}

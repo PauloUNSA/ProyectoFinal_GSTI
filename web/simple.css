@@ -14,3 +14,9 @@
 
 /* Panel edificio */
 #edificio-info{font-size:17px}#edificio-info dl{grid-template-columns:90px 1fr;gap:6px;margin:10px 0;font-size:16px}#edificio-info strong{display:block;font-size:18px;margin-top:10px}.chip{display:inline-block;padding:3px 8px;border-radius:10px;font-size:14px;font-weight:700;color:#fff}.chip.rojo{background:#dc2626}.chip.amarillo{background:#eab308;color:#24342d}.chip.verde{background:#16a34a}
+/* Mantener el mapa legible aunque crezca la explicación documental. */
+.workspace aside{padding:18px;max-height:740px;overflow-y:auto;min-width:0}
+.workspace aside h2{font-size:26px;line-height:1.2;margin:0 0 14px}
+.map-panel{height:740px;min-height:490px}
+#map{height:740px;min-height:490px}
+@media(max-width:750px){header{flex-wrap:wrap}.acciones{flex-wrap:wrap}.map-panel,#map{height:460px;min-height:460px}.workspace aside{max-height:none;overflow:visible}}

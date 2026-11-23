@@ -5,7 +5,7 @@
 <base href="./">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, límites de faja, franjas de proximidad y detección de edificios por CNN.">
-<title>Chullo Unificado · Mapa y edificaciones</title>
+<title>Chullo Unificado · Límites y posibles cubiertas</title>
 <link rel="stylesheet" href="vendor/leaflet.css">
 <link rel="stylesheet" href="simple.css">
 </head>
@@ -13,10 +13,11 @@
 <header>
   <div>
     <p class="eyebrow">TORRENTERA CHULLO · AREQUIPA · MAPA UNIFICADO</p>
-    <h1>Mapa, fajas y edificaciones</h1>
-    <p class="sub">Puntos ANA de Cayma y Yanahuara · límites de faja · franjas de proximidad · detección CNN de edificios</p>
+    <h1>Mapa, límites y posibles cubiertas</h1>
+    <p class="sub">Puntos documentales ANA · corredor de Cayma · proximidad exploratoria · posibles cubiertas</p>
   </div>
   <div class="acciones">
+    <a class="button secondary" href="layers/vertices-limites-cayma.geojson" download>Descargar 210 vértices</a>
     <a class="button secondary" href="layers/hitos-ana.geojson" download>Descargar hitos ANA</a>
   </div>
 </header>
@@ -34,18 +35,20 @@
     </div>
 
     <aside>
-      <h2>Edificio seleccionado</h2>
+      <h2>Contorno seleccionado</h2>
       <div id="edificio-info">
-        <p class="vacio">Selecciona un edificio en el mapa para ver su ficha.</p>
+        <p class="vacio">Selecciona un contorno candidato en el mapa para ver su ficha.</p>
       </div>
 
       <div id="faja-info" class="faja-panel">
         <h3>Límites de faja marginal (documental ANA)</h3>
-        <p>Cayma · margen derecha e izquierda · 210 vértices del documento ANA (RD 1610-2018). Ancho documental: 4 m por margen.</p>
+        <p>Cayma · 210 vértices de los límites exteriores y 48 hitos de señalización. Expediente RD 1610-2018 y rectificación RD 289-2019. Ancho documental de faja: 4 m por margen.</p>
+        <p>El rojo contiene el espacio entre ambos límites exteriores, incluido el cauce y las fajas. No representa únicamente el cauce. Son coordenadas documentales, pendientes de contraste con ANA y campo para su aplicación actual.</p>
+        <p><a href="normativa.html" target="_blank" rel="noopener">Ver documentos y justificación de las distancias</a></p>
       </div>
 
       <div id="detector-panel">
-        <h3>Detección de edificios (CNN)</h3>
+        <h3>Detección de posibles cubiertas</h3>
         <p>Detecta cubiertas que tocan las zonas roja y amarilla. El rojo tiene prioridad si un contorno toca ambas zonas.</p>
         <p class="note" id="modelo-nota">Detección CNN sobre imagen Esri del corredor. Requiere revisión de contornos y puede omitir edificios o unir techos. La proximidad no determina peligro ni permiso para construir.</p>
         <button id="btn-run-detect" class="button">Ejecutar detección CNN sobre imagen del sector</button>
@@ -61,7 +64,10 @@
           <input type="checkbox" id="layer-limites" checked> Límites de faja (Cayma)
         </label>
         <label class="layer-toggle">
-          <input type="checkbox" id="layer-bandas" checked> Franjas de proximidad (ANA)
+          <input type="checkbox" id="layer-vertices" checked> 210 vértices de los límites (Cayma)
+        </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-bandas" checked> Corredor documental y proximidad
         </label>
         <label class="layer-toggle">
           <input type="checkbox" id="layer-edificios" checked> Edificios detectados (CNN)
@@ -70,8 +76,8 @@
           <input type="checkbox" id="layer-satelital" checked> Vista satelital (Esri)
         </label>
         <div class="band-controls">
-          <p>Rojo: corredor completo entre los límites azul y morado.</p>
-          <label>Franja amarilla hacia afuera (m): <input type="number" id="band-amarillo" value="20" min="0" max="500" step="1" required></label>
+          <p>Rojo: corredor entre límites exteriores. Amarillo: distancia exploratoria desde su borde, sin carácter de retiro legal.</p>
+          <label>Proximidad amarilla (m): <input type="number" id="band-amarillo" value="20" min="0" max="500" step="1" required></label>
           <button id="btn-recalcular-bandas">Recalcular franjas</button>
         </div>
         <div id="panel-info" class="info-panel"></div>

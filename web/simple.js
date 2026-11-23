@@ -10,6 +10,7 @@
 let map = null;
 let puntoLayer = null;
 let limiteLayer = null;
+let verticesLayer = null;
 let edificioLayer = null;
 let satelitalLayer = null;
 // bandaLayer se declara en bands.js; ejeTorrentera se declara en data.js (ambos globales)
@@ -80,6 +81,11 @@ async function cargarTodo() {
 
   dibujarPuntos();
   dibujarLimites();
+  await dibujarVertices();
+  // El análisis implementado es Cayma; los hitos de Yanahuara siguen consultables.
+  if (limiteLayer?.getBounds().isValid()) {
+    map.fitBounds(limiteLayer.getBounds(), {padding: [30, 30], maxZoom: 17, animate: false});
+  }
   try {
     await dibujarBandas();
   } catch (err) {
@@ -158,11 +164,33 @@ function dibujarLimites() {
       const p = feature.properties;
       layer.bindPopup(
         `<strong>Límite exterior de faja · ${p.bank}</strong><br>` +
-        `Cayma · ${p.vertices} vértices · Tabla 02 · RD 1610-2018`,
+        `Cayma · ${p.vertices} vértices · Tabla 02 · RD 1610-2018, expediente rectificado por RD 289-2019. No es un levantamiento actual.`,
         { maxWidth: 300 }
       );
     },
   }).addTo(map);
+}
+
+async function dibujarVertices() {
+  const respuesta = await fetch("layers/vertices-limites-cayma.geojson");
+  if (!respuesta.ok) return;
+  const vertices = await respuesta.json();
+  verticesLayer = L.geoJSON(vertices, {
+    pointToLayer: (f, latlng) => L.circleMarker(latlng, {
+      radius: 3, weight: 1, color: "#fff", fillOpacity: 1,
+      fillColor: f.properties.bank === "Derecha" ? "#216aab" : "#6b4ca0",
+    }),
+    onEachFeature: (f, layer) => {
+      const p = f.properties;
+      const [lon, lat] = f.geometry.coordinates;
+      layer.bindTooltip(`Vértice ${p.position} · ${p.bank}`);
+      layer.bindPopup(`<strong>Vértice documental ${p.position} de ${p.total}</strong><br>` +
+        `Margen ${esc(p.bank)} · Cayma<br>Latitud: ${lat.toFixed(7)}<br>Longitud: ${lon.toFixed(7)}<br>` +
+        `Posición en la línea digitalizada; no es un nuevo código oficial ni un punto medido en campo.<br>` +
+        `<a href="docs/ANA-Cayma.pdf#page=${p.source_page}" target="_blank" rel="noopener">Tabla de origen del expediente ANA</a>`);
+    },
+  });
+  if (document.getElementById("layer-vertices")?.checked) verticesLayer.addTo(map);
 }
 
 // ------------------------------------------------------------------
@@ -212,6 +240,7 @@ function configurarUI() {
   const toggles = {
     "layer-hitos": () => toggleCapa(puntoLayer, "layer-hitos"),
     "layer-limites": () => toggleCapa(limiteLayer, "layer-limites"),
+    "layer-vertices": () => toggleCapa(verticesLayer, "layer-vertices"),
     "layer-bandas": () => toggleCapa(bandaLayer, "layer-bandas"),
     "layer-edificios": () => toggleCapa(edificioLayer, "layer-edificios"),
     "layer-satelital": toggleSatelital,
@@ -325,10 +354,10 @@ function actualizarInfoPanel() {
   const amarillo = cfg.amarilloM;
   const exterior = rojo + amarillo;
   panel.innerHTML =
-    `<strong>Franjas del corredor ANA</strong><br>` +
-    `Rojo: todo el espacio entre el límite azul y el morado.<br>` +
-    `Amarillo: ${amarillo} m hacia afuera desde esos límites.<br>` +
-    `La clasificación usa el contorno del edificio y estas mismas zonas.`;
+    `<strong>Corredor documental y proximidad</strong><br>` +
+    `Rojo: espacio entre límites exteriores; incluye cauce y fajas.<br>` +
+    `Amarillo: hasta ${amarillo} m de distancia desde el corredor, con esquinas redondeadas.<br>` +
+    `La franja amarilla es exploratoria y no autoriza construir.`;
 }
 
 function abrirFuente(id) {
@@ -365,7 +394,7 @@ function abrirFuente(id) {
   }
 
   const referencia = p.sector === "Cayma"
-    ? "Expediente ANA Cayma · RD 1610-2018, rectificación del 22/03/2019"
+    ? "Expediente ANA Cayma · RD 1610-2018, rectificación RD 289-2019 del 22/03/2019"
     : "Resolución ANA del 28/12/2017 · Yanahuara";
 
   body.innerHTML =

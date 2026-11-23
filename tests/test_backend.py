@@ -91,6 +91,38 @@ def test_limites_reales_sin_atraso_ni_solapamientos():
     assert len(bandas['cauce']['geometry']['coordinates']) == 105
     assert len(calcular_linea_cauce_desde_limites(limites).coords) == 105
 
+
+def test_anillo_no_prolonga_esquinas_mas_de_20_metros(limites):
+    zonas = construir_zonas(limites, 20)
+    rojo, exterior = zonas['rojo'], zonas['exterior']
+    # Una esquina de inglete puede sobrepasar el ancho aun cuando el buffer
+    # se haya pedido con 20 m. Comprobar distancias, no solo el parámetro.
+    inglete = rojo.buffer(20, join_style=2)
+    punta_antigua = max((Point(c) for c in inglete.exterior.coords), key=rojo.distance)
+    assert rojo.distance(punta_antigua) > 20.1
+    assert inglete.covers(punta_antigua)
+    assert evaluar_edificio(punta_antigua, zonas)['clase'] == 'verde'
+    for k in range(2001):
+        punto = exterior.boundary.interpolate(k / 2000, normalized=True)
+        assert rojo.distance(punto) <= 20 + 1e-6
+    assert exterior.difference(rojo.buffer(20 + 1e-6)).is_empty
+
+
+def test_vertices_publicados_copian_las_210_coordenadas_documentales():
+    limites = json.loads((BASE/'web/layers/limites-faja-cayma.geojson').read_text(encoding='utf-8'))
+    vertices = json.loads((BASE/'web/layers/vertices-limites-cayma.geojson').read_text(encoding='utf-8'))
+    assert len(vertices['features']) == vertices['metadata']['count'] == 210
+    assert len({f['id'] for f in vertices['features']}) == 210
+    for linea in limites['features']:
+        bank = linea['properties']['bank']
+        puntos = sorted((f for f in vertices['features'] if f['properties']['bank'] == bank),
+                        key=lambda f: f['properties']['position'])
+        assert len(puntos) == len(linea['geometry']['coordinates']) == 105
+        assert [f['properties']['position'] for f in puntos] == list(range(1, 106))
+        assert [f['geometry']['coordinates'] for f in puntos] == linea['geometry']['coordinates']
+        assert all(f['geometry']['type'] == 'Point' and
+                   f['properties']['role'] == 'documentary_outer_limit_vertex' for f in puntos)
+
 @pytest.fixture
 def imagen(tmp_path):
     import rasterio

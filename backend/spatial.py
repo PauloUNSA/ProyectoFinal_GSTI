@@ -88,7 +88,9 @@ def construir_zonas(limites, amarillo_m=20, crs_metrico="EPSG:32719"):
         rojo = make_valid(rojo)
     if rojo.geom_type not in ("Polygon", "MultiPolygon") or rojo.is_empty:
         raise ValueError("Los límites no forman un corredor poligonal válido.")
-    exterior = rojo.buffer(amarillo_m, join_style=2, mitre_limit=3) if amarillo_m else rojo
+    # Los ingletes prolongan las esquinas más allá del ancho solicitado.
+    # Las uniones redondas representan la distancia máxima desde el corredor.
+    exterior = rojo.buffer(amarillo_m, join_style=1) if amarillo_m else rojo
     return {
         "rojo": rojo,
         "amarillo": exterior.difference(rojo),
@@ -119,7 +121,7 @@ def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=20, crs_metrico="EPSG:
             "geometry": mapping(transform(zonas["a_wgs"], zonas[clase])),
             "properties": {
                 "clase": clase,
-                "etiqueta": ETIQUETAS.get(clase, "Referencia central del cauce"),
+                "etiqueta": ETIQUETAS.get(clase, "Referencia central geométrica · no es un levantamiento del cauce"),
                 "color": COLORES.get(clase, "#07838a"),
             },
         }
@@ -129,6 +131,9 @@ def generar_poligonos_banda(limites, rojo_m=4, amarillo_m=20, crs_metrico="EPSG:
         "amarillo_m": amarillo_m,
         "crs": crs_metrico,
         "medicion": "Amarillo desde el borde del corredor; rojo entre ambos límites documentales.",
+        "buffer_join": "round",
+        "red_scope": "Corredor reconstruido entre límites exteriores documentales; incluye cauce y fajas, no equivale al cauce solo.",
+        "yellow_scope": "Franja exploratoria de proximidad; no es un retiro legal ni un límite de peligro.",
     }
     return salida
 

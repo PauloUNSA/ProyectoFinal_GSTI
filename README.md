@@ -2,7 +2,7 @@
 
 Proyecto Chullo Unificado: visor de franjas ANA y detección de cubiertas con CNN.
 
-Visor local de los límites documentales ANA y detección automática de cubiertas con Mask R-CNN.
+Visor de los límites documentales ANA y detección de posibles cubiertas con YOLO26-Chullo. Mask R-CNN se conserva como alternativa experimental explícita.
 
 ## Despliegue
 
@@ -12,7 +12,7 @@ Visor local de los límites documentales ANA y detección automática de cubiert
 
 | Opción | Qué permite probar | Requisitos |
 | --- | --- | --- |
-| GitHub Pages | Mapa, franjas de 20 m, fichas y 442 detecciones guardadas del modelo YOLO26-Chullo | Navegador; sin instalar Python |
+| GitHub Pages | Mapa, corredor documental, proximidad exploratoria de 20 m, fichas y detecciones guardadas de YOLO26-Chullo | Navegador; sin instalar Python |
 | Docker / servidor Python | Recalcular franjas y ejecutar nuevas inferencias | Docker, o Python y pesos; memoria suficiente |
 
 La demo estática no ejecuta PyTorch. Las inferencias anteriores se identifican como resultados guardados. GitHub Pages sirve archivos estáticos; la CNN requiere el servidor completo.
@@ -63,7 +63,7 @@ Esta preparación no crea un servicio de pago ni configura una cuenta de Render.
 
 Documentación oficial: [GitHub Pages y Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [Docker en Render](https://render.com/docs/docker).
 
-## Clonar con el modelo CNN
+## Clonar y ejecutar el modelo actual
 
 Los pesos se distribuyen mediante Git LFS. Antes de ejecutar la detección:
 
@@ -72,25 +72,40 @@ git lfs install
 git clone https://github.com/PauloUNSA/ProyectoFinal_GSTI.git
 cd ProyectoFinal_GSTI
 git lfs pull
-python -m pip install -r requirements-detection.txt
-python servidor.py --abrir
+python -m venv .venv-ml
+.venv-ml\Scripts\python -m pip install -r requirements-detection.txt
+.venv-ml\Scripts\python servidor.py --abrir
 ```
 
 ## Franjas corregidas
 
 - **Rojo:** un único corredor que ocupa todo el espacio entre las líneas azul y morada. Su ancho sigue los límites existentes; no es un buffer fijo de 4 m desde el eje.
-- **Amarillo:** anillo exterior de 20 m por defecto, configurable entre 0 y 500 m. Se mide desde el borde del corredor rojo.
+- **Amarillo:** anillo exterior de 20 m por defecto, configurable entre 0 y 500 m. Se mide desde el borde del corredor rojo, con esquinas redondeadas para no exceder la distancia elegida. No es un retiro legal.
 - **Referencia central:** línea discontinua abierta entre ambas márgenes; nunca une artificialmente el final con el inicio.
 
 Los 4 m documentales se conservan como referencia del documento; no desplazan ni sustituyen las coordenadas de los límites. Estas capas no son una validación legal ni un estudio de peligro.
 
 El visor y la CNN comparten la geometría calculada en `backend/spatial.py`, en EPSG:32719. La intersección de cualquier parte del contorno con rojo tiene prioridad roja; si solo toca la zona exterior se clasifica amarillo. Se conservan los contornos completos. No se muestran candidatos fuera de ambas zonas.
 
+## Documentos y distancias
+
+El visor incluye [la justificación y sus fuentes](web/normativa.html). Revisión documental al **22/11/2026**:
+
+- **Cauce, ribera y faja marginal son diferentes.** Ley 29338 art. 74 y DS 001-2010-AG arts. 108, 111 y 113–115. La AAA fija la faja; estar fuera de ella no acredita seguridad o permiso para construir.
+- **Chullo en Cayma:** RD 1610-2018 y rectificación RD 289-2019 del 22/03/2019. El expediente fija 4 m de faja por margen. La RJ 332-2016-ANA art. 12 define mínimos por pendiente, material y protección; para >2 % y conglomerado contempla 4 m desde el límite superior de ribera. No son 4 m desde el eje ni una regla basada solo en profundidad. Los arts. 13–14 regulan mayor ancho y modificaciones.
+- **Puntos trazables:** 210 vértices (105 por línea) representan los límites exteriores digitalizados; 48 hitos de Cayma son referencias de señalización. El visor muestra ambos y permite descargar los vértices. La capa nueva copia exactamente las coordenadas existentes; no inventa una actualización de campo. La antigüedad no prueba caducidad: confirmar cartografía aplicable con AAA Caplina Ocoña/ALA Chili.
+- **Rojo:** corredor entre límites exteriores. Incluye cauce y fajas; no equivale solo al cauce ni a las dos fajas aisladas. El eje discontinuo es una referencia geométrica, no un levantamiento de la corriente.
+- **Amarillo:** distancia exploratoria configurable desde ese corredor. Los 20 m no provienen de un retiro universal de RNE/PDM. Las esquinas se redondean; se corrigieron las puntas de los ingletes que podían superar el ancho configurado.
+- **RNE pertinente:** TH.050 arts. 3 y 8 (riberas y laderas); A.010 arts. 4 y 8 (parámetros y retiros desde linderos). No establecen la equivalencia profundidad de 10 m → margen de 0,5 m.
+- **PDM:** OM 961 y OM 975, reglamento Título III cap. 1. El horizonte 2025 no deroga automáticamente el plan (DS 012-2022-VIVIENDA art. 40.2). El nuevo PDM 2026–2045 está en consulta pública hasta el 06/12/2026 según IMPLA. La MPA reconoce restricciones judiciales del plan anterior: verificar aplicación por sector. No se asignó zonificación a cada detección sin una capa predial oficial.
+
+Fuentes directas: [expediente ANA](https://repositorio.ana.gob.pe/bitstream/20.500.12543/4034/1/ANA0002438.pdf), [RJ 332 anexo](https://faolex.fao.org/docs/pdf/per167827anx.pdf), [TH.050](https://cdn.www.gob.pe/uploads/document/file/2365177/12%20TH.050%20HABILITACIONES%20EN%20RIBERAS%20Y%20LADERAS.pdf?v=1636045242), [reglamento PDM](https://www.muniarequipa.gob.pe/descargas/transparencia/pdm/reglamento/4_1_titulo%20III_1_zonificacion%20y%20compatibilidades.pdf), [consulta del nuevo PDM](https://www.gob.pe/institucion/impla/noticias/1471044-exhibicion-y-consulta-publica-del-pdm-2026-2045).
+
 ## Uso
 
 1. Abre `iniciar.bat`, o ejecuta `python servidor.py --abrir` desde esta carpeta.
 2. Visita http://127.0.0.1:4173/.
-3. Pulsa **Ejecutar detección CNN sobre imagen del sector**. Una ejecución completa sobre CPU tardó aproximadamente 4 minutos y medio en este equipo.
+3. Pulsa **Ejecutar detección CNN sobre imagen del sector**. El servidor selecciona YOLO26 y su umbral recomendado; la duración depende del equipo y del modelo.
 4. Selecciona un contorno para consultar distancias y puntuación.
 5. Si cambias el ancho amarillo y recalculas, vuelve a ejecutar la CNN. El visor limpia el resultado anterior para evitar mostrar una clasificación con otro ancho.
 
@@ -101,7 +116,8 @@ Los resultados completos guardados se cargan al abrir el visor. Un fallo devuelv
 - `data/imagery/chullo/chullo_rgb.tif`: GeoTIFF RGB real, EPSG:32719, 1177 × 8942 píxeles, que cubre el corredor ANA con contexto alrededor.
 - `data/imagery/chullo/chullo_rgb.json`: procedencia, extensiones devueltas por ArcGIS, parámetros de las tres capturas y hashes. Fuente: [Esri World Imagery](https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer). Se conservan los créditos del proveedor. La fecha de descarga no se presenta como fecha de captura.
 - `data/imagery/chullo/captura_original_sin_crs.png`: respaldo de la imagen que antes estaba renombrada como `.tif`, sin coordenadas.
-- `models/chullo_local_v1/`: pesos y documentación del modelo piloto ya existente en el proyecto original `gsti-teo`. Se verifica el SHA256 antes de cargarlo. No se entrenó un modelo nuevo en esta corrección.
+- `models/yolo26_chullo/`: modelo activo YOLO26s-seg, manifiesto y pesos SHA256 verificados. Su entrenamiento y evaluación se documentan en `docs/ENTRENAMIENTO_YOLO.md`.
+- `models/chullo_local_v1/`: piloto Mask R-CNN conservado para comparación. Para usarlo: `$env:CHULLO_MODELO="maskrcnn"`. Se verifica su SHA256 antes de cargarlo.
 
 El GeoTIFF del proyecto original cubría otro tramo, al sur del corredor ANA, por lo que se descartó como entrada de esta detección. No se asignaron coordenadas inventadas al PNG ni se desplazaron límites para hacerlo coincidir.
 
@@ -112,13 +128,13 @@ Para repetir la captura local del corredor: `python scripts/prepare_imagery.py` 
 Instala las dependencias si faltan: `python -m pip install -r requirements-detection.txt`.
 
 ```powershell
-python scripts/run_detection.py --imagen data/imagery/chullo/chullo_rgb.tif --salida web/outputs/detection --umbral 0.5 --amarillo 20
+python scripts/run_detection.py --imagen data/imagery/chullo/chullo_rgb.tif --salida web/outputs/detection --modelo yolo --amarillo 20
 python scripts/generate_bands.py --amarillo 20
 ```
 
 La API publica `web/outputs/detection/buildings.geojson` y `manifest.json`; se sirven bajo `/outputs/detection/`. El manifiesto registra conteos por color, modelo, imagen, cobertura y parámetros.
 
-Las detecciones publicadas (15/11/2026) son del modelo final **YOLO26-Chullo**: **442 contornos candidatos, 113 rojos y 329 amarillos**, con umbral de confianza 0.05. El Mask R-CNN piloto había dado 405 (118 rojos y 287 amarillos) el 31/10/2026. Ninguna cifra certifica la precisión de los contornos; ver la evaluación en [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md).
+La verificación local del **22/11/2026** con **YOLO26-Chullo**, umbral 0.05 y anillo redondeado de 20 m produjo **437 contornos candidatos: 114 rojos y 323 amarillos**, en 115 mosaicos y 67,34 s de CPU en este equipo. Los contornos son cerrados y válidos; falta validar su correspondencia con techos reales. La versión guardada del 15/11/2026 tenía 442 (113 rojos y 329 amarillos) con la geometría anterior. El cambio de geometría y las diferencias del entorno de inferencia impiden atribuir toda variación de conteo al detector. El Mask R-CNN piloto había dado 405 (118 rojos y 287 amarillos) el 31/10/2026. Ninguna cifra certifica la precisión de los contornos; ver la evaluación en [docs/ENTRENAMIENTO_YOLO.md](docs/ENTRENAMIENTO_YOLO.md).
 
 ## Pruebas
 
@@ -135,7 +151,7 @@ Se verifican las franjas, el último vértice de ambas márgenes, anillos interi
 
 ## Alcance de la CNN
 
-El modelo local sigue siendo **experimental**: su evaluación previa en dos recortes del proyecto original obtuvo F1 de instancias ≈0.249, con omisiones, falsos positivos y máscaras que unen techos. Esa cifra no mide su precisión en la nueva imagen Esri. Detecta cubiertas visibles; no confirma viviendas individuales ni su uso residencial. Es necesario revisar los contornos en el mapa.
+El detector sigue siendo **experimental**. El F1 de instancias ≈0.249 corresponde al piloto Mask R-CNN, no a YOLO26. El manifiesto de YOLO publica métricas de instancias y de área distintas, medidas contra huellas automáticas de Overture sin revisión humana. No deben interpretarse como exactitud verificada ni compararse entre sí como si midieran lo mismo. Los contornos pueden omitir techos, unirlos o incluir otras superficies; un polígono cerrado y válido no demuestra que corresponda a un edificio real.
 
 ## Modelo final: YOLO26-Chullo
 
@@ -151,3 +167,12 @@ Para mejorarlo, anota techos en QGIS sobre `data/training/yolo_chullo/celdas.geo
 ## Verificación del despliegue
 
 Se aprobaron 28 pruebas del backend y una prueba de navegador de la demo bajo un subdirectorio. Se construyó el Dockerfile en Linux y se ejecutó la CNN real sobre un recorte del GeoTIFF: devolvió 13 contornos. Se comprobó también la API HTTP del contenedor y la carga de los 405 resultados guardados. El contenedor incluye `libexpat1`, requerido por Rasterio en la imagen base slim.
+
+## Verificación del 22 de noviembre de 2026
+
+- 51 pruebas Python aprobadas, incluidas regresiones de distancia en esquinas, copia exacta de los 210 vértices y verificación SHA256 de los dos modelos.
+- Inferencia real sobre el GeoTIFF completo, con YOLO26 y CPU; resultados guardados y manifiesto actualizados. La comprobación geométrica no detectó anillos abiertos, geometrías inválidas ni clases incoherentes (tolerancia de ida y vuelta de coordenadas de 1e-6 m).
+- El Dockerfile ahora incluye YOLO, su manifiesto y dependencias, además del piloto Mask R-CNN. No se reconstruyó la imagen Docker en esta revisión porque el motor Linux de Docker no estaba iniciado.
+- El artículo conserva los resultados históricos del piloto y añade el marco normativo y una nota de versión; no se reemplazan sus métricas por las del nuevo modelo sin una revisión específica.
+
+En el caso agrícola de la Fig. 2b del artículo, el contorno histórico de 2361,25 m² del piloto ya no recibe candidatos YOLO en la misma región e imagen. Es una inspección puntual, no una evaluación formal. [Comparación visual](docs/comparacion-chacra-20261122.png) y [registro de la verificación](docs/verificacion-20261122.json).
