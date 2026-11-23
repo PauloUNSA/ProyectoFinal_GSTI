@@ -1,29 +1,31 @@
 "use strict";
 
-const clasesCubiertas = ["rojo", "naranja", "amarillo"];
+const zonasCubiertas = {
+  rojo: "el área aproximada del cauce o de las riberas",
+  naranja: "alguna de las fajas marginales reconstruidas a partir de los límites de la ANA",
+  amarillo: "el área que podrían alcanzar los huaicos según la simulación de INGEMMET",
+};
 const resultadosVersion = "20261123-cruce-a7270";
 
 function dibujarEdificios(mapInstance, geojson) {
   if (edificioLayer) mapInstance.removeLayer(edificioLayer);
-  const features = (geojson?.features || []).filter(f => clasesCubiertas.includes(f.properties?.clase));
-  const mapa = mapInstance.getContainer();
-  const leyenda = mapa.parentElement.querySelector(".map-legend");
-  const espacioLeyenda = leyenda
-    ? Math.max(12, leyenda.getBoundingClientRect().bottom - mapa.getBoundingClientRect().top + 12)
-    : 12;
+  const features = (geojson?.features || []).filter(f => Object.hasOwn(zonasCubiertas, f.properties?.clase));
   edificioLayer = L.geoJSON({type: "FeatureCollection", features}, {
     style: f => ({color: f.properties.clase === "amarillo" ? "#7c4a06" : f.properties.color, weight: 2, fillColor: f.properties.color, fillOpacity: f.properties.clase === "amarillo" ? 0.68 : 0.55}),
     onEachFeature: (f, layer) => {
       layer.bindPopup(`<strong>${esc(f.properties.etiqueta)}</strong>`,
-        {autoPanPaddingTopLeft: [12, espacioLeyenda], maxWidth: 300});
+        {autoPanPadding: [12, 12], maxWidth: 300});
     },
   });
   if (document.getElementById("layer-edificios")?.checked !== false) edificioLayer.addTo(mapInstance);
-  const counts = Object.fromEntries(clasesCubiertas.map(clase => [clase, 0]));
-  for (const feature of features) counts[feature.properties.clase]++;
-  document.getElementById("edificio-info").innerHTML =
-    `<strong>${features.length} contornos candidatos</strong><br>` +
-    `Rojo: ${counts.rojo} · Naranja: ${counts.naranja} · Amarillo: ${counts.amarillo}`;
+  const conteos = {rojo: 0, naranja: 0, amarillo: 0};
+  for (const feature of features) conteos[feature.properties.clase]++;
+  document.getElementById("edificio-info").innerHTML = Object.entries(zonasCubiertas)
+    .map(([clase, zona]) => {
+      const cantidad = conteos[clase];
+      const detecciones = cantidad === 1 ? "posible edificación que toca" : "posibles edificaciones que tocan";
+      return `<p>Hay <strong class="${clase}">${cantidad}</strong> ${detecciones} ${zona}.</p>`;
+    }).join("");
 }
 
 async function cargarEdificiosGeoJSON(ruta, mapInstance) {

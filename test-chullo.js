@@ -19,7 +19,9 @@ const { chromium } = require('playwright');
     if (serverStatus.manifest) {
       assert.equal(await page.locator('#cnn-state').textContent(),'Resultados guardados');
       assert.equal(await page.evaluate(() => edificioLayer.getLayers().length),serverStatus.manifest.count);
-      assert.match(await page.locator('#edificio-info').textContent(),new RegExp(serverStatus.manifest.count + ' contornos candidatos'));
+      for (const [clase, conteo] of Object.entries(serverStatus.manifest.counts_by_class)) {
+        assert.equal(await page.locator(`#edificio-info strong.${clase}`).textContent(),String(conteo));
+      }
     }
     const geometry = await page.evaluate(() => {
       const bands = window.OBTENER_BANDAS();
@@ -35,7 +37,7 @@ const { chromium } = require('playwright');
     await page.waitForTimeout(1800);
     await page.screenshot({path:path.join(out,'franjas-corregidas.png'),fullPage:true});
     if (process.env.CHULLO_PREVIEW) await page.locator('#map').screenshot({path:process.env.CHULLO_PREVIEW});
-    assert.equal(await page.locator('#band-amarillo').count(),0);
+    assert.equal(await page.locator('#band-amarillo, .map-legend').count(),0);
     assert.equal(await page.locator('#btn-run-detect, #btn-ver-cruce-amarillo, #faja-info, #detector-panel, #panel-info').count(),0);
     assert.equal(await page.locator('.leaflet-franjas-pane path[stroke="#eab308"]').count(),0);
     await page.locator('#layer-bandas').uncheck();

@@ -9,10 +9,20 @@ const {chromium}=require('playwright');
   const errors=[];const api=[];page.on('pageerror',e=>errors.push(e.message));
   page.on('request',r=>{if(new URL(r.url()).pathname.startsWith('/api/'))api.push(r.url())});
   for(let i=0;i<30;i++){try{await page.goto('http://127.0.0.1:4187/dist/');break;}catch(e){await new Promise(r=>setTimeout(r,200));}}
-  const total=(await (await page.request.get('http://127.0.0.1:4187/dist/outputs/detection/manifest.json')).json()).count;
+  const {count: total, counts_by_class: counts} = await (await page.request.get('http://127.0.0.1:4187/dist/outputs/detection/manifest.json')).json();
   await page.waitForFunction(n=>edificioLayer?.getLayers().length===n,total);
   assert.equal(await page.locator('#cnn-state').textContent(),'Resultados guardados');
-  assert.match(await page.locator('#edificio-info').textContent(),/Amarillo: [1-9]\d*/);
+  assert.equal(await page.locator('.map-legend').count(),0);
+  for (const [clase, zona, color] of [
+    ['rojo', /cauce o de las riberas/, 'rgb(185, 28, 28)'],
+    ['naranja', /fajas marginales.*ANA/, 'rgb(194, 65, 12)'],
+    ['amarillo', /huaicos.*INGEMMET/, 'rgb(148, 102, 0)'],
+  ]) {
+    const numero = page.locator(`#edificio-info strong.${clase}`);
+    assert.equal(await numero.textContent(),String(counts[clase]));
+    assert.equal(await numero.evaluate(elemento => getComputedStyle(elemento).color),color);
+    assert.match(await page.locator('#edificio-info p').filter({has:page.locator('strong.' + clase)}).textContent(),zona);
+  }
   assert.equal(await page.locator('#btn-run-detect, #btn-ver-cruce-amarillo, #faja-info, #detector-panel, #panel-info').count(),0);
   assert.equal(await page.locator('#band-amarillo').count(),0);
   assert.equal(await page.evaluate(()=>window.OBTENER_BANDAS().features.filter(f=>f.properties.clase==='rojo').length),1);

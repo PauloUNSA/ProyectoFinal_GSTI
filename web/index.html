@@ -7,7 +7,7 @@
 <meta name="description" content="Chullo Unificado: mapa de la torrentera Chullo con hitos ANA, límites de faja marginal, fajas marginales y detección de edificios por CNN.">
 <title>Chullo Unificado · Límites y posibles cubiertas</title>
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="simple.css?v=20261123-visor">
+<link rel="stylesheet" href="simple.css?v=20261123-resumen">
 </head>
 <body>
 <header>
@@ -32,17 +32,11 @@
   <section class="workspace" aria-label="Consulta de hitos y edificaciones">
     <div class="map-panel">
       <div id="map" aria-label="Mapa de Chullo con OpenStreetMap y fajas marginales"></div>
-      <div class="map-legend">
-        <span class="legend-item"><i class="rojo" aria-hidden="true"></i>Cauce y riberas</span>
-        <span class="legend-item"><i class="naranja" aria-hidden="true"></i>Dos fajas marginales de 4 m</span>
-        <span class="legend-item"><i class="amarillo" aria-hidden="true"></i>Alcance simulado de huaicos</span>
-        <small>Capas aproximadas. Amarillo a escala de sector · INGEMMET 2022.</small>
-      </div>
     </div>
 
     <aside>
       <h2>Cubiertas detectadas</h2>
-      <p id="edificio-info" role="status">Cargando contornos…</p>
+      <div id="edificio-info" role="status">Cargando contornos…</div>
 
       <div id="controles-panel" class="controles-panel">
         <h3>Controles de visualización</h3>
@@ -86,7 +80,7 @@
 <script src="vendor/leaflet.js"></script>
 <script src="data.js?v=20261123-cruce-a7270"></script>
 <script src="bands.js?v=20261123-cruce-a7270"></script>
-<script src="detection.js?v=20261123-visor"></script>
+<script src="detection.js?v=20261123-resumen"></script>
 <script src="simple.js?v=20261123-visor"></script>
 </body>
 </html>
